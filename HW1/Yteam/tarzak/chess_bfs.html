@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <style>
+        #parentDiv {
+            width: 1000px; 
+            height: 200px; 
+            border: 2px solid black; 
+            display: block
+        }
+    </style>
+    </head>
+    
+    <body>
+        <section  class = "main">
+            <div class = "size">
+                Size of the side <input id = "size" type="text">
+                <input type="button" onclick="setUpChessBoard()" value="Set Up">
+            </div>
+            <div class = "start">
+                Start x: <input id = "sX" type="text">
+                Start y: <input id = "sY" type="text">
+                <input type="button" onclick="setUpStartCords" value="Set">
+            </div>
+            
+            <div class = "finish">
+                Finish x: <input id = "fX" type="text">
+                Finish y: <input id = "fY" type="text">
+                <input type="button" onclick="setUpFinishCords" value="Set">
+            </div>
+            
+        </section>
+        <script type="text/javascript">
+            //Конструктор матриці
+            Array.matrix = function(numrows, numcols, initial) {
+                var arr = [];
+                for (var i = 0; i < numrows; ++i) {
+                    var columns = [];
+                    for (var j = 0; j < numcols; ++j) {
+                        columns[j] = initial;
+                    }
+                        arr[i] = columns;
+                    }
+                return arr;
+            }
+            
+            //Створюємо дошку і чергу
+            var chessBoard = Array.matrix(1000,1000,0)
+            var queue = [];
+            
+            //Функція для встановлення стартових координат на дошці, також пушить в чергу відразу стартову точку
+            function setStartCords(sX, sY) {
+                var startArr = [sX,sY];
+                chessBoard[sX][sY] = 0;
+                queue.push(startArr);
+                return startArr;
+            }
+            
+            //Функція для встановлення кінцевих координат на дошці, також позначає кінцеву точку на дошці як "finish"
+            function setFinishCords(fX, fY) {
+                var finishArr = [fX,fY];
+                chessBoard[fX][fY] = "finish";
+                return finishArr;
+            }
+            
+            //отримуємо початкові та кінцеві координати в змінні та оголошуємо змінну curPos - поточний елемент в черзі
+            var startArr = setStartCords(0,0),
+                finishArr = setFinishCords(3,3), visits = 0, curPos, jumpCounter = 0;
+            
+            //Запускаємо цикл, що має діяти поки черга не пуста
+            while (queue.length > 0) {
+                visits++;
+                console.log("Step " + visits + ". Jump counter equal: " + jumpCounter);
+                curPos = queue.shift(); //переміщаємо перший елемент з черги в змінну поточної позиції
+                console.log(curPos);
+                if (chessBoard[curPos[0]] != undefined) {
+                    if (chessBoard[curPos[0]][curPos[1]] != undefined) {
+                        if (chessBoard[curPos[0]][curPos[1]] === 0) { //перевіряємо значення на дошці по координатам поточної позиції, якщо там 0 ->
+                            queue = queue.concat(movesCords(curPos)); //викликаємо функцію movesCords() з поточною позицією, для генерування набору можливих ходів
+                            chessBoard[curPos[0]][curPos[1]] = "visited"; //позначаємо клітинку в якій вже були "visited"
+                        }
+                        else if (chessBoard[curPos[0]][curPos[1]] === "finish") { //якщо знаходиться клітинка зі значенням "finish", обнуляємо чергу, для виходу з циклу
+                            tempQue = queue;
+                            queue = [];
+                            console.log("finish at " + curPos);
+                        }
+                    }
+                    
+                    else
+                        console.log("such cell does not exist");
+                }
+                else 
+                    console.log("such row does not exist");
+            }
+            
+            /*
+            **creating tempArr** функція що генерує масив можливих ходів на основі поточної позиції
+            */
+            function movesCords(curPos) {
+                var movesArr = [[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]]; //можливі варіанти ходу коня
+                var tempArr = [], i, j; //тимчасовий масив для варіантів нового ходу
+                var v = [[curPos[0],curPos[1]]]; //поточна позиція
+                
+                jumpCounter++;
+                for (i = 0; i < 8; i++) {
+                    tempArr[i] = [];
+                    for (j = 0; j < 2; j++) {
+                        tempArr[i][j] = movesArr[i][j] + v[0][j]; //генеруємо елементи додаючи до Х та У координат можливого ходу, поточні значення даних координат
+                    }
+                }
+                return tempArr;
+            }
+            
+        </script>
+    </body>
+</html>
