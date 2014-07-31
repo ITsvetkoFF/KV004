@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Horse-jumping</title>
+    <meta http-equiv="content-type" content="text/html" charset="windows-1251" />
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link type="text/css" href="style.css" rel="stylesheet">
+    <script src="jquery-1.11.1.js" type="text/javascript"></script>
+    <script type="text/javascript" src="code.js"></script>
+</head>
+<body>
+    <div class="b-container">
+        <div class="b-container__field">
+            <div class="b-field">
+                <h1 class="b-field__name">Horse-jumping field</h1>
+
+                <div class="b-field__data">
+                    <div class="b-data__start">
+                        <div class="b-start">
+                            <h4 class="b-start__header">Start point:</h4>
+                            <div class="b-start__x">
+                                <span class="b-start__x-text">X:</span>
+                                <input type="number" class="b-start__x-input" id="startX" autofocus />
+                            </div>
+
+                            <div class="b-start__y">
+                                <span class="b-start__y-text">Y:</span>
+                                <input type="number" class="b-start__y-input" id="startY" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="b-data__end">
+                        <div class="b-end">
+                            <h4 class="b-end__header">End point:</h4>
+                            <div class="b-end__x">
+                                <span class="b-end__x-text">X:</span>
+                                <input type="number" class="b-end__x-input" id="endX" />
+                            </div>
+
+                            <div class="b-end__y">
+                                <span class="b-end__y-text">Y:</span>
+                                <input type="number" class="b-end__y-input" id="endY" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="b-data__controls">
+                        <div class="b-controls">
+                            <input type="button" value="Get path!" class="b-controls__get-path" id="getPath" />
+                        </div>
+                    </div>
+
+                    <div class="b-data__result">
+                        <span id="for_time"></span>
+                        <span id="for_steps"></span>
+                    </div>
+                </div>
+
+                <div class="b-field__board" id="flBoard">
+                    <canvas class="b-board" id="cnv" width="1000" height="1000"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
