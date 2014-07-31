@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>BDS</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+	<aside class="col">
+		<div id="form-wrap">
+			<h1>Breadth-first search</h1>
+			<form id="bds">
+				
+				<input type="text" id="board-size" placeholder="Board size">
+				<p>Start point:</p>
+				<div class="row">
+					<input type="text" id="start-x" placeholder="x">
+					<input type="text" id="start-y" placeholder="y">
+				</div>
+				<p>End point:</p>
+				<div class="row">
+					<input type="text" id="finish-x" placeholder="x">
+					<input type="text" id="finish-y" placeholder="y">
+				</div>
+		
+				<button id="btn" type="submit">Get the result</button>
+			
+			</form>
+			
+		</div>
+		
+		<div id="result"></div>
+		<div id="time"></div>
+	</aside>
+	<div id="board-block" class="col">
+		<canvas id='board'></canvas>
+	</div>
+	<div class="clear"></div>
+	<script src="js/BDS.js">lalala</script>
+	
+</body>
+</html>
