@@ -1,0 +1,47 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Wide Search of horse mowement</title>
+		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>
+		<link rel='stylesheet' href='../css/reset.css'>
+		<link rel='stylesheet' href='../css/horse.css'>
+	</head>
+	<body>
+		<div class="b-bord" id="pole">
+			<form action='?' method='POST' id='boardDimension' class='b-boardDimension'>
+				<div class='b-dimension'>
+					<p class='b-dimension__label'>Розмір гральної доски</p>
+					<input class='b-dimension__param b-dimension__param_width' type='number' placeholder='Board width' 	min="0" max="1000" step='1' >
+					<input class='b-dimension__param b-dimension__param_height' type='number' placeholder='Board height'	min="0" max="1000" step='1' >
+				</div>
+				<div class='b-points'>
+					<div class='b-point'>
+						<p class='b-point__label'>Координати точки "Старт"</p>
+						<input class='b-point__coord b-point__coord_startX' type='number' placeholder='Coord. X' min="0" max="1000" step='1' >
+						<input class='b-point__coord b-point__coord_startY' type='number' placeholder='Coord. Y' min="0" max="1000" step='1' >
+					</div>
+					<div class='b-point'>
+						<p class='b-point__label'>Координати точки "Фініш"</p>
+						<input class='b-point__coord b-point__coord_finishX' type='number' placeholder='Coord. X' min="0" max="1000" step='1' >
+						<input class='b-point__coord b-point__coord_finishY' type='number' placeholder='Coord. Y' min="0" max="1000" step='1' >
+						<br>
+					</div>
+				</div>
+				<input type='button' value='Розрахувати' class='b-search-button'>
+				<br>
+				<input class='b-duration__label b-duration__label_time' type='text' placeholder='Don`t know' DISABLED >
+				<br>
+				<input class='b-duration__label b-duration__label_step' type='text' placeholder='Don`t know' DISABLED >
+			</form>
+		</div>
+		<canvas id='b-way'>
+			
+		</canvas>
+	</body>
+	<script type='text/javascript' src='../js/component.js'></script>
+	<script type='text/javascript' src='../js/error.js'></script>
+	<script type='text/javascript' src='../js/jquery-2.1.0.min.js'></script>
+	<script type='text/javascript' src='../js/horse.js'></script>
+	<script> var pole = new blackboard('#pole') </script>
+</html>
