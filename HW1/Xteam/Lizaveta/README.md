@@ -1,4 +1,5 @@
-KV004
+Lizaveta
 =====
 
-Main repository of Kv-004.WebUI Kyiv IT Academy group
+First home task
+*[HW1] (https://github.com/ITsvetkoFF/KV004/blob/master/HW1/Xteam/Lizaveta/index.html)
