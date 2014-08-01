@@ -15,9 +15,6 @@ for(var i=0; i<dimension; i++) {
     }
 }
 
-
-
-
 //possibleMoves(0,0) => [{"x":2,"y":1},{"x":1,"y":2}]; 
 var possibleMoves = function(xStart,yStart) {
      // 8 steps
@@ -37,7 +34,9 @@ var possibleMoves = function(xStart,yStart) {
     return possiblePoints;
 }
     
-var validate = function(x,y) {}
+var validate = function(x,y) {
+    if possiblePoints = -1 && possiblePoints <= dimension;
+}
 
 var ret = possibleMoves(0,0);
 document.write(ret);
