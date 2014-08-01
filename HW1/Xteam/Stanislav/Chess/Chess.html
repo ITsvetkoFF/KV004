@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Chess</title>
+        <script src="chess2.js"></script>
+        <link href="chess.css" rel="stylesheet">
+    </head>
+    <body>
+    	<table>
+    		<tr><td>Input number</td><td><input type="text" name="InputNumber" value="30"></td></tr>
+    		<tr><td>Input Start X</td><td><input type="text" name="InputStartX" value="1"></td></tr>
+    		<tr><td>Input Start Y</td><td><input type="text" name="InputStartY" value="1"></td></tr>
+    		<tr><td>Input Finish X</td><td><input type="text" name="InputFinishX" value="6"></td></tr>
+    		<tr><td>Input Finish Y</td><td><input type="text" name="InputFinishY" value="12"></td></tr>
+    		<tr><td>Draw:</td><td><input type="submit" value="Start" onclick="start()"></td></tr>
+    		<tr><td>Number of moves:</td><td><span class="output" name="NumberOfMoves"></span></td></tr>
+    	</table>
+    	<br><canvas id="canvas" width="500" height="500"></canvas>
+    </body>
+</html>
