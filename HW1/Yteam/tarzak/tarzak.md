@@ -9,7 +9,9 @@
 - [Краткое руководство по Маркдауну](http://goo.gl/84aUxo)
 
 ## Node.js & npm
+- [Node.js для начинающих](http://www.nodebeginner.ru/)
 - [Шпаргалка по пакетному менеджеру NPM](http://habrahabr.ru/post/133363/#npm_understand)
+- [Node.js quick file server (static files over HTTP)](http://stackoverflow.com/questions/16333790/node-js-quick-file-server-static-files-over-http)
 
 ## MongoDB
 - [Начало работы с MongoDB, часть 1](http://www.ashep.org/2012/nachalo-raboty-s-mongodb-chast-1/#.U94vC2NElyx)
@@ -24,3 +26,7 @@
 - [Hello MongoDB (открытый удаленный доступ)](http://habrahabr.ru/post/221221/)
 - [MongoDB от теории к практике. Руководство по установке кластера mongoDB](http://habrahabr.ru/post/217393/)
 - [Делаем админпанель для MySQL и MongoDB на Node.js](http://habrahabr.ru/post/192302/)
+
+## Bower
+- [Howto fix bower ECMDERR](http://stackoverflow.com/questions/21789683/howto-fix-bower-ecmderr)
+- [Bower / Git Errors: Exit code #128 - failed connect](http://stackoverflow.com/questions/21544803/git-bower-errors-exit-code-128-failed-connect)
