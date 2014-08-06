@@ -26,6 +26,15 @@
 - [Hello MongoDB (открытый удаленный доступ)](http://habrahabr.ru/post/221221/)
 - [MongoDB от теории к практике. Руководство по установке кластера mongoDB](http://habrahabr.ru/post/217393/)
 - [Делаем админпанель для MySQL и MongoDB на Node.js](http://habrahabr.ru/post/192302/)
+- Searching masks for elements in db.collection:
+```javascript
+  {a: {$gt: 10}} // Greater than 10
+  {a: {$lt: 5}} // Less Than
+  {a: {$gte: 10}} // Greater than or equal to
+  {a: {$ne: 'b'}} // Not Equal To
+  {a: {$in: ['a', 'b', 'c']}} // Exists in array
+```
+
 
 ## Bower
 - [Howto fix bower ECMDERR](http://stackoverflow.com/questions/21789683/howto-fix-bower-ecmderr)
