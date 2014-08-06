@@ -39,3 +39,6 @@
 ## Bower
 - [Howto fix bower ECMDERR](http://stackoverflow.com/questions/21789683/howto-fix-bower-ecmderr)
 - [Bower / Git Errors: Exit code #128 - failed connect](http://stackoverflow.com/questions/21544803/git-bower-errors-exit-code-128-failed-connect)
+ 
+## HTTP
+- [How are parameters sent in an HTTP POST request?](http://stackoverflow.com/questions/14551194/how-are-parameters-sent-in-an-http-post-request)
