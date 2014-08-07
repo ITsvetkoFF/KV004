@@ -42,3 +42,8 @@
  
 ## HTTP
 - [How are parameters sent in an HTTP POST request?](http://stackoverflow.com/questions/14551194/how-are-parameters-sent-in-an-http-post-request)
+
+## Grunt
+- [Grunt для тех, кто считает штуки вроде него странными и сложными](http://frontender.info/grunt-is-not-weird-and-hard/#davaytezastavimgruntobaedinityparufaylov)
+- [Grunt, инструмент для сборки javascript проектов](http://habrahabr.ru/post/148274/)
+- [Делаем жизнь проще, GruntJS (для новичков)](http://habrahabr.ru/post/177395/)
