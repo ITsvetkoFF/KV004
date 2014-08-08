@@ -47,3 +47,6 @@
 - [Grunt для тех, кто считает штуки вроде него странными и сложными](http://frontender.info/grunt-is-not-weird-and-hard/#davaytezastavimgruntobaedinityparufaylov)
 - [Grunt, инструмент для сборки javascript проектов](http://habrahabr.ru/post/148274/)
 - [Делаем жизнь проще, GruntJS (для новичков)](http://habrahabr.ru/post/177395/)
+
+## Angular
+-[С чего начать изучать Angular](http://thinking.bohdanvorona.name/to-learn-angular/)
