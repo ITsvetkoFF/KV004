@@ -49,4 +49,5 @@
 - [Делаем жизнь проще, GruntJS (для новичков)](http://habrahabr.ru/post/177395/)
 
 ## Angular
--[С чего начать изучать Angular](http://thinking.bohdanvorona.name/to-learn-angular/)
+- [С чего начать изучать Angular](http://thinking.bohdanvorona.name/to-learn-angular/)
+- [AngularJS Training Videos and Tutorials for Developers](https://egghead.io/lessons)
