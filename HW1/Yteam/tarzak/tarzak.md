@@ -34,6 +34,7 @@
   {a: {$ne: 'b'}} // Not Equal To
   {a: {$in: ['a', 'b', 'c']}} // Exists in array
 ```
+- [Новый aggregation framework в MongoDB 2.1](http://habrahabr.ru/post/139643/)
 
 
 ## Bower
