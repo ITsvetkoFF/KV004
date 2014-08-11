@@ -35,6 +35,14 @@ function getValues(){
     var i;
     A.x = selectTags[0].value;
     A.y = selectTags[1].value;
+    var step = {
+		x : selectTags[0].value,
+        y : selectTags[1].value
+	}
+	var steps =[];
+	steps.push(A);
+
+	A.steps = steps;
 
     B.x = selectTags[2].value;
     B.y = selectTags[3].value;
@@ -62,15 +70,6 @@ function fillMatrix(){
    }
 }
 
-//function showMatrix(){
-//    for(var i = 0 ; i<matrix.length;i++){
-//        var index = matrix[i];
-//        for(var j = 0; j<index.length; j++){
-//          //  document.writeln(matrix[i][j].x +""+ matrix[i][j].y ;
-//        }
-//    }
-//
-//}
 //----------------заносим вариант хода коня в масиив---
 
 function optionsOfstep(){
@@ -113,35 +112,39 @@ var getDirection = function(){
     queue.push(A);
     for(var i = 0; i<queue.length; i++){
         for(var j=0 ;j<stepOption.length;j++){
+			var steps = queue[i]['steps'].slice(0);
             x = parseInt(queue[i]['x'])+ parseInt(stepOption[j]['x']);
             y = parseInt(queue[i]['y']) + parseInt(stepOption[j]['y']);
-          if(x>=0 && x<=matSize && y>=0 && y<=matSize) {
+          if(x>=0 && x<=matSize && y>=0 && y<=matSize ) {
               var isValidated = validate(x,y);
-            if(isValidated==true){
+            if(isValidated == true){
             if(this.B['x'] == x && this.B['y'] == y){
-                alert('Position found!');
+                alert('Position found! ' +queue[i]['steps'].length + ' with steps');
                 return;
             }else{
-                var cord ={
+				var step = {
+					x:x,
+					y:y
+				}
+                var cord = {
                     x:x,
-                    y:y
+                    y:y,
                 }
+				steps.push(step);
+				cord.steps = steps;
                 queue.push(cord);
                 visitedCoordinates.push(cord);
                 }
-            }
+             }
           }
-        }
+       }
     }
-}
+ }
 
 document.getElementById('send').onclick = function(){
     getValues();
     fillMatrix();
     getDirection();
-    this.queue = new Array();
-    this.matrix = new Array();
-
 }
 
 
