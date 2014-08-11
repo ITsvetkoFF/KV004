@@ -14,7 +14,7 @@ function addOption(){
     var i;
     var j;
     for(i=0; i<selectTags.length; i++){
-        for(j = 1; j<=1000;j++){
+        for(j = 0; j<=1000;j++){
             var opt = document.createElement('option');
             opt.innerHTML = j
             selectTags[i].appendChild(opt);
@@ -35,15 +35,6 @@ function getValues(){
     var i;
     A.x = selectTags[0].value;
     A.y = selectTags[1].value;
-    var step = {
-		x : selectTags[0].value,
-        y : selectTags[1].value
-	}
-	var steps =[];
-	steps.push(A);
-
-	A.steps = steps;
-
     B.x = selectTags[2].value;
     B.y = selectTags[3].value;
 
@@ -56,13 +47,13 @@ function getValues(){
 //---------------Заполнение матрици координат-
 function fillMatrix(){
     matSize = setMatrixSize();
-   for(var i = 0 ;i<matSize;i++){
+   for(var i = 0 ;i<=matSize;i++){
        this.stroke = new Array();
-       for(var j = 0 ;j<matSize;j++){
+       for(var j = 0 ;j<=matSize;j++){
          var coordinates = {
              x: i,
              y: j,
-             wasVisited: -1
+             wasVisited: false
           };
            stroke.push(coordinates);
        }
@@ -96,14 +87,21 @@ optionsOfstep();
 
 //----------перебираем возможные варианты ходов коня на каждой точке каждой точке-------
 
-function validate(X,Y){
-    var length = visitedCoordinates.length;
-    for(var i = 0; i < length; i++){
-        if(parseInt(visitedCoordinates[i]['x']) == parseInt(X) && parseInt(visitedCoordinates[i]['y']) == parseInt(Y)){
-            return false;
-        }
-    }
-    return true;
+function routeToPointA(X,Y){
+	var route = [];
+	var x;
+	var y;
+	while(true){
+	x = matrix[X][Y]['x'];
+	y = matrix[X][Y]['y'];
+	X = x;
+	Y = y;
+		if(x == A.x && y == A.y){
+			alert('Point fount with ' + route.length + ' steps')
+			return route;
+		}
+		route.unshift(matrix[X][Y]);
+	}
 }
 
 var getDirection = function(){
@@ -112,28 +110,23 @@ var getDirection = function(){
     queue.push(A);
     for(var i = 0; i<queue.length; i++){
         for(var j=0 ;j<stepOption.length;j++){
-			var steps = queue[i]['steps'].slice(0);
             x = parseInt(queue[i]['x'])+ parseInt(stepOption[j]['x']);
             y = parseInt(queue[i]['y']) + parseInt(stepOption[j]['y']);
           if(x>=0 && x<=matSize && y>=0 && y<=matSize ) {
-              var isValidated = validate(x,y);
-            if(isValidated == true){
+            if(matrix[x][y]['wasVisited'] == false){
             if(this.B['x'] == x && this.B['y'] == y){
-                alert('Position found! ' +queue[i]['steps'].length + ' with steps');
+                routeToPointA((x -parseInt(stepOption[j]['x'])),y - parseInt(stepOption[j]['y']));
                 return;
             }else{
-				var step = {
-					x:x,
-					y:y
-				}
+				matrix[x][y]['wasVisited'] = true;
+				matrix[x][y]['x'] = (x - parseInt(stepOption[j]['x']));
+				matrix[x][y]['y'] = (y - parseInt(stepOption[j]['y']));
                 var cord = {
                     x:x,
-                    y:y,
+                    y:y
                 }
-				steps.push(step);
-				cord.steps = steps;
                 queue.push(cord);
-                visitedCoordinates.push(cord);
+
                 }
              }
           }
