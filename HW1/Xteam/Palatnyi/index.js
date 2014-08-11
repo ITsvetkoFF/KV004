@@ -7,6 +7,8 @@ var B = {};
 var stepOption = [];
 var queue = [];
 var visitedCoordinates = [];
+var chess = document.getElementById("chess");
+var path = chess.getContext("2d");
 //---------------Добавляем елемент option  в DOM---------------------------------------
 var selectTags = document.getElementsByName('coordinates');
 
@@ -87,6 +89,21 @@ optionsOfstep();
 
 //----------перебираем возможные варианты ходов коня на каждой точке каждой точке-------
 
+function drawPath(route) {
+    for (var i = 0; i < route.length - 1; i++) {
+            path.beginPath()
+            path.moveTo(route[i].x * 5 - 2.5, route[i].y * 5 - 2.5);
+            path.lineWidth = 3;
+
+            path.lineTo(route[i+1].x * 5 - 2.5, route[i+1].y * 5 - 2.5);
+            path.strokeStyle = "black";
+            path.stroke();
+//            if (arrPath[i+1].x > 0 && arrPath[i+1].y > 0) {
+//                console.log("+ " + i);
+//        }
+    }
+}
+
 function routeToPointA(X,Y){
 	var route = [];
 	var x;
@@ -100,7 +117,7 @@ function routeToPointA(X,Y){
 			alert('Point fount with ' + route.length + ' steps')
 			return route;
 		}
-		route.unshift(matrix[X][Y]);
+		route.push(matrix[X][Y]);
 	}
 }
 
@@ -115,7 +132,7 @@ var getDirection = function(){
           if(x>=0 && x<=matSize && y>=0 && y<=matSize ) {
             if(matrix[x][y]['wasVisited'] == false){
             if(this.B['x'] == x && this.B['y'] == y){
-                routeToPointA((x -parseInt(stepOption[j]['x'])),y - parseInt(stepOption[j]['y']));
+                drawPath(routeToPointA((x -parseInt(stepOption[j]['x'])),y - parseInt(stepOption[j]['y'])));
                 return;
             }else{
 				matrix[x][y]['wasVisited'] = true;
