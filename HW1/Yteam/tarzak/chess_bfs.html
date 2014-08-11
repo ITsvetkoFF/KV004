@@ -18,11 +18,11 @@ Array.matrix = function(numrows, numcols) {
 }
 
 //Створюємо дошку і чергу
-var chessBoard = Array.matrix(9, 9)
+var chessBoard = Array.matrix(1000, 1000)
     , queue = []
-    , startPoint = {x: 2, y: 1, status: 0, pX: null, pY: null, start: true }
-    , finishPoint = {x: 2, y: 8, status: "finish", pX: null, pY: null }
-    , currPos = {x: 0, y: 0, status: 0, pX: null, pY: null }
+    , startPoint = {x: 0, y: 0, status: 0, pX: null, pY: null, start: true }
+    , finishPoint = {x: 500, y: 500, status: "finish", pX: null, pY: null }
+    , currPos
     , tempQueue = []
     , step = 0
     , prevMoveArr = []
@@ -42,13 +42,13 @@ setStartPoint(startPoint, finishPoint);
 while(queue.length > 0) {
     
     currPos = queue.shift(); //переміщаємо перший елемент з черги в змінну поточної позиції
-    console.log(currPos.x + " " + currPos.y + " " + currPos.pX + " " + currPos.pY);
+    //console.log(currPos.x + " " + currPos.y + " " + currPos.pX + " " + currPos.pY);
     if ((chessBoard[currPos.x] != undefined) && (chessBoard[currPos.x][currPos.y] != undefined) && (chessBoard[currPos.x][currPos.y].status != "visited")) {
         
         if (chessBoard[currPos.x][currPos.y].status === "finish") {
             chessBoard[currPos.x][currPos.y].pX = currPos.pX;
             chessBoard[currPos.x][currPos.y].pY = currPos.pY;
-            chessBoard[currPos.x][currPos.y].step = currPos.step;
+            //chessBoard[currPos.x][currPos.y].step = currPos.step;
             
             prevMoveArr.push(currPos);
             while (stop == false) {
@@ -56,7 +56,7 @@ while(queue.length > 0) {
             }
             tempQueue = queue;
             queue = [];
-            console.log(chessBoard[finishPoint.x][finishPoint.y].status);
+            //console.log(chessBoard[finishPoint.x][finishPoint.y].status);
             prevMoveArr.reverse();
             console.log("Кількість ходів: " + ((prevMoveArr.length) - 1));
         }
@@ -68,20 +68,20 @@ while(queue.length > 0) {
             chessBoard[currPos.x][currPos.y].pY = currPos.pY;
         }
     }
-    else if ((chessBoard[currPos.x] == undefined) || (chessBoard[currPos.x][currPos.y] == undefined) || (chessBoard[currPos.x][currPos.y] == "visited"))
-        console.log("such cell doesnt exist! or you already have been here");
+    //else if ((chessBoard[currPos.x] == undefined) || (chessBoard[currPos.x][currPos.y] == undefined) || (chessBoard[currPos.x][currPos.y] == "visited"))
+    //    console.log("such cell doesnt exist! or you already have been here");
 }
 
 function movesCords(currPos) {
 
-var movesArr = [ {x: 1, y: 2, pX: null, pY: null }
-                , {x: 2, y: 1, pX: null, pY: null }
-                , {x: 2, y: -1, pX: null, pY: null }
-                , {x: 1, y: -2, pX: null, pY: null }
-                , {x: -1, y: -2, pX: null, pY: null }
-                , {x: -2, y: -1, pX: null, pY: null }
-                , {x: -2, y: 1, pX: null, pY: null }
-                , {x: -1, y: 2, pX: null, pY: null } ]
+var movesArr = [ {x: 1, y: 2}
+                , {x: 2, y: 1}
+                , {x: 2, y: -1}
+                , {x: 1, y: -2}
+                , {x: -1, y: -2}
+                , {x: -2, y: -1}
+                , {x: -2, y: 1}
+                , {x: -1, y: 2} ]
                 , i = 0
                 , movesArrLength = movesArr.length;
     
@@ -91,7 +91,7 @@ var movesArr = [ {x: 1, y: 2, pX: null, pY: null }
         movesArr[i].pX = currPos.x;
         movesArr[i].pY = currPos.y;
     }
-return movesArr;    
+return movesArr;
 }
 
 
@@ -100,8 +100,8 @@ function getPrevMove(currPos) {
     stop = true;
     return prevMoveArr;
     }
-    console.log(chessBoard[currPos.x][currPos.y].pX);
-    console.log(chessBoard[currPos.x][currPos.y].pY);
+    //console.log(chessBoard[currPos.x][currPos.y].pX);
+    //console.log(chessBoard[currPos.x][currPos.y].pY);
     var tempPos = {x:chessBoard[currPos.x][currPos.y].pX, y: chessBoard[currPos.x][currPos.y].pY}; 
     prevMoveArr.push(tempPos);
     counter++;
