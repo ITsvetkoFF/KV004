@@ -34,6 +34,7 @@
   {a: {$ne: 'b'}} // Not Equal To
   {a: {$in: ['a', 'b', 'c']}} // Exists in array
 ```
+- [Новый aggregation framework в MongoDB 2.1](http://habrahabr.ru/post/139643/)
 
 
 ## Bower
@@ -51,3 +52,7 @@
 ## Angular
 - [С чего начать изучать Angular](http://thinking.bohdanvorona.name/to-learn-angular/)
 - [AngularJS Training Videos and Tutorials for Developers](https://egghead.io/lessons)
+
+## Graphic libs
+- [Рисование на JavaScript с помощью Paper.js, Processing.js, Raphael.js](http://sitear.ru/material/risovanie-na-javascript)
+- [Улучшаем производительность HTML5 canvas](http://habrahabr.ru/post/127014/)
