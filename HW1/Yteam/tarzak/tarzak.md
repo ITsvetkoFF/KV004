@@ -54,3 +54,4 @@
 
 ## Graphic libs
 - [Рисование на JavaScript с помощью Paper.js, Processing.js, Raphael.js](http://sitear.ru/material/risovanie-na-javascript)
+- [Улучшаем производительность HTML5 canvas](http://habrahabr.ru/post/127014/)
