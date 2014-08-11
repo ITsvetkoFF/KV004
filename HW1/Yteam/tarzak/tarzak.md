@@ -51,3 +51,6 @@
 ## Angular
 - [С чего начать изучать Angular](http://thinking.bohdanvorona.name/to-learn-angular/)
 - [AngularJS Training Videos and Tutorials for Developers](https://egghead.io/lessons)
+
+## Graphic libs
+- [Рисование на JavaScript с помощью Paper.js, Processing.js, Raphael.js](http://sitear.ru/material/risovanie-na-javascript)
