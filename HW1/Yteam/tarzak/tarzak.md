@@ -56,3 +56,6 @@
 ## Graphic libs
 - [Рисование на JavaScript с помощью Paper.js, Processing.js, Raphael.js](http://sitear.ru/material/risovanie-na-javascript)
 - [Улучшаем производительность HTML5 canvas](http://habrahabr.ru/post/127014/)
+
+## JavaScript manipulations with DOM
+- [remove created item from DOM - beginner student ](http://www.webdeveloper.com/forum/showthread.php?263233-remove-created-item-from-DOM-beginner-student)
