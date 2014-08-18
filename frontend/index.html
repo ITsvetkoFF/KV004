@@ -1,0 +1,409 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+                    
+ 
+        <link href="styles/main.css" rel="stylesheet" type="text/css">
+            
+          <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+          <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/main.js"></script>
+    </head>
+    <body>
+        
+        <header> 
+         <div class="mini-menu" style="margin:0;padding:0;position:absolute;"></div>
+          <div class="header-top"></div>
+            <a href="http://wwf.panda.org/" id="logo"> <img src="images/logo.png" width="104" height="119" alt="WWF"></a>
+             
+            
+         
+         <div class="header-bottom">
+            
+           
+             <ul class="header-menu-content">
+                  <li class="header-menu-content-element"><a href="javascript:showAddProblem();" class="header-menu-content-element-a" id="add-problem-button">Повідомити про проблему</a> </li>
+                 <li class="header-menu-content-element"><a href="" class="header-menu-content-element-a">WWF</a> </li>
+                 <li class="header-menu-content-element"><a href="" class="header-menu-content-element-a">Карта</a></li>
+                 <li class="header-menu-content-element"><a href="" class="header-menu-content-element-a">Сиписок</a></li>
+                 <li class="header-menu-content-element"><a href="" class="header-menu-content-element-a">Про проект</a></li>
+                 <li id="dropdown-source" class="header-menu-content-element">
+                 <a href="" class="header-menu-content-element-a " id="dropdown-source-a">Рeсурси</a>
+                  
+                 <ul class="header-dropdown-menu">
+                 	              <li><a href="">Як організувати прибирання в парку</a> </li>
+                 	       	<li><a   href="">Як зупинити торгівлю первоцвітами</a> </li>
+                 	       	<li><a    href="">Як добитись ліквідації незаконного звалища</a> </li>
+                 	       	<li><a   href="">Як зупинити комерційну експлуатацію тварин</a> </li>
+                 
+                 </ul>
+                 
+                 
+                 </li>    
+                 		<li class="second-menu header-menu-content-element"><a href="javascript:showForm()">Вход</a></li>
+                 		<li class="second-menu header-menu-content-element"><a href="javascript:showRegForm()">Приеднатися</a></li>
+            </div>
+            <div class="login-form">
+            <div class="form-header">Вход</div>
+            <form method="POST" align="right">
+                Логин: <input type="text" class="login-field" name="login"><br>
+                Пароль: <input type="password" class="login-field" name="password"><br>
+                 
+             </form>   
+               <input type="submit" class="form-button"  style="float:left"  value="Войти"> 
+                <a href="javascript:hideForms()" class="form-button" style="text-decoration:none;float:right;">Закрыть</a>
+                
+         </div> 
+         <div class="registration-form">
+           <div class="form-header">Присоединяйся!</div>
+           <div class="facebook-login" style="padding:10px;">Вход через Facebook<div style="float:right; margin-right:20px;"> <fb:login-button style="float:right;display:block;" scope="public_profile,email" onlogin="checkLoginState();" onclick="_gaq.push(['_trackEvent', 'Engage','click','social_login_FB']);" login_text="
+" class=" fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=485796351552703&amp;locale=en_US&amp;login_text=%0A&amp;scope=public_profile%2Cemail&amp;sdk=joey"><span style="vertical-align: bottom; width: 63px; height: 22px;"><iframe name="fa943758c" width="1000px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:login_button Facebook Social Plugin" src="http://www.facebook.com/plugins/login_button.php?app_id=485796351552703&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2FFX-Xf5fQjUk.js%3Fversion%3D41%23cb%3Df35a7aa0c4%26domain%3Dwwf.panda.org%26origin%3Dhttp%253A%252F%252Fwwf.panda.org%252Ff37fd92dd4%26relation%3Dparent.parent&amp;locale=en_US&amp;login_text=%0A&amp;scope=public_profile%2Cemail&amp;sdk=joey" style="border: none; visibility: visible; width: 63px; height: 22px;" class=""></iframe></span></fb:login-button></div></div>
+          
+            <form method="POST" name="reg-form" align="right">
+                <label class="reg-label">Имя*:</label><input type="text" class="reg-field" name="login"><br>
+                <label class="reg-label"> E-mail*:</label> <input type="email" class="reg-field" name="email"><br>
+                 <label class="reg-label">Пароль*:</label> <input type="password" class="reg-field" name="password"><br>
+                 <label class="reg-label">Повторите пароль*:</label> <input type="password" class="reg-field" name="password"><br>
+                 
+             </form>   
+             <input type="submit" class="form-button" style="float:left" form="reg-form" value="Присоединиться!">
+                 <a href="javascript:hideForms()" class="form-button" style="text-decoration:none;float:right;">Закрыть</a>
+         </div> 
+        </header>
+        <div class="main-content">
+            <div id="map" style="width:100%;height:100%"></div>
+            <div class="pointer" id="panel-pointer"></div>
+            <div class="pointer" id="info-pointer"></div>
+            <div class="b-container-panel" >
+                                
+     
+    <div class="show">
+    <div class="left">
+        <div class="info-problem-filters">
+            <div class="problem filters">
+                <p class="title">ТИП ПРОБЛЕМ</p>
+                                
+                    <input type="checkbox" id="forest-problems"/>
+                        <label for="forest-problems">Проблеми лісів</label>
+                    <input type="checkbox" id="garbage-problems">
+                        <label for="garbage-problems">Сміттєзвалища</label>
+                    <input type="checkbox" id="illegal-construction-problems">
+                        <label for="illegal-construction-problems">Незаконна забудова</label>
+                    <input type="checkbox" id="waters-problems">
+                        <label for="waters-problems">Проблеми водойм</label>
+                    <input type="checkbox" id="threats-to-biodivercity-problems">
+                        <label for="threats-to-biodivercity-problems">Загрози біорізноманіттю</label>
+                    <input type="checkbox" id="poaching-problems">
+                        <label for="poaching-problems">Браконьєрство</label>
+                    <input type="checkbox" id="other-problems">
+                        <label for="other-problems">Інші проблеми</label>
+                
+            </div>
+           
+            <div class="problem status">
+                <p class="title">СТАТУС ПРОБЛЕМ</p>
+                    <input type="checkbox" id="problem-status-new">
+                        <label for="problem-status-new">Нова</label>
+                    <input type="checkbox" id="problem-status-inprocess">    
+                        <label for="problem-status-inprocess">В процесі</label>
+                    <input type="checkbox" id="problem-status-resolved">
+                        <label for="problem-status-resolved">Вирішена</label>
+             </div>
+            <div class="problem controls"><!-- For Registered Users -->
+                <p class="title">REGISTERED USER CONTROLS</p>
+                    <ul>Мої проблеми</ul>
+                        <li>Проблема 1</li>
+                        <li>Проблема 2</li>
+                        <li>Проблема 3</li>
+                    <ul>Коментарі</ul>
+                        <li>Коментар 1</li>
+                        <li>Коментар 1</li>
+                        <li>Коментар 1</li>
+            </div>
+            <div class="problem stats">
+                <p class="title">STATS</p>
+                    <li>Кількість проблем</li>    
+                    <li>Останні проблеми</li>
+                    <li>Популярні проблеми</li>
+                         
+            </div>
+        
+         
+        </div>
+            </div>
+</div>
+</div>
+        
+            <div class="b-container-info" >
+ <div class="b-problems">
+                <div class="b-problems__close">
+                    <img src="images/icons/close_icon.png" class="b-problems__close-image"/>
+                </div>
+
+                <div class="b-problems_float-clear">
+                </div>
+
+                <div class="b-problems__mainContent">
+                    <div class="b-mainContent">
+                        <div class="b-mainContent__leftPanel">
+                            <div class="b-leftPanel">
+
+                                <div class="b-leftPanel__details">
+                                    <div class="b-details">
+                                        <div class="b-details__title">
+                                            <span class="b-details__title_">Lorem ipsum</span>
+                                        </div>
+
+                                        <div class="b-details__block">
+                                            <span class="b-details__block-title">Додана:</span>
+                                            <span class="b-details__block-value">2014-01-01</span>
+                                        </div>
+
+                                        <div class="b-details__block">
+                                            <span class="b-details__block-title">Тип проблеми:</span>
+                                            <span class="b-details__block-value">Браконьєрство</span>
+                                        </div>
+
+                                        <div class="b-details__block">
+                                            <span class="b-details__block-title">Статус проблеми:</span>
+                                            <span class="b-details__block-value">Нова</span>
+                                        </div>
+
+                                        <div class="b-details__block">
+                                            <span class="b-details__block-title">Важливість проблеми:</span>
+                                            <span class="b-details__block-value">3/5</span>
+                                        </div>
+
+                                        <div class="b-details__block">
+                                            <span class="b-details__block-title">Голосів:</span>
+                                            <span class="b-details__block-value">10</span>
+                                        </div>
+
+                                        <div class="b-details__subscribe">
+                                            <span class="b-details__subscribe-title">Ви можете дізнаватися про зміни по даній проблемі:</span>
+                                            <input type="text" placeholder="e-mail" class="b-details__subscribe-mail"/>
+                                            <input type="submit" value="Підписатись" class="b-details__subscribe-send"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="b-leftPanel__photos">
+                                    <div class="b-photos">
+                                        <div class="b-photos__line">
+                                            <div class="b-photos__line-elem">
+                                                <img src="images/icons/noImage_icon.png" class="b-photos__line-elem-img"/>
+                                            </div>
+                                            <div class="b-photos__line-elem">
+                                                <img src="images/icons/noImage_icon.png" class="b-photos__line-elem-img"/>
+                                            </div>
+                                            <div class="b-photos__line-elem">
+                                                <img src="images/icons/noImage_icon.png" class="b-photos__line-elem-img"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="b-photos__line">
+                                            <div class="b-photos__line-elem">
+                                                <img src="images/icons/noImage_icon.png" class="b-photos__line-elem-img"/>
+                                            </div>
+                                            <div class="b-photos__line-elem">
+                                                <img src="images/icons/noImage_icon.png" class="b-photos__line-elem-img"/>
+                                            </div>
+                                            <div class="b-photos__line-elem">
+                                                <img src="images/icons/noImage_icon.png" class="b-photos__line-elem-img"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="b-mainContent__rightPanel">
+                            <div class="b-rightPanel">
+                                <ul class="b-rightPanel_chat">
+                                    <li class="b-rightPanel_chat-mail">
+                                        <div class="b-chat-mail">
+                                            <span class="b-chat-mail__created">Created: 2014-01-01</span>
+                                            <span class="b-chat-mail__author">By: anonymous</span>
+                                            <span class="b-chat-mail__msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                                        </div>
+                                    </li>
+
+                                    <li class="b-rightPanel_chat-mail">
+                                        <div class="b-chat-mail">
+                                            <span class="b-chat-mail__created">Created: 2014-01-01</span>
+                                            <span class="b-chat-mail__author">By: anonymous</span>
+                                            <span class="b-chat-mail__msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                                        </div>
+                                    </li>
+
+                                    <li class="b-rightPanel_chat-mail">
+                                        <div class="b-chat-mail">
+                                            <span class="b-chat-mail__created">Created: 2014-01-01</span>
+                                            <span class="b-chat-mail__author">By: anonymous</span>
+                                            <span class="b-chat-mail__msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <div class="b-rightPanel__comment">
+                                    <div class="b-comment">
+                                        <span class="b-comment__title">Напішіть свій коментар:</span>
+                                        <textarea placeholder="Текст коментарю..." class="b-comment__field"></textarea>
+                                        <input type="submit" value="Надіслати"  class="b-comment__btn"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="b-problems_float-clear">
+                        </div>
+
+                        <div class="b-mainContent__footer">
+                            <ul class="b-pFooter">
+                                <li class="b-pFooter__item-list">
+                                    <span class="b-your-list__title">Ваши записи:</span>
+                                    <ul class="b-your-list">
+                                        <li class="b-your-list__problem">
+                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
+                                            <span class="b-your-list__problem-votes">Голосів:</span>
+                                            <span class="b-your-list__problem-count">10</span>
+                                        </li>
+
+                                        <li class="b-your-list__problem">
+                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
+                                            <span class="b-your-list__problem-votes">Голосів:</span>
+                                            <span class="b-your-list__problem-count">10</span>
+                                        </li>
+
+                                        <li class="b-your-list__problem">
+                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
+                                            <span class="b-your-list__problem-votes">Голосів:</span>
+                                            <span class="b-your-list__problem-count">10</span>
+                                        </li>
+
+                                        <li class="b-your-list__problem">
+                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
+                                            <span class="b-your-list__problem-votes">Голосів:</span>
+                                            <span class="b-your-list__problem-count">10</span>
+                                        </li>
+
+                                        <li class="b-your-list__problem">
+                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
+                                            <span class="b-your-list__problem-votes">Голосів:</span>
+                                            <span class="b-your-list__problem-count">10</span>
+                                        </li>
+
+                                        <li class="b-your-list__problem">
+                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
+                                            <span class="b-your-list__problem-votes">Голосів:</span>
+                                            <span class="b-your-list__problem-count">10</span>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="b-pFooter__item-list">
+                                    <span class="b-your-list__title">Популярні записи:</span>
+                                    <ul class="b-your-list">
+                                        <li class="b-your-list__problem">
+                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
+                                            <span class="b-your-list__problem-votes">Голосів:</span>
+                                            <span class="b-your-list__problem-count">10</span>
+                                        </li>
+
+                                        <li class="b-your-list__problem">
+                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
+                                            <span class="b-your-list__problem-votes">Голосів:</span>
+                                            <span class="b-your-list__problem-count">10</span>
+                                        </li>
+
+                                        <li class="b-your-list__problem">
+                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
+                                            <span class="b-your-list__problem-votes">Голосів:</span>
+                                            <span class="b-your-list__problem-count">10</span>
+                                        </li>
+
+                                        <li class="b-your-list__problem">
+                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
+                                            <span class="b-your-list__problem-votes">Голосів:</span>
+                                            <span class="b-your-list__problem-count">10</span>
+                                        </li>
+
+                                        <li class="b-your-list__problem">
+                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
+                                            <span class="b-your-list__problem-votes">Голосів:</span>
+                                            <span class="b-your-list__problem-count">10</span>
+                                        </li>
+
+                                        <li class="b-your-list__problem">
+                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
+                                            <span class="b-your-list__problem-votes">Голосів:</span>
+                                            <span class="b-your-list__problem-count">10</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="b-container-addproblem">
+<div class = "tzinfo">
+<div><h2>ДОДАТИ ПРОБЛЕМУ</h2></div>  
+<form class = "tzform" name = "submit_problem" method = "get">
+  
+    <div class = "add_problem_row tzinput">
+        <label class = "add_problem_input" for = "title-field">Заголовок</label>
+        <input type = "text" id = "title-field" placeholder = "Узагальніть проблему" name = "title" class = "row_input">
+    </div>
+    
+    <div class = "add_problem_row tzinput">
+        <label class = "add_problem_input" for = "select-field">Тип проблеми</label>
+        <select name = "type" class = "row_input" id = "select-field">
+            <option value = "Проблеми лісів">Проблеми лісів</option>
+            <option value = "Сміттєзвалища">Сміттєзвалища</option>
+            <option value = "Незаконна забудова">Незаконна забудова</option>
+            <option value = "Проблеми водойм">Проблеми водойм</option>
+            <option value = "Загрози біорізноманіттю">Загрози біорізноманіттю</option>
+            <option value = "Браконьєрство">Браконьєрство</option>
+            <option value = "Інші проблеми">Інші проблеми</option>
+        </select>
+    </div>
+    
+    <div class = "add_problem_row tztextarea">
+        <label class = "add_problem_input" for = "description-field">Опис проблеми</label>
+        <textarea id = "description-field" placeholder = "Опишіть якомога детальніше проблему" name = "description" class = "row_textarea" rows = "6"></textarea>
+    </div>
+    
+    <div class = "add_problem_row tztextarea">
+        <label class = "add_problem_input" for = "proposal-field">Пропозиція щодо рішення</label>
+        <textarea id = "proposal-field" placeholder = "Ваші пропозиції" name = "proposal" class = "row_textarea" rows = "6"></textarea>
+    </div>
+    
+    <div class = "add_problem_row">
+        <label class = "label-for-files add_problem_input" for="files">Додайте фото: 
+            <input class = "tzbutton tzbutton-files" type = "button" value = "Додати фото"> 
+        </label>
+        
+        <input id="files" type="file" multiple/>
+        <div id="result"></div>
+    </div>
+    
+    <div class = "submit-section">
+        <input class = "tzbutton" type = "button" value = "Закрити">
+        <input class = "tzbutton" type = "submit" value = "Додати">
+    </div>
+</form>
+</div>
+        
+        </div>
+        <footer></footer>    
+    
+    
+    
+    </body>
+</html>
