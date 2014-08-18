@@ -966,7 +966,7 @@ a.header-menu-content-element-a:active,a.header-menu-content-element-a:hover{
                 left: calc(50% - 25px);
                 height: 25px;
                 width: 50px;                
-                background: #AAAAAA url('images/icons/arrow_down_icon.png') no-repeat center center;
+                background: #AAAAAA url('../images/icons/arrow_down_icon.png') no-repeat center center;
                 border-top: 0;
                 opacity: 0.2;
             }
@@ -982,7 +982,7 @@ a.header-menu-content-element-a:active,a.header-menu-content-element-a:hover{
                 left: calc(50% - 25px);
                 height: 25px;
                 width: 50px;                
-                background: #AAAAAA url('images/icons/arrow_up_icon.png') no-repeat center center;
+                background: #AAAAAA url('../images/icons/arrow_up_icon.png') no-repeat center center;
                 border-top: 0;
                 opacity: 0.2;
             }
