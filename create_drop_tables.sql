@@ -2,13 +2,14 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-
+DROP DATABASE IF EXISTS `enviromap` ;
+CREATE DATABASE IF NOT EXISTS `enviromap` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `enviromap` ;
 
 -- -----------------------------------------------------
--- Table `Enviromap_schema`.`ProblemStatus`
+-- Table `enviromap`.`ProblemStatus`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap_schema`.`ProblemStatus` (
+CREATE TABLE IF NOT EXISTS `enviromap`.`ProblemStatus` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `ProbStatus` VARCHAR(20) NULL,
   PRIMARY KEY (`Id`))
@@ -16,9 +17,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Enviromap_schema`.`ProblemTypes`
+-- Table `enviromap`.`ProblemTypes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap_schema`.`ProblemTypes` (
+CREATE TABLE IF NOT EXISTS `enviromap`.`ProblemTypes` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `ProbType` VARCHAR(45) NULL,
   PRIMARY KEY (`Id`))
@@ -26,9 +27,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Enviromap_schema`.`Problems`
+-- Table `enviromap`.`Problems`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap_schema`.`Problems` (
+CREATE TABLE IF NOT EXISTS `enviromap`.`Problems` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Title` VARCHAR(70) NULL,
   `Content` VARCHAR(500) NULL,
@@ -45,21 +46,21 @@ CREATE TABLE IF NOT EXISTS `Enviromap_schema`.`Problems` (
   INDEX `fk_Problems_ProblemTypes1_idx` (`ProblemTypes_Id` ASC),
   CONSTRAINT `fk_Problems_ProblemStatus1`
     FOREIGN KEY (`ProblemStatus_Id`)
-    REFERENCES `Enviromap_schema`.`ProblemStatus` (`Id`)
+    REFERENCES `enviromap`.`ProblemStatus` (`Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Problems_ProblemTypes1`
     FOREIGN KEY (`ProblemTypes_Id`)
-    REFERENCES `Enviromap_schema`.`ProblemTypes` (`Id`)
+    REFERENCES `enviromap`.`ProblemTypes` (`Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Enviromap_schema`.`Users`
+-- Table `enviromap`.`Users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap_schema`.`Users` (
+CREATE TABLE IF NOT EXISTS `enviromap`.`Users` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45) NULL,
   `Surname` VARCHAR(45) NULL,
@@ -70,9 +71,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Enviromap_schema`.`Photos`
+-- Table `enviromap`.`Photos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap_schema`.`Photos` (
+CREATE TABLE IF NOT EXISTS `enviromap`.`Photos` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `PhotoLink` VARCHAR(100) NULL,
   `PhotoStatus` TINYINT(1) NULL,
@@ -83,21 +84,21 @@ CREATE TABLE IF NOT EXISTS `Enviromap_schema`.`Photos` (
   INDEX `fk_Photos_Users1_idx` (`Users_Id` ASC),
   CONSTRAINT `fk_Photos_Problems1`
     FOREIGN KEY (`Problems_id`)
-    REFERENCES `Enviromap_schema`.`Problems` (`Id`)
+    REFERENCES `enviromap`.`Problems` (`Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Photos_Users1`
     FOREIGN KEY (`Users_Id`)
-    REFERENCES `Enviromap_schema`.`Users` (`Id`)
+    REFERENCES `enviromap`.`Users` (`Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Enviromap_schema`.`ActivityTypes`
+-- Table `enviromap`.`ActivityTypes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap_schema`.`ActivityTypes` (
+CREATE TABLE IF NOT EXISTS `enviromap`.`ActivityTypes` (
   `Id` INT NOT NULL,
   `ActivityName` VARCHAR(45) NULL,
   PRIMARY KEY (`Id`))
@@ -105,9 +106,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Enviromap_schema`.`Activities`
+-- Table `enviromap`.`Activities`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap_schema`.`Activities` (
+CREATE TABLE IF NOT EXISTS `enviromap`.`Activities` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `ActivityContent` VARCHAR(500) NULL,
   `ActivityDate` DATE NULL,
@@ -120,17 +121,17 @@ CREATE TABLE IF NOT EXISTS `Enviromap_schema`.`Activities` (
   INDEX `fk_Activities_Problems1_idx` (`Problems_Id` ASC),
   CONSTRAINT `fk_Activities_ActivityTypes1`
     FOREIGN KEY (`ActivityTypes_Id`)
-    REFERENCES `Enviromap_schema`.`ActivityTypes` (`Id`)
+    REFERENCES `enviromap`.`ActivityTypes` (`Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Activities_Users1`
     FOREIGN KEY (`Users_Id`)
-    REFERENCES `Enviromap_schema`.`Users` (`Id`)
+    REFERENCES `enviromap`.`Users` (`Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Activities_Problems1`
     FOREIGN KEY (`Problems_Id`)
-    REFERENCES `Enviromap_schema`.`Problems` (`Id`)
+    REFERENCES `enviromap`.`Problems` (`Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
