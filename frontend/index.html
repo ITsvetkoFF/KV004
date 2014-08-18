@@ -136,220 +136,241 @@
 </div>
         
             <div class="b-container-info" >
- <div class="b-problems">
+  <div class="b-container__problems">
+            <div class="b-problems">
+                <!-- Часть для вставки / начало -->  
                 <div class="b-problems__close">
                     <img src="images/icons/close_icon.png" class="b-problems__close-image"/>
                 </div>
-
-                <div class="b-problems_float-clear">
+                
+                <div class="b-crear-float">
                 </div>
-
-                <div class="b-problems__mainContent">
-                    <div class="b-mainContent">
-                        <div class="b-mainContent__leftPanel">
-                            <div class="b-leftPanel">
-
-                                <div class="b-leftPanel__details">
-                                    <div class="b-details">
-                                        <div class="b-details__title">
-                                            <span class="b-details__title_">Lorem ipsum</span>
-                                        </div>
-
-                                        <div class="b-details__block">
-                                            <span class="b-details__block-title">Додана:</span>
-                                            <span class="b-details__block-value">2014-01-01</span>
-                                        </div>
-
-                                        <div class="b-details__block">
-                                            <span class="b-details__block-title">Тип проблеми:</span>
-                                            <span class="b-details__block-value">Браконьєрство</span>
-                                        </div>
-
-                                        <div class="b-details__block">
-                                            <span class="b-details__block-title">Статус проблеми:</span>
-                                            <span class="b-details__block-value">Нова</span>
-                                        </div>
-
-                                        <div class="b-details__block">
-                                            <span class="b-details__block-title">Важливість проблеми:</span>
-                                            <span class="b-details__block-value">3/5</span>
-                                        </div>
-
-                                        <div class="b-details__block">
-                                            <span class="b-details__block-title">Голосів:</span>
-                                            <span class="b-details__block-value">10</span>
-                                        </div>
-
-                                        <div class="b-details__subscribe">
-                                            <span class="b-details__subscribe-title">Ви можете дізнаватися про зміни по даній проблемі:</span>
-                                            <input type="text" placeholder="e-mail" class="b-details__subscribe-mail"/>
-                                            <input type="submit" value="Підписатись" class="b-details__subscribe-send"/>
-                                        </div>
-                                    </div>
+                                
+                <div class="b-problems__leftPanel floating" id="left">                    
+                    <div class="b-leftPanel">
+                        <div class="b-leftPanel__details">
+                            <div class="b-details">
+                                <span class="b-details__title">Заголовок проблеми.</span>
+                                
+                                <div class="b-details__body">
+                                    <table class="b-details-body">
+                                        <tr class="b-details-body__line">
+                                            <td class="b-details-body__title">Додана:</td>
+                                            <td class="b-details-body__value" colspan="2">2014-01-01</td>
+                                        </tr>
+                                        <tr class="b-details-body__line">
+                                            <td class="b-details-body__title">Тип:</td>
+                                            <td class="b-details-body__value" colspan="2">Браконьєрство</td>
+                                        </tr>
+                                        <tr class="b-details-body__line">
+                                            <td class="b-details-body__title">Статус:</td>
+                                            <td class="b-details-body__value" colspan="2">Нова</td>
+                                        </tr>
+                                        <tr class="b-details-body__line">
+                                            <td class="b-details-body__title">Важливість:</td>
+                                            <td class="b-details-body__value" colspan="2">3/5</td>
+                                        </tr>                                        
+                                        <tr class="b-details-body__line">
+                                            <td class="b-details-body__title" width="200">Кількість голосів:</td>
+                                            <td class="b-details-body__value" width="30">10</td>
+                                            <td class="b-details-body__image">
+                                                <img src="images/icons/thumb_up_icon.png" class="b-details-body-image" title="Голосувати!"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="b-details-body__line">
+                                            <td class="b-details-body__title" colspan="4">Опис проблеми:</td>
+                                        </tr>
+                                        <tr class="b-details-body__line">
+                                            <td class="b-details-body__problem-definition" colspan="4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
+                                        </tr>
+                                        <tr class="b-details-body__line">
+                                            <td class="b-details-body__title" colspan="4">Фотографії проблеми:</td>
+                                        </tr>
+                                        <tr class="b-details-body__line">
+                                            <td class="b-details-body__problem-photos" colspan="4">
+                                                <img src="images/icons/add_image_icon.png" class="b-details-body-problem-photo"/>
+                                                <img src="images/icons/add_image_icon.png" class="b-details-body-problem-photo"/>        
+                                            </td>
+                                        </tr>
+                                        <tr class="b-details-body__line">
+                                            <td class="b-details-body__title" colspan="4">Фотографії після вирішення:</td>
+                                        </tr>
+                                        <tr class="b-details-body__line">
+                                            <td class="b-details-body__problem-photos" colspan="4">
+                                                <img src="images/icons/add_image_icon.png" class="b-details-body-problem-photo"/>
+                                                <img src="images/icons/add_image_icon.png" class="b-details-body-problem-photo"/>        
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
-
-
-                                <div class="b-leftPanel__photos">
-                                    <div class="b-photos">
-                                        <div class="b-photos__line">
-                                            <div class="b-photos__line-elem">
-                                                <img src="images/icons/noImage_icon.png" class="b-photos__line-elem-img"/>
-                                            </div>
-                                            <div class="b-photos__line-elem">
-                                                <img src="images/icons/noImage_icon.png" class="b-photos__line-elem-img"/>
-                                            </div>
-                                            <div class="b-photos__line-elem">
-                                                <img src="images/icons/noImage_icon.png" class="b-photos__line-elem-img"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="b-photos__line">
-                                            <div class="b-photos__line-elem">
-                                                <img src="images/icons/noImage_icon.png" class="b-photos__line-elem-img"/>
-                                            </div>
-                                            <div class="b-photos__line-elem">
-                                                <img src="images/icons/noImage_icon.png" class="b-photos__line-elem-img"/>
-                                            </div>
-                                            <div class="b-photos__line-elem">
-                                                <img src="images/icons/noImage_icon.png" class="b-photos__line-elem-img"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="b-mainContent__rightPanel">
-                            <div class="b-rightPanel">
-                                <ul class="b-rightPanel_chat">
-                                    <li class="b-rightPanel_chat-mail">
-                                        <div class="b-chat-mail">
-                                            <span class="b-chat-mail__created">Created: 2014-01-01</span>
-                                            <span class="b-chat-mail__author">By: anonymous</span>
-                                            <span class="b-chat-mail__msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                                        </div>
-                                    </li>
-
-                                    <li class="b-rightPanel_chat-mail">
-                                        <div class="b-chat-mail">
-                                            <span class="b-chat-mail__created">Created: 2014-01-01</span>
-                                            <span class="b-chat-mail__author">By: anonymous</span>
-                                            <span class="b-chat-mail__msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                                        </div>
-                                    </li>
-
-                                    <li class="b-rightPanel_chat-mail">
-                                        <div class="b-chat-mail">
-                                            <span class="b-chat-mail__created">Created: 2014-01-01</span>
-                                            <span class="b-chat-mail__author">By: anonymous</span>
-                                            <span class="b-chat-mail__msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
-                                        </div>
-                                    </li>
-                                </ul>
-
-                                <div class="b-rightPanel__comment">
-                                    <div class="b-comment">
-                                        <span class="b-comment__title">Напішіть свій коментар:</span>
-                                        <textarea placeholder="Текст коментарю..." class="b-comment__field"></textarea>
-                                        <input type="submit" value="Надіслати"  class="b-comment__btn"/>
-                                    </div>
+                                
+                                <div class="b-details__photos">
                                 </div>
                             </div>
                         </div>
-
-                        <div class="b-problems_float-clear">
-                        </div>
-
-                        <div class="b-mainContent__footer">
-                            <ul class="b-pFooter">
-                                <li class="b-pFooter__item-list">
-                                    <span class="b-your-list__title">Ваши записи:</span>
-                                    <ul class="b-your-list">
-                                        <li class="b-your-list__problem">
-                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
-                                            <span class="b-your-list__problem-votes">Голосів:</span>
-                                            <span class="b-your-list__problem-count">10</span>
-                                        </li>
-
-                                        <li class="b-your-list__problem">
-                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
-                                            <span class="b-your-list__problem-votes">Голосів:</span>
-                                            <span class="b-your-list__problem-count">10</span>
-                                        </li>
-
-                                        <li class="b-your-list__problem">
-                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
-                                            <span class="b-your-list__problem-votes">Голосів:</span>
-                                            <span class="b-your-list__problem-count">10</span>
-                                        </li>
-
-                                        <li class="b-your-list__problem">
-                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
-                                            <span class="b-your-list__problem-votes">Голосів:</span>
-                                            <span class="b-your-list__problem-count">10</span>
-                                        </li>
-
-                                        <li class="b-your-list__problem">
-                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
-                                            <span class="b-your-list__problem-votes">Голосів:</span>
-                                            <span class="b-your-list__problem-count">10</span>
-                                        </li>
-
-                                        <li class="b-your-list__problem">
-                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
-                                            <span class="b-your-list__problem-votes">Голосів:</span>
-                                            <span class="b-your-list__problem-count">10</span>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="b-pFooter__item-list">
-                                    <span class="b-your-list__title">Популярні записи:</span>
-                                    <ul class="b-your-list">
-                                        <li class="b-your-list__problem">
-                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
-                                            <span class="b-your-list__problem-votes">Голосів:</span>
-                                            <span class="b-your-list__problem-count">10</span>
-                                        </li>
-
-                                        <li class="b-your-list__problem">
-                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
-                                            <span class="b-your-list__problem-votes">Голосів:</span>
-                                            <span class="b-your-list__problem-count">10</span>
-                                        </li>
-
-                                        <li class="b-your-list__problem">
-                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
-                                            <span class="b-your-list__problem-votes">Голосів:</span>
-                                            <span class="b-your-list__problem-count">10</span>
-                                        </li>
-
-                                        <li class="b-your-list__problem">
-                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
-                                            <span class="b-your-list__problem-votes">Голосів:</span>
-                                            <span class="b-your-list__problem-count">10</span>
-                                        </li>
-
-                                        <li class="b-your-list__problem">
-                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
-                                            <span class="b-your-list__problem-votes">Голосів:</span>
-                                            <span class="b-your-list__problem-count">10</span>
-                                        </li>
-
-                                        <li class="b-your-list__problem">
-                                            <span class="b-your-list__problem-title">Hello, Hello, Hello, Hello, Hello</span>
-                                            <span class="b-your-list__problem-votes">Голосів:</span>
-                                            <span class="b-your-list__problem-count">10</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-
                     </div>
                 </div>
+                
+                <div class="b-problems__rightPanel floating" id="right">
+                    <div class="b-rightPanel">
+                        <div class="b-rightPanel__chat">
+                            <div class="b-chat">
+                                <div class="b-chat__container-arrow-down">
+                                </div>
+                                
+                                <div class="b-chat__container-arrow-up">
+                                </div>  
+                            </div>
+                            
+                            <div class="b-chat-comment">
+                                <span class="b-chat-comment__title">Додати коментар</span>
+                                <textarea class="b-chat-comment__field" placeholder="Напишіть тут свій коментар..."></textarea>
+                                <div class="b-chat-comment__btn-field">
+                                    <input type="button" value="Додати" class="b-chat-comment__btn"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="b-crear-float">
+                </div>
+                
+                <div class="b-problems__mainList">
+                    <div class="b-mainList">
+                        <div class="b-mainList-categorie floating"> 
+                            <span class="b-mainList-categorie__title">Ваші записи:</span>
+                            <ul class="b-mainList__list">
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>                                
+                            </ul>
+                        </div>
+                                            
+                        <div class="b-mainList-categorie floating"> 
+                            <span class="b-mainList-categorie__title">Останні проблеми:</span>
+                            <ul class="b-mainList__list">
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>                                
+                            </ul>
+                        </div>
+                        
+                        <div class="b-crear-float">
+                        </div>    
+                        
+                        
+                        <div class="b-mainList-categorie floating"> 
+                            <span class="b-mainList-categorie__title">Найближчі проблеми:</span>
+                            <ul class="b-mainList__list">
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>                                
+                            </ul>
+                        </div>
+                                            
+                        <div class="b-mainList-categorie floating"> 
+                            <span class="b-mainList-categorie__title">Популярні проблеми:</span>
+                            <ul class="b-mainList__list">
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>
+                                <li class="b-mainList__list-item">
+                                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                                    <span class="b-mainList__list-item-votes-value">10</span>
+                                </li>                                
+                            </ul>
+                        </div>
+                        
+                        <div class="b-crear-float">
+                        </div>               
+                    </div>
+                </div>
+            
             </div>
+                <!-- Часть для вставки / конец -->
+
+        </div>
             </div>
             <div class="b-container-addproblem">
 <div class = "tzinfo">
