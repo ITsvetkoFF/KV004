@@ -99,3 +99,4 @@ function filldb() {
 
 filldb();
 console.log('database filled');
+connection.end();
