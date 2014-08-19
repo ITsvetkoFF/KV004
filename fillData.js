@@ -13,8 +13,8 @@ var connection = mysql.createConnection(
     {
       host     : 'localhost',
       user     : 'root',
-      password : 'root',
-      database : 'enviromap',
+      password : '000',
+      database : 'Enviromap_schema',
     }
 );
 
@@ -24,21 +24,14 @@ var queryString = "insert into ProblemTypes (ProbType) values ('Проблеми
 
 connection.query(queryString, function(err, rows, fields) {
     if (err) throw err;
- 
-    for (var i in rows) {
-        console.log('Post Titles: ', rows[i].post_title);
-    }
-});
+    });
 
 var queryString = "insert into ProblemStatus (ProbStatus) values ('Нова'), ('В процесі'), ('Вирішена');";
 
 connection.query(queryString, function(err, rows, fields) {
     if (err) throw err;
- 
-    for (var i in rows) {
-        console.log('Post Titles: ', rows[i].post_title);
-    }
-});
+    });
+
 for (var i=0, len=probs.length; i<len; i++) {
 if (probs[i].probStatus == 'Нова') probs[i].probStatus = 1;
 else if (probs[i].probStatus == 'В процесі') probs[i].probStatus = 2;
@@ -62,11 +55,8 @@ var queryString = "insert into Problems (Title, Content, Severity, Moderation, L
 
 connection.query(queryString, function(err, rows, fields) {
     if (err) throw err;
- 
-    for (var i in rows) {
-        console.log('Post Titles: ', rows[i].post_title);
-    }
-});
+    });
+
 };
 };
 connection.end();
