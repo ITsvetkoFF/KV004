@@ -98,4 +98,4 @@ function filldb() {
 }
 
 filldb();
-console.log('database filled')
+console.log('database filled');
