@@ -99,7 +99,7 @@ ENGINE = InnoDB;
 -- Table `enviromap`.`ActivityTypes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `enviromap`.`ActivityTypes` (
-  `Id` INT NOT NULL,
+  `Id` INT NOT NULL AUTO_INCREMENT,
   `ActivityName` VARCHAR(45) NULL,
   PRIMARY KEY (`Id`))
 ENGINE = InnoDB;
