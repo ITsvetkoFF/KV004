@@ -34,14 +34,14 @@ var connection = mysql.createConnection(
 
 function fillProblemStatus() {
     for (var i = 0; i < problemStatus.length; i++) {
-        connection.query('INSERT INTO problemstatus SET ?', {probStatus: problemStatus[i]});
+        connection.query('INSERT INTO ProblemStatus SET ?', {probStatus: problemStatus[i]});
     }
 }
 
 
 function fillProblemTypes() {
     for (var i = 0; i < problemType.length; i++) {
-        connection.query('INSERT INTO problemtypes SET ?', {probType: problemType[i]});
+        connection.query('INSERT INTO ProblemTypes SET ?', {probType: problemType[i]});
     }
 }
 
@@ -50,7 +50,7 @@ function fillProblemAndActivityTable() {
     for (var i = 0; i < 50; i++) {
         var currentContent = content[randomIntInc(0, content.length)];
         contentStory.push(currentContent);
-        connection.query('INSERT INTO problems SET ?', {title: title[randomIntInc(0, title.length)],
+        connection.query('INSERT INTO Problems SET ?', {title: title[randomIntInc(0, title.length)],
             content: currentContent,
             severity: severity[randomIntInc(0, severity.length)],
             moderation: moderation[randomIntInc(0, moderation.length)],
@@ -63,7 +63,7 @@ function fillProblemAndActivityTable() {
     }
 
     for (var j = 1; j <= 50; j++) {
-        connection.query('INSERT INTO activities SET ?', {activityContent: contentStory[j - 1],
+        connection.query('INSERT INTO Activities SET ?', {activityContent: contentStory[j - 1],
             problems_id: j,
             activityDate: new Date(),
             activityTypes_Id: 4,
@@ -75,7 +75,7 @@ function fillProblemAndActivityTable() {
 
 function fillUsers() {
     for (var i = 0; i < userNames.length; i++) {
-        connection.query('INSERT INTO users SET ?', {
+        connection.query('INSERT INTO Users SET ?', {
             name: userNames[i],
             password: crypto.createHmac('sha1', '33').update(new Buffer(passwords[i])).digest("hex"),
             email: userEmails[i]});
@@ -85,7 +85,7 @@ function fillUsers() {
 
 function fillActivityType() {
     for (var i = 0; i < activityType.length; i++) {
-        connection.query('INSERT INTO activityTypes SET ?', {activityName: activityType[i]});
+        connection.query('INSERT INTO ActivityTypes SET ?', {activityName: activityType[i]});
     }
 }
 
