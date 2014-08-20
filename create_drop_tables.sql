@@ -77,13 +77,13 @@ CREATE TABLE IF NOT EXISTS `enviromap`.`Photos` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `PhotoLink` VARCHAR(100) NULL,
   `PhotoStatus` TINYINT(1) NULL,
-  `Problems_id` INT NOT NULL,
+  `Problems_Id` INT NOT NULL,
   `Users_Id` INT NOT NULL,
-  PRIMARY KEY (`Id`, `Problems_id`),
-  INDEX `fk_Photos_Problems1_idx` (`Problems_id` ASC),
+  PRIMARY KEY (`Id`, `Problems_Id`),
+  INDEX `fk_Photos_Problems1_idx` (`Problems_Id` ASC),
   INDEX `fk_Photos_Users1_idx` (`Users_Id` ASC),
   CONSTRAINT `fk_Photos_Problems1`
-    FOREIGN KEY (`Problems_id`)
+    FOREIGN KEY (`Problems_Id`)
     REFERENCES `enviromap`.`Problems` (`Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
