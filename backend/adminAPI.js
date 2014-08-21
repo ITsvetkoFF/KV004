@@ -9,10 +9,10 @@ var connectionpool = mysql.createPool({
       database : 'Enviromap_schema',
     });
 app.get('/not_aprooved', notAproovedProblems);
-app.get('/delete_problem', deleteProblem);
-app.get('/delete_user', deleteUser);
-app.get('/delete_comment', deleteComment);
-app.get('/edit_problem', editProblem);
+app.delete('/delete_problem', deleteProblem);
+app.delete('/delete_user', deleteUser);
+app.delete('/delete_comment', deleteComment);
+app.put('/edit_problem', editProblem);
 
 function notAproovedProblems(req, res) {
 connectionpool.getConnection(function(err, connection) {
