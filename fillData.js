@@ -13,8 +13,8 @@ var connection = mysql.createConnection(
     {
       host     : 'localhost',
       user     : 'root',
-      password : '000',
-      database : 'Enviromap_schema',
+      password : 'root',
+      database : 'enviromap',
     }
 );
 
