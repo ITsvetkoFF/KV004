@@ -5,8 +5,8 @@ var app = express();
 var connectionpool = mysql.createPool({
       host     : 'localhost',
       user     : 'root',
-      password : '000',
-      database : 'Enviromap_schema',
+      password : 'root',
+      database : 'enviromap',
     });
 app.get('/not_aprooved', notAproovedProblems);
 app.delete('/delete_problem/: id', deleteProblem);
