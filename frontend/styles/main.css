@@ -740,10 +740,12 @@
             }
 
 /*Taras ///////////////////////////////////////////*/
-            .b-add-problem-form {
+       .b-add-problem-form {
         background-color: white;
         margin-top: 25px;
         margin-bottom: 0;
+        border: none;
+        padding:0;
     }
     
     h2 {
@@ -753,7 +755,6 @@
         text-align:center;
         font-size: 40px;
         font-weight: lighter;
-        
     }
     
     .b-add-problem-input {
@@ -763,9 +764,9 @@
     
     .b-add-problem {
         height: 100%;
-        width: 100%;
+        width: 560px;
         background-color: #FFF;
-        padding: 0px 20px 0px 20px;
+        padding: 0 20px 0px 20px;
     }
     
     .b-add-problem-row {
@@ -798,7 +799,7 @@
     }
     
     .b-add-problem-textarea {
-        min-height: 120px;
+        min-height: 200px;
     }
     
     .b-add-problem-join_us {
@@ -818,4 +819,14 @@
     
     #join_us_submit {
         text-align:center;
+    }
+        
+    #previews {
+        margin-bottom:10px;
+        text-align: center;
+        background-image: url("../images/spritemap.png");
+        background-repeat: no-repeat;
+        background-position: 75 50;
+        min-height: 180px;
+        border:2px dashed #f3f3f3;
     }

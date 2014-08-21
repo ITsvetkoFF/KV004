@@ -2,9 +2,12 @@
 <head>
     <meta charset="utf-8">                                    
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+        <link rel="stylesheet" href="styles/dropzone.css"/>
         <link rel="stylesheet" href="styles/main.css"/>
+        
         <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/dropzone.js"></script>
         <script src="js/main.js"></script>
 </head>
 <body> 
@@ -155,10 +158,11 @@
             <div class="b-container__right-side">
             	<div class="b-right-side">
             		<div class="b-right-side__add-problem">
-                    <div class = "b-add-problem">
+                    
+                        <div class = "b-add-problem">
     <div class = "b-add-problem-header"><h2>ДОДАТИ ПРОБЛЕМУ</h2></div>  
     
-    <form class = "b-add-problem-form" name = "submit_problem">
+    <form method = "post" enctype="" action="/file-upload" id="my-awesome-dropzone" class = "dropzone b-add-problem-form" name = "submit_problem">
       
         <div class = "b-add-problem-row b-add-problem-input">
             <label class = "b-add-problem-input" for = "title-field">Заголовок</label>
@@ -180,13 +184,10 @@
         
         <div class = "b-add-problem-row b-add-problem-textarea">
             <label class = "b-add-problem-input" for = "description-field">Опис проблеми</label>
-            <textarea id = "description-field" placeholder = "Опишіть якомога детальніше проблему" name = "description" class = "b-add-problem-row_textarea" rows = "6"></textarea>
+            <textarea id = "description-field" placeholder = "Опишіть якомога детальніше проблему" name = "description" class = "b-add-problem-row_textarea" rows = "10"></textarea>
         </div>
         
-        <div class = "b-add-problem-row b-add-problem-textarea">
-            <label class = "b-add-problem-input" for = "proposal-field">Пропозиція щодо рішення</label>
-            <textarea id = "proposal-field" placeholder = "Ваші пропозиції" name = "proposal" class = "b-add-problem-row_textarea" rows = "6"></textarea>
-        </div>
+        <div id = "previews" class = ""></div>
         
         <div class = "b-add-problem-row b-add-problem-input b-add-problem-row-for-buttons">
             <input type = "submit" id = "tz_btn_anonim" class = "b-add-problem-button" value = "Додати проблему анонімно">
@@ -196,9 +197,14 @@
         
     <section class = "b-add-problem-join_us">
         <div class = "b-add-problem-new_user" hidden>
-            <div class = "b-add-problem-row b-add-problem-input">
+            <div class = "b-add-problem-row b-add-problem-input" required>
                 <label class = "b-add-problem-input" for = "login-field">Логін</label>
                 <input type = "text" id = "login-field" placeholder = "Ваш логін" name = "login" class = "b-add-problem-row_input">
+            </div>
+            
+            <div class = "b-add-problem-row b-add-problem-input">
+                <label class = "b-add-problem-input" for = "email-field">Email</label>
+                <input type = "email" id = "email-field" placeholder = "Ваш email" name = "email" class = "b-add-problem-row_input">
             </div>
             
             <div class = "b-add-problem-row b-add-problem-input">
@@ -218,6 +224,37 @@
     </section>
     </form>
 </div>
+
+<script>
+Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the form element
+
+  // The configuration we've talked about above
+  autoProcessQueue: false,
+  uploadMultiple: true,
+  parallelUploads: 100,
+  maxFiles: 100,
+  clickable: "#previews",
+    previewsContainer: "#previews",
+  
+
+  // The setting up of the dropzone
+  init: function() {
+    var myDropzone = this;
+  }
+}
+    
+    $('#tz_btn_join_us').click(function(){
+        $(".b-add-problem-new_user").show();
+    })
+    
+    $('#tz_btn_facebook').click(function(){
+        $(".b-add-problem-new_user").hide();
+    })
+</script>
+                        
+                        
+                        
+                        
                     </div>
             		<div class="b-right-side__show-problem"> 
                         <div class="b-problems">
