@@ -9,10 +9,10 @@ var connectionpool = mysql.createPool({
       database : 'enviromap',
     });
 app.get('/not_aprooved', notAproovedProblems);
-app.delete('/delete_problem', deleteProblem);
-app.delete('/delete_user', deleteUser);
-app.delete('/delete_comment', deleteComment);
-app.put('/edit_problem', editProblem);
+app.get('/delete_problem', deleteProblem);
+app.get('/delete_user', deleteUser);
+app.get('/delete_comment', deleteComment);
+app.get('/edit_problem', editProblem);
 
 function notAproovedProblems(req, res) {
 connectionpool.getConnection(function(err, connection) {
@@ -58,7 +58,7 @@ connectionpool.getConnection(function(err, connection) {
 			});
 		} else {
             console.log("getProblems - method works");
-            var id=req.body.Problem_id;
+            var id=req.body.problem_id;
             connection.query('DELETE FROM Problems WHERE Id=' + id, function(err, rows, fields) {
                 if (err) {
                     console.error(err);
@@ -158,9 +158,9 @@ connectionpool.getConnection(function(err, connection) {
              content = req.body.content,
              severity = req.body.severity,
              moderation = req.body.moderation,
-             ProblemStatus_Id = req.body.ProblemStatus_Id,
-             ProblemTypes_Id = req.body.ProblemTypes_Id,
-             id = req.body.id;
+             ProblemStatus_Id = req.body.problemStatus_Id,
+             ProblemTypes_Id = req.body.problemTypes_Id,
+             id = req.body.problem_id;
             connection.query("UPDATE Problems SET Title="+ "\'" + title + "\'" + " , Content=" + "\'" + content + "\'" + " , Severity=" + severity+ ", Moderation="+ moderation +" , ProblemStatus_Id="+ProblemStatus_Id+", ProblemTypes_Id="+ProblemTypes_Id+ " WHERE Id="+id+";", function(err, rows, fields) {
                 if (err) {
                     console.error(err);
