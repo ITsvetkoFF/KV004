@@ -5,14 +5,14 @@ var app = express();
 var connectionpool = mysql.createPool({
       host     : 'localhost',
       user     : 'root',
-      password : '000',
-      database : 'Enviromap_schema',
+      password : 'root',
+      database : 'enviromap',
     });
 app.get('/not_aprooved', notAproovedProblems);
-app.get('/delete_problem', deleteProblem);
-app.get('/delete_user', deleteUser);
-app.get('/delete_comment', deleteComment);
-app.get('/edit_problem', editProblem);
+app.delete('/delete_problem', deleteProblem);
+app.delete('/delete_user', deleteUser);
+app.delete('/delete_comment', deleteComment);
+app.put('/edit_problem', editProblem);
 
 function notAproovedProblems(req, res) {
 connectionpool.getConnection(function(err, connection) {
@@ -21,11 +21,12 @@ connectionpool.getConnection(function(err, connection) {
 			res.statusCode = 503;
 			res.send({
 				result: 'error',
+
 				err:    err.code
 			});
 		} else {
             console.log("selectNotAproovedProblems - method works");
-            var queryString='SELECT Id, Title FROM Problems WHERE Moderation IS NULL;';
+            var queryString='SELECT Id, Title FROM Problems WHERE Moderation=0;';
             connection.query(queryString, function(err, rows, fields) {
                 if (err) {
                     console.error(err);
@@ -38,7 +39,6 @@ connectionpool.getConnection(function(err, connection) {
                 res.send({
                     result: 'success',
                     err:    '',
-                    // fields: fields,
                     json:   rows,
                     length: rows.length
                 });
@@ -58,9 +58,8 @@ connectionpool.getConnection(function(err, connection) {
 			});
 		} else {
             console.log("getProblems - method works");
-            id=req.body.id;
-            var queryString='DELETE FROM Problems WHERE Id=' + id;
-            connection.query(queryString, function(err, rows, fields) {
+            var id=req.body.Problem_id;
+            connection.query('DELETE FROM Problems WHERE Id=' + id+";", function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -72,7 +71,6 @@ connectionpool.getConnection(function(err, connection) {
                 res.send({
                     result: 'success',
                     err:    '',
-                    // fields: fields,
                     json:   rows,
                     length: rows.length
                 });
@@ -92,9 +90,8 @@ connectionpool.getConnection(function(err, connection) {
 			});
 		} else {
             console.log("deleteUser - method works");
-            id=req.body.user_id;
-            var queryString='DELETE FROM Users WHERE Id=' + id;
-            connection.query(queryString, function(err, rows, fields) {
+            var id=req.body.user_id;
+            connection.query('DELETE FROM Users WHERE Id=' + id+";", function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -106,7 +103,6 @@ connectionpool.getConnection(function(err, connection) {
                 res.send({
                     result: 'success',
                     err:    '',
-                    // fields: fields,
                     json:   rows,
                     length: rows.length
                 });
@@ -126,9 +122,8 @@ connectionpool.getConnection(function(err, connection) {
 			});
 		} else {
             console.log("deleteComment - method works");
-            id=req.body.comment_id;
-            var queryString='DELETE FROM Activities WHERE Id=' + id;
-            connection.query(queryString, function(err, rows, fields) {
+            var id=req.body.comment_id;
+            connection.query('DELETE FROM Activities WHERE Id=' + id+";", function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -140,7 +135,6 @@ connectionpool.getConnection(function(err, connection) {
                 res.send({
                     result: 'success',
                     err:    '',
-                    // fields: fields,
                     json:   rows,
                     length: rows.length
                 });
@@ -160,14 +154,14 @@ connectionpool.getConnection(function(err, connection) {
 			});
 		} else {
             console.log("editProblem - method works");
-            var citle = req.body.title;
-            var content = req.body.content;
-            var severity = req.body.severity;
-            var moderation = req.body.moderation;
-            var ProblemStatus_Id = req.body.ProblemStatus_Id;
-            var ProblemTypes_Id = req.body.ProblemTypes_Id;
-            var queryString='UPDATE Problems WHERE SET Title='+title+', Content='+content+', Severity='+severity+', Moderation='+moderation+', ProblemStatus_Id='+ProblemStatus_Id+', ProblemTypes_Id='+ProblemTypes_Id;
-            connection.query(queryString, function(err, rows, fields) {
+         var title = req.body.title,
+             content = req.body.content,
+             severity = req.body.severity,
+             moderation = req.body.moderation,
+             ProblemStatus_Id = req.body.ProblemStatus_Id,
+             ProblemTypes_Id = req.body.ProblemTypes_Id,
+             id = req.body.id;
+            connection.query("UPDATE Problems SET Title="+ "\'" + title + "\'" + " , Content=" + "\'" + content + "\'" + " , Severity=" + severity+ ", Moderation="+ moderation +" , ProblemStatus_Id="+ProblemStatus_Id+", ProblemTypes_Id="+ProblemTypes_Id+ " WHERE Id="+id+";", function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -179,7 +173,6 @@ connectionpool.getConnection(function(err, connection) {
                 res.send({
                     result: 'success',
                     err:    '',
-                    // fields: fields,
                     json:   rows,
                     length: rows.length
                 });
