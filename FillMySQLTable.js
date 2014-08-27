@@ -17,32 +17,23 @@ var connection = mysql.createConnection(
       database : 'enviromap',
     }
 );
-
-
+var problemStatus = ['Нова', 'Вирішена'],
+problemType = ['Проблеми лісів', 'Сміттєзвалища', 'Незаконна забудова', 'Проблеми водойм', 'Загрози біорізноманіттю', 'Браконьєрство', 'Інші проблеми'];
 connection.connect();
-var queryString = "insert into ProblemTypes (ProbType) values ('Проблеми лісів'), ('Сміттєзвалища'), ('Незаконна забудова'), ('Проблеми водойм'), ('Загрози біорізноманіттю'),  ('Браконьєрство'), ('Інші проблеми');";
-
-connection.query(queryString, function(err, rows, fields) {
+for (var i = 0; i < problemStatus.length; i++) {
+        connection.query('INSERT INTO ProblemStatus SET ?', {probStatus: problemStatus[i]}, function(err, rows, fields) {
     if (err) throw err;
- 
-    for (var i in rows) {
-        console.log('Post Titles: ', rows[i].post_title);
-    }
-});
-
-var queryString = "insert into ProblemStatus (ProbStatus) values ('Нова'), ('В процесі'), ('Вирішена');";
-
-connection.query(queryString, function(err, rows, fields) {
+    });
+};
+for (var i = 0; i < problemType.length; i++) {
+        connection.query('INSERT INTO ProblemTypes SET ?', {probType: problemType[i]}, function(err, rows, fields) {
     if (err) throw err;
- 
-    for (var i in rows) {
-        console.log('Post Titles: ', rows[i].post_title);
-    }
-});
+    });
+};
+
 for (var i=0, len=probs.length; i<len; i++) {
 if (probs[i].probStatus == 'Нова') probs[i].probStatus = 1;
-else if (probs[i].probStatus == 'В процесі') probs[i].probStatus = 2;
-else if (probs[i].probStatus == 'Вирішена') probs[i].probStatus = 3;
+else if (probs[i].probStatus == 'Вирішена') probs[i].probStatus = 2;
 
 if (probs[i].probType == 'Проблеми лісів') probs[i].probType = 1;
 else if (probs[i].probType == 'Сміттєзвалища') probs[i].probType = 2;
@@ -58,15 +49,20 @@ probs[i].title = probs[i].title.replace(/'/g,"\\'");
 };
 
 if ( (probs[i].probType) && (probs[i].probStatus) ) {
-var queryString = "insert into Problems (Title, Content, Severity, Moderation, Lat, Lon, ProblemStatus_Id, ProblemTypes_Id) values (" + "\'" +  probs[i].title + "\'"+ "," + "\'"+ probs[i].content + "\'"+ "," + probs[i].severity + "," + probs[i].moderation + "," + probs[i].lat + "," + probs[i].lon + "," + probs[i].probStatus + "," + probs[i].probType +");";
-
-connection.query(queryString, function(err, rows, fields) {
+var data = {
+Title : probs[i].title,
+Content : probs[i].content,
+Severity : probs[i].severity,
+Moderation : probs[i].moderation,
+Lat : probs[i].lat,
+Lon : probs[i].lon,
+ProblemStatus_Id : probs[i].probStatus,
+ProblemTypes_Id : probs[i].probType
+  };
+connection.query("INSERT INTO Problems SET ?", data, function(err, rows, fields) {
     if (err) throw err;
- 
-    for (var i in rows) {
-        console.log('Post Titles: ', rows[i].post_title);
-    }
-});
+    });
+
 };
 };
 connection.end();
