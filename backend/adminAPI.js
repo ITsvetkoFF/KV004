@@ -9,10 +9,10 @@ var connectionpool = mysql.createPool({
       database : 'enviromap',
     });
 app.get('/not_aprooved', notAproovedProblems);
-app.get('/delete_problem', deleteProblem);
-app.get('/delete_user', deleteUser);
-app.get('/delete_comment', deleteComment);
-app.get('/edit_problem', editProblem);
+app.delete('/delete_problem', deleteProblem);
+app.delete('/delete_user', deleteUser);
+app.delete('/delete_comment', deleteComment);
+app.put('/edit_problem', editProblem);
 
 function notAproovedProblems(req, res) {
 connectionpool.getConnection(function(err, connection) {
@@ -59,7 +59,7 @@ connectionpool.getConnection(function(err, connection) {
 		} else {
             console.log("getProblems - method works");
             var id=req.body.problem_id;
-            connection.query('DELETE FROM Problems WHERE Id=' + id, function(err, rows, fields) {
+            connection.query('DELETE FROM Problems WHERE Id=' + id+";", function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -91,7 +91,7 @@ connectionpool.getConnection(function(err, connection) {
 		} else {
             console.log("deleteUser - method works");
             var id=req.body.user_id;
-            connection.query('DELETE FROM Users WHERE Id=' + id, function(err, rows, fields) {
+            connection.query('DELETE FROM Users WHERE Id=' + id+";", function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -123,7 +123,7 @@ connectionpool.getConnection(function(err, connection) {
 		} else {
             console.log("deleteComment - method works");
             var id=req.body.comment_id;
-            connection.query('DELETE FROM Activities WHERE Id=' + id, function(err, rows, fields) {
+            connection.query('DELETE FROM Activities WHERE Id=' + id+";", function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
