@@ -26,7 +26,7 @@ connectionpool.getConnection(function(err, connection) {
 			});
 		} else {
             console.log("selectNotAproovedProblems - method works");
-            var queryString='SELECT Id, Title FROM Problems WHERE Moderation=0;';
+            var queryString='SELECT Id, Title FROM Problems WHERE Moderation IS NULL;';
             connection.query(queryString, function(err, rows, fields) {
                 if (err) {
                     console.error(err);
