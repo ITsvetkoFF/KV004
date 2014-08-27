@@ -1,0 +1,21 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Problem Description form</title>
+	<style type="text/css" src="main.css"></style>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="form" ng-app ng-controller="problemController">
+	<img src="images\waste.png"> <h2>{{probs.Title | uppercase}}</h2> <img src="images\edit.png"> <img src="images\del.png">
+   <div ng-controller="RatingDemoCtrl">
+    <h4>Важность:</h4>
+    <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+    <span class="label" ng-class="{'label-warning': percent<3, 'label-info': percent>=3 && percent<4, 'label-success': percent>=4}" ng-show="overStar && !isReadonly">{{percent}}</span>
+</div>
+</div>
+</body>
+</html>
