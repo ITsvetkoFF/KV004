@@ -1,243 +1,54 @@
-var mysql      = require('mysql');
-var express    = require('express');
-var app		   = express();
-// var bodyParser = require('body-parser');
+var mysql        = require('mysql'),
+    express      = require('express'),
+    jwt          = require('jsonwebtoken'),
+    crypto       = require('crypto'),
+    bodyParser   = require('body-parser'), 
+    cookieParser = require('cookie-parser'),
+    myConnection = require('express-myconnection'),
+    secret       = require('./config/secret');  
 
-// app.use(bodyParser.json());
+var app    = express(),
+    routes = require('./routes.js');
 
-var connectionpool = mysql.createPool({
-	host     : 'localhost',
-	user     : 'root',
-	password : 'root',
-	database : 'enviromap'
+var connectionPool = {
+    host     : 'localhost',
+    user     : 'root',
+    password : '',
+    database : 'Enviromap'
+};
+
+app.use(bodyParser());
+app.use(cookieParser());
+app.use(myConnection(mysql, connectionPool, 'pool'));
+app.use(express.static(__dirname + '/frontend'));
+
+app.all('*', function(req, res, next) {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Credentials', true);
+  res.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
+  res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
+  if ('OPTIONS' === req.method) return res.send(200);
+  next();
 });
 
-app.get('/problems', function(req,res){getProblems(req,res);})
-app.get('/problems/:id', function(req,res){getProblemId(req,res);})
-app.get('/users/:idUser', function(req,res){getUserId(req,res);})
-app.get('/activities/:idUser', function(req,res){getUserActivity(req,res);})
-app.get('/problemspost/:id', function(req,res){postProblemId(req,res);})
-app.get('/vote/:id', function(req,res){postVote(req,res);})
+//user
+app.get('/problems', routes.getProblems);
+app.get('/problems/:id', routes.getProblemId);
+app.get('/users/:idUser', routes.getUserId);
+app.get('/activities/:idUser', routes.getUserActivity);
+app.get('/problempost', routes.postProblem);
+app.get('/vote', routes.postVote);
 
-function getProblems(req,res){ // get all problems in brief (id, title, coordinates, type)
-	connectionpool.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
-            console.log("getProblems - method works");
-            connection.query('SELECT Id, Title, Lat, Lon, ProblemTypes_Id FROM Problems', function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send({
-                    result: 'success',
-                    err:    '',
-                    // fields: fields,
-                    json:   rows,
-                    length: rows.length
-                });
-                connection.release();
-            });
-        }
-    });
-};
-
-function getProblemId(req,res){ //get detailed problem description (everything)
-	connectionpool.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
-            console.log("getProblemId - method works");
-            var id = req.params.id;
-            connection.query('SELECT * FROM Problems WHERE Id=?', [id], function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send({
-                    result: 'success',
-                    err:    '',
-                    // fields: fields,
-                    json:   rows,
-                    length: rows.length
-                });
-                connection.release();
-            });
-        }
-    });
-};
-
-function getUserId(req,res){ //get all user's problems in brief (coords, type, title)
-	connectionpool.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
-            console.log("getUserId - method works");
-            var idUser = req.params.idUser;
-            connection.query('SELECT Id, Title, Lat, Lon, ProblemTypes_Id FROM Problems WHERE Id IN (SELECT Problems_Id FROM Activities WHERE Users_Id = ?)', [idUser], function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send({
-                    result: 'success',
-                    err:    '',
-                    // fields: fields,
-                    json:   rows,
-                    length: rows.length
-                });
-                connection.release();
-            });
-        }
-    });
-};
-
-function getUserActivity(req,res){  //get user's activity list (everything)
-	connectionpool.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
-            console.log("getUserActivity - method works");
-            var idUser = req.params.idUser;
-            connection.query('SELECT Id, ActivityContent, ActivityDate, ActivityTypes_Id, Problems_Id FROM Activities WHERE Users_Id = ?', [idUser], function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send({
-                    result: 'success',
-                    err:    '',
-                    // fields: fields,
-                    json:   rows,
-                    length: rows.length
-                });
-                connection.release();
-            });
-        }
-    });
-};
-
-function postProblemId(req,res){  //post new problem
-	connectionpool.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
-            console.log("postProblemId - method works");
-            // var input = req.body;
-            // var data = {
-            // 	Title 				: input.title,
-            // 	Content 			: input.content,
-            // 	Lat 				: input.latitude,
-            // 	Lon 				: input.longituge,
-            // 	ProblemStatus_Id 	: input.problemStatus_Id,
-            // 	ProblemTypes_Id 	: input.problemTypes_Id
-            // };
-            // var id = req.params.id;
-            var data = {
-            	Title 				: "Dump",
-            	Content 			: "lol",
-            	Lat 				: "8",
-            	Lon 				: "3",
-            	ProblemStatus_Id 	: "1",
-            	ProblemTypes_Id 	: "1"
-            };
-            connection.query('INSERT INTO Problems SET ?', data, function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send({
-                    result: 'success',
-                    err:    '',
-                    fields: fields,
-                    json:   rows,
-                    length: rows.length
-                });
-                connection.release();
-            });
-        }
-    });
-};
-
-function postVote(req,res){  //+1 vote for a problem
-	connectionpool.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
-            console.log("postVote - method works");
-            var id = req.params.id;
-            connection.query('UPDATE Problems SET Votes=Votes+1 WHERE Id=?', [id], function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send({
-                    result: 'success',
-                    err:    '',
-                    fields: fields,
-                    json:   rows,
-                    length: rows.length
-                });
-                connection.release();
-            });
-        }
-    });
-};
+app.post('/login', routes.logIn);
+app.get('/logout', routes.logOut); 
+app.post('/register', routes.register);
+//admin
+app.get('/not_approved', routes.notApprovedProblems);
+app.delete('/problem', routes.deleteProblem);
+app.delete('/user', routes.deleteUser);
+app.delete('/comment', routes.deleteComment);
+app.delete('/photo', routes.deletePhoto);
+app.put('/edit', routes.editProblem);
 
 app.listen(3000);
 console.log('Rest Demo Listening on port 3000');
