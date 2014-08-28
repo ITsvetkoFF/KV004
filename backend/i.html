@@ -2,20 +2,51 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Problem Description form</title>
-	<style type="text/css" src="main.css"></style>
+    <link href="main.css" rel="stylesheet">
+    <script type="text/javascript" src="main.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
-	<script type="text/javascript" src="main.js"></script>
 	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<div class="form" ng-app ng-controller="problemController">
-	<img src="images\waste.png"> <h2>{{probs.Title | uppercase}}</h2> <img src="images\edit.png"> <img src="images\del.png">
-   <div ng-controller="RatingDemoCtrl">
-    <h4>Важность:</h4>
-    <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
-    <span class="label" ng-class="{'label-warning': percent<3, 'label-info': percent>=3 && percent<4, 'label-success': percent>=4}" ng-show="overStar && !isReadonly">{{percent}}</span>
-</div>
-</div>
+	<!--<div ng-app class="form">
+	
+    <div id="panel">
+   
+    <div class="btn-group btn-toggle"> 
+        <button class="btn btn-xs btn-default">ON</button>
+        <button class="btn btn-xs btn-danger active">OFF</button>
+        </div>
+ </div>
+
+</div>-->
+<form class="description" ng-app>
+    <div id="title">
+        <img id="icon" align="left" src="images\water.png"> <img height="20px" align="right" src="images\del.png"><img height="20px" align="right" src="images\edit.png"> <h3>Засмічення Вовчинецьких гір побутовим сміттям</h3> 
+    </div>
+    <div id="info"></div>
+    <div id="content">
+        <span>Мешканці міста Івано-Франківськ, с.Вовчинець та с.Підлужжя скидають побітове сміття на схилах Вовчинецького пагорбу (комплексна пам'ятка природи місцевого значення ) та берегах річки Бистриця Надвірнянська../nВстановлення сміттєвих баків біля будинків в с.Вовчинець та с.Підлужжя, організація централізованого вивозу сміття не рідше 1 разу/тиждень, встановлення сміттєвих контейнерів при в'їзді в заказник "Козакова долина" та регулярний вивіз сміття (не рідше 2 разів/тиждень в період березень-листопад, не рідше 1 рази/тиждень в період грудень-січень)</span>
+    </div>
+    <div id="chat">
+        <ul>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+            <li>Some messge...</li>
+        </ul>
+    </div>
+    <div id="photos"></div>
+</form>
 </body>
 </html>
