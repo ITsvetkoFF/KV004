@@ -14,7 +14,7 @@
    <div ng-controller="AdminUserCtrl">
         <div ng-show='in'>
 
-           <input type="text" id="inputUsername" placeholder="Username" ng-model="login.email">
+           <input type="text" id="inputEmail" placeholder="Email" ng-model="login.email">
            <input type="password" id="inputPassword" placeholder="Password" ng-model="login.password">
            <button ng-click="logIn(login.email, login.password)">Log In</button>
            <span>{{loginErrorMsg}}</span>

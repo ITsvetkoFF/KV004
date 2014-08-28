@@ -28,11 +28,6 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-//var psw = crypto.createHmac("sha1", "10011992").update("123456").digest("hex");
-//connection.query("update `Enviromap_schema`.`Users` set email = 'real@gmail.com' where `Id`=2",  function(err, affectedRows) {
-//    console.log(affectedRows);
-//});
-
 app.all('*', function(req, res, next) {
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Access-Control-Allow-Credentials', true);
@@ -53,26 +48,28 @@ app.post('/register', register);
 
 
 function logIn(req, res) {
-    var email = req.body.username||"";
-    var password = req.body.password||"";
+    var email = req.body.email||'',
+        password = req.body.password||'';
 
 
     if (email === '' || password === '') {
 		return res.send(401);
 	}
-    password = crypto.createHmac("sha1", "123456").update(password).digest("hex");
+    password = crypto.createHmac("sha1", secret.secretToken).update(password).digest("hex");
 
     var userData = {};
 
-    connection.query("select `Id`, `Name`, `Surname`  from `Enviromap_schema`.`Users` where `Email` like '" + email + "' and `Password` like '" + password + "'", function(err, result) {
+    connection.query("select Users.Id, Users.Name, Users.Surname, UserRoles.Role from Users left join UserRoles on Users.UserRoles_Id = UserRoles.Id where Email like  '" + email + "' and Password like '" + password + "'", function(err, result) {
+        if(err) console.log;
 
         if(result.length === 0) {
-            return res.send(401);
+            return res.send(400);
         }
-
+        userData.id = result[0].Id;
         userData.name = result[0].Name;
-        userData.surname = result[0].Surname
-        userData.token = jwt.sign(result, secret.secretToken);
+        userData.surname = result[0].Surname;
+        userData.role = result[0].Role;
+        userData.token = jwt.sign(userData, secret.secretToken);
         return res.json(userData);
 
     });
@@ -81,44 +78,55 @@ function logIn(req, res) {
 
 
 function logOut(req, res) {
-    var token = req.cookies.token;
+    var token;
+    if(req.cookies.token) {
+        console.log(req.cookies);
+        token = req.cookies.token;
+    } else {
+        return res.send(401);
+    }
+
     jwt.verify(token, secret.secretToken, function(err, decoded) {
         if(err) {
             return res.send(401);
         }
+// for administrator's api
+//        if (decoded.role != 'administrator') {
+//            return res.send(401);
+//        }
         return res.send(200);
+
     });
 
 }
 
 function register(req, res) {
 
-    var name = req.body.username||"";
-    var surname = req.body.surname||"";
-    var email = req.body.email||"";
-    var password = req.body.password||"";
+    var userData = {};
+    userData.name = req.body.username||'';
+    userData.surname = req.body.surname||'';
+    userData.email = req.body.email||'';
+    userData.password = req.body.password||'';
+    userData.userRoles_Id = 2;
 
-     if (name === "" || surname === "" || email === "" || password === "") {
+     if (userData.name === '' || userData.surname === '' || userData.email === '' || userData.password === '') {
          return res.send(401);
 	}
 
-    password = crypto.createHmac("sha1", "123456").update(password).digest("hex");
+    password = crypto.createHmac("sha1", secret.secretToken).update(userData.password).digest("hex");
 
-    var userData = {};
-
-    connection.query("select `Id`  from `Enviromap_schema`.`Users` where `Email` like '" + email + "'", function(err, result) {
-
+    connection.query("select Id from Users where Email like ?", userData.email, function(err, result) {
 
         if(result.length !== 0) {
-            return res.send(401);
+            return res.send(400);
         }
 
-        connection.query("insert into `Enviromap_schema`.`Users` (`Name`, `Surname`, `Email`, `Password`) values ('" + name + "', '" + surname + "', '" + email + "', '" + password + "')", function(err, recordId) {
-
-            userData.token = jwt.sign(recordId, secret.secretToken);
-            userData.name = name;
-            userData.surname = surname;
-            console.log(userData);
+        connection.query("insert into Users set ?", userData, function(err, recordId) {
+            userData.id = recordId;
+            userData.role = 'user';
+            delete userData.email;
+            delete userData.password;
+            userData.token = jwt.sign(userData, secret.secretToken);
             return res.json(userData);
 
         });

@@ -15,21 +15,25 @@ app.controller('AdminUserCtrl', ['$scope',  '$location', '$window', '$cookieStor
         }
 
 
-        $scope.logIn = function logIn(username, password) {
+        $scope.logIn = function logIn(email, password) {
 
-            password = CryptoJS.SHA1(password).toString();
-
-            if (username !== undefined && password !== undefined) {
-                UserService.logIn(username, password).success(function(userData) {
-
+            if (email !== '' && password !== '') {
+                //password = CryptoJS.SHA1(password).toString();
+                UserService.logIn(email, password).success(function(userData) {
+                    console.log(userData);
                     AuthenticationService.isLogged = true;
-                    $cookieStore.put('userName', userData.name, {expires: 2} );
-                    $cookieStore.put('userSurname', userData.surname, {expires: 2} );
-                    $cookieStore.put('token', userData.token, {expires: 2} );
+                    $cookieStore.put('userName', userData.name, {expires: 60});
+                    $cookieStore.put('userSurname', userData.surname, {expires: 60});
+                    $cookieStore.put('userRole', userData.role, {expires: 60});
+                    $cookieStore.put('token', userData.token, {expires: 60});
+
 
                     $scope.userName =  userData.name;
                     $scope.userSurname = userData.surname;
                     $scope.in=false;
+
+
+
 
                 }).error(function(status, data) {
                     $scope.loginErrorMsg = 'Wrong name or password!';
@@ -41,7 +45,7 @@ app.controller('AdminUserCtrl', ['$scope',  '$location', '$window', '$cookieStor
         }
 
         $scope.register = function register(username, surname, email, password, cnfPassword) {
-            if (username == undefined || surname == undefined || email == undefined || password == undefined || cnfPassword == undefined) {
+            if (username == '' || surname == '' || email == '' || password == '' || cnfPassword == '') {
                 $scope.registerErrorMsg = 'All fields are required!';
                 return;
             }
@@ -50,15 +54,16 @@ app.controller('AdminUserCtrl', ['$scope',  '$location', '$window', '$cookieStor
                 return;
             }
 
-            password = CryptoJS.SHA1(password).toString();
+            //password = CryptoJS.SHA1(password).toString();
 
             UserService.register(username, surname, email, password).success(function(userData) {
 
                 AuthenticationService.isLogged = true;
-                $cookieStore.put('userName', userData.name, {expires: 2});
-                $cookieStore.put('userSurname', userData.surname, {expires: 2});
-                $cookieStore.put('token', userData.token, {expires: 2});
-                alert(document.cookie);
+                $cookieStore.put('userName', userData.name);
+                $cookieStore.put('userSurname', userData.surname, {expires: 60} );
+                $cookieStore.put('userRole', userData.role, {expires: 60} );
+                $cookieStore.put('token', userData.token, {expires: 60} );
+
 
                 $scope.userName =  userData.name;
                 $scope.userSurname = userData.surname;
@@ -78,19 +83,20 @@ app.controller('AdminUserCtrl', ['$scope',  '$location', '$window', '$cookieStor
 
 
             if (AuthenticationService.isLogged) {
+                AuthenticationService.isLogged = false;
+            }
+
+            if ($cookieStore.get('token')) {
                 UserService.logOut().success(function() {
-                    AuthenticationService.isLogged = false;
                     $scope.in = true;
                     $cookieStore.remove('token');
                     $cookieStore.remove('userName');
                     $cookieStore.remove('userSurname');
-
-
+                    $cookieStore.remove('userRole');
                 }).error(function(status, data) {
                     console.log(status);
                     console.log(data);
                 });
-
             }
 
         }
@@ -102,15 +108,14 @@ app.factory('AuthenticationService', function() {
     var auth = {
         isLogged: false
     }
-
     return auth;
 });
 
 
 app.factory('UserService', function($http) {
     return {
-        logIn: function(username, password) {
-            return $http.post('http://localhost:3000' + '/login', {username: username, password: password});
+        logIn: function(email, password) {
+            return $http.post('http://localhost:3000' + '/login', {email: email, password: password});
         },
 
         logOut: function() {
@@ -178,7 +183,7 @@ app.provider('$cookieStore', [function(){
 app.config(['$cookieStoreProvider', function($cookieStoreProvider){
     $cookieStoreProvider.setDefaultOptions({
         path: '/', // Cookies should be available on all pages
-        expires: 7 // Store cookies for a week
+        expires: 60 // Store cookies for an hour
     });
 }]);
 
