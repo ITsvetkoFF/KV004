@@ -740,12 +740,17 @@
             }
 
 /*Taras ///////////////////////////////////////////*/
-       .b-add-problem-form {
+    .b-add-problem-form {
         background-color: white;
         margin-top: 25px;
         margin-bottom: 0;
         border: none;
-        padding:0;
+        padding: 0;
+    }
+    
+    .b-add-problem-form input,.b-add-problem-form select,.b-add-problem-form textarea {
+        font-size: 13px;
+        font-family: arial;
     }
     
     h2 {
@@ -758,44 +763,40 @@
     }
     
     .b-add-problem-input {
-        float: left;
-        width: 30%;
+        width: 65%;
+        display:block;
+        margin: auto;
     }
     
     .b-add-problem {
-        height: 100%;
         width: 560px;
         background-color: #FFF;
-        padding: 0 20px 0px 20px;
+        padding: 0 20px 20px 20px;
     }
     
     .b-add-problem-row {
         width:100%;
-        clear:both;
         height: auto;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
     }
     
     .b-add-problem-row-for-buttons {
         text-align: center;
     }
     
-    /* button style */
-    .b-add-problem-button {
-        color: #fff;
-        background-color: #23527B;
-        height: 32px;
-        border: none;
-    }
-    
-    .b-add-problem-row_input, .b-add-problem-row_textarea {
+    .b-add-problem-row_textarea {
         width: 65%;
         resize: none;
-        float: right;
+        display:block;
+        margin: auto;
     }
     
-    .b-add-problem-input {
-        min-height: 30px; 
+    .b-add-problem-type {
+        width: 65%;
+    }
+    
+    .b-add-problem-type-margin {
+        margin: 0;
     }
     
     .b-add-problem-textarea {
@@ -803,13 +804,35 @@
     }
     
     .b-add-problem-join_us {
-        min-height: 100px;
+        
     }
     
     .b-add-problem-new_user {
         margin-left: auto;
         margin-right: auto;
+        width: 65%;
+    }
+    
+    .b-add-problem-row-new_user-left {
+        margin: 0px;
         width: 45%;
+        float: left;
+        padding-bottom: 20px;
+    }
+    
+    .b-add-problem-row-new_user-right {
+        margin: 0px;
+        width: 45%;
+        float: right;
+        padding-bottom: 20px;
+    }
+    
+    .b-add-problem-row-new_user-left input {
+        width: 100%;
+    }
+    
+    .b-add-problem-row-new_user-right input {
+        width: 100%;
     }
     
     .b-add-problem-header {
@@ -817,16 +840,57 @@
         padding-bottom: 10px;
     }
     
+    .b-add-problem-new_user-label {
+        margin: 0;
+        display: block;
+    }
+    
     #join_us_submit {
         text-align:center;
     }
         
     #previews {
-        margin-bottom:10px;
+        width: 65%;
+        margin: auto auto 20px;
         text-align: center;
-        background-image: url("../images/spritemap.png");
         background-repeat: no-repeat;
         background-position: 75 50;
         min-height: 180px;
         border:2px dashed #f3f3f3;
+    }
+    
+    #my-awesome-dropzone label {
+        padding-bottom: 5px;
+    }
+    
+    .dz-message {
+        display: none;
+    }
+    
+    .b-add-problem-row-for-buttons input {
+        display:block;
+        margin: auto auto 10px;
+        width: 250px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    
+    .b-add-problem-row-for-buttons p {
+        margin-bottom:10px;
+    }
+    
+    .previews_text {
+        width: 65%;
+        margin: auto;
+        padding-bottom:5px;
+    }
+    
+    /* button style */
+    .b-add-problem-form .b-add-problem-button {
+        color: #fff;
+        background-color: #23527B;
+        height: 32px;
+        border: none;
+        font-weight: bold;
+        font-size: 14px;
     }
