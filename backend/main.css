@@ -1,0 +1,42 @@
+.description {
+	padding: 5px;
+    width: 600px;
+    }
+  #icon {
+  	height: 25px;
+  }
+  .description h2 {
+  	margin-top: 0px;
+  	clear: none;
+  }
+  #panel {
+  	padding: 10px;
+  	margin: 5px 20px;
+  	border: dotted 1px blue;
+  }
+ .description  div {
+ 	margin: 5px;
+ 	border: solid 1px rgba(0,0,0,0.8);
+  }
+  #title {
+  	clear: both;
+  }
+   #info {
+  	clear: both;
+  }
+   #content {
+   	width: 280px;
+  	float: left;
+  }
+   #photos {
+   	width: 280px;
+  	float: left;
+  }
+    #chat {
+    width: 280px;
+  	float: right;
+  }
+  .description  #chat ul li {
+  	list-style-type: none;
+  }
+
