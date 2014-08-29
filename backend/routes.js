@@ -85,7 +85,7 @@ exports.getUserId = function(req,res){ //get all user's problems in brief (coord
 			});
 		} else {
             var idUser = req.params.idUser;
-            connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Problems.ProblemTypes_Id FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id AND Users_Id = ?', [idUser], function(err, rows, fields) {
+            connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Problems.ProblemTypes_Id FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Activities.Users_Id = ?', [idUser], function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
