@@ -11,7 +11,7 @@ USE `Enviromap` ;
 -- -----------------------------------------------------
 -- Table `Enviromap`.`ProblemTypes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap`.`ProblemTypes` (
+CREATE TABLE IF NOT EXISTS `ProblemTypes` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Type` VARCHAR(45) NULL,
   PRIMARY KEY (`Id`))
