@@ -266,7 +266,8 @@
                 position: absolute;
                 top: 0;
                 left: -300px;
-                height: 100%;
+                height: calc(100% - 52px);
+                height: -moz-calc(100% - 52px);
                 width: 300px; 
                 z-index: 1006;
 		        display: block;   
@@ -281,8 +282,9 @@
                 right: 0;
                 width: 600px;
                 min-width: 320px;
-                height: 100%;
                 background: #FFFFFF;
+                height: calc(100% - 52px);
+                height: -moz-calc(100% - 52px);
                  
                  
             }
@@ -319,6 +321,7 @@
             
             .b-left-side{
             height: 100%;
+                overflow:auto;
             }
 	     .b-left-side__pointer{
 		  position: absolute;
@@ -345,7 +348,7 @@
                 padding: 0 15px 10px 15px;
             }
             
-            .b-crear-float{
+            .b-crear-float {
                 clear: both;
             }
 
@@ -662,7 +665,7 @@
             }
 
             .left .info-problem-filters{
-            margin-top:30px;
+            margin-top:0;
             height:100%;
             overflow:auto;
              background:#fff;
@@ -673,6 +676,7 @@
             .problem .title {
             text-align:center;
             font-weight: bold;
+                margin-top:30px;
 
             }
             .problem {
@@ -740,6 +744,18 @@
             }
 
 /*Taras ///////////////////////////////////////////*/
+    .b-add-problem {
+        width: 560px;
+        background-color: #FFF;
+        padding: 0 20px 20px 20px;
+    }
+    
+    .b-add-problem-header {
+        border-bottom: 1px dashed #dadada;
+        padding-top: 5px;
+        padding-bottom: 10px;
+    }
+
     .b-add-problem-form {
         background-color: white;
         margin-top: 25px;
@@ -762,69 +778,53 @@
         font-weight: lighter;
     }
     
-    .b-add-problem-input {
-        width: 65%;
-        display:block;
-        margin: auto;
-    }
-    
-    .b-add-problem {
-        width: 560px;
-        background-color: #FFF;
-        padding: 0 20px 20px 20px;
-    }
-    
     .b-add-problem-row {
         width:100%;
         height: auto;
-        padding-bottom: 20px;
+        padding: 0 10% 5px;
     }
-    
-    .b-add-problem-row-for-buttons {
-        text-align: center;
+
+    .b-add-problem-row-content {
+        width: 100%;
+        display:block;
     }
-    
-    .b-add-problem-row_textarea {
-        width: 65%;
+                        
+    .b-add-problem-row textarea {
+        width: 100%;
         resize: none;
         display:block;
-        margin: auto;
-    }
-    
-    .b-add-problem-type {
-        width: 65%;
-    }
-    
-    .b-add-problem-type-margin {
-        margin: 0;
-    }
-    
-    .b-add-problem-textarea {
         min-height: 200px;
     }
     
-    .b-add-problem-join_us {
-        
+    .b-add-problem-row input{
+        display:block;
+    }
+
+    .b-add-problem-row select {
+        width: 50%;
+    }
+    
+    .b-add-problem-row p {
+        text-align: center;
     }
     
     .b-add-problem-new_user {
-        margin-left: auto;
-        margin-right: auto;
-        width: 65%;
+        padding-top: 20px;
+       
     }
     
     .b-add-problem-row-new_user-left {
         margin: 0px;
         width: 45%;
         float: left;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
     }
     
     .b-add-problem-row-new_user-right {
         margin: 0px;
         width: 45%;
         float: right;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
     }
     
     .b-add-problem-row-new_user-left input {
@@ -835,34 +835,24 @@
         width: 100%;
     }
     
-    .b-add-problem-header {
-        border-bottom: 1px dashed #dadada;
-        padding-bottom: 10px;
-    }
-    
     .b-add-problem-new_user-label {
         margin: 0;
         display: block;
     }
     
     #join_us_submit {
-        text-align:center;
+        text-align: center;
     }
         
     #previews {
-        width: 65%;
-        margin: auto auto 20px;
+        margin: 2px auto 15px;
         text-align: center;
         background-repeat: no-repeat;
         background-position: 75 50;
         min-height: 180px;
         border:2px dashed #f3f3f3;
     }
-    
-    #my-awesome-dropzone label {
-        padding-bottom: 5px;
-    }
-    
+        
     .dz-message {
         display: none;
     }
@@ -878,13 +868,15 @@
     .b-add-problem-row-for-buttons p {
         margin-bottom:10px;
     }
-    
-    .previews_text {
-        width: 65%;
-        margin: auto;
-        padding-bottom:5px;
+
+    .b-add-problem-row-for-buttons .b-add-problem-button {
+        float: none;
     }
-    
+
+    .b-add-problem-button {
+        float:right;
+    }
+
     /* button style */
     .b-add-problem-form .b-add-problem-button {
         color: #fff;
