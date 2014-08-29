@@ -330,7 +330,7 @@ exports.notApprovedProblems = function(req, res) {
             });
         } else {
             console.log("selectNotApprovedProblems - method works");
-            var queryString='SELECT Id, Title FROM Problems WHERE Moderation IS NULL;';
+            var queryString='SELECT Id, Title FROM Problems WHERE Moderation = 0;';
             connection.query(queryString, function(err, rows, fields) {
                 if (err) {
                     console.error(err);
