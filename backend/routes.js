@@ -1,3 +1,10 @@
+var jwt          = require('jsonwebtoken'),
+    crypto       = require('crypto'),
+    bodyParser   = require('body-parser'), 
+    cookieParser = require('cookie-parser'),
+    myConnection = require('express-myconnection'),
+    secret       = require('./config/secret');  
+
 exports.getProblems = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
 	req.getConnection(function(err, connection) {
 		if (err) {
