@@ -36,8 +36,8 @@ app.get('/problems', routes.getProblems);
 app.get('/problems/:id', routes.getProblemId);
 app.get('/users/:idUser', routes.getUserId);
 app.get('/activities/:idUser', routes.getUserActivity);
-app.get('/problempost', routes.postProblem);
-app.get('/vote', routes.postVote);
+app.post('/problempost', routes.postProblem);
+app.post('/vote', routes.postVote);
 
 app.post('/login', routes.logIn);
 app.get('/logout', routes.logOut); 
