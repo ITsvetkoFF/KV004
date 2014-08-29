@@ -330,7 +330,7 @@ exports.notApprovedProblems = function(req, res) {
             });
         } else {
             console.log("selectNotApprovedProblems - method works");
-            connection.query('SELECT Problems.Id, Problems.Title, Activities.Date FROM Problems JOIN Activities ON Problems.Id = Activities.Problems_Id WHERE Moderation = 0;', function(err, rows, fields) {
+            connection.query('SELECT Problems.Id, Problems.Title, Activities.Date FROM Problems JOIN Activities ON (Problems.Id = Activities.Problems_Id) and (Activities.ActivityTypes_Id=1) WHERE Moderation = 0;', function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
