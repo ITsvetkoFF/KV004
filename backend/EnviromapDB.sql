@@ -21,7 +21,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Enviromap`.`Problems`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap`.`Problems` (
+CREATE TABLE IF NOT EXISTS `Problems` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Title` VARCHAR(70) NULL,
   `Content` VARCHAR(500) NULL,
@@ -46,7 +46,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Enviromap`.`UserRoles`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap`.`UserRoles` (
+CREATE TABLE IF NOT EXISTS `UserRoles` (
   `Id` INT NOT NULL,
   `Role` VARCHAR(45) NULL,
   PRIMARY KEY (`Id`))
@@ -56,7 +56,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Enviromap`.`Users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap`.`Users` (
+CREATE TABLE IF NOT EXISTS `Users` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45) NULL,
   `Surname` VARCHAR(45) NULL,
@@ -76,7 +76,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Enviromap`.`Photos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap`.`Photos` (
+CREATE TABLE IF NOT EXISTS `Photos` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Link` VARCHAR(100) NULL,
   `Status` TINYINT(1) NULL,
@@ -102,7 +102,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Enviromap`.`ActivityTypes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap`.`ActivityTypes` (
+CREATE TABLE IF NOT EXISTS `ActivityTypes` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45) NULL,
   PRIMARY KEY (`Id`))
@@ -112,7 +112,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Enviromap`.`Activities`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Enviromap`.`Activities` (
+CREATE TABLE IF NOT EXISTS `Activities` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Content` VARCHAR(500) NULL,
   `Date` DATE NULL,
