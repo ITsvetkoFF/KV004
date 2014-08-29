@@ -13,7 +13,7 @@ var app    = express(),
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
-    password : '',
+    password : 'root',
     database : 'Enviromap'
 };
 
