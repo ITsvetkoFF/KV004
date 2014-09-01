@@ -924,9 +924,80 @@
     .dz-filename {
         display:none ;
     }
-    .dropzone .dz-preview:hover.dz-error .dz-error-message,
-.dropzone-previews .dz-preview:hover.dz-error .dz-error-message {
-  opacity: 0;
-  -ms-filter: none;
-  filter: none;
-}
+    .dropzone .dz-preview:hover.dz-error .dz-error-message, .dropzone-previews .dz-preview:hover.dz-error .dz-error-message {
+        opacity: 1;
+        -ms-filter: none;
+        filter: none;
+    }
+
+    .dz-details img{
+	    width: 60px !important;
+        height: 60px !important;
+    }
+
+    .dropzone .dz-preview.dz-image-preview:hover .dz-details img, .dropzone-previews .dz-preview.dz-image-preview:hover .dz-details img {
+        display: block;
+        opacity: initial;
+    }
+
+    .dropzone .dz-preview .dz-progress, .dropzone-previews .dz-preview .dz-progress {
+        position: absolute;
+        bottom: 0;
+        top: initial;
+        left: 70px;
+        right: 5px;
+        height: 6px;
+        background: #d7d7d7;
+        margin: 3px 0 5px 0;
+        display: none;
+    }
+
+    .dropzone .dz-preview .dz-error-message, .dropzone-previews .dz-preview .dz-error-message {
+        display: none;
+        position: absolute;
+        top: -5px;
+        left: 70px;
+    }
+
+    .remove_btn{
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		width: 16px;
+		height: 16px;
+		border: none;				
+		background: url('../images/delete.png') no-repeat center center;
+	}
+
+    .remove_btn:hover {
+        cursor: pointer;				
+	}
+    
+    .dz-preview {
+		width: calc(100% - 10px);
+		margin: 5px !important;
+		text-align: left !important;
+	}
+
+    .dz-error-message {
+	    display: none;
+	}
+
+    .dz-filemane {
+	    display: none !important;
+		width: 60px;
+		height: 60px;
+	}
+			
+	.dz-details {
+        width: 60px !important;
+		height: 60px !important;
+		display: inline-block;
+		margin: 0 !important;
+	}
+
+    .dz-size-title{
+	    font-style: normal !important;
+        font-size: 14px !important;
+	    font-weight: 400 !important;
+	}

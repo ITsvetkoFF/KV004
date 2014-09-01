@@ -9,91 +9,6 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="js/dropzone.js"></script>
         <script src="js/main.js"></script>
-<style>
-.myblock {
-                display: inline-block;
-				min-width: 378px;
-                background: #E7E7E7;                
-                padding: 10px;
-				margin: 40px 0 0 0;
-				border: 1px solid #777777;				
-            }
-			
-			.btn{
-				width: 100%;
-			}
-
-            .mytext {
-                width: 40px;
-            }
-
-            .myimage{
-                display: block;
-                margin: 10px auto 0;                
-            }
-			
-			#submit-all{
-				display: block;
-				width: 400px;
-			}
-						
-			#my-awesome-dropzone > span strong{
-				font-size: 22px;				
-			}
-			
-			#my-awesome-dropzone > span:last-of-type{
-				font-size: 14px;
-			}
-
-			.remove_btn{
-				position: absolute;
-				top: 5px;
-				right: 5px;
-				width: 16px;
-				height: 16px;
-				border: none;				
-				background: url('images/delete.png') no-repeat center center;
-			}
-			
-			.remove_btn:hover{
-				cursor: pointer;				
-			}
-			
-			.dz-preview {
-				width: calc(100% - 10px);
-				margin: 5px !important;
-				text-align: left !important;
-				font-size: 0;
-			}
-			
-			.dz-filemane{
-				display: none !important;
-				width: 60px;
-				height: 60px;
-			}
-			
-			.dz-details{
-				width: 60px !important;
-				height: 60px !important;
-				display: inline-block;
-				margin: 0 !important;
-			}
-			
-			.dz-details img{
-				width: 60px !important;
-				height: 60px !important;
-			}
-			
-			.dz-error-message{
-				display: none;
-			}
-						
-			.dz-size-title{
-				font-style: normal !important;
-				font-size: 14px !important;
-				font-weight: 400 !important;
-			}
-</style>
 </head>
 <body> 
     <div class="b-container">
@@ -247,16 +162,16 @@
                         <div class = "b-add-problem">
                             <div class = "b-add-problem-header"><h2>ДОДАТИ ПРОБЛЕМУ</h2></div>  
 
-                            <form method = "post" enctype="multipart/form-data" action="/file-upload" id="my-awesome-dropzone" class = "dropzone b-add-problem-form" name = "submit_problem">
+                            <form id="my-awesome-dropzone" class = "dropzone b-add-problem-form" name = "submit_problem">
 
                                 <div class = "b-add-problem-row">
                                     <label class = "b-add-problem-row-content" for = "title-field">Заголовок</label>
-                                    <input type = "text" id = "title-field" name = "title" class = "b-add-problem-row-content">
+                                    <input type = "text" id = "title-field" name = "title" class = "b-add-problem-row-content" required>
                                 </div>
 
                                 <div class = "b-add-problem-row">
                                     <label class = "b-add-problem-row-content" for = "select-field">Тип проблеми</label>
-                                    <select name = "type" id = "select-field">
+                                    <select name = "type" id = "select-field" required>
                                         <option value = ""></option>
                                         <option value = "Проблеми лісів">Проблеми лісів</option>
                                         <option value = "Сміттєзвалища">Сміттєзвалища</option>
@@ -270,21 +185,21 @@
 
                                 <div class = "b-add-problem-row">
                                     <label class = "b-add-problem-row-content" for = "description-field">Опис проблеми</label>
-                                    <textarea id = "description-field" name = "description" rows = "10"></textarea>
+                                    <textarea id = "description-field" name = "description" rows = "10" required></textarea>
                                 </div>
                                 
                                 <div class = "b-add-problem-row">
                                     <span>Перенесіть фото сюди</span>
                                     <div id = "previews"></div>
-                                    <input type='button' value='Завантажити фото' id='1submit-all' class = "b-add-problem-button"/>
+                                    <input type='button' value='Завантажити фото' id='submit-all' class = "b-add-problem-button"/>
                                     <div class="b-crear-float"></div>
                                 </div>                            
 
                                 <div class = "b-add-problem-row b-add-problem-row-for-buttons">
                                     <p>Бажаєте додати проблему i приєднатися до нас?</p>
-                                    <input type = "button" id = "tz_btn_join_us" class = "b-add-problem-button" value = "Так, зареєструватися">
-                                    <input type = "button" id = "tz_btn_facebook" class = "b-add-problem-button" value ="Так, увійти через Facebook">
-                                    <input type = "submit" id = "tz_btn_anonim" class = "b-add-problem-button" value = "Ні, додати проблему анонімно">
+                                    <input type = "button" id = "btn-join-us" class = "b-add-problem-button" value = "Так, зареєструватися">
+                                    <input type = "button" id = "btn-facebook" class = "b-add-problem-button" value ="Так, увійти через Facebook">
+                                    <input type = "submit" id = "btn-anonim" class = "b-add-problem-button" value = "Ні, додати проблему анонімно">
                                 </div>
 
                             <div class = "b-add-problem-new_user b-add-problem-row" hidden>
@@ -308,83 +223,10 @@
                                     <input type = "password" id = "password2-field" name = "password" class = "b-add-problem-row_input">
                                 </div>
                                 <div class="b-crear-float"></div>
-                                <input class = "b-add-problem-button" type = "submit" value = "Відправити">
+                                <input class = "b-add-problem-button" id = "btn-signup-submit" type = "submit" value = "Відправити">
                             </div>
                             </form>
                         </div>
-
-<script>
-Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the form element
-
-  // The configuration we've talked about above
-    autoProcessQueue: false,
-    url: "http://localhost:3000",
-    uploadMultiple: true,
-    maxFilesize: 10,
-    maxFiles: 10,
-    parallelUploads: 10,
-    thumbnailWidth: 100,
-    thumbnailHeight: 100,
-    clickable: "#previews",
-    previewsContainer: "#previews",
-  
-
-  // The setting up of the dropzone
-  init: function() {
-    var myDropzone = this;
-    var counter = 0;
-    this.on("addedfile", function(file) {
-        var arr = document.getElementsByClassName("dz-preview");
-
-        for (var i = counter; i < arr.length; i++){
-            arr[i].addEventListener('click', function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-            });
-        }
-        counter++;
-        
-        // Create the remove button
-        //var removeButton = Dropzone.createElement("<input type = 'button' value = 'Remove file'>");
-        
-        
-        // Add the button to the file preview element.
-        //file.previewElement.appendChild(removeButton);
-        var removeButton = Dropzone.createElement("<div class='remove_btn'></div>");
-        var commentField = Dropzone.createElement("<textarea type='text' class='comment_field' placeholder='Додайте короткий опис фото...' maxlength='200'></textarea>");																	
-												
-        file.previewElement.appendChild(removeButton);
-        file.previewElement.appendChild(commentField);
-        
-        removeButton.addEventListener("click", myFunction);
-        
-        function myFunction(e) {
-            myDropzone.removeFile(file);
-            counter--;
-            e.stopPropagation();
-        };
-        
-        
-      
-    })
-      //var uploadPhotos = Dropzone.createElement("<input type='button' value='Upload!' id='submit-all'/>");
-      //document.getElementById("previews").appendChild(uploadPhotos);
-    
-  }
-}
-    
-    $('#tz_btn_join_us').click(function(){
-        $(".b-add-problem-new_user").show();
-        $(".b-add-problem-row-for-buttons").hide();
-    })
-    
-    $('#tz_btn_facebook').click(function(){
-        $(".b-add-problem-new_user").hide();
-    })
-</script>
-                        
-                        
-                        
                         
                     </div>
             		<div class="b-right-side__show-problem"> 
@@ -627,5 +469,73 @@ Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the
             </div>
         </div>
     </div>
+<script>
+Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the form element
+
+  // The configuration we've talked about above
+    autoProcessQueue: false,
+    url: "http://localhost:3000/",
+	method: "POST",
+    uploadMultiple: true,
+    maxFilesize: 10,
+    maxFiles: 10,
+    parallelUploads: 10,
+    thumbnailWidth: 100,
+    thumbnailHeight: 100,
+    clickable: "#previews",
+    previewsContainer: "#previews",
+  
+
+  // The setting up of the dropzone
+  init: function() {
+    var submitButton1 = document.querySelector("#submit-all");
+    var submitButton = document.querySelector("#btn-signup-submit");
+    var submitAnonim = document.querySelector("#btn-anonim");
+    var myDropzone = this;
+    var counter = 0;
+    
+    submitAnonim.addEventListener("click", function() {
+					myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+					});
+      
+    submitButton.addEventListener("click", function() {
+					myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+					});
+      
+    this.on("addedfile", function(file) {
+        var arr = document.getElementsByClassName("dz-preview");
+
+        for (var i = counter; i < arr.length; i++){
+            arr[i].addEventListener('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            });
+        }
+        counter++;
+        
+        // Add the button to the file preview element.
+        var removeButton = Dropzone.createElement("<div class='remove_btn'></div>");
+        var commentField = Dropzone.createElement("<textarea type='text' class='comment_field' placeholder='Додайте короткий опис фото...' maxlength='200'></textarea>");																	
+												
+        file.previewElement.appendChild(removeButton);
+        file.previewElement.appendChild(commentField);
+        
+        removeButton.addEventListener("click", myFunction);
+        
+        function myFunction(e) {
+            myDropzone.removeFile(file);
+            counter--;
+            e.stopPropagation();
+        };
+    })
+  }
+}
+    
+    $('#btn-join-us').click(function(){
+        $(".b-add-problem-new_user").show();
+        $(".b-add-problem-row-for-buttons").hide();
+    })
+    
+</script>
 </body>
 </html>
