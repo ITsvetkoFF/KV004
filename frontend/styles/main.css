@@ -850,7 +850,7 @@
         background-repeat: no-repeat;
         background-position: 75 50;
         min-height: 180px;
-        border:2px dashed #f3f3f3;
+        border:2px dashed #dadada;
     }
         
     .dz-message {
@@ -886,3 +886,47 @@
         font-weight: bold;
         font-size: 14px;
     }
+
+    #previews .dz-preview .comment_field {
+        position: absolute;
+		left: 70px;
+		top: 28px;
+		height: 30px;
+		width: calc(100% - 75px);
+		resize: none;
+		font-size: 12px;
+		line-height: 12px;
+        min-height:initial;
+    }
+
+    .comment_field:hover {
+				cursor: pointer;
+			}
+    
+    .remove_btn:hover:after {
+        position: absolute;
+		right: -85px;				
+		top: -30px;
+		background: #fff;
+		padding: 5px;
+		content: 'Remove photo';
+        border: 2px dashed #dadada;
+        font-size:12px
+    }
+
+    .dropzone .dz-preview .dz-details .dz-size, .dropzone-previews .dz-preview .dz-details .dz-size {
+        position: absolute;
+        top: 0;
+        right: -85px;
+        line-height: initial;
+        left: 65px
+    }
+    .dz-filename {
+        display:none ;
+    }
+    .dropzone .dz-preview:hover.dz-error .dz-error-message,
+.dropzone-previews .dz-preview:hover.dz-error .dz-error-message {
+  opacity: 0;
+  -ms-filter: none;
+  filter: none;
+}
