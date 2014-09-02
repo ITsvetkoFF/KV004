@@ -45,7 +45,7 @@ app.get('/logout', routes.logOut);
 app.post('/register', routes.register);
 //admin
 app.get('/not_approved', routes.notApprovedProblems);
-app.delete('/problem', routes.deleteProblem);
+app.delete('/problem/:id', routes.deleteProblem);
 app.delete('/user', routes.deleteUser);
 app.delete('/comment', routes.deleteComment);
 app.delete('/photo', routes.deletePhoto);
