@@ -655,7 +655,7 @@
                 margin: 5px 0 0 0;
             }
             /* Nikolay ////////////////////////////////*/
-            .left{
+            .b-container-filters-left{
             width:300px;
             float:left;
             height:100%;
@@ -664,7 +664,7 @@
             background:#fff;/*rgba(255,255,255,0.5);*/
             }
 
-            .left .info-problem-filters{
+            .b-container-filters-left .info-problem-filters{
             margin-top:0;
             height:100%;
             overflow:auto;
