@@ -1,3 +1,15 @@
+var mysql        = require('mysql'),
+    express      = require('express'),
+    jwt          = require('jsonwebtoken'),
+    crypto       = require('crypto'),
+    bodyParser   = require('body-parser'), 
+    cookieParser = require('cookie-parser'),
+    myConnection = require('express-myconnection'),
+    secret       = require('./config/secret');  
+
+var app    = express(),
+    routes = require('./routes.js');
+
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
