@@ -50,5 +50,7 @@ app.delete('/comment', routes.deleteComment);
 app.delete('/photo', routes.deletePhoto);
 app.put('/edit', routes.editProblem);
 
+app.use(express.static(__dirname + '../frontend'));
+
 app.listen(3000);
-console.log('Rest Demo Listening on port 3000');
+console.log('Rest Demo Listening on port 8090');
