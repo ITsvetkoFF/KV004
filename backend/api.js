@@ -20,7 +20,7 @@ var connectionPool = {
 app.use(bodyParser());
 app.use(cookieParser());
 app.use(myConnection(mysql, connectionPool, 'pool'));
-app.use(express.static(__dirname + '../frontend'));
+app.use(express.static(__dirname + '/../frontend'));
 
 app.all('*', function(req, res, next) {
   res.set('Access-Control-Allow-Origin', '*');
