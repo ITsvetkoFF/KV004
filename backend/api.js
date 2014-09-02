@@ -1,15 +1,3 @@
-var mysql        = require('mysql'),
-    express      = require('express'),
-    jwt          = require('jsonwebtoken'),
-    crypto       = require('crypto'),
-    bodyParser   = require('body-parser'), 
-    cookieParser = require('cookie-parser'),
-    myConnection = require('express-myconnection'),
-    secret       = require('./config/secret');  
-
-var app    = express(),
-    routes = require('./routes.js');
-
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
@@ -20,7 +8,8 @@ var connectionPool = {
 app.use(bodyParser());
 app.use(cookieParser());
 app.use(myConnection(mysql, connectionPool, 'pool'));
-app.use(express.static(__dirname + '/../frontend'));
+app.use('/',express.static('/var/tmp/deploy/KV004/frontend'));
+//console.log(__dirname);
 
 app.all('*', function(req, res, next) {
   res.set('Access-Control-Allow-Origin', '*');
