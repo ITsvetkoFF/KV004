@@ -266,7 +266,8 @@
                 position: absolute;
                 top: 0;
                 left: -300px;
-                height: 100%;
+                height: calc(100% - 52px);
+                height: -moz-calc(100% - 52px);
                 width: 300px; 
                 z-index: 1006;
 		        display: block;   
@@ -281,8 +282,9 @@
                 right: 0;
                 width: 600px;
                 min-width: 320px;
-                height: 100%;
                 background: #FFFFFF;
+                height: calc(100% - 52px);
+                height: -moz-calc(100% - 52px);
                  
                  
             }
@@ -319,6 +321,7 @@
             
             .b-left-side{
             height: 100%;
+                overflow:auto;
             }
 	     .b-left-side__pointer{
 		  position: absolute;
@@ -345,7 +348,7 @@
                 padding: 0 15px 10px 15px;
             }
             
-            .b-crear-float{
+            .b-crear-float {
                 clear: both;
             }
 
@@ -652,34 +655,30 @@
                 margin: 5px 0 0 0;
             }
             /* Nikolay ////////////////////////////////*/
-            .left{
-            width:300px;
-            float:left;
-            height:100%;
-            margin-top:0px;
-            border:none;
-            background:#fff;/*rgba(255,255,255,0.5);*/
+            .b-container-filters-left{
+                width:300px;
+                float:left;
+                height:100%;
+                margin-top:0px;
+                border:none;
+                background:#fff;/*rgba(255,255,255,0.5);*/
             }
 
-            .left .info-problem-filters{
-            margin-top:30px;
-            height:100%;
-            overflow:auto;
-             background:#fff;
-
-
-
+            .b-container-filters-left .info-problem-filters{
+                margin-top:0;
+                height:100%;
+                overflow:auto;
+                background:#fff;
             }
             .problem .title {
             text-align:center;
             font-weight: bold;
-
+                margin-top:30px;
             }
             .problem {
                 width:275px;
                 position:relative;
                 border:none;
-
             }
             .problem input[type="checkbox"] {
                 display: none;
@@ -687,20 +686,16 @@
             .problem input[type="checkbox"] + label {
                 cursor: pointer;
                 padding-left: 0;
-
-
                 display:block;
                 width:270px;
                 height:25px;
                 padding:5px 5px 2px;
                 margin-top:1px;
                 margin-left:5px;
-
             }
             .problem input[type="checkbox"] + label:hover {
                 background:#f5f5f5;
             }
-
             .problem input[type="checkbox"] + label::after {
                 content: "";
                 display:block;
@@ -723,7 +718,6 @@
                 margin-left:5px;
                 padding-left:5px;
                 font-weight:bolder;
-
             }
             .problem li {
                 list-style-type:none;
@@ -740,6 +734,18 @@
             }
 
 /*Taras ///////////////////////////////////////////*/
+    .b-add-problem {
+        width: 560px;
+        background-color: #FFF;
+        padding: 0 20px 20px 20px;
+    }
+    
+    .b-add-problem-header {
+        border-bottom: 1px dashed #dadada;
+        padding-top: 5px;
+        padding-bottom: 10px;
+    }
+
     .b-add-problem-form {
         background-color: white;
         margin-top: 25px;
@@ -762,69 +768,53 @@
         font-weight: lighter;
     }
     
-    .b-add-problem-input {
-        width: 65%;
-        display:block;
-        margin: auto;
-    }
-    
-    .b-add-problem {
-        width: 560px;
-        background-color: #FFF;
-        padding: 0 20px 20px 20px;
-    }
-    
     .b-add-problem-row {
         width:100%;
         height: auto;
-        padding-bottom: 20px;
+        padding: 0 10% 5px;
     }
-    
-    .b-add-problem-row-for-buttons {
-        text-align: center;
+
+    .b-add-problem-row-content {
+        width: 100%;
+        display:block;
     }
-    
-    .b-add-problem-row_textarea {
-        width: 65%;
+                        
+    .b-add-problem-row textarea {
+        width: 100%;
         resize: none;
         display:block;
-        margin: auto;
-    }
-    
-    .b-add-problem-type {
-        width: 65%;
-    }
-    
-    .b-add-problem-type-margin {
-        margin: 0;
-    }
-    
-    .b-add-problem-textarea {
         min-height: 200px;
     }
     
-    .b-add-problem-join_us {
-        
+    .b-add-problem-row input{
+        display:block;
+    }
+
+    .b-add-problem-row select {
+        width: 50%;
+    }
+    
+    .b-add-problem-row p {
+        text-align: center;
     }
     
     .b-add-problem-new_user {
-        margin-left: auto;
-        margin-right: auto;
-        width: 65%;
+        padding-top: 20px;
+       
     }
     
     .b-add-problem-row-new_user-left {
         margin: 0px;
         width: 45%;
         float: left;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
     }
     
     .b-add-problem-row-new_user-right {
         margin: 0px;
         width: 45%;
         float: right;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
     }
     
     .b-add-problem-row-new_user-left input {
@@ -835,34 +825,24 @@
         width: 100%;
     }
     
-    .b-add-problem-header {
-        border-bottom: 1px dashed #dadada;
-        padding-bottom: 10px;
-    }
-    
     .b-add-problem-new_user-label {
         margin: 0;
         display: block;
     }
     
     #join_us_submit {
-        text-align:center;
+        text-align: center;
     }
         
     #previews {
-        width: 65%;
-        margin: auto auto 20px;
+        margin: 2px auto 15px;
         text-align: center;
         background-repeat: no-repeat;
         background-position: 75 50;
         min-height: 180px;
-        border:2px dashed #f3f3f3;
+        border:2px dashed #dadada;
     }
-    
-    #my-awesome-dropzone label {
-        padding-bottom: 5px;
-    }
-    
+        
     .dz-message {
         display: none;
     }
@@ -878,13 +858,15 @@
     .b-add-problem-row-for-buttons p {
         margin-bottom:10px;
     }
-    
-    .previews_text {
-        width: 65%;
-        margin: auto;
-        padding-bottom:5px;
+
+    .b-add-problem-row-for-buttons .b-add-problem-button {
+        float: none;
     }
-    
+
+    .b-add-problem-button {
+        float:right;
+    }
+
     /* button style */
     .b-add-problem-form .b-add-problem-button {
         color: #fff;
@@ -894,3 +876,118 @@
         font-weight: bold;
         font-size: 14px;
     }
+
+    #previews .dz-preview .comment_field {
+        position: absolute;
+		left: 70px;
+		top: 28px;
+		height: 30px;
+		width: calc(100% - 75px);
+		resize: none;
+		font-size: 12px;
+		line-height: 12px;
+        min-height:initial;
+    }
+
+    .comment_field:hover {
+				cursor: pointer;
+			}
+    
+    .remove_btn:hover:after {
+        position: absolute;
+		right: -85px;				
+		top: -30px;
+		background: #fff;
+		padding: 5px;
+		content: 'Remove photo';
+        border: 2px dashed #dadada;
+        font-size:12px
+    }
+
+    .dropzone .dz-preview .dz-details .dz-size, .dropzone-previews .dz-preview .dz-details .dz-size {
+        position: absolute;
+        top: 0;
+        right: -85px;
+        line-height: initial;
+        left: 65px
+    }
+    .dz-filename {
+        display:none ;
+    }
+    .dropzone .dz-preview:hover.dz-error .dz-error-message, .dropzone-previews .dz-preview:hover.dz-error .dz-error-message {
+        opacity: 1;
+        -ms-filter: none;
+        filter: none;
+    }
+
+    .dz-details img{
+	    width: 60px !important;
+        height: 60px !important;
+    }
+
+    .dropzone .dz-preview.dz-image-preview:hover .dz-details img, .dropzone-previews .dz-preview.dz-image-preview:hover .dz-details img {
+        display: block;
+        opacity: initial;
+    }
+
+    .dropzone .dz-preview .dz-progress, .dropzone-previews .dz-preview .dz-progress {
+        position: absolute;
+        bottom: 0;
+        top: initial;
+        left: 70px;
+        right: 5px;
+        height: 6px;
+        background: #d7d7d7;
+        margin: 3px 0 5px 0;
+        display: none;
+    }
+
+    .dropzone .dz-preview .dz-error-message, .dropzone-previews .dz-preview .dz-error-message {
+        display: none;
+        position: absolute;
+        top: -5px;
+        left: 70px;
+    }
+
+    .remove_btn{
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		width: 16px;
+		height: 16px;
+		border: none;				
+		background: url('../images/delete.png') no-repeat center center;
+	}
+
+    .remove_btn:hover {
+        cursor: pointer;				
+	}
+    
+    .dz-preview {
+		width: calc(100% - 10px);
+		margin: 5px !important;
+		text-align: left !important;
+	}
+
+    .dz-error-message {
+	    display: none;
+	}
+
+    .dz-filemane {
+	    display: none !important;
+		width: 60px;
+		height: 60px;
+	}
+			
+	.dz-details {
+        width: 60px !important;
+		height: 60px !important;
+		display: inline-block;
+		margin: 0 !important;
+	}
+
+    .dz-size-title{
+	    font-style: normal !important;
+        font-size: 14px !important;
+	    font-weight: 400 !important;
+	}

@@ -1,3 +1,10 @@
+var jwt          = require('jsonwebtoken'),
+    crypto       = require('crypto'),
+    bodyParser   = require('body-parser'), 
+    cookieParser = require('cookie-parser'),
+    myConnection = require('express-myconnection'),
+    secret       = require('./config/secret');  
+
 exports.getProblems = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
 	req.getConnection(function(err, connection) {
 		if (err) {
@@ -85,7 +92,7 @@ exports.getUserId = function(req,res){ //get all user's problems in brief (coord
 			});
 		} else {
             var idUser = req.params.idUser;
-            connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Problems.ProblemTypes_Id FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id AND Users_Id = ?', [idUser], function(err, rows, fields) {
+            connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Problems.ProblemTypes_Id FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Activities.Users_Id = ?', [idUser], function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -330,8 +337,7 @@ exports.notApprovedProblems = function(req, res) {
             });
         } else {
             console.log("selectNotApprovedProblems - method works");
-            var queryString='SELECT Id, Title FROM Problems WHERE Moderation IS NULL;';
-            connection.query(queryString, function(err, rows, fields) {
+            connection.query('SELECT Problems.Id, Problems.Title, Activities.Date FROM Problems JOIN Activities ON (Problems.Id = Activities.Problems_Id) and (Activities.ActivityTypes_Id=1) WHERE Moderation = 0;', function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
