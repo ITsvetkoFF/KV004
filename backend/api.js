@@ -20,7 +20,8 @@ var connectionPool = {
 app.use(bodyParser());
 app.use(cookieParser());
 app.use(myConnection(mysql, connectionPool, 'pool'));
-app.use(express.static(__dirname + '/frontend'));
+app.use('/',express.static('/var/tmp/deploy/KV004/frontend'));
+//console.log(__dirname);
 
 app.all('*', function(req, res, next) {
   res.set('Access-Control-Allow-Origin', '*');
@@ -50,5 +51,6 @@ app.delete('/comment', routes.deleteComment);
 app.delete('/photo', routes.deletePhoto);
 app.put('/edit', routes.editProblem);
 
-app.listen(3000);
-console.log('Rest Demo Listening on port 3000');
+
+app.listen(8090);
+console.log('Rest Demo Listening on port 8090');
