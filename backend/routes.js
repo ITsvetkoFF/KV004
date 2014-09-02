@@ -367,8 +367,8 @@ exports.deleteProblem = function(req, res) {
                 err:    err.code
             });
         } else {
-            console.log("getProblems - method works");
-            var id=req.body.problem_id;
+            console.log("deleteProblems - method works");
+            var id=req.body.id;
             connection.query('DELETE FROM Problems WHERE Id = ?', id, function(err, rows, fields) {
                 if (err) {
                     console.error(err);
