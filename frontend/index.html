@@ -160,71 +160,111 @@
             		<div class="b-right-side__add-problem">
                     
                         <div class = "b-add-problem">
-                            <div class = "b-add-problem-header"><h2>ДОДАТИ ПРОБЛЕМУ</h2></div>  
-
+                            <div class = "b-add-problem-header"><h2>ДОДАТИ ПРОБЛЕМУ</h2></div>
                             <form id="my-awesome-dropzone" class = "dropzone b-add-problem-form" name = "submit_problem">
-
-                                <div class = "b-add-problem-row">
-                                    <label class = "b-add-problem-row-content" for = "title-field">Заголовок</label>
-                                    <input type = "text" id = "title-field" name = "title" class = "b-add-problem-row-content" required>
-                                </div>
-
-                                <div class = "b-add-problem-row">
-                                    <label class = "b-add-problem-row-content" for = "select-field">Тип проблеми</label>
-                                    <select name = "type" id = "select-field" required>
-                                        <option value = ""></option>
-                                        <option value = "Проблеми лісів">Проблеми лісів</option>
-                                        <option value = "Сміттєзвалища">Сміттєзвалища</option>
-                                        <option value = "Незаконна забудова">Незаконна забудова</option>
-                                        <option value = "Проблеми водойм">Проблеми водойм</option>
-                                        <option value = "Загрози біорізноманіттю">Загрози біорізноманіттю</option>
-                                        <option value = "Браконьєрство">Браконьєрство</option>
-                                        <option value = "Інші проблеми">Інші проблеми</option>
-                                    </select>
-                                </div>
-
-                                <div class = "b-add-problem-row">
-                                    <label class = "b-add-problem-row-content" for = "description-field">Опис проблеми</label>
-                                    <textarea id = "description-field" name = "description" rows = "10" required></textarea>
+                                
+                                <div style = "display:block" class = "b-add-problem__step-1">
+                                    <div class = "b-step-1">
+                                        <div class = "b-step-1__sub-header"><span class = "b-step-1-sub-header">Крок перший: Позначення місця розташування проблеми</span></div>
+                                        <div class = "b-step-1__description"><p>Перемістіть мишкою мітку в потрібне місце, після чого натисніть кнопку "Далі".</p></div>
+                                        <div class = "b-step-1__picture"><img src = "images/new.gif" class = "b-step-1-picture"></div>
+                                        <div class = "b-step-1__btns-div"><input type = "button" class = "b-add-problem-button btn-forward-step-1 btn-float-right" value = "Далі" ></div>
+                                        <div class="b-crear-float"></div>
+                                    </div>
                                 </div>
                                 
-                                <div class = "b-add-problem-row">
-                                    <span>Перенесіть фото сюди</span>
-                                    <div id = "previews"></div>
-                                    <input type='button' value='Завантажити фото' id='submit-all' class = "b-add-problem-button"/>
-                                    <div class="b-crear-float"></div>
-                                </div>                            
-
-                                <div class = "b-add-problem-row b-add-problem-row-for-buttons">
-                                    <p>Бажаєте додати проблему i приєднатися до нас?</p>
-                                    <input type = "button" id = "btn-join-us" class = "b-add-problem-button" value = "Так, зареєструватися">
-                                    <input type = "button" id = "btn-facebook" class = "b-add-problem-button" value ="Так, увійти через Facebook">
-                                    <input type = "submit" id = "btn-anonim" class = "b-add-problem-button" value = "Ні, додати проблему анонімно">
+                                <div style = "display:none" class = "b-add-problem__step-2">
+                                    <div class = "b-step-2">
+                                        <div class = "b-step-2__sub-header">
+                                            <span class = "b-step-2-sub-header">Крок другий: Заповнення інформації щодо проблеми</span>
+                                        </div>
+                                        
+                                        <div class = "b-step-2__title">
+                                            <label class = "b-add-problem-row-content" for = "title-field">Заголовок</label>
+                                            <input type = "text" id = "title-field" name = "title" class = "b-add-problem-row-content" required>
+                                        </div>
+                                        
+                                        <div class = "b-step-2__select">
+                                            <label class = "b-add-problem-row-content" for = "select-field">Тип проблеми</label>
+                                            <select name = "type" id = "select-field" required>
+                                                <option value = ""></option>
+                                                <option value = "Проблеми лісів">Проблеми лісів</option>
+                                                <option value = "Сміттєзвалища">Сміттєзвалища</option>
+                                                <option value = "Незаконна забудова">Незаконна забудова</option>
+                                                <option value = "Проблеми водойм">Проблеми водойм</option>
+                                                <option value = "Загрози біорізноманіттю">Загрози біорізноманіттю</option>
+                                                <option value = "Браконьєрство">Браконьєрство</option>
+                                                <option value = "Інші проблеми">Інші проблеми</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class = "b-step-2__textarea">
+                                            <label class = "b-add-problem-row-content" for = "description-field">Опис проблеми</label>
+                                            <textarea id = "description-field" name = "description" rows = "10" required></textarea>
+                                        </div>
+                                        
+                                        <div class = "b-step-2__btns-div">
+                                            <input type = "button" class = "b-add-problem-button btn-backward-step-2 btn-float-left" value = "Назад">
+                                            <input type = "button" class = "b-add-problem-button btn-forward-step-2 btn-float-right" value = "Далі">
+                                        </div>
+                                        <div class="b-crear-float"></div>
+                                    </div>
                                 </div>
+                                <div style = "display:none" class = "b-add-problem__step-3">
+                                    <div class = "b-step-3">
+                                        <div class = "b-step-3__sub-header">
+                                            <span class = "b-step-3-sub-header">Крок третій: Додання фотографій</span>
+                                        </div>
+                                        
+                                        <div class = "b-step-3__dropzone">
+                                            <span>Перенесіть фото сюди</span>
+                                            <div id = "previews"></div>
+                                        </div>
+                                        
+                                        <div class = "b-add-problem-row-for-buttons">
+                                            <p>Бажаєте додати проблему i приєднатися до нас?</p>
+                                            <input type = "button" id = "btn-join-us" class = "b-add-problem-button" value = "Так, зареєструватися">
+                                            <input type = "button" id = "btn-facebook" class = "b-add-problem-button" value ="Так, увійти через Facebook">
+                                            <!-- <input type = "button" id = "btn-anonim" class = "b-add-problem-button" value = "Ні, додати проблему анонімно"> -->
+                                        </div>
+                                                                                                                       
+                                        <div class = "b-add-problem-new_user" style = "display:none">
+                                            <div class = "b-add-problem-row-new_user-left" required>
+                                                <label class = "b-add-problem-new_user-label" for = "login-field">Логін</label>
+                                                <input type = "text" id = "login-field" name = "login" class = "b-add-problem-row_input">
+                                            </div>
+                                            
+                                            <div class = "b-add-problem-row-new_user-right">
+                                                    <label class = "b-add-problem-new_user-label" for = "email-field">Email</label>
+                                                    <input type = "email" id = "email-field" name = "email" class = "b-add-problem-row_input">
+                                            </div>
+                                            
+                                            <div class = "b-add-problem-row-new_user-left">
+                                                    <label class = "b-add-problem-new_user-label" for = "password-field">Пароль</label>
+                                                    <input type = "password" id = "password-field" name = "password" class = "b-add-problem-row_input">
+                                            </div>
+                                            
+                                            <div class = "b-add-problem-row-new_user-right">
+                                                    <label class = "b-add-problem-new_user-label" for = "password2-field">Повторіть пароль</label>
+                                                    <input type = "password" id = "password2-field" name = "password" class = "b-add-problem-row_input">
+                                            </div>
+                                            
+                                            <div class="b-crear-float"></div>
+                                            
+                                        </div>
 
-                            <div class = "b-add-problem-new_user b-add-problem-row" hidden>
-                                <div class = "b-add-problem-row-new_user-left" required>
-                                    <label class = "b-add-problem-new_user-label" for = "login-field">Логін</label>
-                                    <input type = "text" id = "login-field" name = "login" class = "b-add-problem-row_input">
-                                </div>
+                                        <div class="b-crear-float"></div>
 
-                                <div class = "b-add-problem-row-new_user-right">
-                                    <label class = "b-add-problem-new_user-label" for = "email-field">Email</label>
-                                    <input type = "email" id = "email-field" name = "email" class = "b-add-problem-row_input">
-                                </div>
+                                        <div class = "b-step-3__btns-div">
+                                            <input type = "button" class = "b-add-problem-button btn-backward-step-3 btn-float-left" value = "Назад">
+                                            <input id = "btn-submit" type = "button" class = "b-add-problem-button btn-forward-step-3 btn-float-right" disabled value = "Відправити">
 
-                                <div class = "b-add-problem-row-new_user-left">
-                                    <label class = "b-add-problem-new_user-label" for = "password-field">Пароль</label>
-                                    <input type = "password" id = "password-field" name = "password" class = "b-add-problem-row_input">
-                                </div>
+                                            <div class="b-crear-float"></div>
+                                        </div>
 
-                                <div class = "b-add-problem-row-new_user-right">
-                                    <label class = "b-add-problem-new_user-label" for = "password2-field">Повторіть пароль</label>
-                                    <input type = "password" id = "password2-field" name = "password" class = "b-add-problem-row_input">
+                                        <div class="b-crear-float"></div>
+                                    </div>
                                 </div>
-                                <div class="b-crear-float"></div>
-                                <input class = "b-add-problem-button" id = "btn-signup-submit" type = "submit" value = "Відправити">
-                            </div>
                             </form>
                         </div>
                         
@@ -488,15 +528,10 @@ Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the
 
   // The setting up of the dropzone
   init: function() {
-    var submitButton1 = document.querySelector("#submit-all");
-    var submitButton = document.querySelector("#btn-signup-submit");
-    var submitAnonim = document.querySelector("#btn-anonim");
+    var submitButton = document.querySelector("#btn-submit");
     var myDropzone = this;
     var counter = 0;
-    
-    submitAnonim.addEventListener("click", function() {
-					myDropzone.processQueue(); // Tell Dropzone to process all queued files.
-					});
+        
       
     submitButton.addEventListener("click", function() {
 					myDropzone.processQueue(); // Tell Dropzone to process all queued files.
@@ -530,10 +565,29 @@ Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the
     })
   }
 }
+    $('.btn-forward-step-1').click(function(){
+        $('.b-add-problem__step-1').hide();
+        $('.b-add-problem__step-2').show();
+    });
+    
+    $('.btn-forward-step-2').click(function(){
+        $('.b-add-problem__step-2').hide();
+        $('.b-add-problem__step-3').show();
+    });
+    
+    $('.btn-backward-step-2').click(function(){
+        $('.b-add-problem__step-2').hide();
+        $('.b-add-problem__step-1').show();
+    });
+    
+    $('.btn-backward-step-3').click(function(){
+        $('.b-add-problem__step-2').show();
+        $('.b-add-problem__step-3').hide();
+    });
     
     $('#btn-join-us').click(function(){
-        $(".b-add-problem-new_user").show();
-        $(".b-add-problem-row-for-buttons").hide();
+        $('.b-add-problem-new_user').show();
+        $('.b-add-problem-row-for-buttons').hide();
     })
     
 </script>
