@@ -11,17 +11,23 @@ xhr.send(null);
 var mysql = require('mysql');
 var connection = mysql.createConnection(
     {
-      host     : 'localhost',
-    user     : 'root',
-    password : 'root',
-    database : 'Enviromap'
+      host: 'localhost',
+      user: 'root',
+      password: 'root',
+      database: 'Enviromap'
     }
 );
 var problemStatus = ['Нова', 'Вирішена'],
-problemType = ['Проблеми лісів', 'Сміттєзвалища', 'Незаконна забудова', 'Проблеми водойм', 'Загрози біорізноманіттю', 'Браконьєрство', 'Інші проблеми'];
+problemType = ['Проблеми лісів', 'Сміттєзвалища', 'Незаконна забудова', 'Проблеми водойм', 'Загрози біорізноманіттю', 'Браконьєрство', 'Інші проблеми'],
+activityTypes = ['addProblem', 'editProblem', 'voteForProblem', 'postPhoto', 'postComment'];
 connection.connect();
 for (var i = 0; i < problemType.length; i++) {
         connection.query('INSERT INTO ProblemTypes SET ?', {Type: problemType[i]}, function(err, rows, fields) {
+    if (err) throw err;
+    });
+};
+for (var i = 0; i < activityTypes.length; i++) {
+        connection.query('INSERT INTO ActivityTypes SET ?', {Name: activityTypes[i]}, function(err, rows, fields) {
     if (err) throw err;
     });
 };
@@ -37,6 +43,8 @@ else if (probs[i].probType == 'Проблеми водойм') probs[i].probType
 else if (probs[i].probType == 'Загрози біорізноманіттю') probs[i].probType = 5;
 else if (probs[i].probType == 'Браконьєрство') probs[i].probType = 6;
 else if (probs[i].probType == 'Інші проблеми') probs[i].probType = 7;
+
+probs[i].created = new Date(probs[i].created*1000).toISOString();
 
 if (probs[i].content) {
 probs[i].content = probs[i].content.replace(/'/g,"\\'");
@@ -57,6 +65,14 @@ Status : probs[i].probStatus,
 ProblemTypes_Id : probs[i].probType
   };
 connection.query("INSERT INTO Problems SET ?", data, function(err, rows, fields) {
+    if (err) throw err;
+    });
+var data = {
+Date : probs[i].created,
+ActivityTypes_Id : 1,
+Problems_Id : i+1,
+  };
+connection.query("INSERT INTO Activities SET ?", data, function(err, rows, fields) {
     if (err) throw err;
     });
 
