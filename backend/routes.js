@@ -24,10 +24,7 @@ exports.getProblems = function(req,res){ // get all moderated problems in brief 
                         err:    err.code
                     });
                 }
-                res.send({
-                    json:   rows,
-                    length: rows.length
-                });
+                res.send(rows);
             });
         }
     });
@@ -71,9 +68,7 @@ exports.getProblemId = function(req,res){ //get detailed problem description (ev
                             err3:    err3.code
                             });  
                         }
-                        res.send({
-                            json: [rows1, rows2, rows3],
-                        });
+                        res.send([rows1, rows2, rows3]);
                     });
                 });
             });
