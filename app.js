@@ -1,8 +1,8 @@
 var app = angular.module('app', ['ngCookies']);
 
 
-app.controller('AdminUserCtrl', ['$scope',  '$location', '$window', '$cookieStore', 'UserService', 'AuthenticationService',
-    function AdminUserCtrl($scope, $location, $window, $cookieStore, UserService, AuthenticationService) {
+app.controller('AdminUserCtrl', ['$scope',  '$location', '$window', '$cookieStore', 'UserService',
+    function AdminUserCtrl($scope, $location, $window, $cookieStore, UserService) {
         //
         window.fbAsyncInit = function() {
             FB.init({
