@@ -1,0 +1,27 @@
+.main {
+float: left;
+width: 60%;
+}
+.left {
+float: left;
+width: 10%;
+}
+.right {
+max-width: 28%;
+border: solid black;
+float: left;
+margin-top: 5px;
+margin-left: 71%;
+position: fixed;
+}
+table, th , td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
