@@ -6,7 +6,7 @@ app.controller('AdminUserCtrl', ['$scope',  '$location', '$window', '$cookieStor
         //
         window.fbAsyncInit = function() {
             FB.init({
-                appId      : '1458092457803267',
+                appId      : '1458754107737788',
                 cookie     : true,
                 xfbml      : true,
                 version    : 'v2.1'
