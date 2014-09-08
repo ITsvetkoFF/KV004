@@ -1,0 +1,106 @@
+<div class="b-wrapper-inside-blocks">
+    <!-- left block - filters START -->
+    <div class="b-filters">
+        ФІЛЬТР ПО ТИПАМ ПРОБЛЕМ
+        <form method="" action="" id="ecoProblem"></form>
+        ФІЛЬТРИ ДЛЯ АДМІНІСТРАТОРА
+        <!-- <div ng-controller="ButtonsCtrl"> -->
+        <!-- </div> -->
+
+    </div>
+    <!-- header block END -->
+    <!-- ---------------- -->
+    <!-- central block - problem list START -->
+    <div class="b-problem-list" ng-show="blockVisible">
+        <!--<div class="b-problem-list__list"> -->
+        <div class="b-problem-list__caption">
+            СПИСОК НОВИХ ПРОБЛЕМ
+        </div>
+        <ul class="b-problem-list-items" ng-show="infoVisible">
+            <li class="b-problem-list-item" ng-repeat="problem in problems">
+                <div class="b-problem-list-item__created" ng-hide="compareDate($index)"> {{problem.created|date:'shortDate'}} </div>
+                <div class="b-problem-list-item__title" ng-click="getDeatiledProblemInfo($index)">
+                    <a href="" class="b-problem-list-item__link">{{problem.title}}</a>
+                </div>
+            </li>
+        </ul>
+        <!--</div> -->
+    </div>
+    <!-- ---------------- -->
+    <!-- central block - problem list END -->
+    <!-- right block - detailed problem START -->
+    <div class="b-problem-deatiled-info" ng-show="v_DeatiledProblemInfo">
+        <div class="b-problem-deatiled-info-header">
+            <form method="" action="" class="b-problem-deatiled-info-form">
+                <input type="button" value="Редагувати" class="b-problem-deatiled-info_edit">
+                <input type="button" value="Видалити" class="b-problem-deatiled-info_delete">
+            </form>
+            <div class="b-problem-deatiled-info-title">
+                <img src="images/icons/waste_icon.png" class="b-problem-deatiled-info-title__icon">
+                <div class="b-problem-deatiled-info-title__text">{{problems[problemId].title}}</div>
+                <div class="b-problem-deatiled-info-user">
+                    <div class="b-problem-deatiled-info-user__name">Василь</div>
+                    <div class="b-problem-deatiled-info-user__date">{{problems[problemId].created|date:'shortDate'}}</div>
+                </div>
+            </div>
+            <div class="b-problem-deatiled-info-general">
+                <div class='b-problem-deatiled-info-severity'>
+                    <div class="b-problem-deatiled-info__caption">Важливість</div>
+                    <div class="b-problem-deatiled-info__severity" ng-controller="RatingCtrl">
+                        <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null">
+                        </rating>
+                    </div>
+                </div>
+                <div class="btn-group b-problem-deatiled-info__status">
+                    <div class="b-problem-deatiled-info-status__text">Status</div>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                        <label class="onoffswitch-label" for="myonoffswitch">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="b-problem-deatiled-info-votes">
+                    <!--<img class='b-problem-deatiled-info__votes' src='images/icons/heart.jpg'> -->
+                    <span class="glyphicon glyphicon-heart"></span>
+                    {{problems[problemId].votes}}
+                </div>
+            </div>
+
+        </div>
+        <div class="b-problem-deatiled-info-description">
+            <div class="b-problem-deatiled-info-description__title">Детально</div>
+            <div class="b-problem-deatiled-info-description__content">{{problems[problemId].content}}</div>
+            <div class="b-problem-deatiled-info-description-photos">
+                <img src="images/icons/noImage_icon.png" class="b-problem-deatiled-info-description-photos__photo">
+                <img src="images/icons/noImage_icon.png" class="b-problem-deatiled-info-description-photos__photo">
+                <img src="images/icons/noImage_icon.png" class="b-problem-deatiled-info-description-photos__photo">
+                <img src="images/icons/noImage_icon.png" class="b-problem-deatiled-info-description-photos__photo">
+                <img src="images/icons/noImage_icon.png" class="b-problem-deatiled-info-description-photos__photo">
+            </div>
+        </div>
+        <div class="b-problem-deatiled-info-userComments">
+            <div class="b-problem-deatiled-info-userComments__title">Коментарі користувачів</div>
+            <div class="b-problem-deatiled-info-userCommentsList">
+                <div class="b-problem-deatiled-info-userCommentList__item">
+                    <div class="b-problem-deatiled-info-userComment__userName">Василь Петрович</div>
+                    <div class="b-problem-deatiled-info-userComment__date">24.04.13 о 23:15</div>
+                    <div class="b-problem-deatiled-info-userComment__activityType"></div>
+                </div>
+                <div class="b-problem-deatiled-info-userComment__content">Повідомив про проблему</div>
+            </div>
+            <div class="b-problem-deatiled-info-userCommentsList">
+                <div class="b-problem-deatiled-info-userCommentList__item">
+                    <div class="b-problem-deatiled-info-userComment__userName">Петро</div>
+                    <div class="b-problem-deatiled-info-userComment__date">05.07.13 о 23:15</div>
+                    <div class="b-problem-deatiled-info-userComment__activityType"></div>
+                </div>
+                <div class="b-problem-deatiled-info-userComment__content">Друзі, Всіх небайдужих запрошуємо долучитися до прибирання в міському парку ім. Л.Українки</div>
+            </div>
+        </div>
+    </div>
+    <!-- ---------------- -->
+    <!-- central block - problem list END -->
+    <div class="b-empty-bottom"> </div>
+</div>

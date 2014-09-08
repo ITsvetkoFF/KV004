@@ -1,0 +1,108 @@
+<div class="b-add-problem">
+    <div class="b-add-problem-header"><h2>ADD PROBLEM</h2></div>
+    <form id="my-awesome-dropzone" class="dropzone b-add-problem-form" name="submit_problem">
+
+        <div style="display:block" class="b-add-problem__step-1">
+            <div class="b-step-1">
+                <div class="b-step-1__sub-header"><span class="b-step-1-sub-header">Step 1: Problem position</span></div>
+                <div class="b-step-1__description"><p>Click on the map, to create problem position</p></div>
+                <div class="b-step-1__picture"><img src="images/new.gif" class="b-step-1-picture"></div>
+                <div class="b-step-1__btns-div"><input type="button" class="b-add-problem-button btn-forward-step-1 btn-float-right" value="Next"></div>
+                <div class="b-crear-float"></div>
+            </div>
+        </div>
+
+        <div style="display:none" class="b-add-problem__step-2">
+            <div class="b-step-2">
+                <div class="b-step-2__sub-header">
+                    <span class="b-step-2-sub-header">Step 2: Detail information</span>
+                </div>
+
+                <div class="b-step-2__title">
+                    <label class="b-add-problem-row-content" for="title-field">Title</label>
+                    <input type="text" id="title-field" name="title" class="b-add-problem-row-content" required>
+                </div>
+
+                <div class="b-step-2__select">
+                    <label class="b-add-problem-row-content" for="select-field">Problem type</label>
+                    <select name="type" id="select-field" required>
+                        <option value=""></option>
+                        <option value="Проблеми лісів">Проблеми лісів</option>
+                        <option value="Сміттєзвалища">Сміттєзвалища</option>
+                        <option value="Незаконна забудова">Незаконна забудова</option>
+                        <option value="Проблеми водойм">Проблеми водойм</option>
+                        <option value="Загрози біорізноманіттю">Загрози біорізноманіттю</option>
+                        <option value="Браконьєрство">Браконьєрство</option>
+                        <option value="Інші проблеми">Інші проблеми</option>
+                    </select>
+                </div>
+
+                <div class="b-step-2__textarea">
+                    <label class="b-add-problem-row-content" for="description-field">Problem defenition</label>
+                    <textarea id="description-field" name="description" rows="10" required></textarea>
+                </div>
+
+                <div class="b-step-2__btns-div">
+                    <input type="button" class="b-add-problem-button btn-backward-step-2 btn-float-left" value="Back">
+                    <input type="button" class="b-add-problem-button btn-forward-step-2 btn-float-right" value="Next">
+                </div>
+                <div class="b-crear-float"></div>
+            </div>
+        </div>
+        <div style="display:none" class="b-add-problem__step-3">
+            <div class="b-step-3">
+                <div class="b-step-3__sub-header">
+                    <span class="b-step-3-sub-header">Step 3: Add pictures</span>
+                </div>
+
+                <div class="b-step-3__dropzone">
+                    <span>Drop photos here</span>
+                    <div id="previews"></div>
+                </div>
+
+                <div class="b-add-problem-row-for-buttons">
+                    <p>Do You want add problem and follow us?</p>
+                    <input type="button" id="btn-join-us" class="b-add-problem-button" value="Yes, registration">
+                    <input type="button" id="btn-facebook" class="b-add-problem-button" value="Yes, use Facebook account">
+                    <!-- <input type = "button" id = "btn-anonim" class = "b-add-problem-button" value = "Ні, додати проблему анонімно"> -->
+                </div>
+
+                <div class="b-add-problem-new_user" style="display:none">
+                    <div class="b-add-problem-row-new_user-left" required>
+                        <label class="b-add-problem-new_user-label" for="login-field">Login</label>
+                        <input type="text" id="login-field" name="login" class="b-add-problem-row_input">
+                    </div>
+
+                    <div class="b-add-problem-row-new_user-right">
+                        <label class="b-add-problem-new_user-label" for="email-field">Email</label>
+                        <input type="email" id="email-field" name="email" class="b-add-problem-row_input">
+                    </div>
+
+                    <div class="b-add-problem-row-new_user-left">
+                        <label class="b-add-problem-new_user-label" for="password-field">Password</label>
+                        <input type="password" id="password-field" name="password" class="b-add-problem-row_input">
+                    </div>
+
+                    <div class="b-add-problem-row-new_user-right">
+                        <label class="b-add-problem-new_user-label" for="password2-field">Confirm password</label>
+                        <input type="password" id="password2-field" name="password" class="b-add-problem-row_input">
+                    </div>
+
+                    <div class="b-crear-float"></div>
+
+                </div>
+
+                <div class="b-crear-float"></div>
+
+                <div class="b-step-3__btns-div">
+                    <input type="button" class="b-add-problem-button btn-backward-step-3 btn-float-left" value="Next">
+                    <input id="btn-submit" type="button" class="b-add-problem-button btn-forward-step-3 btn-float-right" disabled value="Send">
+
+                    <div class="b-crear-float"></div>
+                </div>
+
+                <div class="b-crear-float"></div>
+            </div>
+        </div>
+    </form>
+</div>
