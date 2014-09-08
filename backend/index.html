@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="routEx">
+<head>
+<style type="text/css">
+	
+</style>
+    <meta charset="UTF-8"/>
+    <title>Angular routing Example</title>
+	<link rel="stylesheet" href="main.css"/>
+	<link rel="stylesheet" href="bootstrap.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular-animate.js"></script>
+</head>
+<body >
+<div  height="30px"><a href="about.html">Про проект</a> <a href="/#/resourses">Ресурси</a></div>
+<div class="left">
+  Нова<br>
+  Вирішена<br>
+</div>
+<div  ng-controller="problemsCtrl">
+<div class="main" >
+  <table>
+  <tr ng-repeat="i in fprobs"> <td><b><a href="/#/problem/{{$index}}">{{i.created}}</a></b></td>
+  <td><em>{{i.title}}</em></td></tr>
+  </table>
+  </div>
+<div ng-view class="right">
+</div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
