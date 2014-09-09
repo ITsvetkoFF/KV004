@@ -1,11 +1,13 @@
 define(['./module'], function (controllers) {
 
     'use strict';
-    controllers.controller('AdminUserCtrl', ['$scope', '$location', '$window', '$cookieStore', 'UserService', function ($scope, $location, $window, $cookieStore, UserService) {
+    controllers.controller('AdminUserCtrl', ['$scope', '$location', '$window', 'ipCookie', 'UserService', function ($scope, $location, $window, ipCookie, UserService) {
 
         $scope.isLoggedIn = UserService.isLoggedIn;
         $scope.isAdministrator = UserService.isAdministrator;
-        $scope.name = $cookieStore.get('userName');
+        //ipCookie('userName', 'LIZA');
+        $scope.name = ipCookie('userName');
+        //console.log(ipCookie('userName'));
 
         FB.init({
                 appId      : '1458754107737788',
@@ -79,18 +81,18 @@ define(['./module'], function (controllers) {
 
         // This function is called after success login procedure
         function successLogIn(userData) {
-            $cookieStore.put('userName', userData.name, {expires: 60});
-            $cookieStore.put('userSurname', userData.surname, {expires: 60});
-            $cookieStore.put('userRole', userData.role, {expires: 60});
-            $cookieStore.put('token', userData.token, {expires: 60});
+            ipCookie('userName', userData.name, {expires: 1});
+            ipCookie('userSurname', userData.surname, {expires: 1});
+            ipCookie('userRole', userData.role, {expires: 1});
+            ipCookie('token', userData.token, {expires: 1});
 
         }
 
         function successLogOut() {
-            $cookieStore.remove('token');
-            $cookieStore.remove('userName');
-            $cookieStore.remove('userSurname');
-            $cookieStore.remove('userRole');
+            ipCookie.remove('token');
+            ipCookie.remove('userName');
+            ipCookie.remove('userSurname');
+            ipCookie.remove('userRole');
 
         }
 

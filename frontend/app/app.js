@@ -6,7 +6,7 @@ define([
     'angular',
     'angular-route',
     'angular-mocks',
-    'angular-cookies',
+    'angular-cookie',
     'facebook',
     './controllers/index',
     //'./directives/index',
@@ -21,6 +21,6 @@ define([
         //'app.filters',
         'app.services',
         'ngRoute',
-        'ngCookies'
+        'ipCookie'
     ]);
 });

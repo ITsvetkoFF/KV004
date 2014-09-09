@@ -6,7 +6,7 @@
     "angular": "latest",
     "angular-route": "latest",
     "angular-mocks": "latest",
-    "angular-cookies": "latest",
+    "angular-cookie": "latest",
     "bootstrap": "latest",
     "requirejs": "latest",
     "requirejs-domready": "latest"

@@ -9,7 +9,7 @@ require.config({
         'angular': '../bower_components/angular/angular',
         'angular-route': '../bower_components/angular-route/angular-route',
         'angular-mocks': '../bower_components/angular-mocks/angular-mocks',
-        'angular-cookies': '../bower_components/angular-cookies/angular-cookies',
+        'angular-cookie': '../bower_components/angular-cookie/angular-cookie',
         'domReady': '../bower_components/requirejs-domready/domReady',
         'require': '../bower_components/requirejs/require',
         'facebook': 'https://connect.facebook.net/en_US/all'
@@ -29,7 +29,7 @@ require.config({
         'angular-mocks': {
             deps: ['angular']
         },
-        'angular-cookies': {
+        'angular-cookie': {
             deps: ['angular']
         },
         'facebook' : {
