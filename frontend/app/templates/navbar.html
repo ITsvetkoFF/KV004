@@ -26,7 +26,7 @@
                 </div>
             </li>
             <li class="b-menu__item">
-                <a href="#" class="b-menu__link" id="b-menu__item__enter">Вхід</a>
+                <a href="#" class="b-menu__link" id="b-menu__item__enter" ng-hide='isLoggedIn()'>Вхід</a>
                 <!-- Hidden registration form -->
 
                 <div class="b-header__sign-up">
@@ -59,7 +59,7 @@
 
                                 </div>
                                 <div class="b-form__only-login-form  b-form-footer" style="border-top:1px solid #ccc;text-align:center;padding-top:5px">
-                                    Войти через <a href="">Facebook</a> или <a href="">Google</a>
+                                    Войти через <a href="" ng-click="logInFB()">Facebook</a> или <a href="">Google</a>
                                 </div>
 
                             </div>
@@ -67,6 +67,7 @@
                     </div>
                 </div>
             </li>
+            <li  class="b-menu__item" ng-show="isLoggedIn()">HI, {{name}}</li>
         </ul>
     </div>
 </div>

@@ -9,7 +9,8 @@
     "crypto": "*",
     "body-parser": "*",
     "cookie-parser": "*",
-    "express-myconnection": "*"
+    "express-myconnection": "*",
+	  "xmlhttprequest":"*"
   },
   "engines": {
     "node": ">=0.8.0"

@@ -1,28 +1,25 @@
 var mysql = require('mysql'),
     crypto = require('crypto'),
-    secret = require('./config/secret');
-
+    secret = require('./config/secret'),
+    XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 var problemTypes = ['проблеми лісів', 'сміттєзвалища', 'незаконна забудова', 'проблеми водойм', 'загрози біорізноманіттю', 'браконьєрство', 'інші проблеми'],
     userRoles = ['administrator', 'user'],
-    
-    amountOfProblems = 50;
-    titles = ['problem1', 'problem2', 'problem3', 'problem4', 'problem5', 'problem6', 'problem7', 'problem8', 'problem9', 'problem10'],
-    content = ['content1', 'content2', 'content3', 'content4', 'content5', 'content6', 'content7', 'content8','content9','content10'],
-    moderation = [true, false],
-    latitude = [50.4546600, 50.282, 50.12, 50.123, 50.176, 50.1234, 50.01],
-    longtitude = [30.5238000, 50.22, 50.152, 50.1223, 50.16, 50.12034, 50.1],
-    
     userNames = ['admin', 'name1', 'name2', 'name3', 'name4', 'name5', 'name6', 'name7', 'name8', 'name9'],
     userEmails = ['admin@.com', 'name1@.com', 'name2@.com', 'name3@.com', 'name4@.com', 'name5@.com', 'name6@.com', 'name7@.com', 'name8@.com', 'name9@.com'],
     passwords = ['admin', '12345678'],
-    
-    
     activityTypes = ['addProblem', 'editProblem', 'voteForProblem', 'postPhoto', 'postComment'];
 
 var i;
-   
-   
+
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+   if (xhr.readyState == 4) {
+        probs = JSON.parse(xhr.responseText);
+    };
+};
+xhr.open('GET', 'http://ecomap.org/api/problems', false);
+xhr.send(null);
 
 function randomIntInc(low, high) {
     return Math.floor(Math.random() * (high - low) + low);
@@ -68,8 +65,8 @@ function fillUsers() {
             userRoles_Id: 2});
     }
 }
-    
-  
+
+
 
 
 function fillActivityTypes() {
@@ -79,37 +76,58 @@ function fillActivityTypes() {
 }
 
 function fillProblemsActivities() {
-    for (i = 0; i < amountOfProblems; i++) {
-        connection.query('INSERT INTO Problems SET ?', {
-            title: titles[randomIntInc(0, titles.length)],
-            content: content[randomIntInc(0, content.length)],
-            severity: randomIntInc(1, 5),
-            moderation: moderation[randomIntInc(0, moderation.length)],
-            votes: randomIntInc(0, 100),
-            latitude: latitude[randomIntInc(0, latitude.length)],
-            longtitude: longtitude[randomIntInc(0, longtitude.length)],
-            status: moderation[randomIntInc(0, moderation.length)],
-            problemTypes_Id: randomIntInc(1, problemTypes.length)
-        });
-    }
-    
-    for (i = 0; i < amountOfProblems; i++) {
-        connection.query('INSERT INTO Activities SET ?', {
-            date: new Date(),
-            activityTypes_Id: 1,
-            users_Id: randomIntInc(1, userNames.length),
-            problems_Id: i+1
-            
-        });
-    }   
+    for (var i=0, len=probs.length; i<len; i++) {
+if (probs[i].probStatus == 'Нова') probs[i].probStatus = 0;
+else if (probs[i].probStatus == 'Вирішена') probs[i].probStatus = 1;
+
+if (probs[i].probType == 'Проблеми лісів') probs[i].probType = 1;
+else if (probs[i].probType == 'Сміттєзвалища') probs[i].probType = 2;
+else if (probs[i].probType == 'Незаконна забудова') probs[i].probType = 3;
+else if (probs[i].probType == 'Проблеми водойм') probs[i].probType = 4;
+else if (probs[i].probType == 'Загрози біорізноманіттю') probs[i].probType = 5;
+else if (probs[i].probType == 'Браконьєрство') probs[i].probType = 6;
+else if (probs[i].probType == 'Інші проблеми') probs[i].probType = 7;
+
+probs[i].created = new Date(probs[i].created*1000).toISOString();
+
+if (probs[i].content) {
+probs[i].content = probs[i].content.replace(/'/g,"\\'");
+probs[i].title = probs[i].title.replace(/'/g,"\\'");
+};
+
+if (!probs[i].probType) probs[i].probType=7;
+var data = {
+Title : probs[i].title,
+Content : probs[i].content,
+Severity : probs[i].severity,
+Moderation : 0,
+Votes : probs[i].votes,
+Latitude : probs[i].lat,
+Longtitude : probs[i].lon,
+Status : probs[i].probStatus,
+ProblemTypes_Id : probs[i].probType
+  };
+connection.query("INSERT INTO Problems SET ?", data, function(err, rows, fields) {
+    if (err) throw err;
+    });
+var data = {
+Date : probs[i].created,
+ActivityTypes_Id : 1,
+users_Id: randomIntInc(1, userNames.length),
+Problems_Id : i+1,
+  };
+connection.query("INSERT INTO Activities SET ?", data, function(err, rows, fields) {
+    if (err) throw err;
+    });
+};
 }
 
-fillProblemTypes(); 
+fillProblemTypes();
 fillUserRoles();
 fillUsers();
 fillActivityTypes();
 fillProblemsActivities();
 
-
 console.log('database filled');
 connection.end();
+

@@ -1,9 +1,9 @@
 var jwt          = require('jsonwebtoken'),
     crypto       = require('crypto'),
-    bodyParser   = require('body-parser'), 
+    bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
-    secret       = require('./config/secret');  
+    secret       = require('./config/secret');
 
 exports.getProblems = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
 	req.getConnection(function(err, connection) {
@@ -48,7 +48,7 @@ exports.getProblemId = function(req,res){ //get detailed problem description (ev
                     res.send({
                         result1: 'error',
                         err1:    err1.code
-                    });  
+                    });
                 }
                 connection.query('SELECT * FROM Photos WHERE Problems_Id=?', [id], function(err2, rows2, fields2) {
                     if (err2) {
@@ -57,7 +57,7 @@ exports.getProblemId = function(req,res){ //get detailed problem description (ev
                         res.send({
                             result2: 'error',
                             err2:    err2.code
-                        });  
+                        });
                     }
                     connection.query('SELECT * FROM Activities WHERE Activities.Problems_Id=?', [id], function(err3, rows3, fields3) {
                         if (err3) {
@@ -66,7 +66,7 @@ exports.getProblemId = function(req,res){ //get detailed problem description (ev
                         res.send({
                             result3: 'error',
                             err3:    err3.code
-                            });  
+                            });
                         }
                         res.send([rows1, rows2, rows3]);
                     });
@@ -217,6 +217,7 @@ exports.logIn = function(req, res) {
 				err:    err.code
 			});
 		} else {
+            console.log(req.body);
             var email = req.body.email||'',
             password = req.body.password||'';
 
@@ -241,11 +242,11 @@ exports.logIn = function(req, res) {
                 userData.token = jwt.sign(userData, secret.secretToken);
                 return res.json(userData);
 
-            });   
+            });
         }
-    });       
+    });
 }
-  
+
 exports.logOut = function(req, res) {
     req.getConnection(function(err, connection) {
 		if (err) {
@@ -273,7 +274,7 @@ exports.logOut = function(req, res) {
 //            return res.send(401);
 //        }
                 return res.send(200);
-            });    
+            });
         }
     });
 }
@@ -299,7 +300,7 @@ exports.register = function(req, res) {
                return res.send(401);
             }
 
-            password = crypto.createHmac("sha1", secret.secretToken).update(userData.password).digest("hex");
+            userData.password = crypto.createHmac("sha1", secret.secretToken).update(userData.password).digest("hex");
 
             connection.query("select Id from Users where Email like ?", userData.email, function(err, result) {
 
@@ -318,204 +319,289 @@ exports.register = function(req, res) {
             });
         });
         }
-    });  
+    });
 };
 //admin-------------------------------------------------------------------
 exports.notApprovedProblems = function(req, res) {
-    req.getConnection(function(err, connection) {
-        if (err) {
-            console.error('CONNECTION error: ',err);
-            res.statusCode = 503;
-            res.send({
-                result: 'error',
-                err:    err.code
-            });
-        } else {
-            console.log("selectNotApprovedProblems - method works");
-            connection.query('SELECT Problems.Id, Problems.Title, Activities.Date FROM Problems JOIN Activities ON (Problems.Id = Activities.Problems_Id) and (Activities.ActivityTypes_Id=1) WHERE Moderation = 0;', function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
+req.getConnection(function(err, connection) {
+		if (err) {
+			console.error('CONNECTION error: ',err);
+			res.statusCode = 503;
+			res.send({
+				result: 'error',
+
+				err:    err.code
+			});
+		} else {
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            }
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
                 }
-                res.send({
-                    result: 'success',
-                    err:    '',
-                    json:   rows,
-                    length: rows.length
-                });
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+                connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Activities.Date FROM Problems JOIN Activities ON Problems.Id = Activities.Problems_Id WHERE Moderation =0;', function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    	res.send({
+                        	result: 'success',
+                        err:    '',
+                        json:   rows,
+                        length: rows.length
+                    });
+                   });
             });
         }
     });
 };
 
 exports.deleteProblem = function(req, res) {
-    req.getConnection(function(err, connection) {
+req.getConnection(function(err, connection) {
         if (err) {
             console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
                 result: 'error',
+
                 err:    err.code
             });
         } else {
-            console.log("deleteProblems - method works");
-            var id=req.body.id;
-            connection.query('DELETE FROM Problems WHERE Id = ?', id, function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            };
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
                 }
-                res.send({
-                    result: 'success',
-                    err:    '',
-                    json:   rows,
-                    length: rows.length
-                });
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+                var id=req.params.id;
+                connection.query('DELETE FROM Problems WHERE Id = ?', id, function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    '',
+                        json:   rows,
+                        length: rows.length
+                    });
+                    });
             });
         }
     });
 };
 
 exports.deleteUser = function(req, res) {
-    req.getConnection(function(err, connection) {
+req.getConnection(function(err, connection) {
         if (err) {
             console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
                 result: 'error',
+
                 err:    err.code
             });
         } else {
-            console.log("deleteUser - method works");
-            var id=req.body.user_id;
-            connection.query('DELETE FROM Users WHERE Id = ?', id, function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            }
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
                 }
-                res.send({
-                    result: 'success',
-                    err:    '',
-                    json:   rows,
-                    length: rows.length
-                });
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+                var id=req.params.id;
+                connection.query('DELETE FROM Users WHERE Id = ?', id, function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    '',
+                        json:   rows,
+                        length: rows.length
+                    });
+                    });
             });
         }
     });
 };
 
 exports.deleteComment = function(req, res) {
-    req.getConnection(function(err, connection) {
+req.getConnection(function(err, connection) {
         if (err) {
             console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
                 result: 'error',
+
                 err:    err.code
             });
         } else {
-            console.log("deleteComment - method works");
-            var id=req.body.comment_id;
-            connection.query('DELETE FROM Activities WHERE Id = ?', id, function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            }
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
                 }
-                res.send({
-                    result: 'success',
-                    err:    '',
-                    json:   rows,
-                    length: rows.length
-                });
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+                var id=req.params.id;
+                connection.query('DELETE FROM Activities WHERE Id = ?', id, function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    '',
+                        json:   rows,
+                        length: rows.length
+                    });
+                    });
             });
         }
     });
 };
 
 exports.deletePhoto = function(req, res) {
-    req.getConnection(function(err, connection) {
+req.getConnection(function(err, connection) {
         if (err) {
             console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
                 result: 'error',
+
                 err:    err.code
             });
         } else {
-            console.log("deletePhoto - method works");
-            var id=req.body.photo_id;
-            connection.query('DELETE FROM Photos WHERE Id = ?', id, function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            }
+
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
                 }
-                res.send({
-                    result: 'success',
-                    err:    '',
-                    json:   rows,
-                    length: rows.length
-                });
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+                var id=req.params.id;
+                connection.query('DELETE FROM Photos WHERE Id = ?', id, function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    '',
+                        json:   rows,
+                        length: rows.length
+                    });
+                    });
             });
         }
     });
 };
 
 exports.editProblem = function(req, res) {
-    req.getConnection(function(err, connection) {
+req.getConnection(function(err, connection) {
         if (err) {
             console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
                 result: 'error',
+
                 err:    err.code
             });
         } else {
-            console.log("editProblem - method works");
-            var data = {
-               Title : req.body.title,
-               Content : req.body.content,
-               Severity : req.body.severity,
-               Moderation : req.body.moderation,
-               Status : req.body.status,
-               ProblemTypes_Id : req.body.problemTypes_Id
-           };
-           var id = req.body.problem_id;
-           connection.query("UPDATE Problems SET ? WHERE Id = ?", [data, id], function(err, rows, fields) {
-            if (err) {
-                console.error(err);
-                res.statusCode = 500;
-                res.send({
-                    result: 'error',
-                    err:    err.code
-                });
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
             }
-            res.send({
-                result: 'success',
-                err:    '',
-                json:   rows,
-                length: rows.length
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
+                }
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+                var data = {
+             Title : req.body.title,
+             Content : req.body.content,
+             Severity : req.body.severity,
+             Moderation : req.body.moderation,
+             Status : req.body.status,
+             ProblemTypes_Id : req.body.problemTypes_Id
+                };
+            var id = req.body.id;
+            connection.query("UPDATE Problems SET ? WHERE Id = ?", [data, id], function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    '',
+                        json:   rows,
+                        length: rows.length
+                    });
+                    });
             });
-        });
-       }
-   });
+        }
+    });
 };

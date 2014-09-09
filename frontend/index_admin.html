@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="ecoApp">
 <head>
-        <meta charset="utf-8">                                    
+        <meta charset="utf-8">
         <script src="js/angular.js"></script>
         <script src="js/angular-touch.js"></script>
         <script src="js/angular-route.js"></script>
@@ -12,10 +12,10 @@
         <script src="js/ecoCtrl.js"></script>
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="styles/reset.css">
-        <link rel="stylesheet" href="styles/header.css">        
+        <link rel="stylesheet" href="styles/header.css">
         <link rel="stylesheet" href="styles/admin.css">
 </head>
-<body   ng-controller="Ctrl" ng-init="init()" > 
+<body   ng-controller="Ctrl" ng-init="init()" >
     <div class="b-container">
         <!-- header block START -->
         <div class="b-container__header">
@@ -45,11 +45,11 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li> 
+                        </li>
                         <li class="b-menu__item">
-                            <a href="#" class="b-menu__link" id="b-menu__item__enter">Вхід</a>    
+                            <a href="#" class="b-menu__link" id="b-menu__item__enter">Вхід</a>
                             <!-- Hidden registration form -->
-                
+
                             <div class="b-header__sign-up">
                                 <div class="b-sign-up">
                                  <div class="b-sign-up__caption">Допоможимо разом!</div>
@@ -77,42 +77,42 @@
                                 			</div>
                                 			<div class="b-form__item" style="padding-top:5px;">
                                 				<input class="b-form__button-left" type="submit" value="ВОЙТИ">
-                                				 
+
                                 			</div>
                                 			<div class="b-form__only-login-form  b-form-footer" style="border-top:1px solid #ccc;text-align:center;padding-top:5px">
                                 				Войти через <a href="">Facebook</a> или <a href="">Google</a>
                                 			</div>
-                                			
+
                                 		</div>
                                 	</form>
                                 </div>
-                            </div>   
-                            
-                        </li> 
+                            </div>
+
+                        </li>
                     </ul>
                 </div>
-                
-                
+
+
             </div>
-        </div> 
+        </div>
         <!-- header block END -->
         <!-- ---------------- -->
 
         <div class="b-wrapper-inside-blocks">
             <!-- left block - filters START -->
             <div class="b-filters">
-            ФІЛЬТР ПО ТИПАМ ПРОБЛЕМ 
+            ФІЛЬТР ПО ТИПАМ ПРОБЛЕМ
                 <form method = "" action="" id="ecoProblem">
-                
+
                 </form>
                 ФІЛЬТРИ ДЛЯ АДМІНІСТРАТОРА
                 <!-- <div ng-controller="ButtonsCtrl"> -->
                          <!-- </div> -->
-                
+
             </div>
             <!-- header block END -->
             <!-- ---------------- -->
-    
+
             <!-- central block - problem list START -->
             <div class="b-problem-list">
             <!--<div class="b-problem-list__list"> -->
@@ -120,18 +120,18 @@
                     СПИСОК НОВИХ ПРОБЛЕМ
                 </div>
                 <ul class="b-problem-list-items" ng-show = "infoVisible">
-                    <li class="b-problem-list-item" ng-repeat="problem in problems" > 
+                    <li class="b-problem-list-item" ng-repeat="problem in problems" >
                         <div class="b-problem-list-item__created"  ng-hide="compareDate($index)"> {{problem.created|date:'shortDate'}} </div>
-                        <div class="b-problem-list-item__title" ng-click="getDeatiledProblemInfo($index)"> 
+                        <div class="b-problem-list-item__title" ng-click="getDeatiledProblemInfo($index)">
                             <a href="" class = "b-problem-list-item__link">{{problem.title}}</a>
                         </div>
                     </li>
                 </ul>
-            <!--</div> --> 
+            <!--</div> -->
             </div>
-            <!-- ---------------- -->        
+            <!-- ---------------- -->
             <!-- central block - problem list END -->
-    
+
             <!-- right block - detailed problem START -->
             <div class="b-problem-deatiled-info" ng-show = "v_DeatiledProblemInfo" >
             <div class="b-problem-deatiled-info-header">
@@ -156,7 +156,7 @@
                         </div>
                     </div>
                     <div class="btn-group b-problem-deatiled-info__status">
-                        <div class="b-problem-deatiled-info-status__text">Status</div> 
+                        <div class="b-problem-deatiled-info-status__text">Status</div>
                         <div class="onoffswitch">
                             <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
                                 <label class="onoffswitch-label" for="myonoffswitch">
@@ -171,7 +171,7 @@
                         {{problems[problemId].votes}}
                     </div>
                 </div>
-    
+
             </div>
             <div class="b-problem-deatiled-info-description">
                 <div class="b-problem-deatiled-info-description__title">Детально</div>
@@ -204,7 +204,7 @@
                 </div>
             </div>
         </div>
-            <!-- ---------------- -->        
+            <!-- ---------------- -->
             <!-- central block - problem list END -->
             <div class="b-empty-bottom"> </div>
         </div>
@@ -214,7 +214,7 @@
 </html>
 
 <!--
-&nbsp; &nbsp;&nbsp;{{problems[$index+1].created|date:DD/MM/YYYY}} 
+&nbsp; &nbsp;&nbsp;{{problems[$index+1].created|date:DD/MM/YYYY}}
 ng-hide = "compareDate(problems[$index].created, problems[$index+1].created)"
 
 

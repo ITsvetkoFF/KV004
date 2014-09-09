@@ -2,10 +2,10 @@ var mysql        = require('mysql'),
     express      = require('express'),
     jwt          = require('jsonwebtoken'),
     crypto       = require('crypto'),
-    bodyParser   = require('body-parser'), 
+    bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
-    secret       = require('./config/secret');  
+    secret       = require('./config/secret');
 
 var app    = express(),
     routes = require('./routes.js');
@@ -41,14 +41,14 @@ app.post('/api/problempost', routes.postProblem);
 app.post('/api/vote', routes.postVote);
 
 app.post('/api/login', routes.logIn);
-app.get('/api/logout', routes.logOut); 
+app.get('/api/logout', routes.logOut);
 app.post('/api/register', routes.register);
 //admin
 app.get('/api/not_approved', routes.notApprovedProblems);
 app.delete('/api/problem/:id', routes.deleteProblem);
-app.delete('/api/user', routes.deleteUser);
-app.delete('/api/comment', routes.deleteComment);
-app.delete('/api/photo', routes.deletePhoto);
+app.delete('/api/user/:id', routes.deleteUser);
+app.delete('/api/activity/:id', routes.deleteComment);
+app.delete('/api/photo/:id', routes.deletePhoto);
 app.put('/api/edit', routes.editProblem);
 
 

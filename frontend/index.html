@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="mapApp">
+<html lang="en">
 <head>
     <title>Ecomap - Project</title>
     <meta charset="utf-8">
@@ -7,31 +7,19 @@
     <link rel="stylesheet" href="style/css/dropzone.css" />
     <link rel="stylesheet" href="style/css/main.css" />
 
-    <!-- ***** Block of scripts depend from Angular ***** -->
-    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-    <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
-    <!-- ************************************************ -->
 
 
     <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
 
     <!-- ***** Block of scripts depend from Dropzone ***** -->
+<!--
     <script type="text/javascript" src="app/js/dropzone.js"></script>
     <script type="text/javascript" src="app/js/settingsDropzone.js"></script>
+-->
     <!-- ************************************************* -->
 
-
-
-    <!-- There isn't really main file in application. Show app.js-->
-    <script src="app/js/main.js"></script>
-
-    <!-- There are the main JS files in Angular application -->
-    <script type="text/javascript" src="app/app.js"></script>
-    <script type="text/javascript" src="app/controller/controllers.js"></script>
 </head>
-<body>
+<body ng-controller="AdminUserCtrl">
     <div class="b-container">
         <div class="b-container__header" ng-include="'app/templates/navbar.html'"></div>
 
@@ -50,5 +38,7 @@
             </div>
         </div>
     </div>
+    <script src="bower_components/requirejs/require.js" data-main="app/main.js"></script>
+    <div id="status"></div>
 </body>
 </html>
