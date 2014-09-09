@@ -58,16 +58,16 @@ define(['./module'], function (services) {
         console.log($cookieStore);
         return {
             logIn: function(email, password) {
-                return $http.post('http://localhost:3000' + '/login', {email: email, password: password});
+                return $http.post('http://ita-kv.tk:8090' + '/api/login', {email: email, password: password});
             },
 
             logOut: function() {
-                return $http.get('http://localhost:3000' + '/logout');
+                return $http.get('http://ita-kv.tk:8090' + '/api/logout');
 
             },
 
             register: function(username, surname, email, password) {
-                return $http.post('http://localhost:3000' + '/register', {username: username, surname: surname, email: email, password: password});
+                return $http.post('http://ita-kv.tk:8090' + '/api/register', {username: username, surname: surname, email: email, password: password});
 
             },
 

@@ -217,6 +217,7 @@ exports.logIn = function(req, res) {
 				err:    err.code
 			});
 		} else {
+            console.log(req.body);
             var email = req.body.email||'',
             password = req.body.password||'';
 
@@ -299,7 +300,7 @@ exports.register = function(req, res) {
                return res.send(401);
             }
 
-            password = crypto.createHmac("sha1", secret.secretToken).update(userData.password).digest("hex");
+            userData.password = crypto.createHmac("sha1", secret.secretToken).update(userData.password).digest("hex");
 
             connection.query("select Id from Users where Email like ?", userData.email, function(err, result) {
 

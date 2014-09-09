@@ -3,6 +3,9 @@ define(['./module'], function (controllers) {
     'use strict';
     controllers.controller('AdminUserCtrl', ['$scope', '$location', '$window', '$cookieStore', 'UserService', function ($scope, $location, $window, $cookieStore, UserService) {
 
+        $scope.isLoggedIn = UserService.isLoggedIn;
+        $scope.isAdministrator = UserService.isAdministrator;
+        $scope.name = $cookieStore.get('userName');
 
         FB.init({
                 appId      : '1458754107737788',
@@ -93,8 +96,7 @@ define(['./module'], function (controllers) {
 
 
 
-        $scope.isLoggedIn = UserService.isLoggedIn();
-        $scope.isAdministrator = UserService.isAdministrator();
+        
 
         $scope.logInFB = function logInFB() {
             FB.login(function(response) {

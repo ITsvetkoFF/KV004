@@ -33,23 +33,23 @@ app.all('*', function(req, res, next) {
 });
 
 //user
-app.get('/problems', routes.getProblems);
-app.get('/problems/:id', routes.getProblemId);
-app.get('/users/:idUser', routes.getUserId);
-app.get('/activities/:idUser', routes.getUserActivity);
-app.post('/problempost', routes.postProblem);
-app.post('/vote', routes.postVote);
+app.get('/api/problems', routes.getProblems);
+app.get('/api/problems/:id', routes.getProblemId);
+app.get('/api/users/:idUser', routes.getUserId);
+app.get('/api/activities/:idUser', routes.getUserActivity);
+app.post('/api/problempost', routes.postProblem);
+app.post('/api/vote', routes.postVote);
 
-app.post('/login', routes.logIn);
-app.get('/logout', routes.logOut);
-app.post('/register', routes.register);
+app.post('/api/login', routes.logIn);
+app.get('/api/logout', routes.logOut);
+app.post('/api/register', routes.register);
 //admin
-app.get('/not_approved', routes.notApprovedProblems);
-app.delete('/problem/:id', routes.deleteProblem);
-app.delete('/user/:id', routes.deleteUser);
-app.delete('/activity/:id', routes.deleteComment);
-app.delete('/photo/:id', routes.deletePhoto);
-app.put('/edit', routes.editProblem);
+app.get('/api/not_approved', routes.notApprovedProblems);
+app.delete('/api/problem/:id', routes.deleteProblem);
+app.delete('/api/user/:id', routes.deleteUser);
+app.delete('/api/activity/:id', routes.deleteComment);
+app.delete('/api/photo/:id', routes.deletePhoto);
+app.put('/api/edit', routes.editProblem);
 
 
 app.listen(8090);
