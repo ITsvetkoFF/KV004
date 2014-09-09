@@ -1,0 +1,56 @@
+var mysql        = require('mysql'),
+    express      = require('express'),
+    jwt          = require('jsonwebtoken'),
+    crypto       = require('crypto'),
+    bodyParser   = require('body-parser'),
+    cookieParser = require('cookie-parser'),
+    myConnection = require('express-myconnection'),
+    secret       = require('./config/secret');
+
+var app    = express(),
+    routes = require('./routes.js');
+
+var connectionPool = {
+    host     : 'localhost',
+    user     : 'root',
+    password : 'root',
+    database : 'Enviromap'
+};
+
+app.use(bodyParser());
+app.use(cookieParser());
+app.use(myConnection(mysql, connectionPool, 'pool'));
+app.use('/',express.static('../frontend'));
+//console.log(__dirname);
+
+app.all('*', function(req, res, next) {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Credentials', true);
+  res.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
+  res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
+  if ('OPTIONS' === req.method) return res.send(200);
+  next();
+});
+
+//user
+app.get('/problems', routes.getProblems);
+app.get('/problems/:id', routes.getProblemId);
+app.get('/users/:idUser', routes.getUserId);
+app.get('/activities/:idUser', routes.getUserActivity);
+app.post('/problempost', routes.postProblem);
+app.post('/vote', routes.postVote);
+
+app.post('/login', routes.logIn);
+app.get('/logout', routes.logOut);
+app.post('/register', routes.register);
+//admin
+app.get('/not_approved', routes.notApprovedProblems);
+app.delete('/problem/:id', routes.deleteProblem);
+app.delete('/user/:id', routes.deleteUser);
+app.delete('/activity/:id', routes.deleteComment);
+app.delete('/photo/:id', routes.deletePhoto);
+app.put('/edit', routes.editProblem);
+
+
+app.listen(8090);
+console.log('Rest Demo Listening on port 8090');

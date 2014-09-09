@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Ecomap - Project</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="style/css/dropzone.css" />
+    <link rel="stylesheet" href="style/css/main.css" />
+
+
+
+    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+    <!-- ***** Block of scripts depend from Dropzone ***** -->
+<!--
+    <script type="text/javascript" src="app/js/dropzone.js"></script>
+    <script type="text/javascript" src="app/js/settingsDropzone.js"></script>
+-->
+    <!-- ************************************************* -->
+
+</head>
+<body ng-controller="AdminUserCtrl">
+    <div class="b-container">
+        <div class="b-container__header" ng-include="'app/templates/navbar.html'"></div>
+
+        <div class="b-container__map-content">
+            <div class="b-map-content" id="map-content">
+            </div>
+
+            <div class="b-container__left-side">
+                <div class="b-left-side" ng-include="'app/templates/filters.html'"></div>
+                <div class="b-left-side__pointer"></div>
+            </div>
+
+            <div class="b-container__right-side">
+                <div class="b-right-side__pointer"></div>
+                <div class="b-view" ng-view></div>
+            </div>
+        </div>
+    </div>
+    <script src="bower_components/requirejs/require.js" data-main="app/main.js"></script>
+</body>
+</html>

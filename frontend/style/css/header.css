@@ -1,0 +1,269 @@
+
+@font-face {
+    font-family: "WWF";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/wwf.otf") format("woff"), url("../fonts/myfont.ttf") format("truetype"), url("../fonts/myfont.svg") format("svg");
+}
+html, body, ul, h2 {
+    font-family: arial;
+    font-size: 16pt;
+}
+.leaflet-top .leaflet-control {
+    margin-top: 35px !important;
+}
+body {
+    overflow: hidden;
+}
+html, body {
+    height: 100%;
+}
+.b-container {
+    height: 100%;
+    position: relative;
+}
+.b-container__header {
+    height: 52px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2000;
+}
+.b-header {
+    background: linear-gradient(to bottom, rgb(236, 235, 225) 10%, rgb(230, 227, 208)) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    height: 100%;
+    position: relative;
+    z-index: 2000;
+}
+.b-header__logo {
+    margin: 0 20px 0 125px;
+    width: 70px;
+    z-index: 2000;
+}
+.b-header__add-problem {
+    background: none repeat scroll 0 0 #23527b;
+    border: 1px solid black;
+    border-radius: 3px;
+    color: #ffffff;
+    font-family: WWF;
+    font-size: 16px;
+    font-weight: lighter;
+    height: 32px;
+    letter-spacing: 2px;
+    margin: 10px 0 0 91px;
+    padding: 0 10px;
+    text-transform: uppercase;
+    vertical-align: top;
+}
+.b-header__add-problem:hover {
+    background: none repeat scroll 0 0 #fff;
+    color: #000;
+    cursor: pointer;
+}
+.b-header__menu {
+    display: inline-block;
+    margin: 0 0 0 20px;
+    vertical-align: top;
+    width: 300px;
+}
+.b-menu {
+    display: inline-block;
+    font-size: 0;
+    list-style: none outside none;
+    margin: 10px 0 0;
+}
+.b-menu__item {
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 12px;
+    position: relative;
+}
+.b-menu__link {
+    border: 1px solid rgba(0, 0, 0, 0);
+    color: #000000;
+    display: block;
+    font-family: WWF;
+    font-size: 16px;
+    font-weight: lighter;
+    height: 30px;
+    letter-spacing: 2px;
+    line-height: 30px;
+    padding: 0 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.b-menu__item:hover {
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+.b-menu__item:hover .b-menu__submenu {
+    display: block;
+}
+.b-menu__item:hover .b-header__sign-up {
+    display: block;
+}
+.b-menu__submenu {
+    background: none repeat scroll 0 0 #fff;
+    display: none;
+    padding: 5px;
+    position: absolute;
+    top: 31px;
+    width: 350px;
+}
+.b-submenu {
+    list-style: none outside none;
+}
+.b-submenu__item {
+    border-bottom: 1px solid #ccc;
+    height: 30px;
+    line-height: 30px;
+}
+.b-submenu__item:last-child {
+    border: medium none;
+}
+.b-submenu__link {
+    color: #000;
+    display: block;
+    font-size: 16px;
+    text-decoration: none;
+}
+.b-submenu__link:hover {
+    background: none repeat scroll 0 0 #e4e2d1;
+    display: block;
+}
+.b-header__sign-up {
+    background: none repeat scroll 0 0 #fff;
+    display: none;
+    left: 0;
+    position: absolute;
+    top: 31px;
+    width: 265px;
+}
+.b-sign-up__caption {
+    font: 27px WWF;
+    letter-spacing: 2px;
+    text-align: center;
+}
+.b-sign-up {
+    padding: 10px;
+}
+.b-sign-up__form {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.b-form {
+    height: 100%;
+    padding: 3px;
+}
+.b-form__item {
+    display: inline-block;
+    font-size: 16px;
+    padding-bottom: 2px;
+    width: 100%;
+}
+.b-form__item a {
+    text-decoration: none;
+}
+.b-form__hidden-item {
+    display: none;
+}
+.b-form__label {
+    float: left;
+    line-height: 30px;
+    width: 50px;
+}
+.b-form__input {
+    float: right;
+    font-family: Arial;
+    font-size: 16px;
+    height: 30px;
+    margin-left: 5px;
+    padding: 3px;
+    width: 150px;
+}
+.b-form__button-left {
+    background: none repeat scroll 0 0 #23527b;
+    border: medium none;
+    color: #fff;
+    float: left;
+    height: 30px;
+    width: 100%;
+}
+#b-menu__link-source {
+    background: url("../images/icons/main-nav-arrow.png") no-repeat scroll 67px center rgba(0, 0, 0, 0);
+    padding-right: 17px;
+}
+#b-menu__item__enter {
+    background: url("../images/icons/main-nav-arrow.png") no-repeat scroll 43px center rgba(0, 0, 0, 0);
+    padding-right: 17px;
+}
+.b-add-problem-form {
+    background-color: white;
+    margin-bottom: 0;
+    margin-top: 25px;
+}
+h2 {
+    background-color: #fff;
+    color: #000;
+    font-family: WWF;
+    font-size: 40px;
+    font-weight: lighter;
+    text-align: center;
+}
+.b-add-problem-input {
+    float: left;
+    width: 30%;
+}
+.b-add-problem {
+    background-color: #fff;
+    height: 100%;
+    padding: 0 20px;
+    width: 100%;
+}
+.b-add-problem-row {
+    clear: both;
+    height: auto;
+    padding-bottom: 10px;
+    width: 100%;
+}
+.b-add-problem-row-for-buttons {
+    text-align: center;
+}
+.b-add-problem-button {
+    background-color: #23527b;
+    border: medium none;
+    color: #fff;
+    height: 32px;
+}
+.b-add-problem-row_input, .b-add-problem-row_textarea {
+    float: right;
+    resize: none;
+    width: 65%;
+}
+.b-add-problem-input {
+    min-height: 30px;
+}
+.b-add-problem-textarea {
+    min-height: 120px;
+}
+.b-add-problem-join_us {
+    min-height: 100px;
+}
+.b-add-problem-new_user {
+    margin-left: auto;
+    margin-right: auto;
+    width: 45%;
+}
+.b-add-problem-header {
+    border-bottom: 1px dashed #dadada;
+    padding-bottom: 10px;
+}
+#join_us_submit {
+    text-align: center;
+}

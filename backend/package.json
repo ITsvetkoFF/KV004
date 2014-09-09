@@ -1,0 +1,18 @@
+{
+  "name": "enviromap-rest-api",
+  "version": "0.0.2",
+  "dependencies": {},
+  "devDependencies": {
+    "express": "*",
+    "mysql": "~2.4.3",
+    "jsonwebtoken": "*",
+    "crypto": "*",
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "express-myconnection": "*",
+	  "xmlhttprequest":"*"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}
