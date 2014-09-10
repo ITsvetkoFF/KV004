@@ -39,7 +39,7 @@ app.get('/api/users/:idUser', routes.getUserId);
 app.get('/api/activities/:idUser', routes.getUserActivity);
 app.post('/api/problempost', routes.postProblem);
 app.post('/api/vote', routes.postVote);
-app.get('/api/resources/:name',routes.getResourse);
+app.get('/api/resources/:name',routes.getResource);
 
 app.post('/api/login', routes.logIn);
 app.get('/api/logout', routes.logOut);
