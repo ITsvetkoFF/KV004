@@ -6,10 +6,13 @@
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link rel="stylesheet" href="style/css/dropzone.css" />
     <link rel="stylesheet" href="style/css/main.css" />
+    <link rel="stylesheet" href="style/css/MarkerCluster.css"/>
+    <link rel="stylesheet" href="style/css/MarkerCluster.Default.css"/>
 
 
 
     <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="app/js/leaflet.markercluster-src.js"></script>
 
     <!-- ***** Block of scripts depend from Dropzone ***** -->
 <!--
@@ -23,12 +26,11 @@
     <div class="b-container">
         <div class="b-container__header" ng-include="'app/templates/navbar.html'"></div>
 
-        <div class="b-container__map-content">
-            <div class="b-map-content" id="map-content">
-            </div>
+        <div class="b-container__map-content" ng-controller="mapLoadCtrl">
+            <div class="b-map-content" id="map-content"></div>
 
-            <div class="b-container__left-side">
-                <div class="b-left-side" ng-include="'app/templates/filters.html'"></div>
+            <div class="b-container__left-side" >
+                <div class="b-left-side" problem-filters></div>
                 <div class="b-left-side__pointer"></div>
             </div>
 
