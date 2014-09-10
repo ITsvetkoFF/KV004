@@ -81,7 +81,7 @@ title : resourses[i].title,
 content : resourses[i].content,
 alias : resourses[i].alias
   };
-connection.query("INSERT INTO Problems SET ?", data, function(err, rows, fields) {
+connection.query("INSERT INTO Resourses SET ?", data, function(err, rows, fields) {
     if (err) throw err;
     });
 };
