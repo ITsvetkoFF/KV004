@@ -90,7 +90,7 @@ define(['./module'], function (controllers) {
             });
         };
 
-        function onMarkerClick(){
+        function onMarkerClick(marker){
         	//window.location.href="/problem/showProblem/"+ this._id;
     		map.panTo(marker.latlng);
         }
