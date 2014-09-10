@@ -76,7 +76,7 @@ exports.getProblemId = function(req,res){ //get detailed problem description (ev
     });
 };
 
-exports.getResourse = function(req,res){ //get resourse
+exports.getResource = function(req,res){ //get resourse
     req.getConnection(function(err, connection) {
         if (err) {
             console.error('CONNECTION error: ',err);
@@ -87,7 +87,7 @@ exports.getResourse = function(req,res){ //get resourse
             });
         } else {
             var name = req.params.name
-            connection.query('SELECT Title, Content FROM Resorces WHERE Alias = ?', name, function(err, rows, fields) {
+            connection.query('SELECT Title, Content FROM Resources WHERE Alias = ?', name, function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
