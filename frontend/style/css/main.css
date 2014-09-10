@@ -1040,3 +1040,11 @@ form.dropzone {
     font-size: 14px !important;
     font-weight: 400 !important;
 }
+
+.left_filter_show {
+    left:0;
+}
+
+.left_pointer_reverse {
+    background: #fff url(../../images/icons/arrows-sprite-64-better.png) -5px center no-repeat;
+}
