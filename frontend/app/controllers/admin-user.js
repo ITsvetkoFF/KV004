@@ -97,7 +97,14 @@ define(['./module'], function (controllers) {
         }
 
 
-
+        $scope.showFiltersVar = false;
+        
+        $scope.showFilters = function() {
+            if($scope.showFiltersVar === true)
+                $scope.showFiltersVar = false;
+            else
+                $scope.showFiltersVar = true;
+        }
         
 
         $scope.logInFB = function logInFB() {
