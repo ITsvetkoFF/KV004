@@ -109,9 +109,9 @@ CREATE TABLE IF NOT EXISTS `ActivityTypes` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `Enviromap`.`Resourses`
+-- Table `Enviromap`.`Resources`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Resourses` (
+CREATE TABLE IF NOT EXISTS `Resources` (
 `Alias` VARCHAR(30) NOT NULL,
 `Title` VARCHAR(150) NOT NULL,
 `Content` VARCHAR(5000) NOT NULL,
