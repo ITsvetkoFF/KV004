@@ -112,7 +112,11 @@ function fillActivityTypes() {
 }
 
 function fillProblemsActivities() {
-    for (var i=0, len=probs.length; i<len; i++) {
+    for (var i=0, j=0, len=probs.length; i<len; i++) {
+
+if (!probs[i].lat || !probs[i].probType || (probs[i].probStatus === null) || !probs[i].lon) {}
+else {
+j++;
 if (probs[i].probStatus == 'Нова') probs[i].probStatus = 0;
 else if (probs[i].probStatus == 'Вирішена') probs[i].probStatus = 1;
 
@@ -131,12 +135,11 @@ probs[i].content = probs[i].content.replace(/'/g,"\\'");
 probs[i].title = probs[i].title.replace(/'/g,"\\'");
 };
 
-if (!probs[i].probType) probs[i].probType=7;
 var data = {
 Title : probs[i].title,
 Content : probs[i].content,
 Severity : probs[i].severity,
-Moderation : 0,
+Moderation : 1,
 Votes : probs[i].votes,
 Latitude : probs[i].lat,
 Longtitude : probs[i].lon,
@@ -150,13 +153,14 @@ var data = {
 Date : probs[i].created,
 ActivityTypes_Id : 1,
 users_Id: randomIntInc(1, userNames.length),
-Problems_Id : i+1,
+Problems_Id : j,
   };
 connection.query("INSERT INTO Activities SET ?", data, function(err, rows, fields) {
     if (err) throw err;
     });
+}; 
 };
-}
+};
 
 fillResources()
 fillProblemTypes();
