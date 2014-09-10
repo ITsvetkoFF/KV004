@@ -91,7 +91,8 @@ define(['./module'], function (controllers) {
         };
 
         function onMarkerClick(){
-        	window.location.href="/problem/showProblem/"+ this._id;
+        	//window.location.href="/problem/showProblem/"+ this._id;
+    		map.panTo(marker.latlng);
         }
 
         function userSelectionFilterMarkers(data) {
