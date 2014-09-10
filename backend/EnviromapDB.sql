@@ -108,6 +108,15 @@ CREATE TABLE IF NOT EXISTS `ActivityTypes` (
   PRIMARY KEY (`Id`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `Enviromap`.`Resourses`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Resourses` (
+`Alias` VARCHAR(30) NOT NULL,
+`Title` VARCHAR(150) NOT NULL,
+`Content` VARCHAR(5000) NOT NULL,
+PRIMARY KEY (`Alias`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `Enviromap`.`Activities`
