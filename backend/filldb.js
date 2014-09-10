@@ -3,28 +3,28 @@ var mysql = require('mysql'),
     secret = require('./config/secret'),
     XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-var resourses = [{}, {}, {}, {}, {}];
-for (var i = 0; i < resourses.length; i++) {
-  resourses[i].content = [];
+var resources = [{}, {}, {}, {}, {}];
+for (var i = 0; i < resources.length; i++) {
+  resources[i].content = [];
 };
 var fs = require('fs');
-resourses[0].content.push(fs.readFileSync('resourses/about.html','utf-8'));
-resourses[1].content.push(fs.readFileSync('resourses/cleaning.html','utf-8'));
-resourses[2].content.push(fs.readFileSync('resourses/removing.html','utf-8'));
-resourses[3].content.push(fs.readFileSync('resourses/stopping-exploitation.html','utf-8'));
-resourses[4].content.push(fs.readFileSync('resourses/stopping-trade.html','utf-8'));
+resources[0].content.push(fs.readFileSync('resources/about.html','utf-8'));
+resources[1].content.push(fs.readFileSync('resources/cleaning.html','utf-8'));
+resources[2].content.push(fs.readFileSync('resources/removing.html','utf-8'));
+resources[3].content.push(fs.readFileSync('resources/stopping-exploitation.html','utf-8'));
+resources[4].content.push(fs.readFileSync('resources/stopping-trade.html','utf-8'));
 
-resourses[0].title = 'Про проект';
-resourses[1].title = 'Як організувати прибирання в парку';
-resourses[2].title = 'Як добитись ліквідації незаконного звалища?';
-resourses[3].title = 'Як зупинити комерційну експлуатацію тварин?';
-resourses[4].title = 'Торгують первоцвітами - телефонуй: "102-187!"';
+resources[0].title = 'Про проект';
+resources[1].title = 'Як організувати прибирання в парку';
+resources[2].title = 'Як добитись ліквідації незаконного звалища?';
+resources[3].title = 'Як зупинити комерційну експлуатацію тварин?';
+resources[4].title = 'Торгують первоцвітами - телефонуй: "102-187!"';
 
-resourses[0].alias = 'about';
-resourses[1].alias = 'cleaning';
-resourses[2].alias = 'removing';
-resourses[3].alias = 'stopping-exploitation';
-resourses[4].alias = 'stopping-trade';
+resources[0].alias = 'about';
+resources[1].alias = 'cleaning';
+resources[2].alias = 'removing';
+resources[3].alias = 'stopping-exploitation';
+resources[4].alias = 'stopping-trade';
 
 var problemTypes = ['проблеми лісів', 'сміттєзвалища', 'незаконна забудова', 'проблеми водойм', 'загрози біорізноманіттю', 'браконьєрство', 'інші проблеми'],
     userRoles = ['administrator', 'user'],
@@ -74,14 +74,14 @@ function fillUserRoles() {
     }
 }
 
-function fillResourses() {
-    for (var i = 0; i < resourses.length; i++) {
+function fillResources() {
+    for (var i = 0; i < resources.length; i++) {
 var data = {
-title : resourses[i].title,
-content : resourses[i].content,
-alias : resourses[i].alias
+title : resources[i].title,
+content : resources[i].content,
+alias : resources[i].alias
   };
-connection.query("INSERT INTO Resourses SET ?", data, function(err, rows, fields) {
+connection.query("INSERT INTO Resources SET ?", data, function(err, rows, fields) {
     if (err) throw err;
     });
 };
@@ -158,6 +158,7 @@ connection.query("INSERT INTO Activities SET ?", data, function(err, rows, field
 };
 }
 
+fillResources()
 fillProblemTypes();
 fillUserRoles();
 fillUsers();
