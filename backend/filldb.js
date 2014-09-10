@@ -8,11 +8,11 @@ for (var i = 0; i < resources.length; i++) {
   resources[i].content = [];
 };
 var fs = require('fs');
-resources[0].content.push(fs.readFileSync('resources/about.html','utf-8'));
-resources[1].content.push(fs.readFileSync('resources/cleaning.html','utf-8'));
-resources[2].content.push(fs.readFileSync('resources/removing.html','utf-8'));
-resources[3].content.push(fs.readFileSync('resources/stopping-exploitation.html','utf-8'));
-resources[4].content.push(fs.readFileSync('resources/stopping-trade.html','utf-8'));
+resources[0].content.push(fs.readFileSync('resourses/about.html','utf-8'));
+resources[1].content.push(fs.readFileSync('resourses/cleaning.html','utf-8'));
+resources[2].content.push(fs.readFileSync('resourses/removing.html','utf-8'));
+resources[3].content.push(fs.readFileSync('resourses/stopping-exploitation.html','utf-8'));
+resources[4].content.push(fs.readFileSync('resourses/stopping-trade.html','utf-8'));
 
 resources[0].title = 'Про проект';
 resources[1].title = 'Як організувати прибирання в парку';
@@ -77,9 +77,9 @@ function fillUserRoles() {
 function fillResources() {
     for (var i = 0; i < resources.length; i++) {
 var data = {
-title : resources[i].title,
-content : resources[i].content,
-alias : resources[i].alias
+Title : resources[i].title,
+Content : resources[i].content,
+Alias : resources[i].alias
   };
 connection.query("INSERT INTO Resources SET ?", data, function(err, rows, fields) {
     if (err) throw err;
