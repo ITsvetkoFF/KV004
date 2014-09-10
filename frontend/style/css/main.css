@@ -723,10 +723,6 @@ td.b-details-body__title[colspan] {
             background-position: right center;
         }
 
-        .problem input[type="checkbox"]:checked + label {
-            background-color: #f5f5f5;
-        }
-
     .problem ul {
         list-style-type: none;
         margin: 0;

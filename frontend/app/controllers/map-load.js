@@ -7,18 +7,16 @@ define(['./module'], function (controllers) {
         }
     });
     controllers.controller('mapLoadCtrl', ['$scope','$http', function ($scope, $http) {
-    	
-		var map = L.map('map-content');
-            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-
-         var marker_icon;
-        //var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
-		navigator.geolocation.getCurrentPosition(getUserPosition);
-		//var map     = L.map('map-content', {maxZoom: 18, tiles:[tiles]);
+        
+        var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        	maxZoom: 16,
+        	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        });
+		var latlng 	= navigator.geolocation.getCurrentPosition(getUserPosition);
+		var map     = L.map('map-content', {center: latlng, zoom: 10, layers:[tiles]});
 		var markers = L.markerClusterGroup();
         $scope.data = {};
+        var markerIcon;
 
         $http({ method: 'GET', url: 'http://ita-kv.tk:8090/api/problems' }).success(function (data) {
             $scope.data = data;
@@ -39,45 +37,52 @@ define(['./module'], function (controllers) {
             angular.forEach(newData, function (location) {
             	switch (location['ProblemTypes_Id']) {
 				    case 1:                                    
-				        marker_icon = L.icon({
-				            iconUrl: 'images/markers/deforestation_icon.png'
+				        markerIcon = L.icon({
+				            iconUrl: 'images/markers/deforestation_icon.png',
+				            iconAnchor: [25,79]
 				        });
 				        break;
 				    case 2:
-				        marker_icon = L.icon({
-				            iconUrl: 'images/markers/waste_icon.png'
+				        markerIcon = L.icon({
+				            iconUrl: 'images/markers/waste_icon.png',
+				            iconAnchor: [25,79]
 				        });
 				        break;
 				    case 3:                                    
-				        marker_icon = L.icon({
-				            iconUrl: 'images/markers/construction_icon.png'
+				        markerIcon = L.icon({
+				            iconUrl: 'images/markers/construction_icon.png',
+				            iconAnchor: [25,79]
 				        });
 				        break;
 				    case 4:                                    
-				        marker_icon = L.icon({
-				            iconUrl: 'images/markers/water_icon.png'
+				        markerIcon = L.icon({
+				            iconUrl: 'images/markers/water_icon.png',
+				            iconAnchor: [25,79]
 				        });
 				        break;
 				    case 5:                                    
-				        marker_icon = L.icon({
-				            iconUrl: 'images/markers/biodiversity_icon_2.png'
+				        markerIcon = L.icon({
+				            iconUrl: 'images/markers/biodiversity_icon_2.png',
+				            iconAnchor: [25,79]
 				        });
 				        break;
 				    case 6:                                    
-				        marker_icon = L.icon({
-				            iconUrl: 'images/markers/poaching_icon.png'
+				        markerIcon = L.icon({
+				            iconUrl: 'images/markers/poaching_icon.png',
+				            iconAnchor: [25,79]
 				        });
 				        break;
 				    case 7:                                    
-				        marker_icon = L.icon({
-				            iconUrl: 'images/markers/other_icon.png'
+				        markerIcon = L.icon({
+				            iconUrl: 'images/markers/other_icon.png',
+				            iconAnchor: [25,79]
 				        });
 				        break;
 				    default:
 				        break;
 				}; 
 
-	        	var marker = L.marker([location.Latitude, location.Longtitude], {icon: marker_icon});
+	        	var marker = L.marker([location.Latitude, location.Longtitude], {icon: markerIcon});
 	        	marker.on('click', onMarkerClick);
 	        	marker._id = location['Id'];
 	        	markers.addLayer(marker);
@@ -108,7 +113,6 @@ define(['./module'], function (controllers) {
                     return filtersArray[i].selected;
     			}
     		};
-    		//return undefined;
     	};
 
     	$scope.problemTypes = [
