@@ -3,6 +3,29 @@ var mysql = require('mysql'),
     secret = require('./config/secret'),
     XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
+var resourses = [{}, {}, {}, {}, {}];
+for (var i = 0; i < resourses.length; i++) {
+  resourses[i].content = [];
+};
+var fs = require('fs');
+resourses[0].content.push(fs.readFileSync('resourses/about.html','utf-8'));
+resourses[1].content.push(fs.readFileSync('resourses/cleaning.html','utf-8'));
+resourses[2].content.push(fs.readFileSync('resourses/removing.html','utf-8'));
+resourses[3].content.push(fs.readFileSync('resourses/stopping-exploitation.html','utf-8'));
+resourses[4].content.push(fs.readFileSync('resourses/stopping-trade.html','utf-8'));
+
+resourses[0].title = 'Про проект';
+resourses[1].title = 'Як організувати прибирання в парку';
+resourses[2].title = 'Як добитись ліквідації незаконного звалища?';
+resourses[3].title = 'Як зупинити комерційну експлуатацію тварин?';
+resourses[4].title = 'Торгують первоцвітами - телефонуй: "102-187!"';
+
+resourses[0].alias = 'about';
+resourses[1].alias = 'cleaning';
+resourses[2].alias = 'removing';
+resourses[3].alias = 'stopping-exploitation';
+resourses[4].alias = 'stopping-trade';
+
 var problemTypes = ['проблеми лісів', 'сміттєзвалища', 'незаконна забудова', 'проблеми водойм', 'загрози біорізноманіттю', 'браконьєрство', 'інші проблеми'],
     userRoles = ['administrator', 'user'],
     userNames = ['admin', 'name1', 'name2', 'name3', 'name4', 'name5', 'name6', 'name7', 'name8', 'name9'],
@@ -49,6 +72,19 @@ function fillUserRoles() {
             role: userRoles[i]
         });
     }
+}
+
+function fillResourses() {
+    for (var i = 0; i < resourses.length; i++) {
+var data = {
+title : resourses[i].title,
+content : resourses[i].content,
+alias : resourses[i].alias
+  };
+connection.query("INSERT INTO Problems SET ?", data, function(err, rows, fields) {
+    if (err) throw err;
+    });
+};
 }
 
 function fillUsers() {
