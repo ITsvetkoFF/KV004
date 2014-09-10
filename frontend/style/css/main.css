@@ -274,7 +274,7 @@ html, body {
 
 .b-container__right-side {
     z-index: 1005;
-    display: none;
+    display: block;
     position: absolute;
     top: 0;
     right: 0;
@@ -285,6 +285,18 @@ html, body {
     height: -moz-calc(100% - 52px);
 }
 
+.b-container__right-side_hide {
+    z-index: 1005;
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 600px;
+    min-width: 320px;
+    background: #FFFFFF;
+    height: calc(100% - 52px);
+    height: -moz-calc(100% - 52px);
+}
 .b-right-side {
     height: 100%;
     width: 100%;
@@ -784,7 +796,10 @@ div.b-add-problem__step-3 {
     padding: 0 20px 0 20px;
     position: relative;
 }
+div.b-add-problem__step-1_hide{
+    display: none;
 
+}
 .b-step-3__dropzone {
     margin-top: 10px;
 }
@@ -1005,7 +1020,7 @@ form.dropzone {
     width: 16px;
     height: 16px;
     border: none;
-    background: url('../images/delete.png') no-repeat center center;
+    background: url('../../images/delete.png') no-repeat center center;
 }
 
     .remove_btn:hover {

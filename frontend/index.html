@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style/css/dropzone.css" />
     <link rel="stylesheet" href="style/css/main.css" />
 
-
+   <!--<script type="text/javascript" src="/bower_components/dropzone.js"></script>-->
 
     <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 
@@ -20,7 +20,7 @@
 
 </head>
 <body ng-controller="AdminUserCtrl">
-    <div class="b-container">
+    <div class="b-container" ng-controller="mainCtrl">
         <div class="b-container__header" ng-include="'app/templates/navbar.html'"></div>
 
         <div class="b-container__map-content">
@@ -32,8 +32,8 @@
                 <div class="b-left-side__pointer"></div>
             </div>
 
-            <div class="b-container__right-side">
-                <div class="b-right-side__pointer"></div>
+            <div class="b-container__right-side{{showRigthSide}}">
+                <div class="b-right-side__pointer" ng-click="rightSidePointerClick()"></div>
                 <div class="b-view" ng-view></div>
             </div>
         </div>

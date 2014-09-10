@@ -12,7 +12,9 @@ require.config({
         'angular-cookie': '../bower_components/angular-cookie/angular-cookie',
         'domReady': '../bower_components/requirejs-domready/domReady',
         'require': '../bower_components/requirejs/require',
-        'facebook': 'https://connect.facebook.net/en_US/all'
+        'facebook': 'https://connect.facebook.net/en_US/all',
+        'dropzone':'../bower_components/dropzone'
+
     },
 
     /**
@@ -23,6 +25,7 @@ require.config({
         'angular': {
             exports: 'angular'
         },
+
         'angular-route': {
             deps: ['angular']
         },

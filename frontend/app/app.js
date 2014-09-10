@@ -8,16 +8,18 @@ define([
     'angular-mocks',
     'angular-cookie',
     'facebook',
+    'dropzone',
     './controllers/index',
-    //'./directives/index',
+    './directives/index',
     //'./filters/index',
     './services/index'
 ], function (angular) {
     'use strict';
 
     return angular.module('app', [
+
         'app.controllers',
-        //'app.directives',
+        'app.directives',
         //'app.filters',
         'app.services',
         'ngRoute',
