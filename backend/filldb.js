@@ -3,6 +3,29 @@ var mysql = require('mysql'),
     secret = require('./config/secret'),
     XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
+var resources = [{}, {}, {}, {}, {}];
+for (var i = 0; i < resources.length; i++) {
+  resources[i].content = [];
+};
+var fs = require('fs');
+resources[0].content.push(fs.readFileSync('resourses/about.html','utf-8'));
+resources[1].content.push(fs.readFileSync('resourses/cleaning.html','utf-8'));
+resources[2].content.push(fs.readFileSync('resourses/removing.html','utf-8'));
+resources[3].content.push(fs.readFileSync('resourses/stopping-exploitation.html','utf-8'));
+resources[4].content.push(fs.readFileSync('resourses/stopping-trade.html','utf-8'));
+
+resources[0].title = 'Про проект';
+resources[1].title = 'Як організувати прибирання в парку';
+resources[2].title = 'Як добитись ліквідації незаконного звалища?';
+resources[3].title = 'Як зупинити комерційну експлуатацію тварин?';
+resources[4].title = 'Торгують первоцвітами - телефонуй: "102-187!"';
+
+resources[0].alias = 'about';
+resources[1].alias = 'cleaning';
+resources[2].alias = 'removing';
+resources[3].alias = 'stopping-exploitation';
+resources[4].alias = 'stopping-trade';
+
 var problemTypes = ['проблеми лісів', 'сміттєзвалища', 'незаконна забудова', 'проблеми водойм', 'загрози біорізноманіттю', 'браконьєрство', 'інші проблеми'],
     userRoles = ['administrator', 'user'],
     userNames = ['admin', 'name1', 'name2', 'name3', 'name4', 'name5', 'name6', 'name7', 'name8', 'name9'],
@@ -51,6 +74,19 @@ function fillUserRoles() {
     }
 }
 
+function fillResources() {
+    for (var i = 0; i < resources.length; i++) {
+var data = {
+Title : resources[i].title,
+Content : resources[i].content,
+Alias : resources[i].alias
+  };
+connection.query("INSERT INTO Resources SET ?", data, function(err, rows, fields) {
+    if (err) throw err;
+    });
+};
+}
+
 function fillUsers() {
     connection.query('INSERT INTO Users SET ?', {
             name: userNames[0],
@@ -76,7 +112,11 @@ function fillActivityTypes() {
 }
 
 function fillProblemsActivities() {
-    for (var i=0, len=probs.length; i<len; i++) {
+    for (var i=0, j=0, len=probs.length; i<len; i++) {
+
+if (!probs[i].lat || !probs[i].probType || (probs[i].probStatus === null) || !probs[i].lon) {}
+else {
+j++;
 if (probs[i].probStatus == 'Нова') probs[i].probStatus = 0;
 else if (probs[i].probStatus == 'Вирішена') probs[i].probStatus = 1;
 
@@ -95,12 +135,11 @@ probs[i].content = probs[i].content.replace(/'/g,"\\'");
 probs[i].title = probs[i].title.replace(/'/g,"\\'");
 };
 
-if (!probs[i].probType) probs[i].probType=7;
 var data = {
 Title : probs[i].title,
 Content : probs[i].content,
 Severity : probs[i].severity,
-Moderation : 0,
+Moderation : 1,
 Votes : probs[i].votes,
 Latitude : probs[i].lat,
 Longtitude : probs[i].lon,
@@ -114,14 +153,16 @@ var data = {
 Date : probs[i].created,
 ActivityTypes_Id : 1,
 users_Id: randomIntInc(1, userNames.length),
-Problems_Id : i+1,
+Problems_Id : j,
   };
 connection.query("INSERT INTO Activities SET ?", data, function(err, rows, fields) {
     if (err) throw err;
     });
+}; 
 };
-}
+};
 
+fillResources()
 fillProblemTypes();
 fillUserRoles();
 fillUsers();

@@ -3,31 +3,17 @@
         <div class="problem filters">
             <p class="title">ТИП ПРОБЛЕМ</p>
 
-            <input type="checkbox" id="forest-problems" />
-            <label for="forest-problems">Проблеми лісів</label>
-            <input type="checkbox" id="garbage-problems">
-            <label for="garbage-problems">Сміттєзвалища</label>
-            <input type="checkbox" id="illegal-construction-problems">
-            <label for="illegal-construction-problems">Незаконна забудова</label>
-            <input type="checkbox" id="waters-problems">
-            <label for="waters-problems">Проблеми водойм</label>
-            <input type="checkbox" id="threats-to-biodivercity-problems">
-            <label for="threats-to-biodivercity-problems">Загрози біорізноманіттю</label>
-            <input type="checkbox" id="poaching-problems">
-            <label for="poaching-problems">Браконьєрство</label>
-            <input type="checkbox" id="other-problems">
-            <label for="other-problems">Інші проблеми</label>
+            <input ng-repeat-start="problemType in problemTypes" id="{{'type' + problemType.id}}" type="checkbox"  ng-model="problemType.selected" ng-change="toggleSelection()">
+            <label ng-repeat-end for="{{'type' + problemType.id}}">{{problemType.name}}</label>
 
         </div>
 
         <div class="problem status">
             <p class="title">СТАТУС ПРОБЛЕМ</p>
-            <input type="checkbox" id="problem-status-new">
-            <label for="problem-status-new">Нова</label>
-            <input type="checkbox" id="problem-status-inprocess">
-            <label for="problem-status-inprocess">В процесі</label>
-            <input type="checkbox" id="problem-status-resolved">
-            <label for="problem-status-resolved">Вирішена</label>
+
+            <input ng-repeat-start="problemStatus in problemStatuses" id="{{'status' + problemStatus.id}}" type="checkbox"  ng-model="problemStatus.selected" ng-change="toggleSelection()">
+            <label ng-repeat-end for="{{'status' + problemStatus.id}}">{{problemStatus.name}}</label>
+            
         </div>
         <div class="problem controls">
             <!-- For Registered Users -->

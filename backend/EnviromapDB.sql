@@ -108,6 +108,15 @@ CREATE TABLE IF NOT EXISTS `ActivityTypes` (
   PRIMARY KEY (`Id`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `Enviromap`.`Resources`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Resources` (
+`Alias` VARCHAR(30) NOT NULL,
+`Title` VARCHAR(150) NOT NULL,
+`Content` VARCHAR(5000) NOT NULL,
+PRIMARY KEY (`Alias`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `Enviromap`.`Activities`
@@ -138,6 +147,14 @@ CREATE TABLE IF NOT EXISTS `Activities` (
     REFERENCES `Enviromap`.`Problems` (`Id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `Documents` (
+`Id` INT NOT NULL AUTO_INCREMENT,
+`Title` VARCHAR(50) NOT NULL,
+`Content` VARCHAR(500) ,
+`Alias` VARCHAR(50) NULL,
+PRIMARY KEY (`Id`))
 ENGINE = InnoDB;
 
 
