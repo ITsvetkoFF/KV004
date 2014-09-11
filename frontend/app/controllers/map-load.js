@@ -6,6 +6,7 @@ define(['./module'], function (controllers) {
             templateUrl: 'app/templates/filters.html'
         }
     });
+
     controllers.controller('mapLoadCtrl', ['$scope','$http', function ($scope, $http) {
         
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -28,13 +29,7 @@ define(['./module'], function (controllers) {
 			zoom: 7, 
 			layers:[tiles, geoJson]
 		});
-    controllers.controller('mapLoadCtrl', ['$scope','$http','$rootScope', function ($scope, $http,$rootScope) {
-    	
-		var map = L.map('map-content');
-            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-            
+
 		var latlng 	= L.latLng(50.00, 32.00);
 		var markers = L.markerClusterGroup();
         $scope.data = {};
@@ -56,7 +51,7 @@ define(['./module'], function (controllers) {
 
         function onMarkerClick(marker){
         	window.location.href="#/problem/showProblem/"+ this._id;
-        	$rootScope.$broadcast('Update',"");
+            $rootScope.$broadcast('Update',"");
     		map.panTo(marker.latlng);
         }
 
