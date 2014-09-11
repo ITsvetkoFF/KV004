@@ -754,26 +754,30 @@ td.b-details-body__title[colspan] {
 
 /*Taras ///////////////////////////////////////////*/
 .b-add-problem {
-    width: 560px;
+    width: calc(100% - 30px);
     background-color: #FFF;
-    padding: 0 20px 0 20px;
+    padding: 0 15px;
     height: 100%;
     overflow: auto;
 }
 
 .b-add-problem-header {
     border-bottom: 1px dashed #dadada;
-    padding-top: 5px;
-    padding-bottom: 10px;
+    padding: 10px 0;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 24px;
 }
 
-h2 {
-    font-family: WWF;
-    color: #000;
-    background-color: #fff;
-    text-align: center;
-    font-size: 40px;
-    font-weight: lighter;
+.b-view{
+    height: 100% !important;
+}
+
+#my-awesome-dropzone {
+    padding: 0 !important;
+    min-height: calc(100% - 77px) !important;
+    padding: 10px 0 !important;
+    margin: 0 0 10px;
 }
 
 .b-add-problem-form {
@@ -791,28 +795,62 @@ h2 {
 div.b-add-problem__step-1,
 div.b-add-problem__step-2,
 div.b-add-problem__step-3 {
-    min-height: 450px;
-    /*border:1px solid black;*/
-    margin: auto;
-    padding: 0 20px 0 20px;
     position: relative;
+    height: 100%;
 }
-div.b-add-problem__step-1_hide{
+div.b-add-problem__step-1_hide {
     display: none;
-
-}
-.b-step-3__dropzone {
-    margin-top: 10px;
 }
 
 .b-step-1__picture {
     text-align: center;
 }
 
+.b-addProblem-navbar {
+    height: 52px;
+    list-style: none;
+    font-size: 0;
+}
+
+.b-addProblem-navbar__item {
+    display: inline-block;
+    vertical-align: top;
+    height: 52px;
+    margin: 0 0.5%;
+    width: 33%;
+    color: #E7E7E7;
+    text-align: center;
+}
+
+.b-addProblem-navbar__item:hover{
+    cursor: pointer;
+}
+
+.b-addproblem-navbar__item_active{
+    color: #000000;
+    border-bottom: 3px solid #000000;
+}
+
+.b-addProblem-navbar__item:first-child,
+.b-addProblem-navbar__item:last-child
+{
+    margin: 0;
+}
+
+.b-addproblem-navbar__title{
+    font-size: 26px;
+    line-height: 52px;
+    vertical-align: top;
+    margin: 0 0 0 5px;
+}
+
+.b-addProblem__img {
+    margin: 10px 0;
+}
+
 .b-step-2__btns-div,
 .b-step-1__btns-div,
 .b-step-3__btns-div {
-    1position: absolute;
     float: right;
     width: 50%;
     margin-top: 25px;
@@ -820,7 +858,6 @@ div.b-add-problem__step-1_hide{
 
 .b-add-problem-row-content {
     width: 100%;
-    display: block;
 }
 
 .b-step-2 textarea {
@@ -832,10 +869,6 @@ div.b-add-problem__step-1_hide{
 
 .b-step-2 select {
     width: 50%;
-}
-
-.b-add-problem-new_user {
-    padding-top: 20px;
 }
 
     .b-add-problem-new_user input {
@@ -854,6 +887,15 @@ div.b-add-problem__step-1_hide{
     width: 45%;
     float: right;
     padding-bottom: 10px;
+}
+
+.b-public{
+    float: right;
+    width: 150px;
+}
+
+.b-public:hover{
+    cursor: pointer;
 }
 
 .b-add-problem-new_user-label {
@@ -880,7 +922,6 @@ div.b-add-problem__step-1_hide{
 .b-add-problem-row-for-buttons input.b-add-problem-button {
     display: block;
     margin: auto auto 10px;
-    width: 250px;
 }
 
 input[type=button]:disabled, button:disabled {
@@ -888,11 +929,26 @@ input[type=button]:disabled, button:disabled {
 }
 
 .btn-float-left {
-    float: left;
+    position: absolute;
+    right: 155px;
+    bottom: 0;
+    width: 150px !important;
 }
 
 .btn-float-right {
-    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 150px !important;
+}
+
+.btn-float-left:hover,
+.btn-float-right:hover{
+    cursor: pointer;
+}
+
+.b-note{
+    font-size: 16px;
 }
 
 .b-step-1__btns-div .b-add-problem-button,
@@ -914,6 +970,54 @@ input[type=button]:disabled, button:disabled {
     font-size: 20px;
 }
 
+.b-container__note{
+    float: left;
+    margin: 5px 0;
+    height: 100px;
+    border-top: #F7F7F7;
+    border-bottom: #F7F7F7;
+    text-align: center;
+}
+
+.b-container__note-img{
+    display: block;
+}
+
+.b-container__note-text{
+    font-size: 12px;
+}
+
+.b-note__symbols{
+    margin: 10px 0 0 0;
+    float: right;
+    font-size: 12px;
+    color: #A7A7A7;
+}
+
+.b-container__params{
+    float: right;
+    width: calc(100% - 330px);
+    margin: 5px 0 0 10px;
+    vertical-align: top;
+}
+
+.b-container__params-lantitle,
+.b-container__params-lngtitle,
+.b-add-problem-row-content,
+.text_class{
+    font-size: 20px;
+    color: #777777;
+}
+
+.b-container__params-lanvalue,
+.b-container__params-lngvalue,
+.input_class{
+    display: block;
+    width: 100%;
+    height: 32px;
+    margin: 0 0 10px 0;
+}
+
 /* DROPZONE STYLES */
 form.dropzone {
     background: none;
@@ -929,10 +1033,23 @@ form.dropzone {
 #previews {
     margin: 5px auto 15px;
     text-align: center;
-    background-repeat: no-repeat;
-    background-position: 75 50;
-    min-height: 180px;
-    border: 2px dashed #dadada;
+    background: #F7F7F7;
+    min-height: 100px;
+    border: 1px dashed #dadada;
+}
+
+#previews:hover{
+    cursor: pointer;
+}
+
+.b-conteiner__drop-title-1{
+    font-size: 22px;
+    font-style: italic;
+}
+
+.b-conteiner__drop-title-2{
+    font-size: 16px;
+    font-style: italic;
 }
 
 #my-awesome-dropzone label {
@@ -958,7 +1075,7 @@ form.dropzone {
 
 .remove_btn:hover:after {
     position: absolute;
-    right: -85px;
+    left: -85px;
     top: -30px;
     background: #fff;
     padding: 5px;

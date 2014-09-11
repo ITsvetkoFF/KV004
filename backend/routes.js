@@ -3,7 +3,7 @@ var jwt          = require('jsonwebtoken'),
     bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
-    secret       = require('./config/secret');
+    secret = require('./config/secret');
 
 exports.getProblems = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
 	req.getConnection(function(err, connection) {
@@ -173,22 +173,19 @@ exports.postProblem = function(req,res){  //post new problem
 				err:    err.code
 			});
 		} else {
-            // var data = {
-            // 	Title 				: req.body.title,
-            // 	Content 			: req.body.content,
-            // 	Latitude 			: req.body.latitude,
-            // 	Longtitude 			: req.body.longituge,
-            // 	Status 	            : req.body.status,
-            // 	ProblemTypes_Id 	: req.body.problemTypes_Id
-            // };
-            var data = {
-            	Title 				: "Dump",
-            	Content 			: "lol",
-            	Latitude 	     	: "8",
-            	Longtitude         	: "3",
-            	Status 	            : "1",
-            	ProblemTypes_Id 	: "1"
-            };
+
+		    console.log(req.body);
+
+		    var data = {
+		        Title: req.body.title,
+             	Content: req.body.content,
+             	Latitude: req.body.latitude,
+             	Longtitude: req.body.longitude,
+                Moderation:'1',
+             	Status: 0,
+             	ProblemTypes_Id: req.body.type
+		     };
+
             connection.query('INSERT INTO Problems SET ?', [data], function(err, rows, fields) {
                 if (err) {
                     console.error(err);
@@ -198,6 +195,31 @@ exports.postProblem = function(req,res){  //post new problem
                         err:    err.code
                     });
                 }
+
+                var i = 0;
+
+                while (req.files['file[' + i + ']'] != undefined) {
+                    var photo_data = {
+                        Link: req.files['file[' + i + ']'].name,
+                        Status: 0,
+                        Description: req.body.description[i],
+                        Problems_Id: rows.insertId
+                    };
+
+                    connection.query('INSERT INTO photos SET ?', [photo_data], function (err, rows, fields) {
+                        if (err) {
+                            console.error(err);
+                            res.statusCode = 500;
+                            res.send({
+                                result: 'error',
+                                err: err.code
+                            });
+                        }
+                    });
+
+                    i++;
+                }
+
                 res.send({
                     json:   rows,
                     length: rows.length
