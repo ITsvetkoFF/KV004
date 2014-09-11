@@ -206,7 +206,7 @@ exports.postProblem = function(req,res){  //post new problem
                         Problems_Id: rows.insertId
                     };
 
-                    connection.query('INSERT INTO photos SET ?', [photo_data], function (err, rows, fields) {
+                    connection.query('INSERT INTO Photos SET ?', [photo_data], function (err, rows, fields) {
                         if (err) {
                             console.error(err);
                             res.statusCode = 500;
