@@ -6,7 +6,7 @@ define(['./module'], function (controllers) {
             templateUrl: 'app/templates/filters.html'
         }
     });
-    controllers.controller('mapLoadCtrl', ['$scope','$http', function ($scope, $http) {
+    controllers.controller('mapLoadCtrl', ['$scope','$http','$rootScope', function ($scope, $http,$rootScope) {
     	
 		var map = L.map('map-content');
             L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -20,7 +20,7 @@ define(['./module'], function (controllers) {
 		var markers = L.markerClusterGroup();
         $scope.data = {};
 
-        $http({ method: 'GET', url: 'http://ita-kv.tk:8090/api/problems' }).success(function (data) {
+        $http({ method: 'GET', url: 'api/problems' }).success(function (data) {
             $scope.data = data;
             placeMarkers($scope.data);
         });
@@ -86,7 +86,9 @@ define(['./module'], function (controllers) {
         };
 
         function onMarkerClick(){
-        	window.location.href="/problem/showProblem/"+ this._id;
+        	window.location.href="#/problem/showProblem/"+ this._id;
+            $rootScope.$broadcast('Update',"");
+
         }
 
         function userSelectionFilterMarkers(data) {

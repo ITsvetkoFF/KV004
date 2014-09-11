@@ -181,6 +181,7 @@ exports.postProblem = function(req,res){  //post new problem
              	Content: req.body.content,
              	Latitude: req.body.latitude,
              	Longtitude: req.body.longitude,
+                Moderation:'1',
              	Status: 0,
              	ProblemTypes_Id: req.body.type
 		     };
