@@ -1,105 +1,177 @@
 <div class="b-add-problem" >
-    <div class="b-add-problem-header"><h2>ADD PROBLEM</h2></div>
+    <div class="b-add-problem-header"><h2>Додати проблему</h2></div>
     <form id="my-awesome-dropzone" class="dropzone b-add-problem-form" name="submit_problem" drop="dropzoneConfig">
 
         <div style="display:block" class="b-add-problem__step-1" ng-show="showStep_1">
             <div class="b-step-1">
-                <div class="b-step-1__sub-header"><span class="b-step-1-sub-header">Step 1: Problem position</span></div>
-                <div class="b-step-1__description"><p>Click on the map, to create problem position</p></div>
-                <div class="b-step-1__picture"><img src="images/new.gif" class="b-step-1-picture"></div>
-                <div class="b-step-1__btns-div"><input ng-click="nextButton_Step1()" type="button" class="b-add-problem-button btn-forward-step-1 btn-float-right" value="Next"></div>
+                <div class="b-container_addProblem-navbar">
+                    <ul class="b-addProblem-navbar">
+                        <li class="b-addProblem-navbar__item b-addproblem-navbar__item_active" ng-click="showFirst();">
+                            <img class="b-addProblem__img" src="images/icons/map_marker_active.png" />
+                            <span class="b-addproblem-navbar__title">Крок 1</span>
+                        </li>
+                        <li class="b-addProblem-navbar__item" ng-click="showSecond();">
+                            <img class="b-addProblem__img" src="images/icons/info.png" />
+                            <span class="b-addproblem-navbar__title">Крок 2</span>
+                        </li>
+                        <li class="b-addProblem-navbar__item" ng-click="showThird();">
+                            <img class="b-addProblem__img" src="images/icons/add_photo.png" />
+                            <span class="b-addproblem-navbar__title">Крок 3</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="b-container__note">
+                    <img src="images/new.gif" class="b-container__note-img"/>
+                    <span class="b-container__note-text">Відмітьте на карті місце розташування проблеми</span>
+                </div>
+
+                <div class="b-container__params">
+                    <span class="b-container__params-lantitle">Latitude:</span>
+                    <input type="text" class="b-container__params-lanvalue" name="latitude"/>
+                    <span class="b-container__params-lngtitle">Longitude:</span>
+                    <input type="text" class="b-container__params-lngvalue" name="longitude"/>
+                </div>
+
+                <!--
+                <div class="b-step-1__btns-div">
+                    <input type="button" ng-click="nextButton_Step1()" class="b-add-problem-button btn-forward-step-1 btn-float-right" value="Далі" />
+                </div>
+                -->
+
                 <div class="b-crear-float"></div>
             </div>
         </div>
 
         <div style="display:block" class="b-add-problem__step-2" ng-show="showStep_2">
             <div class="b-step-2">
-                <div class="b-step-2__sub-header">
-                    <span class="b-step-2-sub-header">Step 2: Detail information</span>
+                <div class="b-container_addProblem-navbar">
+                    <ul class="b-addProblem-navbar">
+                        <li class="b-addProblem-navbar__item" ng-click="showFirst();">
+                            <img class="b-addProblem__img" src="images/icons/map_marker.png" />
+                            <span class="b-addproblem-navbar__title">Крок 1</span>
+                        </li>
+                        <li class="b-addProblem-navbar__item b-addproblem-navbar__item_active" ng-click="showSecond();">
+                            <img class="b-addProblem__img" src="images/icons/info_active.png" />
+                            <span class="b-addproblem-navbar__title">Крок 2</span>
+                        </li>
+                        <li class="b-addProblem-navbar__item" ng-click="showThird();">
+                            <img class="b-addProblem__img" src="images/icons/add_photo.png" />
+                            <span class="b-addproblem-navbar__title">Крок 3</span>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="b-step-2__title">
-                    <label class="b-add-problem-row-content" for="title-field">Title</label>
-                    <input type="text" id="title-field" name="title" class="b-add-problem-row-content" required>
+                    <label class="b-add-problem-row-content" id="b-note__title" for="title-field">Назва проблеми:</label>
+                    <span class="b-note__symbols">(залишилось 70 символів)</span>
+                    <input type="text" id="title-field" name="title" maxlength="70" class="b-add-problem-row-content input_class" required>
                 </div>
 
                 <div class="b-step-2__select">
-                    <label class="b-add-problem-row-content" for="select-field">Problem type</label>
-                    <select name="type" id="select-field" required>
+                    <label class="b-add-problem-row-content" for="select-field">Тип проблеми:</label>
+                    <select name="type" id="select-field" class="input_class" required>
                         <option value=""></option>
-                        <option value="�������� ���">�������� ���</option>
-                        <option value="�����������">�����������</option>
-                        <option value="��������� ��������">��������� ��������</option>
-                        <option value="�������� ������">�������� ������</option>
-                        <option value="������� ������������">������� ������������</option>
-                        <option value="������������">������������</option>
-                        <option value="��� ��������">��� ��������</option>
+                        <option value="1">Проблеми лісів</option>
+                        <option value="2">Сміттєзвалища</option>
+                        <option value="3">Незаконна забудова</option>
+                        <option value="4">Проблеми водойм</option>
+                        <option value="5">Загрози біорізноманіттю</option>
+                        <option value="6">Браконьєрство</option>
+                        <option value="7">Інші проблеми</option>
                     </select>
                 </div>
 
                 <div class="b-step-2__textarea">
-                    <label class="b-add-problem-row-content" for="description-field">Problem defenition</label>
-                    <textarea id="description-field" name="description" rows="10" required></textarea>
+                    <label class="b-add-problem-row-content" for="description-field">Опис проблеми:</label>
+                    <span class="b-note__symbols">(залишилось 500 символів)</span>
+                    <textarea id="description-field" name="content" rows="10" required></textarea>
                 </div>
 
+                <!--
                 <div class="b-step-2__btns-div">
-                    <input type="button" class="b-add-problem-button btn-backward-step-2 btn-float-left" ng-click="backButton_Step2()" value="Back">
-                    <input  type="button" class="b-add-problem-button btn-forward-step-2 btn-float-right" ng-click="nextButton_Step2()" value="Next">
+                    <input type="button" class="b-add-problem-button btn-backward-step-2 btn-float-left" ng-click="backButton_Step2()" value="Назад">
+                    <input  type="button" class="b-add-problem-button btn-forward-step-2 btn-float-right" ng-click="nextButton_Step2()" value="Далі">
                 </div>
+                -->
+
                 <div class="b-crear-float"></div>
             </div>
         </div>
         <div  class="b-add-problem__step-3" ng-show="showStep_3">
             <div class="b-step-3">
-                <div class="b-step-3__sub-header">
-                    <span class="b-step-3-sub-header">Step 3: Add pictures</span>
+                <div class="b-container_addProblem-navbar">
+                    <ul class="b-addProblem-navbar">
+                        <li class="b-addProblem-navbar__item" ng-click="showFirst();">
+                            <img class="b-addProblem__img" src="images/icons/map_marker.png" />
+                            <span class="b-addproblem-navbar__title">Крок 1</span>
+                        </li>
+                        <li class="b-addProblem-navbar__item" ng-click="showSecond();">
+                            <img class="b-addProblem__img" src="images/icons/info.png" />
+                            <span class="b-addproblem-navbar__title">Крок 2</span>
+                        </li>
+                        <li class="b-addProblem-navbar__item b-addproblem-navbar__item_active" ng-click="showThird();">
+                            <img class="b-addProblem__img" src="images/icons/add_photo_active.png" />
+                            <span class="b-addproblem-navbar__title">Крок 3</span>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="b-step-3__dropzone">
-                    <span>Drop photos here</span>
-                    <div id="previews"></div>
+                    <div id="previews">
+                        <p>
+                            <span class="b-conteiner__drop-title-1"><strong>+ Drop files</strong> to upload</span>
+                        </p>
+                        <span class="b-conteiner__drop-title-2">(or click)</span>
+                    </div>
                 </div>
 
                 <div class="b-add-problem-row-for-buttons">
-                    <p>Do You want add problem and follow us?</p>
-                    <input type="button" id="btn-join-us" class="b-add-problem-button" value="Yes, registration" ng-click="showRegFormButtonClick()">
-                    <input type="button" id="btn-facebook" class="b-add-problem-button" value="Yes, use Facebook account">
-                    <!-- <input type = "button" id = "btn-anonim" class = "b-add-problem-button" value = "ͳ, ������ �������� �������"> -->
+                    <p class="b-note">Щоб додати проблему анонімно - натисніть "Опублікувати".</p>
+                    <p>Ви можете
+                        <a href="" id="btn-join-us" ng-click="showRegFormButtonClick()">зареєструватись</a>, або
+                        <a href="#" id="btn-facebook">авторизуватися через facebook</a>, щоб інформація про автора збереглася при публікації проблеми.</p>
+                    <!--<input type="button" id="btn-join-us" class="b-add-problem-button" value="Yes, registration" ng-click="showRegFormButtonClick()">-->
+                    <!--<input type="button" id="btn-facebook" class="b-add-problem-button" value="Yes, use Facebook account">-->
                 </div>
 
                 <div class="b-add-problem-new_user" ng-show="showRegForm">
                     <div class="b-add-problem-row-new_user-left" required>
-                        <label class="b-add-problem-new_user-label" for="login-field">Login</label>
-                        <input type="text" id="login-field" name="login" class="b-add-problem-row_input">
+                        <label class="b-add-problem-new_user-label text_class" for="login-field">Login</label>
+                        <input type="text" id="login-field" name="login" class="b-add-problem-row_input input_class">
                     </div>
 
                     <div class="b-add-problem-row-new_user-right">
-                        <label class="b-add-problem-new_user-label" for="email-field">Email</label>
-                        <input type="email" id="email-field" name="email" class="b-add-problem-row_input">
+                        <label class="b-add-problem-new_user-label text_class" for="email-field">Email</label>
+                        <input type="email" id="email-field" name="email" class="b-add-problem-row_input input_class">
                     </div>
 
                     <div class="b-add-problem-row-new_user-left">
-                        <label class="b-add-problem-new_user-label" for="password-field">Password</label>
-                        <input type="password" id="password-field" name="password" class="b-add-problem-row_input">
+                        <label class="b-add-problem-new_user-label text_class" for="password-field">Password</label>
+                        <input type="password" id="password-field" name="password" class="b-add-problem-row_input input_class">
                     </div>
 
                     <div class="b-add-problem-row-new_user-right">
-                        <label class="b-add-problem-new_user-label" for="password2-field">Confirm password</label>
-                        <input type="password" id="password2-field" name="password" class="b-add-problem-row_input">
+                        <label class="b-add-problem-new_user-label text_class" for="password2-field">Confirm password</label>
+                        <input type="password" id="password2-field" name="password" class="b-add-problem-row_input input_class">
                     </div>
 
                     <div class="b-crear-float"></div>
 
                 </div>
 
+                <input id="btn-submit" type="button" class="b-add-problem-button btn-forward-step-3 b-public" value="Опублікувати">
+
                 <div class="b-crear-float"></div>
 
+                <!--
                 <div class="b-step-3__btns-div">
-                    <input type="button" class="b-add-problem-button btn-backward-step-3 btn-float-left" value="Back" ng-click="backButton_Step3()">
-                    <input id="btn-submit" type="button" class="b-add-problem-button btn-forward-step-3 btn-float-right"  value="Send">
+                    <input type="button" class="b-add-problem-button btn-backward-step-3 btn-float-left" value="Назад" ng-click="backButton_Step3()">
+                    <input id="btn-submit" type="button" class="b-add-problem-button btn-forward-step-3 btn-float-right"  value="Опублікувати">
 
                     <div class="b-crear-float"></div>
                 </div>
+                -->
 
                 <div class="b-crear-float"></div>
             </div>

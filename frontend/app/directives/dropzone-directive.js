@@ -27,7 +27,7 @@ define(['./module','dropzone'], function(directives,Dropzone){
 
                 // Add the button to the file preview element.
                 var removeButton = Dropzone.createElement("<div class='remove_btn'></div>");
-                var commentField = Dropzone.createElement("<textarea type='text' name='description_"+arr.length+"' class='comment_field' placeholder='Додайте  опіс до фото...' maxlength='200'></textarea>");
+                var commentField = Dropzone.createElement("<textarea type='text' name='description" + "' class='comment_field' placeholder='Додайте  опіс до фото...' maxlength='200'></textarea>");
 
                 file.previewElement.appendChild(removeButton);
                 file.previewElement.appendChild(commentField);

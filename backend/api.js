@@ -1,8 +1,8 @@
-var mysql        = require('mysql'),
-    express      = require('express'),
+var mysql = require('mysql'),
+    express = require('express'),
+    multer = require('multer'),
     jwt          = require('jsonwebtoken'),
     crypto       = require('crypto'),
-    bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
     secret       = require('./config/secret');
@@ -12,12 +12,17 @@ var app    = express(),
 
 var connectionPool = {
     host     : 'localhost',
-    user     : 'root',
-    password : 'root',
+    user     : 'myuser',
+    password : 'Hi$$t0ry',
     database : 'Enviromap'
 };
 
-app.use(bodyParser());
+
+app.use(multer(
+    {
+        dest: 'photos/large'
+    }));
+
 app.use(cookieParser());
 app.use(myConnection(mysql, connectionPool, 'pool'));
 app.use('/',express.static('../frontend'));
