@@ -16,6 +16,11 @@ html, body, ul, h2 {
     margin-top: 35px !important;
 }
 
+.leaflet-clickable {
+    cursor: -webkit-grab;
+    cursor:    -moz-grab;
+}
+
 body {
     overflow: hidden;
 }

@@ -12,10 +12,27 @@ define(['./module'], function (controllers) {
         	maxZoom: 16,
         	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         });
-		var latlng 	= navigator.geolocation.getCurrentPosition(getUserPosition);
-		var map     = L.map('map-content', {center: latlng, zoom: 10, layers:[tiles]});
+        var geoJson = L.geoJson (ukraineBorders, {
+        	style: {
+        		opacity: 	 0,
+        		fillOpacity: 0
+        	},
+        	onEachFeature: function (feature, layer) {
+        		layer.on('contextmenu', function(e) {
+        			alert("Замість цього повідомлення, буде відкриватися вікно 'Повідомити про проблему'");
+        		});
+        	}
+        });
+		var map     = L.map('map-content', {
+			center: latlng, 
+			zoom: 7, 
+			layers:[tiles, geoJson]
+		});
+
+		var latlng 	= L.latLng(50.00, 32.00);
 		var markers = L.markerClusterGroup();
         $scope.data = {};
+        navigator.geolocation.getCurrentPosition(getUserPosition);
         var markerIcon;
 
         $http({ method: 'GET', url: 'http://ita-kv.tk:8090/api/problems' }).success(function (data) {
@@ -29,6 +46,11 @@ define(['./module'], function (controllers) {
                 position.coords.longitude
             ];
             map.setView(mapCenter, 10);
+        }
+
+        function onMarkerClick(marker){
+        	//window.location.href="/problem/showProblem/"+ this._id;
+    		map.panTo(marker.latlng);
         }
 
         function placeMarkers(data) {
@@ -89,11 +111,6 @@ define(['./module'], function (controllers) {
                 map.addLayer(markers);
             });
         };
-
-        function onMarkerClick(marker){
-        	//window.location.href="/problem/showProblem/"+ this._id;
-    		map.panTo(marker.latlng);
-        }
 
         function userSelectionFilterMarkers(data) {
             var newData = [];
