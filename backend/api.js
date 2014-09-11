@@ -20,7 +20,7 @@ var connectionPool = {
 
 app.use(multer(
     {
-        dest: 'photos/large'
+        dest: '../frontend/photos/large'
     }));
 
 app.use(cookieParser());
