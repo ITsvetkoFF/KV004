@@ -7,7 +7,7 @@ define(['./module'], function (controllers) {
         }
     });
 
-    controllers.controller('mapLoadCtrl', ['$scope','$http', function ($scope, $http) {
+    controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope', function ($scope, $http, $rootScope) {
         
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         	maxZoom: 16,
