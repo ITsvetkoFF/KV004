@@ -24,22 +24,22 @@ define(['./module'], function (controllers) {
         		});
         	}
         });
+        	var latlng 	= L.latLng(50.00, 32.00);
 		var map     = L.map('map-content', {
 			center: latlng, 
 			zoom: 7, 
 			layers:[tiles, geoJson]
 		});
 
-		var latlng 	= L.latLng(50.00, 32.00);
 		var markers = L.markerClusterGroup();
         $scope.data = {};
-        navigator.geolocation.getCurrentPosition(getUserPosition);
         var markerIcon;
 
         $http({ method: 'GET', url: 'api/problems' }).success(function (data) {
             $scope.data = data;
             placeMarkers($scope.data);
         });
+        navigator.geolocation.getCurrentPosition(getUserPosition);
 
         function getUserPosition(position) {
             var mapCenter = [
