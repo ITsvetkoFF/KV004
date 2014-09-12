@@ -9,6 +9,7 @@ define([
     './map-load',
     './main-controller',
     './show-problem',
-    './add-problem'
+    './add-problem',
+    './resources'
 
 ], function () {});
