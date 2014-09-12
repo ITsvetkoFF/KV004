@@ -1,1 +1,2 @@
-*.photos
+# Ignore "photos" folder
+photos/
