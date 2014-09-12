@@ -81,10 +81,11 @@ define(['./module'], function (controllers) {
 
         // This function is called after success login procedure
         function successLogIn(userData) {
-            ipCookie('userName', userData.name, {expires: 1});
-            ipCookie('userSurname', userData.surname, {expires: 1});
-            ipCookie('userRole', userData.role, {expires: 1});
-            ipCookie('token', userData.token, {expires: 1});
+            ipCookie('userName', userData.name, {expires: 10});
+            ipCookie('userSurname', userData.surname, {expires: 10});
+            ipCookie('userRole', userData.role, {expires: 10});
+            ipCookie('token', userData.token, {expires: 10});
+            ipCookie('id', userData.id, {expires: 10});
 
         }
 
@@ -93,6 +94,7 @@ define(['./module'], function (controllers) {
             ipCookie.remove('userName');
             ipCookie.remove('userSurname');
             ipCookie.remove('userRole');
+            ipCookie.remove('id');
 
         }
 

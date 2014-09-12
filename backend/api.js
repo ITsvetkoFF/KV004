@@ -5,6 +5,7 @@ var mysql = require('mysql'),
     crypto       = require('crypto'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
+    bodyParser = require('body-parser'),
     secret       = require('./config/secret');
 
 var app    = express(),
@@ -24,6 +25,7 @@ app.use(multer(
     }));
 
 app.use(cookieParser());
+app.use(bodyParser());
 app.use(myConnection(mysql, connectionPool, 'pool'));
 app.use('/',express.static('../frontend'));
 //console.log(__dirname);
