@@ -356,6 +356,8 @@ exports.register = function (req, res) {
 
             connection.query("select Id from Users where Email like ?", userData.email, function(err, result) {
 
+	    //todo: send only message (status=200), that user exists
+	    
             if(result.length !== 0) {
                 return res.send(400);
             }
