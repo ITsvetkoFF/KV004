@@ -3,6 +3,35 @@ define(['./module'],function (controllers){
     controllers.controller('addProblemCtrl', function ($scope){
         $scope.showStep_1 = true;
 
+        console.log("Add Problem Controller is loaded");
+
+        //function that places marker on the map
+        function getCoordinates(e) {
+
+            console.log(e.latlng);                                             // logs into console clicked position !!!need to remove in production
+            $scope.$apply(function(){$scope.latitude = e.latlng.lat;});        // binds lat value to the input on the form
+            $scope.$apply(function(){$scope.longtitude = e.latlng.lng;});      // binds lng value to the input on the form
+
+            $scope.map.addLayer(L.marker([$scope.latitude, $scope.longtitude], // adding marker to the map
+                    {/*icon: L.icon({                                          // commented, cause we dont have special mark for placing new Marker
+                        iconUrl: 'images/markers/other_icon.png',
+                        iconAnchor: [25,79]
+                    })
+                        ,*/ draggable: true
+                    }).on('drag', function(e){console.log(e.target._latlng);   // onDrag listener for Marker that binds lat & lng values to the input on the form !!!need to remove in production console.logging
+                        $scope.$apply(function(){$scope.latitude = e.target._latlng.lat;});
+                        $scope.$apply(function(){$scope.longtitude = e.target._latlng.lng;});
+                    })
+            );
+            $scope.clearGetCoordinatesListener();                              // disable onMapClickListener that binds eventListener "click" & function that places marker on the map
+        }
+
+        $scope.clearGetCoordinatesListener = function() {                      // function with disabling onMapClickListener functionality
+            $scope.map.off('click', getCoordinates);
+        };
+
+        $scope.map.on('click', getCoordinates); // enable onMapClickListener that binds eventListener "click" & function that places marker on the map
+
         function allHidden() {
             $scope.showStep_1 = false;
             $scope.showStep_2 = false;
