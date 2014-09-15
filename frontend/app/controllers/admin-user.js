@@ -20,7 +20,7 @@ define(['./module'], function (controllers) {
             data.email = document.registerForm.email.value;
             data.password = document.registerForm.password.value;
 
-            $http.post('http://localhost:8090/api/register', data);
+            $http.post('http://ita-kv.tk:8090/api/register', data);
         };
         /*******************************/
 
