@@ -1,38 +1,60 @@
 define(['./module'], function (controllers) {
 
     'use strict';
-    controllers.controller('AdminUserCtrl', ['$scope', '$location', '$window', 'ipCookie', 'UserService', function ($scope, $location, $window, ipCookie, UserService) {
+    controllers.controller('AdminUserCtrl', ['$scope', '$http', '$location', '$window', 'ipCookie', 'UserService', function ($scope, $http, $location, $window, ipCookie, UserService) {
+        /*****--- Register form ---*****/
+        $scope.registerClassAppendix = "_hide";
+
+        $scope.showRegisterForm = function () {
+            $scope.registerClassAppendix = "_show";
+        }
+
+        $scope.closeRegisterForm = function () {
+            $scope.registerClassAppendix = "_hide";
+        };
+
+        $scope.postRegistrationForm = function () {
+            var data = {};
+            data.first_name = document.registerForm.first_name.value;
+            data.last_name = document.registerForm.last_name.value;
+            data.email = document.registerForm.email.value;
+            data.password = document.registerForm.password.value;
+
+            $http.post('http://localhost:8090/api/register', data);
+        };
+        /*******************************/
+
+        /*******--- Login form ---******/
+        $scope.postLogIn = function () {
+            var data = {};
+            data.email = document.login.email.value;
+            data.password = document.login.password.value;
+
+            UserService.logIn(data.email, data.password).success(function (userData) {
+                successLogIn(userData);
+            }).error(function (status, data) {
+                console.log(status);
+                console.log(data);
+            });
+        };
+        /*******************************/
 
         $scope.isLoggedIn = UserService.isLoggedIn;
         $scope.isAdministrator = UserService.isAdministrator;
-        //ipCookie('userName', 'LIZA');
         $scope.name = ipCookie('userName');
-        //console.log(ipCookie('userName'));
+        $scope.surname = ipCookie('userSurname');
 
+        /*****--- The main part of facebook authorization ---*****/
         FB.init({
-                appId      : '1458754107737788',
-                cookie     : true,
-                xfbml      : true,
-                version    : 'v2.1'
+            appId: '851721974838131',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v2.1'
         });
-
-        // Now that we've initialized the JavaScript SDK, we call
-        // FB.getLoginStatus().  This function gets the state of the
-        // person visiting this page and can return one of three states to
-        // the callback you provide.  They can be:
-        //
-        // 1. Logged into your app ('connected')
-        // 2. Logged into Facebook, but not your app ('not_authorized')
-        // 3. Not logged into Facebook and can't tell if they are logged into
-        //    your app or not.
-        //
-        // These three cases are handled in the callback function.
 
         FB.getLoginStatus(function(response) {
             statusChangeCallback(response);
         });
-
-
 
         function statusChangeCallback(response) {
 
@@ -40,8 +62,6 @@ define(['./module'], function (controllers) {
             console.log(response);
 
             if (response.status === 'connected') {
-                // Logged into your app and Facebook.
-
                 FB.api('/me', function(response) {
 
                     UserService.logIn(response.email, response.id).success(function(userData) {
@@ -51,9 +71,7 @@ define(['./module'], function (controllers) {
                     }).error(function(status, data) {
                         console.log(status);
                         console.log(data);
-                        // This user has logged into our app first time,
-                        // there is no his or her data in our DB,
-                        // so we need to save it.
+
                         UserService.register(response.first_name, response.last_name, response.email, response.id).success(function(userData) {
 
                             successLogIn(userData);
@@ -67,17 +85,18 @@ define(['./module'], function (controllers) {
                 });
 
             } else if (response.status === 'not_authorized') {
-                // The person is logged into Facebook, but not your app.
                 document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
             } else {
-                // The person is not logged into Facebook, so we're not sure if
-                // they are logged into this app or not.
                 document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
             }
         }
 
+        /*********************************************************/
 
 
+        /*****--- The main part of vkontakte authorization ---*****/
+
+        /**********************************************************/
 
         // This function is called after success login procedure
         function successLogIn(userData) {
@@ -85,7 +104,11 @@ define(['./module'], function (controllers) {
             ipCookie('userSurname', userData.surname, {expires: 1});
             ipCookie('userRole', userData.role, {expires: 1});
             ipCookie('token', userData.token, {expires: 1});
+            ipCookie('id', userData.id, { expires: 1 });
 
+            $scope.name = ipCookie('userName');
+            $scope.surname = ipCookie('userSurname');
+            $scope.userId = ipCookie('id');
         }
 
         function successLogOut() {
@@ -96,7 +119,6 @@ define(['./module'], function (controllers) {
 
         }
 
-
         $scope.showFiltersVar = false;
         
         $scope.showFilters = function() {
@@ -105,7 +127,6 @@ define(['./module'], function (controllers) {
             else
                 $scope.showFiltersVar = true;
         }
-        
 
         $scope.logInFB = function logInFB() {
             FB.login(function(response) {
@@ -119,20 +140,15 @@ define(['./module'], function (controllers) {
                 });
         }
 
-
         $scope.logIn = function logIn(email, password) {
 
             //here must be validation!
 
             UserService.logIn(email, password).success(function(userData) {
-                //console.log(userData);
                 successLogIn(userData);
-
             }).error(function(status, data) {
-
                 console.log(status);
                 console.log(data);
-
             });
         }
 
@@ -141,29 +157,19 @@ define(['./module'], function (controllers) {
             //and here must be validation!
 
             UserService.register(username, surname, email, password).success(function(userData) {
-
                 successLogIn(userData);
-
             }).error(function(status, data) {
-
                 console.log(status);
                 console.log(data);
-
             });
         }
 
-
-
         $scope.logOut = function logOut() {
-
             successLogOut();
             FB.logout(function(response) {
                 console.log(response);
             });
-
         }
-
-
     }]);
 });
 

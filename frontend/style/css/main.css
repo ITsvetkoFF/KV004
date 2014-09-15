@@ -5,6 +5,90 @@
     font-style: normal;
 }
 
+/*REGISTRATION FORM*/
+.b-container__registration_hide{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: RGBA(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.b-container__registration_show{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: RGBA(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.b-registration{
+    width: 250px;
+    background: #ffffff;
+    margin: 100px auto;
+
+    padding: 10px;
+}
+
+.b-registration__header {
+    height: 16px;
+}
+
+.b-registration__close{
+    float: right;
+}
+
+.b-registration__close:hover{
+    cursor: pointer;
+}
+
+.b-registration__form {
+    margin-top: 5px;
+}
+
+.b-form__header{
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.b-form__title{
+    font-size: 14px;
+}
+
+.b-from__input{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.b-form__button{
+    border: none;
+    color: #FFFFFF;
+    height: 32px;
+    font-size: 16px;
+    background: #23527B;
+    width: 100%;
+}
+
+.b-form__button:hover{
+    cursor: pointer;
+    background: #367dbb;
+}
+
+/*******************/
+
+
 html, body, ul, h2 {
     margin: 0;
     padding: 0;
@@ -95,6 +179,14 @@ html, body {
     vertical-align: top;
 }
 
+.b-user__icon{
+    margin: 14px 0;
+}
+
+.b-user__icon{
+    vertical-align: top;
+}
+
 .b-menu {
     display: inline-block;
     font-size: 0;
@@ -102,11 +194,17 @@ html, body {
     list-style: none;
 }
 
+.b-menu__user-data{
+    float: right;
+    height: 52px;
+    line-height: 52px;
+    margin-right: 110px;
+}
+
 .b-menu__item {
     position: relative;
     display: inline-block;
     font-size: 12px;
-    border-radius: 3px;
     border: 1px solid RGBA(0, 0, 0, 0);
 }
 
@@ -125,10 +223,13 @@ html, body {
     border: 1px solid RGBA(0, 0, 0, 0);
 }
 
+.b-user__form-userid{
+    display: none;
+}
+
 .b-menu__item:hover {
     background: #FFF;
     border: 1px solid #CCC;
-    border-radius: 3px;
 }
 
     .b-menu__item:hover .b-menu__submenu {
@@ -187,17 +288,65 @@ html, body {
     position: absolute;
     top: 40px;
     position: absolute;
-    top: 31px;
-    left: 0px;
+    top: 32px;
+    left: -1px;
     display: none;
-    width: 265px;
+    width: 270px;
     background: #FFF;
+    border: 1px solid #CCCCCC;
+}
+
+.b-form__reg-link,
+.b-form__forgot-pass{
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+.b-form__reg-link{
+    float: left;
+}
+
+.b-form__forgot-pass{
+    float: right;
+}
+
+.b-form-footer__title{
+    display: block;
+    margin-bottom: 5px;
+}
+
+.b-form-footer {
+    margin: 0 !important;
+}
+
+.b-fb-link,
+.b-gp-link,
+.b-vk-link,
+.b-tw-link{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.b-fb-link{
+    background: url('../../images/icons/fb_icon.png');
+}
+
+.b-gp-link{
+    background: url('../../images/icons/google_plus_icon.png');
+}
+
+.b-vk-link{
+    background: url('../../images/icons/vk_icon.png');
+}
+
+.b-tw-link{
+    background: url('../../images/icons/tw_icon.png');
 }
 
 .b-sign-up__caption {
-    font: 27px WWF;
+    font-size: 22px;
     text-align: center;
-    letter-spacing: 2px;
 }
 
 .b-sign-up {
@@ -220,6 +369,7 @@ html, body {
     display: inline-block;
     font-size: 16px;
     width: 100%;
+    clear: both;
 }
 
     .b-form__item a {
@@ -253,6 +403,15 @@ html, body {
     color: #fff;
     border: none;
     height: 30px;
+    font-size: 16px;
+}
+
+.b-form__only-login-form {
+    margin-top: 10px;
+}
+
+.b-form__button-left:hover {
+    cursor: pointer;
 }
 
 #b-menu__link-source {
@@ -262,6 +421,7 @@ html, body {
 
 #b-menu__item__enter {
     padding-right: 17px;
+    width: 35px;
     background: url(../../images/icons/main-nav-arrow.png) 43px center no-repeat;
 }
 

@@ -1,6 +1,7 @@
 <div class="b-header">
     <img src="images/logo.png" class="b-header__logo" />
     <a class="b-header__add-problem" href="#/problem/addProblem" ng-click="addProblem()">Повідомити  про  проблему</a>
+
     <div class="b-header__menu">
         <ul class="b-menu">
             <li class="b-menu__item">
@@ -8,12 +9,12 @@
             </li>
             <li class="b-menu__item">
                 <a href="#" class="b-menu__link" id="b-menu__link-source">Ресурси</a>
-                <div class="b-menu__submenu" ng-controller="Resources"  ng-init="getTitles()">
+                <div class="b-menu__submenu" ng-controller="Resources" ng-init="getTitles()">
                     <ul class="b-submenu">
                         <li class="b-submenu__item" ng-repeat="title in data">
                             <a href="#/resourses/{{title.Alias}}" class="b-submenu__link">{{title.Title}}</a>
                         </li>
-                        
+
                         <li class="b-submenu__item" ng-show='true'>
                             <a href="#" class="b-submenu__link">Додати документ</a>
                         </li>
@@ -26,43 +27,39 @@
 
                 <div class="b-header__sign-up">
                     <div class="b-sign-up">
-                        <div class="b-sign-up__caption">Допоможимо разом!</div>
-                        <form class="b-sign-up__form" method="post">
-                            <div class="b-form">
-                                <div class="b-form__item b-form__hidden-item">
-                                    <label class="b-form__label">Имя:*</label>
-                                    <input class="b-form__input" placeholder="Имя" type="text" name="name">
-                                </div><br style="clear:both">
-                                <div class="b-form__item">
-                                    <label class="b-form__label">Email:*</label>
-                                    <input class="b-form__input" placeholder="e-mail" type="email" name="email">
-                                </div>
-                                <div class="b-form__item">
-                                    <label class="b-form__label">Пароль:*</label>
-                                    <input class="b-form__input" placeholder="пароль" type="password" name="password">
-                                </div>
-                                <!--<div class="b-form__item b-form__hidden-item">
-                                    <label class="b-form__label">Повторите пароль:*</label>
-                                    <input class="b-form__input" placeholder="Повторите пароль" type="password" name="password">
-                                </div>-->
-                                <div class="b-form__item b-form__only-login-form">
-                                    <a href="" style="font-size:10px">Забыли пароль?</a><br>
-                                    <a href="javascript:showRegForm()" style="font-size:14px">Желаете присоединиться?</a>
-                                </div>
-                                <div class="b-form__item" style="padding-top:5px;">
-                                    <input class="b-form__button-left" type="submit" value="ВОЙТИ">
+                        <form class="b-sign-up__form" method="post" name="login">
+                            <span class="b-form__header">допоможемо разом!</span>
 
-                                </div>
-                                <div class="b-form__only-login-form  b-form-footer" style="border-top:1px solid #ccc;text-align:center;padding-top:5px">
-                                    Войти через <a href="" ng-click="logInFB()">Facebook</a> или <a href="">Google</a>
-                                </div>
+                            <span class="b-form__title">Email:</span>
+                            <input type="text" class="b-from__input" name="email" required/>
+                            <span class="b-form__title">Пароль:</span>
+                            <input type="password" class="b-from__input" name="password" required/>
 
+                            <div class="b-form__item">
+                                <input class="b-form__button" type="submit" value="Вхід" ng-click="postLogIn()">
+                            </div>
+
+                            <div class="b-form__item b-form__only-login-form">
+                                <a href="#" ng-click="showRegisterForm()" class="b-form__reg-link">Регістрація</a>
+                                <a href="#" class="b-form__forgot-pass">Забули пароль?</a><br>
                             </div>
                         </form>
+
+                        <div class="b-form-footer">
+                            <span class="b-form-footer__title">Увійти чезез соціальну мережу:</span>
+                            <a href="#" ng-click="logInFB()" class="b-fb-link" title="Facebook"></a>
+                            <a href="#" class="b-gp-link" title="Google+"></a>
+                            <a href="#" class="b-vk-link" title="Вконтакте"></a>
+                            <a href="#" class="b-tw-link" title="Twitter"></a>
+                        </div>
                     </div>
                 </div>
             </li>
-            <li  class="b-menu__item" ng-show="isLoggedIn()">HI, {{name}}</li>
         </ul>
     </div>
+
+    <div class="b-menu__user-data" ng-show="isLoggedIn()">
+        <img src="images/icons/user_icon.png" class="b-user__icon"/>
+        <span class="b-user__icon"> {{name}} {{surname}}</span>
+</div>
 </div>

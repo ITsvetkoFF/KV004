@@ -129,10 +129,12 @@
                 <div class="b-add-problem-row-for-buttons">
                     <p class="b-note">Щоб додати проблему анонімно - натисніть "Опублікувати".</p>
                     <p>Ви можете
-                        <a href="" id="btn-join-us" ng-click="showRegFormButtonClick()">зареєструватись</a>, або
-                        <a href="#" id="btn-facebook">авторизуватися через facebook</a>, щоб інформація про автора збереглася при публікації проблеми.</p>
-                    <!--<input type="button" id="btn-join-us" class="b-add-problem-button" value="Yes, registration" ng-click="showRegFormButtonClick()">-->
-                    <!--<input type="button" id="btn-facebook" class="b-add-problem-button" value="Yes, use Facebook account">-->
+                        <a href="" id="btn-join-us" ng-click="showRegisterForm()">зареєструватись</a>, або авторизуватися через соціальнк мережу,
+                    щоб інформація про автора збереглася при публікації проблеми.</p>
+                    <a href="#" ng-click="logInFB()" class="b-fb-link" title="Facebook"></a>
+                    <a href="#" class="b-gp-link" title="Google+"></a>
+                    <a href="#" class="b-vk-link" title="Вконтакте"></a>
+                    <a href="#" class="b-tw-link" title="Twitter"></a>
                 </div>
 
                 <div class="b-add-problem-new_user" ng-show="showRegForm">
@@ -176,5 +178,7 @@
                 <div class="b-crear-float"></div>
             </div>
         </div>
+
+        <input type="text" value="{{userId}}" name="userId" class="b-user__form-userid"/>
     </form>
 </div>

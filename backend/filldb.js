@@ -5,14 +5,14 @@ var mysql = require('mysql'),
 
 var resources = [{}, {}, {}, {}, {}];
 for (var i = 0; i < resources.length; i++) {
-  resources[i].content = [];
+    resources[i].content = [];
 };
 var fs = require('fs');
-resources[0].content.push(fs.readFileSync('resourses/about.html','utf-8'));
-resources[1].content.push(fs.readFileSync('resourses/cleaning.html','utf-8'));
-resources[2].content.push(fs.readFileSync('resourses/removing.html','utf-8'));
-resources[3].content.push(fs.readFileSync('resourses/stopping-exploitation.html','utf-8'));
-resources[4].content.push(fs.readFileSync('resourses/stopping-trade.html','utf-8'));
+resources[0].content.push(fs.readFileSync('resourses/about.html', 'utf-8'));
+resources[1].content.push(fs.readFileSync('resourses/cleaning.html', 'utf-8'));
+resources[2].content.push(fs.readFileSync('resourses/removing.html', 'utf-8'));
+resources[3].content.push(fs.readFileSync('resourses/stopping-exploitation.html', 'utf-8'));
+resources[4].content.push(fs.readFileSync('resourses/stopping-trade.html', 'utf-8'));
 
 resources[0].title = 'Про проект';
 resources[1].title = 'Як організувати прибирання в парку';
@@ -36,8 +36,8 @@ var problemTypes = ['проблеми лісів', 'сміттєзвалища',
 var i;
 
 var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function() {
-   if (xhr.readyState == 4) {
+xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4) {
         probs = JSON.parse(xhr.responseText);
     };
 };
@@ -61,14 +61,14 @@ var connection = mysql.createConnection(
 
 function fillProblemTypes() {
     for (i = 0; i < problemTypes.length; i++) {
-        connection.query('INSERT INTO ProblemTypes SET ?', {type: problemTypes[i]});
+        connection.query('INSERT INTO ProblemTypes SET ?', { type: problemTypes[i] });
     }
 }
 
 function fillUserRoles() {
     for (i = 0; i < userRoles.length; i++) {
         connection.query('INSERT INTO UserRoles SET ?', {
-            id: i+1,
+            id: i + 1,
             role: userRoles[i]
         });
     }
@@ -76,29 +76,31 @@ function fillUserRoles() {
 
 function fillResources() {
     for (var i = 0; i < resources.length; i++) {
-var data = {
-Title : resources[i].title,
-Content : resources[i].content,
-Alias : resources[i].alias
-  };
-connection.query("INSERT INTO Resources SET ?", data, function(err, rows, fields) {
-    if (err) throw err;
-    });
-};
+        var data = {
+            Title: resources[i].title,
+            Content: resources[i].content,
+            Alias: resources[i].alias
+        };
+        connection.query("INSERT INTO Resources SET ?", data, function (err, rows, fields) {
+            if (err) throw err;
+        });
+    };
 }
 
 function fillUsers() {
     connection.query('INSERT INTO Users SET ?', {
-            name: userNames[0],
-            password: crypto.createHmac('sha1', secret.secretToken).update(passwords[0]).digest("hex"),
-            email: userEmails[0],
-            userRoles_Id: 1});
+        name: userNames[0],
+        password: crypto.createHmac('sha1', secret.secretToken).update(passwords[0]).digest("hex"),
+        email: userEmails[0],
+        userRoles_Id: 1
+    });
     for (i = 1; i < userNames.length; i++) {
         connection.query('INSERT INTO Users SET ?', {
             name: userNames[i],
             password: crypto.createHmac('sha1', '123456').update(passwords[1]).digest("hex"),
             email: userEmails[i],
-            userRoles_Id: 2});
+            userRoles_Id: 2
+        });
     }
 }
 
@@ -107,59 +109,59 @@ function fillUsers() {
 
 function fillActivityTypes() {
     for (var i = 0; i < activityTypes.length; i++) {
-        connection.query('INSERT INTO ActivityTypes SET ?', {name: activityTypes[i]});
+        connection.query('INSERT INTO ActivityTypes SET ?', { name: activityTypes[i] });
     }
 }
 
 function fillProblemsActivities() {
-    for (var i=0, j=0, len=probs.length; i<len; i++) {
+    for (var i = 0, j = 0, len = probs.length; i < len; i++) {
 
-if (!probs[i].lat || !probs[i].probType || (probs[i].probStatus === null) || !probs[i].lon) {}
-else {
-j++;
-if (probs[i].probStatus == 'Нова') probs[i].probStatus = 0;
-else if (probs[i].probStatus == 'Вирішена') probs[i].probStatus = 1;
+        if (!probs[i].lat || !probs[i].probType || (probs[i].probStatus === null) || !probs[i].lon) { }
+        else {
+            j++;
+            if (probs[i].probStatus == 'Нова') probs[i].probStatus = 0;
+            else if (probs[i].probStatus == 'Вирішена') probs[i].probStatus = 1;
 
-if (probs[i].probType == 'Проблеми лісів') probs[i].probType = 1;
-else if (probs[i].probType == 'Сміттєзвалища') probs[i].probType = 2;
-else if (probs[i].probType == 'Незаконна забудова') probs[i].probType = 3;
-else if (probs[i].probType == 'Проблеми водойм') probs[i].probType = 4;
-else if (probs[i].probType == 'Загрози біорізноманіттю') probs[i].probType = 5;
-else if (probs[i].probType == 'Браконьєрство') probs[i].probType = 6;
-else if (probs[i].probType == 'Інші проблеми') probs[i].probType = 7;
+            if (probs[i].probType == 'Проблеми лісів') probs[i].probType = 1;
+            else if (probs[i].probType == 'Сміттєзвалища') probs[i].probType = 2;
+            else if (probs[i].probType == 'Незаконна забудова') probs[i].probType = 3;
+            else if (probs[i].probType == 'Проблеми водойм') probs[i].probType = 4;
+            else if (probs[i].probType == 'Загрози біорізноманіттю') probs[i].probType = 5;
+            else if (probs[i].probType == 'Браконьєрство') probs[i].probType = 6;
+            else if (probs[i].probType == 'Інші проблеми') probs[i].probType = 7;
 
-probs[i].created = new Date(probs[i].created*1000).toISOString();
+            probs[i].created = new Date(probs[i].created * 1000).toISOString();
 
-if (probs[i].content) {
-probs[i].content = probs[i].content.replace(/'/g,"\\'");
-probs[i].title = probs[i].title.replace(/'/g,"\\'");
-};
+            if (probs[i].content) {
+                probs[i].content = probs[i].content.replace(/'/g, "\\'");
+                probs[i].title = probs[i].title.replace(/'/g, "\\'");
+            };
 
-var data = {
-Title : probs[i].title,
-Content : probs[i].content,
-Severity : probs[i].severity,
-Moderation : 1,
-Votes : probs[i].votes,
-Latitude : probs[i].lat,
-Longtitude : probs[i].lon,
-Status : probs[i].probStatus,
-ProblemTypes_Id : probs[i].probType
-  };
-connection.query("INSERT INTO Problems SET ?", data, function(err, rows, fields) {
-    if (err) throw err;
-    });
-var data = {
-Date : probs[i].created,
-ActivityTypes_Id : 1,
-users_Id: randomIntInc(1, userNames.length),
-Problems_Id : j,
-  };
-connection.query("INSERT INTO Activities SET ?", data, function(err, rows, fields) {
-    if (err) throw err;
-    });
-}; 
-};
+            var data = {
+                Title: probs[i].title,
+                Content: probs[i].content,
+                Severity: probs[i].severity,
+                Moderation: 1,
+                Votes: probs[i].votes,
+                Latitude: probs[i].lat,
+                Longtitude: probs[i].lon,
+                Status: probs[i].probStatus,
+                ProblemTypes_Id: probs[i].probType
+            };
+            connection.query("INSERT INTO Problems SET ?", data, function (err, rows, fields) {
+                //if (err) throw err;
+            });
+            var data = {
+                Date: probs[i].created,
+                ActivityTypes_Id: 1,
+                users_Id: randomIntInc(1, userNames.length),
+                Problems_Id: j,
+            };
+            connection.query("INSERT INTO Activities SET ?", data, function (err, rows, fields) {
+                //if (err) throw err;
+            });
+        };
+    };
 };
 
 fillResources()

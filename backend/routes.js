@@ -268,7 +268,7 @@ exports.logIn = function(req, res) {
 				err:    err.code
 			});
 		} else {
-            console.log(req.body);
+            console.log('Request: ' + req.body.email);
             var email = req.body.email||'',
             password = req.body.password||'';
 
@@ -330,7 +330,7 @@ exports.logOut = function(req, res) {
     });
 }
 
-exports.register = function(req, res) {
+exports.register = function (req, res) {
     req.getConnection(function(err, connection) {
 		if (err) {
 			console.error('CONNECTION error: ',err);
@@ -341,8 +341,8 @@ exports.register = function(req, res) {
 			});
 		} else {
             var userData = {};
-            userData.name = req.body.username||'';
-            userData.surname = req.body.surname||'';
+            userData.name = req.body.first_name||'';
+            userData.surname = req.body.last_name||'';
             userData.email = req.body.email||'';
             userData.password = req.body.password||'';
             userData.userRoles_Id = 2;
@@ -372,6 +372,10 @@ exports.register = function(req, res) {
         }
     });
 };
+
+
+
+
 //admin-------------------------------------------------------------------
 exports.notApprovedProblems = function(req, res) {
 req.getConnection(function(err, connection) {
