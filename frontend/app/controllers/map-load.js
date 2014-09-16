@@ -30,7 +30,7 @@ define(['./module'], function (controllers) {
 			zoom: 7, 
 			layers:[tiles/*, geoJson*/] //disabling geoJson because of blocking ukraine-zone on the map
 		});
-        $scope.map = map; //forwarding map object to global $scope
+        $scope.geoJson = geoJson; //forwarding geoJson object to global $scope
 		var markers = L.markerClusterGroup();
         $scope.data = {};
         var markerIcon;
