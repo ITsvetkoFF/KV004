@@ -162,7 +162,51 @@ exports.getUserActivity = function(req,res){  //get user's activity list (everyt
         }
     });
 };
+exports.addNewPhotos = function(req,res){
+    req.getConnection(function(err,connection){
+        if(err){
+            console.log('Connection error: ',err);
+            res.send({
+                result:'error',
+                err:err.code
+            });
+        }
+        else{
+            console.log(req.body);
+            var i=0;
+            var rows=[];
+            console.log(req.body.solveProblemMark);
+            while (req.files['file[' + i + ']'] != undefined) {
+                var photo_data = {
+                    Link: req.files['file[' + i + ']'].name,
+                    Status: req.body.solveProblemMark,
+                    Description: req.body.description[i],
+                    Problems_Id: req.params.id
+                };
 
+                connection.query('INSERT INTO Photos SET ?', [photo_data], function (err, row, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err: err.code
+                        });
+                    }
+                    rows.push(row);
+                });
+
+
+                i++;
+            }
+            res.send({
+                json:   rows,
+                length: rows.length
+            });
+
+        }
+    });
+}
 exports.postProblem = function(req,res){  //post new problem
 	req.getConnection(function(err, connection) {
 		if (err) {

@@ -43,18 +43,31 @@
                         </tr>
                         <tr class="b-details-body__line">
                             <td class="b-details-body__problem-photos" colspan="4">
-                                <img ng-repeat="photo in photos" src="photos/large/{{photo.Link}}" class="b-details-body-problem-photo"/>
+                                <!--<img src="images/icons/add_image_icon.png" class="b-details-body-problem-photo"/>-->
+                                <div class="show_photo" ng-repeat="photo in photos">
+                                    <img  ng-src="photos/large/{{photo.Link}}" class="b-details-body-problem-photo"/>
 
+                                    <div class="show_photo_label_{{photo.Status}}"></div>
+                                </div>
 
-                            </td>
-                        </tr>
-                        <tr class="b-details-body__line">
-                            <td class="b-details-body__title" colspan="4">Фотографії після вирішення:</td>
-                        </tr>
-                        <tr class="b-details-body__line">
-                            <td class="b-details-body__problem-photos" colspan="4">
-                                <img src="images/icons/add_image_icon.png" class="b-details-body-problem-photo"/>
-                                <img src="images/icons/add_image_icon.png" class="b-details-body-problem-photo"/>
+                                <div class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div>
+                                <form id="addPhotoDropzone" class="dropzone b-add-problem-form" name="upload_photo" drop="dropzoneConfig" ng-show="showDropField">
+
+                                    <div class="previews previews_show" >
+                                        <p>
+                                            <span class="b-conteiner__drop-title-1"><strong>+ Перемістить сюди фото </strong>для завантаження</span>
+                                        </p>
+                                        <span class="b-conteiner__drop-title-2">(або натисніть)</span>
+                                    </div>
+                                   <div class="b-details-body__status">
+                                       Проблема вже вирішена? <br>Так <input type="radio" name="solveProblemMark" value="1">
+                                       Ні<input type="radio" name="solveProblemMark" value="0">
+
+                                   </div>
+                                    <input id="btn-submit" type="button"   class="b-add-problem-button btn-forward-step-3 b-public" value="Додати">
+                                    <input id="btn-reload" type="button" ng-click="hideAddPhotoForm()" class="b-add-problem-button btn-forward-step-3 b-public" value="Звернути">
+
+                                </form>
                             </td>
                         </tr>
                     </table>

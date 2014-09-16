@@ -99,8 +99,8 @@ define(['./module'],function (controllers){
                 parallelUploads:10,
                 thumbnailWidth:100,
                 thumbnailHeight:100,
-                clickable:"#previews",
-                previewsContainer:"#previews"
+                clickable:".previews",
+                previewsContainer:".previews"
             }
         }
 

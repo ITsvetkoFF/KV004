@@ -48,6 +48,8 @@ app.get('/api/activities/:idUser', routes.getUserActivity);
 app.post('/api/problempost', routes.postProblem);
 app.post('/api/vote', routes.postVote);
 app.get('/api/resources/:name',routes.getResource);
+//new api for adding new photos to existed problem
+app.post('/api/photo/:id',routes.addNewPhotos);
 
 app.post('/api/login', routes.logIn);
 app.get('/api/logout', routes.logOut);
