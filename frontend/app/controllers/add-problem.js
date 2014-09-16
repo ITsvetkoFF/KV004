@@ -12,7 +12,7 @@ define(['./module'],function (controllers){
             $scope.$apply(function(){$scope.latitude = e.latlng.lat;});        // binds lat value to the input on the form
             $scope.$apply(function(){$scope.longtitude = e.latlng.lng;});      // binds lng value to the input on the form
 
-            $scope.map.addLayer(L.marker([$scope.latitude, $scope.longtitude], // adding marker to the map
+            $scope.geoJson.addLayer(L.marker([$scope.latitude, $scope.longtitude], // adding marker to the map
                     {/*icon: L.icon({                                          // commented, cause we dont have special mark for placing new Marker
                         iconUrl: 'images/markers/other_icon.png',
                         iconAnchor: [25,79]
@@ -31,6 +31,7 @@ define(['./module'],function (controllers){
         };
 
         $scope.geoJson.on('click', getCoordinates); // enable onMapClickListener that binds eventListener "click" & function that places marker on the map
+        
 
         function allHidden() {
             $scope.showStep_1 = false;

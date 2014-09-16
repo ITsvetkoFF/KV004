@@ -24,12 +24,12 @@ define(['./module'], function (controllers) {
         		});
         	}
         });
-        	var latlng 	= L.latLng(50.00, 32.00);
-		var map     = L.map('map-content', {
-			center: latlng, 
-			zoom: 7, 
-			layers:[tiles/*, geoJson*/] //disabling geoJson because of blocking ukraine-zone on the map
-		});
+        var latlng 	= L.latLng(50.00, 32.00);
+        var map     = L.map('map-content', {
+            center: latlng, 
+            zoom: 7, 
+            layers:[tiles, geoJson] //disabling geoJson because of blocking ukraine-zone on the map
+        });
         $scope.geoJson = geoJson; //forwarding geoJson object to global $scope
 		var markers = L.markerClusterGroup();
         $scope.data = {};
