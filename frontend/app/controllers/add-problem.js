@@ -27,10 +27,10 @@ define(['./module'],function (controllers){
         }
 
         $scope.clearGetCoordinatesListener = function() {                      // function with disabling onMapClickListener functionality
-            $scope.map.off('click', getCoordinates);
+            $scope.geoJson.off('click', getCoordinates);
         };
 
-        $scope.map.on('click', getCoordinates); // enable onMapClickListener that binds eventListener "click" & function that places marker on the map
+        $scope.geoJson.on('click', getCoordinates); // enable onMapClickListener that binds eventListener "click" & function that places marker on the map
 
         function allHidden() {
             $scope.showStep_1 = false;
