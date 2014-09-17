@@ -95,10 +95,7 @@ exports.getTitles = function(req,res){ //get titles of resources
                         err:    err.code
                     });
                 }
-                res.send({
-                    json:   rows,
-                    length: rows.length
-                });
+                res.send(rows);
             });
         }
     });
@@ -124,10 +121,7 @@ exports.getResource = function(req,res){ //get resourse
                         err:    err.code
                     });
                 }
-                res.send({
-                    json:   rows,
-                    length: rows.length
-                });
+                res.send(rows);
             });
         }
     });
