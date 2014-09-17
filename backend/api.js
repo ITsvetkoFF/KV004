@@ -47,6 +47,7 @@ app.get('/api/users/:idUser', routes.getUserId);
 app.get('/api/activities/:idUser', routes.getUserActivity);
 app.post('/api/problempost', routes.postProblem);
 app.post('/api/vote', routes.postVote);
+app.get('/api/getTitles',routes.getTitles);
 app.get('/api/resources/:name',routes.getResource);
 //new api for adding new photos to existed problem
 app.post('/api/photo/:id',routes.addNewPhotos);
