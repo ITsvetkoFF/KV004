@@ -76,6 +76,34 @@ exports.getProblemId = function(req,res){ //get detailed problem description (ev
     });
 };
 
+exports.getTitles = function(req,res){ //get titles of resources
+    req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
+            connection.query('SELECT Title, Alias FROM Resources', name, function(err, rows, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                res.send({
+                    json:   rows,
+                    length: rows.length
+                });
+            });
+        }
+    });
+};
+
 exports.getResource = function(req,res){ //get resourse
     req.getConnection(function(err, connection) {
         if (err) {
