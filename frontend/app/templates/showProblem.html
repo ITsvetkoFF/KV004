@@ -9,8 +9,8 @@
                 <div class="b-details__title">
                     <span class="b-details__real-title">{{data.Title}}</span>
                     <br />
-                    <div class="simple_like_img"></div>
-                    <span class="b-details__likes-count">123</span>
+                    <button class="simple_like_img" ng-click="addOneVote()" ng-disabled="disableVoteButton"></button>
+                    <span class="b-details__likes-count">{{data.Votes}}</span>
                     <div class="b-crear-float">
                     </div>
                 </div>
@@ -52,7 +52,7 @@
 
                                 <div class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div>
                                 <form id="addPhotoDropzone" class="dropzone b-add-problem-form" name="upload_photo" drop="dropzoneConfig" ng-show="showDropField">
-
+					<input type="text" style="display:none" ng-model="userId" name="userId"/>
                                     <div class="previews previews_show" >
                                         <p>
                                             <span class="b-conteiner__drop-title-1"><strong>+ Перемістить сюди фото </strong>для завантаження</span>

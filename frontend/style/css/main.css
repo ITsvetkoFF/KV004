@@ -812,6 +812,7 @@ td.b-details-body__title[colspan] {
     background-size: cover;
     float: right;
     margin: 0 5px;
+    border: 0;
 }
 
     .simple_like_img:hover:after {
@@ -832,6 +833,7 @@ td.b-details-body__title[colspan] {
         cursor: pointer;
         background: url("../../images/icons/like_icon_hover.png") no-repeat center center;
         background-size: cover;
+	 border: 0;
     }
 
 .b-details__likes-count {

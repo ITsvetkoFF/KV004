@@ -216,11 +216,30 @@ exports.addNewPhotos = function(req,res){
                         });
                     }
                     rows.push(row);
+			   var activityData = {
+				  Content:photo_data.Link,
+				  Date:new Date(),
+				  ActivityTypes_Id:4,
+				  Users_Id:req.body.userId,
+				  Problems_Id:req.params.id
+		      }   
+ 	             connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
+			  
+			 if (err) {
+			      console.error(err);
+			      res.statusCode = 500;
+			      res.send({
+				   result: 'error',
+				   err:    err.code
+			      });
+			  }
+                    });
+
+
+                 
                 });
-
-
-                i++;
-            }
+	     i++;
+	     }
             res.send({
                 json:   rows,
                 length: rows.length
@@ -263,28 +282,50 @@ exports.postProblem = function(req,res){  //post new problem
                 }
 
                 var i = 0;
-
-                while (req.files['file[' + i + ']'] != undefined) {
-                    var photo_data = {
+		  var activityData = {
+			  Content:"",
+			  Date:new Date(),
+			  ActivityTypes_Id:1,
+			  Users_Id:req.body.userId,
+			  Problems_Id:rows.insertId
+		  }   
+ 	         connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
+			  
+			 if (err) {
+			      console.error(err);
+			      res.statusCode = 500;
+			      res.send({
+				   result: 'error',
+				   err:    err.code
+			      });
+			  }
+			  
+			  while (req.files['file[' + i + ']'] != undefined) {
+                       var photo_data = {
                         Link: req.files['file[' + i + ']'].name,
                         Status: 0,
                         Description: req.body.description[i],
                         Problems_Id: rows.insertId
-                    };
+                       };
 
-                    connection.query('INSERT INTO Photos SET ?', [photo_data], function (err, rows, fields) {
-                        if (err) {
-                            console.error(err);
-                            res.statusCode = 500;
-                            res.send({
-                                result: 'error',
-                                err: err.code
-                            });
-                        }
-                    });
+                        connection.query('INSERT INTO Photos SET ?', [photo_data], function (err, rows, fields) {
+				   if (err) {
+					console.error(err);
+					res.statusCode = 500;
+					res.send({
+					    result: 'error',
+					    err: err.code
+					});
+				   }
+                        });
 
-                    i++;
-                }
+                        i++;
+                        }  
+			  
+			  
+			  
+		  });
+                
 
                 res.send({
                     json:   rows,
@@ -296,6 +337,7 @@ exports.postProblem = function(req,res){  //post new problem
 };
 
 exports.postVote = function(req,res){  //+1 vote for a problem
+	 
 	req.getConnection(function(err, connection) {
 		if (err) {
 			console.error('CONNECTION error: ',err);
@@ -305,8 +347,9 @@ exports.postVote = function(req,res){  //+1 vote for a problem
 				err:    err.code
 			});
 		} else {
-            var id = req.params.id;
-            connection.query('UPDATE Problems SET Votes=Votes+1 WHERE Id=?', [id], function(err, rows, fields) {
+            var problemId = req.body.idProblem;
+            var userId = req.body.userId;
+            connection.query('UPDATE Problems SET Votes=Votes+1 WHERE Id=?', [problemId], function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -314,11 +357,37 @@ exports.postVote = function(req,res){  //+1 vote for a problem
                         result: 'error',
                         err:    err.code
                     });
-                }
+		  }
+			  if(userId!=undefined){
+			      var activityData = {
+				  Content:"",
+				  Date:new Date(),
+				  ActivityTypes_Id:3,
+				  Users_Id:userId,
+				  Problems_Id:problemId
+			      }   
+			   connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
+
+				 if (err) {
+				      console.error(err);
+				      res.statusCode = 500;
+				      res.send({
+					   result: 'error',
+					   err:    err.code
+				      });
+				  }  
+
+
+			  });
+			  }
                 res.send({
                     json:   rows,
-                    length: rows.length
+                    length: rows.length,
+		      fields:fields	  
+		       
+		      	  
                 });
+		   
             });
         }
     });

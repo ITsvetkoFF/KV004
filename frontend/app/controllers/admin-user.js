@@ -20,7 +20,7 @@ define(['./module'], function (controllers) {
             data.email = document.registerForm.email.value;
             data.password = document.registerForm.password.value;
 
-            $http.post('http://ita-kv.tk:8090/api/register', data);
+            $http.post('api/register', data);
         };
         /*******************************/
 
@@ -43,6 +43,7 @@ define(['./module'], function (controllers) {
         $scope.isAdministrator = UserService.isAdministrator;
         $scope.name = ipCookie('userName');
         $scope.surname = ipCookie('userSurname');
+	 $scope.userId = ipCookie('id');
 
         /*****--- The main part of facebook authorization ---*****/
         FB.init({
