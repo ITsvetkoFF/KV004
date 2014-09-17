@@ -147,10 +147,7 @@ exports.getUserId = function(req,res){ //get all user's problems in brief (coord
                         err:    err.code
                     });
                 }
-                res.send({
-                    json:   rows,
-                    length: rows.length
-                });
+                res.send(rows);
             });
         }
     });
