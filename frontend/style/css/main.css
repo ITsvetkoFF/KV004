@@ -466,6 +466,20 @@ html, body {
     height: calc(100% - 52px);
     height: -moz-calc(100% - 52px);
 }
+
+.b-container__right-side_full {
+    z-index: 1006;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    min-width: 320px;
+    background: #FFFFFF;
+    height: calc(100% - 52px);
+    height: -moz-calc(100% - 52px);
+}
+
 .b-right-side {
     height: 100%;
     width: 100%;

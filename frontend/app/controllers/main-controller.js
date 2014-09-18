@@ -7,19 +7,14 @@ define(['./module'],function(controllers){
         $scope.addProblem = function () {
             $scope.showRigthSide = "";
         };
-
-        $scope.showResource = function () {
-            $scope.showRigthSide = "";
-        };
-
         $scope.rightSidePointerClick = function () {
             $scope.showRigthSide = "_hide";
         };
 
         $rootScope.$on("Update", function(event, message) {
+            if ($scope.showRigthSide != message){
             $scope.showRigthSide = message;
-            $scope.$apply();
-            console.log("Update");
+        }
         });
 
     }]);

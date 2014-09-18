@@ -24,8 +24,7 @@ define([
         //'app.filters',
         'app.services',
         'ngRoute',
-        'ngSanitize',
         'ipCookie',
-        'textAngular'
+        'ngSanitize'
     ]);
 });

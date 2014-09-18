@@ -5,18 +5,18 @@
     <div class="b-header__menu">
         <ul class="b-menu">
             <li class="b-menu__item">
-                <a href="#/resources/about" class="b-menu__link" ng-click="showResource()">Про проект</a>
+                <a href="#/resources/about" class="b-menu__link" >Про проект</a>
             </li>
             <li class="b-menu__item">
                 <a href="#" class="b-menu__link" id="b-menu__link-source">Ресурси</a>
                 <div class="b-menu__submenu" ng-controller="Resources" ng-init="getTitles()">
                     <ul class="b-submenu">
                         <li class="b-submenu__item" ng-repeat="title in data">
-                            <a href="#/resources/{{title.Alias}}" class="b-submenu__link" ng-click="showResource()">{{title.Title}}</a>
+                            <a href="#/resources/{{title.Alias}}" class="b-submenu__link" >{{title.Title}}</a>
                         </li>
 
                         <li class="b-submenu__item" ng-show='true'>
-                            <a href="#/addDocument" class="b-submenu__link" ng-click="showResource()">Додати документ</a>
+                            <a href="#/addDocument" class="b-submenu__link" >Додати документ</a>
                         </li>
                     </ul>
                 </div>
