@@ -10,7 +10,8 @@
     "body-parser": "*",
     "cookie-parser": "*",
     "express-myconnection": "*",
-	  "xmlhttprequest":"*"
+	  "xmlhttprequest":"*",
+	  "socket.io":"*"
   },
   "engines": {
     "node": ">=0.8.0"
