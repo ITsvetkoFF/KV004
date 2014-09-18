@@ -13,7 +13,12 @@ require.config({
         'domReady': '../bower_components/requirejs-domready/domReady',
         'require': '../bower_components/requirejs/require',
         'facebook': 'https://connect.facebook.net/en_US/all',
-        'dropzone':'../bower_components/dropzone'
+        'dropzone':'../bower_components/dropzone',
+	/* 'btford.socket-io': '../bower_components/btford.socket-io',*/
+	    'ngSanitize':  '../bower_components/angular-sanitize/angular-sanitize',
+	    'ngResource':  '../bower_components/angular-resource/angular-resource',
+	    'socket':'../bower_components/angular-socket-io/socket',
+	    'socket.io':'../bower_components/socket.io-client/dist/socket.io'
 
     },
 
@@ -25,8 +30,22 @@ require.config({
         'angular': {
             exports: 'angular'
         },
-
+        'socket.io': {
+            exports: 'io'
+        },
         'angular-route': {
+            deps: ['angular']
+        },
+	     'ngSanitize': {
+            deps: ['angular']
+        },
+	     'ngResource': {
+            deps: ['angular']
+        },
+	     'socket': {
+            deps: ['socket.io']
+        },
+	     'socket.io': {
             deps: ['angular']
         },
         'angular-mocks': {

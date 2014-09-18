@@ -1,5 +1,7 @@
 var mysql = require('mysql'),
     express = require('express'),
+    app = express(),
+    http = require('http'),
     multer = require('multer'),
     jwt = require('jsonwebtoken'),
     crypto = require('crypto'),
@@ -7,18 +9,32 @@ var mysql = require('mysql'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
     bodyParser = require('body-parser'),
-    secret       = require('./config/secret');
-
-var app    = express(),
+    server = http.createServer(app),
+    secret       = require('./config/secret'),
+    io = require('socket.io'),
     routes = require('./routes.js');
+    
+    io = io.listen(server);
+    require('./sockets/base')(io);
 
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
-    password : 'root',
+    password : '',
     database : 'Enviromap'
 };
+ 
+ var router = express.Router();
 
+  /* GET users listing. */
+  router.get('/', function(req, res) {
+      console.log(req);
+    res.send('respond with a resource');
+  });
+ 
+
+// optional - set socket.io logging level
+io.set('log level', 1000);
 
 app.use(multer(
     {
@@ -63,6 +79,14 @@ app.delete('/api/activity/:id', routes.deleteComment);
 app.delete('/api/photo/:id', routes.deletePhoto);
 app.put('/api/edit', routes.editProblem);
 
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
 
-app.listen(8090);
+server.listen(8090);
+
 console.log('Rest Demo Listening on port 8090');

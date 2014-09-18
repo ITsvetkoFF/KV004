@@ -222,7 +222,11 @@ html, body {
     font-weight: lighter;
     border: 1px solid RGBA(0, 0, 0, 0);
 }
-
+.chatField{
+	padding: 0;
+	margin: 0;
+	
+}
 .b-user__form-userid{
     display: none;
 }
@@ -475,6 +479,8 @@ html, body {
 .b-right-side__show-problem {
     height: 100%;
     width: 100%;
+    overflow: auto;
+	
 }
 
 .b-right-side__pointer {

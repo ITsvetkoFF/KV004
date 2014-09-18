@@ -1,7 +1,8 @@
 define(['./module'], function(controllers){
     'use strict';
     controllers.controller('showProblemCtrl', function ($scope,$routeParams,$http,ipCookie){
-	  if(ipCookie('vote'+$routeParams.problemID)==true){
+
+        if(ipCookie('vote'+$routeParams.problemID)==true){
 		  
 		  $scope.disableVoteButton=true;
 	  }else{

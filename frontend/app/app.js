@@ -7,6 +7,9 @@ define([
     'angular-route',
     'angular-mocks',
     'angular-cookie',
+	'ngResource',
+	'ngSanitize',
+	'socket',
     'facebook',
     'dropzone',
     './controllers/index',
@@ -23,6 +26,9 @@ define([
         //'app.filters',
         'app.services',
         'ngRoute',
-        'ipCookie'
-    ]);
+        'ipCookie',
+	 'ngResource',
+        'ngSanitize',
+       'btford.socket-io'
+    ]).value('nickName', 'anonymous');;
 });

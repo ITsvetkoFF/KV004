@@ -10,6 +10,7 @@ define([
     './main-controller',
     './show-problem',
     './add-problem',
-    './resources'
+    './resources', 
+    './socket'	
 
 ], function () {});

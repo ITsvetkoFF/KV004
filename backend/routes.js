@@ -348,7 +348,7 @@ exports.postVote = function(req,res){  //+1 vote for a problem
 			});
 		} else {
             var problemId = req.body.idProblem;
-            var userId = req.body.userId;
+            var userId = req.body.id;
             connection.query('UPDATE Problems SET Votes=Votes+1 WHERE Id=?', [problemId], function(err, rows, fields) {
                 if (err) {
                     console.error(err);

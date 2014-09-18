@@ -43,7 +43,7 @@ define(['./module'], function (controllers) {
         $scope.isAdministrator = UserService.isAdministrator;
         $scope.name = ipCookie('userName');
         $scope.surname = ipCookie('userSurname');
-	 $scope.userId = ipCookie('id');
+	    $scope.userId = ipCookie('id');
 
         /*****--- The main part of facebook authorization ---*****/
         FB.init({
