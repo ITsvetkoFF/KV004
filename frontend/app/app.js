@@ -12,7 +12,9 @@ define([
     './controllers/index',
     './directives/index',
     //'./filters/index',
-    './services/index'
+    './services/index',
+    'textAngular',
+    'angular-sanitize'
 ], function (angular) {
     'use strict';
 
@@ -23,6 +25,7 @@ define([
         //'app.filters',
         'app.services',
         'ngRoute',
+        'ngSanitize',
         'ipCookie'
     ]);
 });

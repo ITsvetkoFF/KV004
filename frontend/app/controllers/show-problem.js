@@ -10,7 +10,7 @@ define(['./module'], function(controllers){
         $scope.showDropField = false;
         $scope.showAddPhotoButton = true;
 
-        var res=$http.get("api/problems/"+$routeParams.problemID);
+        var res=$http.get("http://ita-kv.tk:8090/api/problems/"+$routeParams.problemID);
 
         res.success(function(data,status,headers,config){
 

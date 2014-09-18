@@ -13,7 +13,9 @@ require.config({
         'domReady': '../bower_components/requirejs-domready/domReady',
         'require': '../bower_components/requirejs/require',
         'facebook': 'https://connect.facebook.net/en_US/all',
-        'dropzone':'../bower_components/dropzone'
+        'dropzone':'../bower_components/dropzone',
+        'textAngular':'../bower_components/textAngular/src/textAngular',
+        'angular-sanitize':'../bower_components/angular-sanitize/angular-sanitize'
 
     },
 

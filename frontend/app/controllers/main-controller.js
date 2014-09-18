@@ -8,6 +8,10 @@ define(['./module'],function(controllers){
             $scope.showRigthSide = "";
         };
 
+        $scope.showResource = function () {
+            $scope.showRigthSide = "";
+        };
+
         $scope.rightSidePointerClick = function () {
             $scope.showRigthSide = "_hide";
         };

@@ -28,7 +28,7 @@ app.use(bodyParser());
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(myConnection(mysql, connectionPool, 'pool'));
-app.use('/',express.static('../frontend'));
+app.use('/',express.static('./frontend'));
 //console.log(__dirname);
 
 app.all('*', function(req, res, next) {

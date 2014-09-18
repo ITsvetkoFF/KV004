@@ -16,9 +16,17 @@ define(['./app'], function (app) {
               templateUrl: 'app/templates/showProblem.html',
               controller: 'showProblemCtrl'
           })
+          .when('/addDoc',{
+            templateUrl: 'app/templates/editor.html',
+             controller: 'editorController'
+          })
           .when('/problem/addProblem', {
               templateUrl: 'app/templates/addProblem.html',
               controller: 'addProblemCtrl'
+          }).
+          when('/resources/:name', {
+              templateUrl: 'app/templates/resources.html',
+              controller:'resourcesCtrl'
           }).
         otherwise({
             redirectTo: '/map'

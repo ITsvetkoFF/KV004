@@ -9,6 +9,8 @@
     "angular-cookie": "latest",
     "bootstrap": "latest",
     "requirejs": "latest",
-    "requirejs-domready": "latest"
+    "requirejs-domready": "latest",
+    "textAngular" : "latest",
+    "angular-sanitize" : "latest"
   }
 }
