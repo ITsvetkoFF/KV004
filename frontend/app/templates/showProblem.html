@@ -1,0 +1,242 @@
+<div class="b-right-side__show-problem">
+<div class="b-problems">
+<!-- Часть для вставки / начало -->
+
+<div class="b-problems__leftPanel floating" id="left">
+    <div class="b-leftPanel">
+        <div class="b-leftPanel__details">
+            <div class="b-details">
+                <div class="b-details__title">
+                    <span class="b-details__real-title">{{data.Title}}</span>
+                    <br />
+                    <button class="simple_like_img" ng-click="addOneVote()" ng-disabled="disableVoteButton"></button>
+                    <span class="b-details__likes-count">{{data.Votes}}</span>
+                    <div class="b-crear-float">
+                    </div>
+                </div>
+
+                <div class="b-details__body">
+                    <table class="b-details-body">
+                        <tr class="b-details-body__line">
+                            <td class="b-details-body__title">Додана:</td>
+                            <td class="b-details-body__value">2014-01-01</td>
+                        </tr>
+                        <tr class="b-details-body__line">
+                            <td class="b-details-body__title">Тип:</td>
+                            <td class="b-details-body__value">{{data.ProblemTypes_Id}}</td>
+                        </tr>
+                        <tr class="b-details-body__line">
+                            <td class="b-details-body__title">Статус:</td>
+                            <td class="b-details-body__value">{{data.Status}}</td>
+                        </tr>
+                        <tr class="b-details-body__line">
+                            <td class="b-details-body__title">Важливість:</td>
+                            <td class="b-details-body__value">{{data.Severity}}</td>
+                        </tr>
+                        <tr class="b-details-body__line">
+                            <td class="b-details-body__title" colspan="4">Опис проблеми:</td>
+                        </tr>
+                        <tr class="b-details-body__line">
+                            <td class="b-details-body__problem-definition" colspan="4">{{data.Content}}</td><tr>
+                        <tr class="b-details-body__line">
+                            <td class="b-details-body__title" colspan="4">Фотографії проблеми:</td>
+                        </tr>
+                        <tr class="b-details-body__line">
+                            <td class="b-details-body__problem-photos" colspan="4">
+                                <!--<img src="images/icons/add_image_icon.png" class="b-details-body-problem-photo"/>-->
+                                <div class="show_photo" ng-repeat="photo in photos">
+                                    <img  ng-src="photos/large/{{photo.Link}}" class="b-details-body-problem-photo"/>
+
+                                    <div class="show_photo_label_{{photo.Status}}"></div>
+                                </div>
+
+                                <div class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div>
+                                <form id="addPhotoDropzone" class="dropzone b-add-problem-form" name="upload_photo" drop="dropzoneConfig" ng-show="showDropField">
+					<input type="text" style="display:none" ng-model="userId" name="userId"/>
+                                    <div class="previews previews_show" >
+                                        <p>
+                                            <span class="b-conteiner__drop-title-1"><strong>+ Перемістить сюди фото </strong>для завантаження</span>
+                                        </p>
+                                        <span class="b-conteiner__drop-title-2">(або натисніть)</span>
+                                    </div>
+                                   <div class="b-details-body__status">
+                                       Проблема вже вирішена? <br>Так <input type="radio" name="solveProblemMark" value="1">
+                                       Ні<input type="radio" name="solveProblemMark" value="0">
+
+                                   </div>
+                                    <input id="btn-submit" type="button"   class="b-add-problem-button btn-forward-step-3 b-public" value="Додати">
+                                    <input id="btn-reload" type="button" ng-click="hideAddPhotoForm()" class="b-add-problem-button btn-forward-step-3 b-public" value="Звернути">
+
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="b-details__photos">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="b-problems__rightPanel floating" id="right">
+    <div class="b-rightPanel">
+        <div class="b-rightPanel__chat">
+            <div class="b-chat">
+                <div class="b-chat__container-arrow-down">
+                </div>
+
+                <div class="b-chat__container-arrow-up">
+                </div>
+            </div>
+
+            <div class="b-chat-comment">
+                <span class="b-chat-comment__title">Додати коментар</span>
+                <textarea class="b-chat-comment__field" placeholder="Напишіть тут свій коментар..."></textarea>
+                <div class="b-chat-comment__btn-field">
+                    <input type="button" value="Додати" class="b-chat-comment__btn"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="b-crear-float">
+</div>
+
+<div class="b-problems__mainList">
+    <div class="b-mainList">
+        <div class="b-mainList-categorie floating">
+            <span class="b-mainList-categorie__title">Ваші записи:</span>
+            <ul class="b-mainList__list">
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="b-mainList-categorie floating">
+            <span class="b-mainList-categorie__title">Останні проблеми:</span>
+            <ul class="b-mainList__list">
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="b-crear-float">
+        </div>
+
+
+        <div class="b-mainList-categorie floating">
+            <span class="b-mainList-categorie__title">Найближчі проблеми:</span>
+            <ul class="b-mainList__list">
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="b-mainList-categorie floating">
+            <span class="b-mainList-categorie__title">Популярні проблеми:</span>
+            <ul class="b-mainList__list">
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+                <li class="b-mainList__list-item">
+                    <img class="b-mainList__list-item-image" src="images/icons/add_image_icon.png"/>
+                    <span class="b-mainList__list-item-title">Hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello, hello</span>
+                    <span class="b-mainList__list-item-votes">Голосів:</span>
+                    <span class="b-mainList__list-item-votes-value">10</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="b-crear-float">
+        </div>
+    </div>
+</div>
+
+</div>
+<!-- Часть для вставки / конец -->
+
+</div>

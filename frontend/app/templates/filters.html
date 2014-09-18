@@ -1,0 +1,40 @@
+<div class="b-container-filters-left">
+    <div class="info-problem-filters">
+        <div class="problem filters">
+            <p class="title">ТИП ПРОБЛЕМ</p>
+
+            <input ng-repeat-start="problemType in problemTypes" id="{{'type' + problemType.id}}" type="checkbox"  ng-model="problemType.selected" ng-change="toggleSelection()">
+            <label ng-repeat-end for="{{'type' + problemType.id}}">{{problemType.name}}</label>
+
+        </div>
+
+        <div class="problem status">
+            <p class="title">СТАТУС ПРОБЛЕМ</p>
+
+            <input ng-repeat-start="problemStatus in problemStatuses" id="{{'status' + problemStatus.id}}" type="checkbox"  ng-model="problemStatus.selected" ng-change="toggleSelection()">
+            <label ng-repeat-end for="{{'status' + problemStatus.id}}">{{problemStatus.name}}</label>
+            
+        </div>
+        <div class="problem controls">
+            <!-- For Registered Users -->
+            <p class="title">REGISTERED USER CONTROLS</p>
+            <ul>Мої проблеми</ul>
+            <li>Проблема 1</li>
+            <li>Проблема 2</li>
+            <li>Проблема 3</li>
+            <ul>Коментарі</ul>
+            <li>Коментар 1</li>
+            <li>Коментар 1</li>
+            <li>Коментар 1</li>
+        </div>
+        <div class="problem stats">
+            <p class="title">STATS</p>
+            <li>Кількість проблем</li>
+            <li>Останні проблеми</li>
+            <li>Популярні проблеми</li>
+
+        </div>
+
+
+    </div>
+</div>
