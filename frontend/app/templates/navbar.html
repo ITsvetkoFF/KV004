@@ -12,11 +12,11 @@
                 <div class="b-menu__submenu" ng-controller="Resources" ng-init="getTitles()">
                     <ul class="b-submenu">
                         <li class="b-submenu__item" ng-repeat="title in data">
-                            <a href="#/resourses/{{title.Alias}}" class="b-submenu__link" ng-click="showResource()">{{title.Title}}</a>
+                            <a href="#/resources/{{title.Alias}}" class="b-submenu__link" ng-click="showResource()">{{title.Title}}</a>
                         </li>
 
                         <li class="b-submenu__item" ng-show='true'>
-                            <a href="#" class="b-submenu__link" ng-click="showResource()">Додати документ</a>
+                            <a href="#/addDocument" class="b-submenu__link" ng-click="showResource()">Додати документ</a>
                         </li>
                     </ul>
                 </div>

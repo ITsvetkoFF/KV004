@@ -11,6 +11,7 @@ define([
     './show-problem',
     './add-problem',
     './resources',
-    './resourcesCtrl'
+    './resourcesCtrl',
+    './editorCtrl'
 
 ], function () {});

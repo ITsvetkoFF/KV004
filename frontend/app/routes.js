@@ -28,6 +28,10 @@ define(['./app'], function (app) {
               templateUrl: 'app/templates/resources.html',
               controller:'resourcesCtrl'
           }).
+          when('/addDocument', {
+              templateUrl: 'app/templates/editorPage.html',
+              controller:'editorCtrl'
+          }).
         otherwise({
             redirectTo: '/map'
         });
