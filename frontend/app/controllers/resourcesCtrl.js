@@ -1,4 +1,4 @@
-define(['./module', 'angular-sanitize'], function (controllers) {
+define(['./module'], function (controllers) {
 
    'use strict';
     controllers.controller('resourcesCtrl',['$scope','$http', '$routeParams', '$rootScope', function($scope,$http, $routeParams, $rootScope) {

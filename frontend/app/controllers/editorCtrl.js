@@ -1,9 +1,8 @@
-define(['./module', 'textAngular', 'angular-sanitize'], function (controllers) {
+define(['./module'], function (controllers) {
    'use strict';
     controllers.controller('editorCtrl',['$scope', '$rootScope', function ($scope, $rootScope) {
-		$scope.orightml = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li>Super Easy <b>Theming</b> Options</li><li style="color: green;">Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li class="text-danger">Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE8+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p>';
+		$scope.orightml = '<h2>Введіть сюди новий ресурс</h2>';
 		$scope.htmlcontent = $scope.orightml;
-		$scope.disabled = false;
 		$rootScope.$broadcast('Update', '_full');
 	}])
 });

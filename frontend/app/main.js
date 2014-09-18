@@ -15,7 +15,8 @@ require.config({
         'facebook': 'https://connect.facebook.net/en_US/all',
         'dropzone':'../bower_components/dropzone',
         'textAngular':'../bower_components/textAngular/src/textAngular',
-        'angular-sanitize':'../bower_components/textAngular/src/textAngular-sanitize'
+        'angular-sanitize':'../bower_components/textAngular/src/textAngular-sanitize',
+        'textAngularSetup':'../bower_components/textAngular/src/textAngularSetup',
 
     },
 

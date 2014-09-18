@@ -14,7 +14,8 @@ define([
     //'./filters/index',
     './services/index',
     'textAngular',
-    'angular-sanitize'
+    'angular-sanitize',
+    'textAngularSetup'
 ], function (angular) {
     'use strict';
 
@@ -25,6 +26,8 @@ define([
         'app.services',
         'ngRoute',
         'ipCookie',
-        'ngSanitize'
+        'ngSanitize',
+        'textAngular',
+        'textAngularSetup'
     ]);
 });

@@ -1,12 +1,10 @@
+<link rel='stylesheet' href='bower_components\textAngular\src\textAngular.css'>
+<link rel="stylesheet" href="https:\\netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
 <style type="text/css">
-	.ta-editor {
-  min-height: 300px;
-  height: auto;
-  overflow: auto;
-  font-family: inherit;
-  font-size: 100%;
-}
 </style>
 Введіть назву реcурсу: <input type="text"><br>
 Введіть контент:
-<div class="ta-editor" text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent" ta-disabled='disabled'></div>
+<div text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent"></div>
+<div type="textarea" ng-bind="htmlcontent"></div>
+Введіть alias: <input type="text">
