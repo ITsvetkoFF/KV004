@@ -32,6 +32,10 @@ define(['./app'], function (app) {
               templateUrl: 'app/templates/editorPage.html',
               controller:'editorCtrl'
           }).
+          when('/editResource/:Alias', {
+              templateUrl: 'app/templates/editorPage.html',
+              controller:'editorCtrl'
+          }).
         otherwise({
             redirectTo: '/map'
         });

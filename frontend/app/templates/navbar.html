@@ -8,13 +8,13 @@
                 <a href="#/resources/about" class="b-menu__link" >Про проект</a>
             </li>
             <li class="b-menu__item">
-                <button class="b-menu__link" id="b-menu__link-source">Ресурси</button>
+                <a class="b-menu__link" id="b-menu__link-source">Ресурси</a>
                 <div class="b-menu__submenu" ng-controller="Resources" ng-init="getTitles()">
                     <ul class="b-submenu">
                         <li class="b-submenu__item" ng-repeat="title in data">
                             <a href="#/resources/{{title.Alias}}" class="b-submenu__link" >{{title.Title}}</a>
-                            <a href="#/editResource/{{title.Alias}}" class="b-submenu__link" >Редагувати</a>
-                            <a href="#/deleteResource" class="b-submenu__link" >Видалити</a>
+                            <a href="#/editResource/{{title.Alias}}" class="b-submenu__button">Редагувати</a>
+                            <a href="#/deleteResource" class="b-submenu__button">Видалити</a>
                         </li>
 
                         <li class="b-submenu__item" ng-show='true'>

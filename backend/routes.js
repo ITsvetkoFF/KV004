@@ -872,7 +872,7 @@ req.getConnection(function(err, connection) {
             Title: req.body.title,
             Content: req.body.content
                 };
-                var Alias: req.body.alias
+                var Alias = req.body.alias
         connection.query("UPDATE Resources SET ? WHERE Alias = ?", [data, Alias], function(err, rows, fields) {
                     if (err) {
                         console.error(err);
@@ -917,7 +917,7 @@ req.getConnection(function(err, connection) {
                 if (decoded.role != 'administrator') {
                     return res.send(401);
                 }
-            var Alias: req.body.alias
+            var Alias = req.body.alias
         connection.query("DELETE FROM Resources WHERE Alias = ?", data, function(err, rows, fields) {
                     if (err) {
                         console.error(err);
