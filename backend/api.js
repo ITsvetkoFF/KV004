@@ -20,7 +20,7 @@ var mysql = require('mysql'),
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
-    password : 'root',
+    password : '',
     database : 'Enviromap'
 };
  
