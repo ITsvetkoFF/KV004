@@ -12,9 +12,9 @@
                 <div class="b-menu__submenu" ng-controller="Resources" ng-init="getTitles()">
                     <ul class="b-submenu">
                         <li class="b-submenu__item" ng-repeat="title in data">
-                            <a href="#/resources/{{title.Alias}}" class="b-submenu__link" >{{title.Title}}</a>
-                            <a href="#/editResource/{{title.Alias}}" class="b-submenu__button">Редагувати</a>
-                            <a href="#/deleteResource" class="b-submenu__button">Видалити</a>
+                            <a href="#/resources/{{title.Alias}}" class="b-submenu__link" >{{title.Title}}</a> 
+                            <a href="#/editResource/{{title.Alias}}" class="b-submenu__button"><i class="fa fa-pencil-square-o"></i></a> 
+                            <a href="#/deleteResource" class="b-submenu__button"><i class="fa fa-eraser"></i></a>
                         </li>
 
                         <li class="b-submenu__item" ng-show='true'>

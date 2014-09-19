@@ -1,24 +1,28 @@
 <link rel='stylesheet' href='bower_components\textAngular\src\textAngular.css'>
-<link rel="stylesheet" href="https:\\netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 <style type="text/css">
 	.editor {
 		margin-top: 30px;
 		padding-left: 30px;
 	}
 	.editor_ta {
-		max-width: 1220px;
+		max-width: 95%;
+		max-height: 90%;
 	}
 	.editor div {
 		margin: 5px;
-		vertical-align: center;
+		}
+	.editor input {
+		line-height: 20px;
+		min-width: 400px;
 	}
 </style>
 <form class="editor">
-<div> Введіть назву реcурсу: <textarea ng-model="Title"></textarea><br></div>
+<div> Введіть назву реcурсу: <input type="text" ng-model="Title"></div>
 <div> 
 Введіть контент:
 <div text-angular="text-angular" name="htmlcontent" ng-model="Content" class="editor_ta"></div>
-<div type="textarea" ng-bind="Content"></div>
 </div>
+<div ng-bind='Content'></div>
 <div> Введіть alias: <input type="text" ng-model="Alias"> </div>
+<button type="submit" ng-click="sendResource(Alias, Content, Title)">Відправити</button>
 </form>
