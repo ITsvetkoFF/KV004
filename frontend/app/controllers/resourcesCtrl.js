@@ -6,6 +6,9 @@ define(['./module'], function (controllers) {
             $scope.resource = data[0];
             });
             $rootScope.$broadcast('Update', '_full');
+            $scope.hideDiv = function() {
+			$rootScope.$broadcast('Update', '_hide');
+		}
         }])
 });
 

@@ -13,6 +13,8 @@
                     <ul class="b-submenu">
                         <li class="b-submenu__item" ng-repeat="title in data">
                             <a href="#/resources/{{title.Alias}}" class="b-submenu__link" >{{title.Title}}</a>
+                            <a href="#/editResource/{{title.Alias}}" class="b-submenu__link" >Редагувати</a>
+                            <a href="#/deleteResource" class="b-submenu__link" >Видалити</a>
                         </li>
 
                         <li class="b-submenu__item" ng-show='true'>

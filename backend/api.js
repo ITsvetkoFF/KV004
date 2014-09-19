@@ -62,6 +62,9 @@ app.delete('/api/user/:id', routes.deleteUser);
 app.delete('/api/activity/:id', routes.deleteComment);
 app.delete('/api/photo/:id', routes.deletePhoto);
 app.put('/api/edit', routes.editProblem);
+app.post('/api/addResource', routes.addResource);
+app.put('/api/editResource', routes.editResource);
+app.delete('/api/deleteResource', routes.deleteResource);
 
 
 app.listen(8090);
