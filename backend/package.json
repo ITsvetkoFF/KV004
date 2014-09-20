@@ -11,7 +11,10 @@
     "cookie-parser": "*",
     "express-myconnection": "*",
 	  "xmlhttprequest":"*",
-	  "socket.io":"*"
+	  "socket.io":"*",
+	  "jade":"*",
+          "multer":"*"
+
   },
   "engines": {
     "node": ">=0.8.0"
