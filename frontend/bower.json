@@ -16,6 +16,7 @@
     "angular-socket-io": "~0.4.1",
     "socket.io": "~0.9.15",
     "angular-resource": "latest",
-    "angular-cookies": "latest"
+    "angular-cookies": "latest",
+    "dropzone":"latest"
   }
 }
