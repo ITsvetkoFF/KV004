@@ -13,7 +13,7 @@ require.config({
         'domReady': '../bower_components/requirejs-domready/domReady',
         'require': '../bower_components/requirejs/require',
         'facebook': 'https://connect.facebook.net/en_US/all',
-        'dropzone':'../bower_components/dropzone',
+        'dropzone':'../bower_components/dropzone/downloads/dropzone',
 	/* 'btford.socket-io': '../bower_components/btford.socket-io',*/
 	    'ngSanitize':  '../bower_components/angular-sanitize/angular-sanitize',
 	    'ngResource':  '../bower_components/angular-resource/angular-resource',
