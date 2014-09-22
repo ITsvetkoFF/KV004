@@ -896,11 +896,12 @@ req.getConnection(function(err, connection) {
                     return res.send(401);
                 }
                 var data = {
+            Alias: req.body.Alias,
             Title: req.body.Title,
             Content: req.body.Content
                 };
-                var Alias = req.params.Alias
-        connection.query("UPDATE Resources SET ? WHERE Alias = ?", [data, Alias], function(err, rows, fields) {
+                var alias = req.params.alias
+        connection.query("UPDATE Resources SET ? WHERE Alias = ?", [data, alias], function(err, rows, fields) {
                     if (err) {
                         console.error(err);
                         res.statusCode = 500;
@@ -942,7 +943,7 @@ req.getConnection(function(err, connection) {
                 if (decoded.role != 'administrator') {
                     return res.send(401);
                 }
-            var Alias = req.params.Alias
+            var Alias = req.params.alias
         connection.query("DELETE FROM Resources WHERE Alias = ?", Alias, function(err, rows, fields) {
                     if (err) {
                         console.error(err);
