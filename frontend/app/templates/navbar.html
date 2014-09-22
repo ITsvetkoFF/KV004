@@ -13,12 +13,12 @@
                     <ul class="b-submenu">
                         <li class="b-submenu__item" ng-repeat="title in data">
                             <a href="#/resources/{{title.Alias}}" class="b-submenu__link" >{{title.Title}}</a> 
-                            <a href="#/editResource/{{title.Alias}}" class="b-submenu__button"><i class="fa fa-pencil-square-o"></i></a> 
-                            <a href="#/deleteResource/{{title.Alias}}" class="b-submenu__button" ng-click="deleteResource(title.Alias)"><i class="fa fa-eraser"></i></a>
+                            <a href="#/editResource/{{title.Alias}}" class="b-submenu__button" ng-show="isAdminisrator()"><i class="fa fa-pencil-square-o"></i></a> 
+                            <a href="#/deleteResource/{{title.Alias}}" class="b-submenu__button" ng-show="isAdminisrator()" ng-click="deleteResource(title.Alias)"><i class="fa fa-eraser"></i></a>
                         </li>
 
                         <li class="b-submenu__item" ng-show='true'>
-                            <a href="#/addDocument" class="b-submenu__link" >Додати документ</a>
+                            <a href="#/addResource" class="b-submenu__link" ng-if="!isAdminisrator()" >Додати новий ресурс</a>
                         </li>
                     </ul>
                 </div>
