@@ -20,7 +20,7 @@ var mysql = require('mysql'),
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
-    password : '',
+    password : 'root',
     database : 'Enviromap'
 };
  
@@ -38,13 +38,13 @@ io.set('log level', 1000);
 
 app.use(multer(
     {
-        dest: './frontend/photos/large'
+        dest: '../frontend/photos/large'
     }));
 app.use(bodyParser());
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(myConnection(mysql, connectionPool, 'pool'));
-app.use('/',express.static('./frontend'));
+app.use('/',express.static('../frontend'));
 //console.log(__dirname);
 
 app.all('*', function(req, res, next) {
