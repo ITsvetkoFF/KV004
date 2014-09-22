@@ -527,6 +527,7 @@
     vertical-align: top;
     width: 25px;
     float:left;
+    font-size: 16pt;
 }
 .b-problem-deatiled-info-title__text {
     display: inline-block;
