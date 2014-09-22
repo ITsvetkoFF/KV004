@@ -12,7 +12,11 @@ define(['./module','dropzone'], function(directives,Dropzone){
             var myDropzone = drop;
             var counter = 0;
             submitButton.addEventListener("click", function() {
-               myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+               if (myDropzone.files.length > 0) {
+                        myDropzone.processQueue();
+                    } else {
+                        myDropzone.uploadFile({name:"",length:0}); //send empty
+                    }
             });
             myDropzone.on("addedfile", function(file) {
                 var arr = document.getElementsByClassName("dz-preview");
