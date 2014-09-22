@@ -1,8 +1,7 @@
 {
   "name": "enviromap-rest-api",
   "version": "0.0.2",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "express": "*",
     "mysql": "~2.4.3",
     "jsonwebtoken": "*",
@@ -14,7 +13,9 @@
 	  "socket.io":"*",
 	  "jade":"*",
           "multer":"*"
-
+  },
+  "devDependencies": {
+    "bower": "*"
   },
   "engines": {
     "node": ">=0.8.0"
