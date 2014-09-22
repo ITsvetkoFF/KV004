@@ -835,9 +835,7 @@ req.getConnection(function(err, connection) {
                     }
                     res.send({
                         result: 'success',
-                        err:    '',
-                        json:   rows,
-                        length: rows.length
+                        err:    ''
                     });
                     });
             });
@@ -884,9 +882,7 @@ req.getConnection(function(err, connection) {
                     }
                     res.send({
                         result: 'success',
-                        err:    '',
-                        json:   rows,
-                        length: rows.length
+                        err:    ''
                     });
                     });
             });
@@ -929,9 +925,7 @@ req.getConnection(function(err, connection) {
                     }
                     res.send({
                         result: 'success',
-                        err:    '',
-                        json:   rows,
-                        length: rows.length
+                        err:    ''
                     });
                     });
             });
