@@ -28,7 +28,7 @@ define(['./app'], function (app) {
               templateUrl: 'app/templates/resources.html',
               controller:'resourcesCtrl'
           }).
-          when('/addDocument', {
+          when('/addResource', {
               templateUrl: 'app/templates/editorPage.html',
               controller:'addResourceCtrl'
           }).
