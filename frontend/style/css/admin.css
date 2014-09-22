@@ -487,6 +487,7 @@
     transition: all 0.5s ease-out 0.5s;
     vertical-align: top;
     width: 600px;
+    font-size: 16pt;
 }
 .b-problem-deatiled-info-header {
     box-sizing: border-box;
@@ -527,7 +528,7 @@
     vertical-align: top;
     width: 25px;
     float:left;
-    font-size: 16pt;
+    
 }
 .b-problem-deatiled-info-title__text {
     display: inline-block;
