@@ -1,7 +1,7 @@
 <div class="b-add-problem" >
     <div class="b-add-problem-header"><h2>Додати проблему</h2></div>
     <form id="my-awesome-dropzone" class="dropzone b-add-problem-form" name="submit_problem" drop="dropzoneConfig">
-
+	<input type="text" ng-model="userId" name="userId"/>
         <div style="display:block" class="b-add-problem__step-1" ng-show="showStep_1">
             <div class="b-step-1">
                 <div class="b-container_addProblem-navbar">
@@ -179,6 +179,6 @@
             </div>
         </div>
 
-        <input type="text" value="{{userId}}" name="userId" class="b-user__form-userid"/>
+       
     </form>
 </div>

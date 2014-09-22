@@ -7,12 +7,18 @@ define([
     'angular-route',
     'angular-mocks',
     'angular-cookie',
+    'ngResource',
+    'ngSanitize',
+    'socket',
     'facebook',
     'dropzone',
     './controllers/index',
     './directives/index',
     //'./filters/index',
-    './services/index'
+    './services/index',
+    'textAngular',
+    //'ngSanitize',
+    'textAngularSetup'
 ], function (angular) {
     'use strict';
 
@@ -22,7 +28,11 @@ define([
         //'app.filters',
         'app.services',
         'ngRoute',
-        'ipCookie'
-
-    ]);
+        'ipCookie',
+        'ngResource',
+        'ngSanitize',
+        'textAngular',
+        'textAngularSetup',
+       'btford.socket-io'
+    ]).value('nickName', 'anonymous');;
 });

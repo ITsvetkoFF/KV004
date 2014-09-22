@@ -5,11 +5,11 @@ define(['./module'], function (services) {
     services.factory('UserService', function($http, ipCookie) {
         return {
             logIn: function (email, password) {
-                return $http.post('http://ita-kv.tk:8090' + '/api/login', {email: email, password: password});
+                return $http.post('/api/login', {email: email, password: password});
             },
 
             logOut: function() {
-                return $http.get('http://ita-kv.tk:8090' + '/api/logout');
+                return $http.get('/api/logout');
 
             },
 
@@ -19,7 +19,7 @@ define(['./module'], function (services) {
                 console.log(email);
                 console.log(password);
 
-                return $http.post('http://ita-kv.tk:8090' + '/api/register', { first_name: username, last_name: surname, email: email, password: password });
+                return $http.post('/api/register', { first_name: username, last_name: surname, email: email, password: password });
 
             },
 

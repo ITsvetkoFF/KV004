@@ -1,6 +1,13 @@
-define(['./module' ], function(controllers  ){
+define(['./module'], function(controllers){
     'use strict';
-    controllers.controller('showProblemCtrl', function ($scope,$routeParams,$http){
+    controllers.controller('showProblemCtrl', function ($scope,$routeParams,$http,ipCookie){
+
+        if(ipCookie('vote'+$routeParams.problemID)==true){
+          
+          $scope.disableVoteButton=true;
+      }else{
+          $scope.disableVoteButton=false;
+      }  
         $scope.showDropField = false;
         $scope.showAddPhotoButton = true;
         var userID ='';
@@ -57,11 +64,21 @@ define(['./module' ], function(controllers  ){
             $scope.showDropField = false;
             $scope.showAddPhotoButton = true;
             //window.location.href="#/problem/showProblem/"+$routeParams.problemID;
-        };
-        // Severity rate information
-
-        // end severity rate
-
+        }
+     $scope.addOneVote = function(){
+         
+         var responce = $http.post('/api/vote',{idProblem:$routeParams.problemID,userId:$scope.userId});
+         responce.success(function(data,status,headers,config){
+            $scope.data.Votes++;
+             ipCookie('vote'+$routeParams.problemID,true);
+              $scope.disableVoteButton=true;
+             
+         });
+         responce.error(function(data,status,headers,config){
+            throw error;
+         });
+     }  
+     
 
 
     });

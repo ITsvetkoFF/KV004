@@ -1,0 +1,9 @@
+<form class="editor">
+<div> Введіть назву реcурсу: <input type="text" ng-model="Title"></div>
+<div> 
+Введіть контент:
+<div text-angular="text-angular" name="htmlcontent" ng-model="Content" class="editor_ta"></div>
+</div>
+<div> Введіть alias: <input type="text" ng-model="Alias"> </div>
+<button type="submit" ng-click="sendResource(Alias, Content, Title)">Відправити</button>
+</form>

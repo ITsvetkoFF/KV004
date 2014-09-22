@@ -7,18 +7,32 @@ var mysql = require('mysql'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
     bodyParser = require('body-parser'),
-    secret       = require('./config/secret');
-
-var app    = express(),
+    server = http.createServer(app),
+    secret       = require('./config/secret'),
+    io = require('socket.io'),
     routes = require('./routes.js');
+    
+    io = io.listen(server);
+    require('./sockets/base')(io);
 
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
-    password : '',
+    password : 'root',
     database : 'Enviromap'
 };
+ 
+ var router = express.Router();
 
+  /* GET users listing. */
+  router.get('/', function(req, res) {
+      console.log(req);
+    res.send('respond with a resource');
+  });
+ 
+
+// optional - set socket.io logging level
+io.set('log level', 1000);
 
 app.use(multer(
     {
@@ -48,6 +62,7 @@ app.get('/api/usersProblem/:idUser', routes.getUserProblemsById);
 app.get('/api/activities/:idUser', routes.getUserActivity);
 app.post('/api/problempost', routes.postProblem);
 app.post('/api/vote', routes.postVote);
+app.get('/api/getTitles',routes.getTitles);
 app.get('/api/resources/:name',routes.getResource);
 //new api for adding new photos to existed problem
 app.post('/api/photo/:id',routes.addNewPhotos);
@@ -62,7 +77,18 @@ app.delete('/api/user/:id', routes.deleteUser);
 app.delete('/api/activity/:id', routes.deleteComment);
 app.delete('/api/photo/:id', routes.deletePhoto);
 app.put('/api/edit', routes.editProblem);
+app.post('/api/addResource', routes.addResource);
+app.put('/api/editResource/:alias', routes.editResource);
+app.delete('/api/deleteResource/:alias', routes.deleteResource);
 
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
 
-app.listen(8090);
+server.listen(8090);
+
 console.log('Rest Demo Listening on port 8090');

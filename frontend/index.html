@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style/css/admin.css" />
     <link rel="stylesheet" href="style/css/MarkerCluster.css"/>
     <link rel="stylesheet" href="style/css/MarkerCluster.Default.css"/>
+    <link rel="stylesheet" href="https:\\netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 
    <!--<script type="text/javascript" src="/bower_components/dropzone.js"></script>-->
 
@@ -40,7 +41,7 @@
             </div>
 
             <div class="b-container__right-side{{showRigthSide}}">
-                <div class="b-right-side__pointer" ng-click="rightSidePointerClick()"></div>
+            <a href="#/map" class="close" ng-click="hideDiv()">×</a>
                 <div class="b-view" ng-view></div>
             </div>
         </div>

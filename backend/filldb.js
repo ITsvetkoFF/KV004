@@ -53,7 +53,7 @@ var connection = mysql.createConnection(
     {
         host: 'localhost',
         user: 'root',
-        password: '',
+        password: 'root',
         database: 'Enviromap'
     });
 
@@ -97,7 +97,7 @@ function fillUsers() {
     for (i = 1; i < userNames.length; i++) {
         connection.query('INSERT INTO Users SET ?', {
             name: userNames[i],
-            password: crypto.createHmac('sha1', '123456').update(passwords[1]).digest("hex"),
+            password: crypto.createHmac('sha1', secret.secretToken).update(passwords[1]).digest("hex"),
             email: userEmails[i],
             userRoles_Id: 2
         });
