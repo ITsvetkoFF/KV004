@@ -795,3 +795,146 @@ req.getConnection(function(err, connection) {
         }
     });
 };
+exports.addResource = function(req, res) {
+req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+
+                err:    err.code
+            });
+        } else {
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            }
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
+                }
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+                var data = {
+            Title: req.body.title,
+            Content: req.body.content,
+            Alias: req.body.alias
+        };
+        connection.query("INSERT INTO Resources SET ?", data, function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    '',
+                        json:   rows,
+                        length: rows.length
+                    });
+                    });
+            });
+        }
+    });
+};
+exports.editResource = function(req, res) {
+req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+
+                err:    err.code
+            });
+        } else {
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            }
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
+                }
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+                var data = {
+            Title: req.body.title,
+            Content: req.body.content
+                };
+                var Alias = req.params.alias
+        connection.query("UPDATE Resources SET ? WHERE Alias = ?", [data, Alias], function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    '',
+                        json:   rows,
+                        length: rows.length
+                    });
+                    });
+            });
+        }
+    });
+};
+exports.deleteResource = function(req, res) {
+req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+
+                err:    err.code
+            });
+        } else {
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            }
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
+                }
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+            var Alias = req.params.alias
+        connection.query("DELETE FROM Resources WHERE Alias = ?", Alias, function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    '',
+                        json:   rows,
+                        length: rows.length
+                    });
+                    });
+            });
+        }
+    });
+};
