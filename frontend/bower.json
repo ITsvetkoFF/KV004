@@ -17,6 +17,7 @@
     "socket.io": "~0.9.15",
     "angular-resource": "latest",
     "angular-cookies": "latest",
-    "dropzone":"latest"
+    "dropzone":"latest",
+    "textAngular":"latest"
   }
 }
