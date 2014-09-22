@@ -20,7 +20,7 @@ var mysql = require('mysql'),
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
-    password : 'root',
+    password : '',
     database : 'Enviromap'
 };
  
@@ -38,13 +38,13 @@ io.set('log level', 1000);
 
 app.use(multer(
     {
-        dest: '../frontend/photos/large'
+        dest: './frontend/photos/large'
     }));
 app.use(bodyParser());
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(myConnection(mysql, connectionPool, 'pool'));
-app.use('/',express.static('../frontend'));
+app.use('/',express.static('./frontend'));
 //console.log(__dirname);
 
 app.all('*', function(req, res, next) {
@@ -78,6 +78,9 @@ app.delete('/api/user/:id', routes.deleteUser);
 app.delete('/api/activity/:id', routes.deleteComment);
 app.delete('/api/photo/:id', routes.deletePhoto);
 app.put('/api/edit', routes.editProblem);
+app.post('/api/addResource', routes.addResource);
+app.put('/api/editResource/:alias', routes.editResource);
+app.delete('/api/deleteResource/:alias', routes.deleteResource);
 
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);

@@ -211,6 +211,7 @@ html, body {
 .b-menu__link {
     display: block;
     text-decoration: none;
+    cursor: pointer;
     height: 30px;
     line-height: 30px;
     font-size: 16px;
@@ -222,11 +223,7 @@ html, body {
     font-weight: lighter;
     border: 1px solid RGBA(0, 0, 0, 0);
 }
-.chatField{
-	padding: 0;
-	margin: 0;
-	
-}
+
 .b-user__form-userid{
     display: none;
 }
@@ -268,6 +265,7 @@ html, body {
     }
 
 .b-submenu__link {
+    float: left;
     display: block;
     text-decoration: none;
     color: #000;
@@ -456,6 +454,7 @@ html, body {
     background: #FFFFFF;
     height: calc(100% - 52px);
     height: -moz-calc(100% - 52px);
+    overflow: auto;
 }
 
 .b-container__right-side_hide {
@@ -470,6 +469,21 @@ html, body {
     height: calc(100% - 52px);
     height: -moz-calc(100% - 52px);
 }
+
+.b-container__right-side_full {
+    z-index: 1006;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    min-width: 320px;
+    background: #FFFFFF;
+    height: calc(100% - 52px);
+    height: -moz-calc(100% - 52px);
+    overflow: auto;
+}
+
 .b-right-side {
     height: 100%;
     width: 100%;
@@ -479,26 +493,7 @@ html, body {
 .b-right-side__show-problem {
     height: 100%;
     width: 100%;
-    overflow: auto;
-	
 }
-
-.b-right-side__pointer {
-    position: absolute;
-    top: calc(50% - 127px);
-    top: -moz-calc(50% - 127px);
-    left: -20px;
-    width: 20px;
-    height: 150px;
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px;
-    background: #fff url(../../images/icons/arrows-sprite-64-better.png) -39px center no-repeat;
-}
-
-    .b-right-side__pointer:hover {
-        cursor: pointer;
-    }
-
 .b-left-side__pointer:hover {
     cursor: pointer;
 }
@@ -839,7 +834,7 @@ td.b-details-body__title[colspan] {
         cursor: pointer;
         background: url("../../images/icons/like_icon_hover.png") no-repeat center center;
         background-size: cover;
-	 border: 0;
+     border: 0;
     }
 
 .b-details__likes-count {
@@ -1407,3 +1402,183 @@ form.dropzone {
 .left_pointer_reverse {
     background: #fff url(../../images/icons/arrows-sprite-64-better.png) -5px center no-repeat;
 }
+.close {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 18px;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+  text-decoration: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.close:hover {
+  color: #000000;
+  text-decoration: none;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+  cursor: pointer;
+}
+/* add generic styling for the editor */
+.ta-scroll-window.form-control{max-height: 90%; min-height: 300px; overflow: auto; font-family: inherit; font-size: 100%; position: relative; padding: 0;} 
+.ta-root.focussed .ta-scroll-window.form-control{border-color: #66afe9; outline: 0; -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);}
+.ta-editor.ta-html{min-height: 300px; height: auto; overflow: auto; font-family: inherit; font-size: 100%;}
+.ta-scroll-window > .ta-bind{height: auto; min-height: 300px; padding: 6px 12px;}
+
+/* add the styling for the awesomness of the resizer */
+.ta-root .ta-resizer-handle-overlay{z-index: 100; position: absolute; display: none;}
+.ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-info{position: absolute; bottom: 16px; right: 16px; border: 1px solid black; background-color: #FFF; padding: 0 4px; opacity: 0.7;}
+.ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-background{position: absolute; bottom: 5px; right: 5px; left: 5px; top: 5px; border: 1px solid black; background-color: rgba(0, 0, 0, 0.2);}
+.ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-corner{width: 10px; height: 10px; position: absolute;}
+.ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-corner-tl{top: 0; left: 0; border-left: 1px solid black; border-top: 1px solid black;}
+.ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-corner-tr{top: 0; right: 0; border-right: 1px solid black; border-top: 1px solid black;}
+.ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-corner-bl{bottom: 0; left: 0; border-left: 1px solid black; border-bottom: 1px solid black;}
+.ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-corner-br{bottom: 0; right: 0; border: 1px solid black; cursor: se-resize; background-color: white;}
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  color: #333;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  background-image: none;
+}
+.btn-default.disabled,
+.btn-default[disabled],
+fieldset[disabled] .btn-default,
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus,
+.btn-default.disabled:active,
+.btn-default[disabled]:active,
+fieldset[disabled] .btn-default:active,
+.btn-default.disabled.active,
+.btn-default[disabled].active,
+fieldset[disabled] .btn-default.active {
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-default .badge {
+  color: #fff;
+  background-color: #333;
+}
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.btn-group,
+.btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.btn-lg,
+.btn-group-lg > .btn {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+.btn-sm,
+.btn-group-sm > .btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.btn-xs,
+.btn-group-xs > .btn {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.btn-group,
+.btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.btn-group > .btn,
+.btn-group-vertical > .btn {
+  position: relative;
+  float: left;
+}
+.btn-group > .btn:hover,
+.btn-group-vertical > .btn:hover,
+.btn-group > .btn:focus,
+.btn-group-vertical > .btn:focus,
+.btn-group > .btn:active,
+.btn-group-vertical > .btn:active,
+.btn-group > .btn.active,
+.btn-group-vertical > .btn.active {
+  z-index: 2;
+}
+.btn-group > .btn:focus,
+.btn-group-vertical > .btn:focus {
+  outline: none;
+}
+.btn-group .btn + .btn,
+.btn-group .btn + .btn-group,
+.btn-group .btn-group + .btn,
+.btn-group .btn-group + .btn-group {
+  margin-left: -1px;
+}
+
+.fa {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+    .editor {
+        margin-top: 30px;
+        padding-left: 30px;
+    }
+    .editor_ta {
+        max-width: 95%;
+        max-height: 90%;
+    }
+    .editor div {
+        margin: 5px;
+        }
+    .editor input {
+        line-height: 20px;
+        min-width: 400px;
+    }

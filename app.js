@@ -1,4 +1,5 @@
-var app = angular.module('app', ['ngCookies']);
+<<<<<<< HEAD
+var app = angular.module('app', ['ngCookies'],['ndSanitize']);
 
 
 app.controller('AdminUserCtrl', ['$scope',  '$location', '$window', '$cookieStore', 'UserService',

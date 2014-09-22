@@ -3,11 +3,11 @@ define(['./module'], function(controllers){
     controllers.controller('showProblemCtrl', function ($scope,$routeParams,$http,ipCookie){
 
         if(ipCookie('vote'+$routeParams.problemID)==true){
-		  
-		  $scope.disableVoteButton=true;
-	  }else{
-		  $scope.disableVoteButton=false;
-	  }  
+          
+          $scope.disableVoteButton=true;
+      }else{
+          $scope.disableVoteButton=false;
+      }  
         $scope.showDropField = false;
         $scope.showAddPhotoButton = true;
 
@@ -50,24 +50,24 @@ define(['./module'], function(controllers){
             $scope.showAddPhotoButton = true;
             //window.location.href="#/problem/showProblem/"+$routeParams.problemID;
         }
-	 $scope.addOneVote = function(){
-		 
-		 var responce = $http.post('/api/vote',{idProblem:$routeParams.problemID,userId:$scope.userId});
-		 responce.success(function(data,status,headers,config){
-		 	$scope.data.Votes++;
-			 ipCookie('vote'+$routeParams.problemID,true);
-			  $scope.disableVoteButton=true;
-			 
-		 });
-		 responce.error(function(data,status,headers,config){
-		 	throw error;
-		 });
-	 }  
-	 
+     $scope.addOneVote = function(){
+         
+         var responce = $http.post('/api/vote',{idProblem:$routeParams.problemID,userId:$scope.userId});
+         responce.success(function(data,status,headers,config){
+            $scope.data.Votes++;
+             ipCookie('vote'+$routeParams.problemID,true);
+              $scope.disableVoteButton=true;
+             
+         });
+         responce.error(function(data,status,headers,config){
+            throw error;
+         });
+     }  
+     
 
 
         });
-	 
+     
 
 
     
