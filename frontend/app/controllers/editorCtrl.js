@@ -15,7 +15,7 @@ define(['./module'], function (controllers) {
                 $scope.delPhotoErrorMsg = 'Всі поля обов\'язкові для заповнення';
                 return;
             }
-            $http.put('/api/editResource/' + Alias, {Content: Content, Title: Title}).success(function() {
+            $http.put('/api/editResource/' + $routeParams.Alias, {Alias: Alias, Content: Content, Title: Title}).success(function() {
             console.log('Query has been successfully sent');
            }).error(function(status, data) {
                     console.log(status);
