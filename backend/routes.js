@@ -104,8 +104,36 @@ exports.getResource = function(req,res){ //get resourse
         }
     });
 };
+exports.getUserById = function(req,res) { //get all user information(name and etc)
+    req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
+            var idUser = req.params.idUser;
+            connection.query('SELECT Users.Name, Users.Surname FROM Users WHERE Users.Id = ?', [idUser], function(err, rows, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                res.send({
+                    json:   rows,
+                    length: rows.length
+                });
+            });
+        }
+    });
+}
 
-exports.getUserId = function(req,res){ //get all user's problems in brief (coords, type, title)
+exports.getUserProblemsById = function(req,res){ //get all user's problems in brief (coords, type, title)
 	req.getConnection(function(err, connection) {
 		if (err) {
 			console.error('CONNECTION error: ',err);

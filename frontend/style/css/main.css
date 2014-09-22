@@ -1235,13 +1235,13 @@ form.dropzone {
 
 
 .b-conteiner__drop-title-1{
-    font-size: 22px;
-    font-style: italic;
+    font-size: 0.8em;
+
 }
 
 .b-conteiner__drop-title-2{
-    font-size: 16px;
-    font-style: italic;
+    font-size: 0.8em;
+
 }
 
 #my-awesome-dropzone label {
@@ -1253,9 +1253,10 @@ form.dropzone {
     font-family: Arial;
 }
 .b-details-body__status{
-    width:200px;
-
-    float:left;
+    width: 200px;
+    float: left;
+    display: inline-block;
+    font-size: 0.7em;
 }
 .previews .dz-preview .comment_field {
     position: absolute;

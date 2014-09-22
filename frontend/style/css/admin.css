@@ -103,17 +103,13 @@
 }
 .b-problem-deatiled-info {
     display: inline-block;
-    height: 88%;
+    font-size: 16pt;
     line-height: 1em;
-    margin: 0 5px;
+    margin: 10px 5px 0 10px;
     overflow-y: auto;
-    position: absolute;
-    right: 2px;
-    top: 85px;
     transition: all 0.5s ease-out 0.5s;
     vertical-align: top;
-    width: 600px;
-    z-index: 200;
+    width: 580px;
 }
 .b-problem-deatiled-info-header {
     box-sizing: border-box;
@@ -143,10 +139,37 @@
 .b-problem-deatiled-info_delete:hover, .b-problem-deatiled-info_edit:hover {
     opacity: 1;
 }
+
+.b-problem-tabs{
+    display: inline-block;
+    margin: 0 0 0 20px;
+}
+
+.b-problem-subtab{
+    display: inline-block;
+}
+
+.b-problem-tabButton{
+    padding: 0;
+    margin: 0;
+    background: none repeat scroll 0 0 #ffffff;
+    display: block;
+    font-family: WWF;
+    font-size: 1em;
+
+
+}
+
+.b-problem-tab-panel{
+    border-top:1px solid #449d44;
+    margin-top: -5px;
+}
+
 .b-problem-deatiled-info-title {
     display: block;
     vertical-align: top;
     text-align: left;
+    margin: 10px 0 0 0;
 }
 .b-problem-deatiled-info-title__icon {
     display: inline-block;
@@ -187,7 +210,7 @@
     margin: 0 2px 0 10px;
 }
 .b-problem-deatiled-info-general{
-    margin: 10px 0 0;
+    margin: 15px 0 15px;
     text-align: center;
 }
 

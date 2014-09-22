@@ -59,52 +59,11 @@ define(['./module'], function (controllers) {
             markers.clearLayers();
             var newData = userSelectionFilterMarkers(data);
             angular.forEach(newData, function (location) {
-            	switch (location['ProblemTypes_Id']) {
-				    case 1:                                    
-				        markerIcon = L.icon({
-				            iconUrl: 'images/markers/deforestation_icon.png',
-				            iconAnchor: [25,79]
-				        });
-				        break;
-				    case 2:
-				        markerIcon = L.icon({
-				            iconUrl: 'images/markers/waste_icon.png',
-				            iconAnchor: [25,79]
-				        });
-				        break;
-				    case 3:                                    
-				        markerIcon = L.icon({
-				            iconUrl: 'images/markers/construction_icon.png',
-				            iconAnchor: [25,79]
-				        });
-				        break;
-				    case 4:                                    
-				        markerIcon = L.icon({
-				            iconUrl: 'images/markers/water_icon.png',
-				            iconAnchor: [25,79]
-				        });
-				        break;
-				    case 5:                                    
-				        markerIcon = L.icon({
-				            iconUrl: 'images/markers/biodiversity_icon_2.png',
-				            iconAnchor: [25,79]
-				        });
-				        break;
-				    case 6:                                    
-				        markerIcon = L.icon({
-				            iconUrl: 'images/markers/poaching_icon.png',
-				            iconAnchor: [25,79]
-				        });
-				        break;
-				    case 7:                                    
-				        markerIcon = L.icon({
-				            iconUrl: 'images/markers/other_icon.png',
-				            iconAnchor: [25,79]
-				        });
-				        break;
-				    default:
-				        break;
-				}; 
+                markerIcon = L.icon({
+                    iconUrl : 'images/markers/'+location['ProblemTypes_Id']+ '.png',
+                    iconAnchor: [25,79]
+                });
+
 
 	        	var marker = L.marker([location.Latitude, location.Longtitude], {icon: markerIcon});
 	        	marker.on('click', onMarkerClick);

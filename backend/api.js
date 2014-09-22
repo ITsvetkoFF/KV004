@@ -15,7 +15,7 @@ var app    = express(),
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
-    password : 'root',
+    password : '',
     database : 'Enviromap'
 };
 
@@ -43,7 +43,8 @@ app.all('*', function(req, res, next) {
 //user
 app.get('/api/problems', routes.getProblems);
 app.get('/api/problems/:id', routes.getProblemId);
-app.get('/api/users/:idUser', routes.getUserId);
+app.get('/api/users/:idUser', routes.getUserById);
+app.get('/api/usersProblem/:idUser', routes.getUserProblemsById);
 app.get('/api/activities/:idUser', routes.getUserActivity);
 app.post('/api/problempost', routes.postProblem);
 app.post('/api/vote', routes.postVote);
