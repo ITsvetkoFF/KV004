@@ -9,22 +9,7 @@
       <change type="DELETED" beforePath="E:\w_enviromap\KV004\frontend\images\markers\poaching_icon.png" afterPath="" />
       <change type="DELETED" beforePath="E:\w_enviromap\KV004\frontend\images\markers\waste_icon.png" afterPath="" />
       <change type="DELETED" beforePath="E:\w_enviromap\KV004\frontend\images\markers\water_icon.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/style/css/admin.css" afterPath="$PROJECT_DIR$/frontend/style/css/admin.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/bower_components/angular-cookie/angular-cookie.js" afterPath="$PROJECT_DIR$/frontend/bower_components/angular-cookie/angular-cookie.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/api.js" afterPath="$PROJECT_DIR$/backend/api.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/app.js" afterPath="$PROJECT_DIR$/frontend/app/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/style/css/bootstrap.css" afterPath="$PROJECT_DIR$/frontend/style/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/bower.json" afterPath="$PROJECT_DIR$/frontend/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/style/css/dropzone.css" afterPath="$PROJECT_DIR$/frontend/style/css/dropzone.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/filldb.js" afterPath="$PROJECT_DIR$/backend/filldb.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/index.html" afterPath="$PROJECT_DIR$/frontend/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/index_admin.html" afterPath="$PROJECT_DIR$/frontend/index_admin.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/controllers/main-controller.js" afterPath="$PROJECT_DIR$/frontend/app/controllers/main-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/style/css/main.css" afterPath="$PROJECT_DIR$/frontend/style/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/controllers/map-load.js" afterPath="$PROJECT_DIR$/frontend/app/controllers/map-load.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backend/routes.js" afterPath="$PROJECT_DIR$/backend/routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/controllers/show-problem.js" afterPath="$PROJECT_DIR$/frontend/app/controllers/show-problem.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/templates/showProblem.html" afterPath="$PROJECT_DIR$/frontend/app/templates/showProblem.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="KV004.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,11 +37,9 @@
           <file leaf-file-name="show-problem.js" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/frontend/app/controllers/show-problem.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.3180272" vertical-offset="0" max-vertical-offset="1054">
+                <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="1547">
                   <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-                  <folding>
-                    <element signature="e#1250#1708#0" expanded="false" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -64,7 +47,7 @@
           <file leaf-file-name="rating.html" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend/app/templates/rating.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="170">
+                <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="170">
                   <caret line="2" column="67" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="67" />
                   <folding />
                 </state>
@@ -74,7 +57,7 @@
           <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="969">
+                <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="986">
                   <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="59" />
                   <folding />
                 </state>
@@ -84,8 +67,8 @@
           <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend/app/controllers/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
-                  <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="306">
+                  <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -94,7 +77,7 @@
           <file leaf-file-name="module.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend/app/controllers/module.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
+                <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="272">
                   <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="9" selection-end-column="3" />
                   <folding />
                 </state>
@@ -104,7 +87,7 @@
           <file leaf-file-name="bootstrap.css" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend/style/css/bootstrap.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="62344" max-vertical-offset="105621">
+                <state vertical-scroll-proportion="0.0" vertical-offset="62577" max-vertical-offset="105570">
                   <caret line="3681" column="31" selection-start-line="3681" selection-start-column="31" selection-end-line="3681" selection-end-column="31" />
                   <folding />
                 </state>
@@ -130,9 +113,7 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1598">
                   <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -140,7 +121,7 @@
           <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend/app/app.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+                <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="748">
                   <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
                   <folding />
                 </state>
@@ -150,7 +131,7 @@
           <file leaf-file-name="map-load.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend/app/controllers/map-load.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="551" max-vertical-offset="2091">
+                <state vertical-scroll-proportion="0.0" vertical-offset="1105" max-vertical-offset="2074">
                   <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
                   <folding />
                 </state>
@@ -160,7 +141,7 @@
           <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend/app/main.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
+                <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1360">
                   <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
                   <folding />
                 </state>
@@ -170,7 +151,7 @@
           <file leaf-file-name="showProblem.html" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/frontend/app/templates/showProblem.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.05831904" vertical-offset="0" max-vertical-offset="6239">
+                <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1955">
                   <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
                   <folding />
                 </state>
@@ -187,6 +168,7 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -250,7 +232,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -343,6 +324,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -355,6 +337,14 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -365,12 +355,14 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
       <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -378,16 +370,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" />
-      <option name="executablePath" />
-      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -411,11 +393,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30843115" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30843115" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17640863" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -447,9 +429,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13828996" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -474,6 +456,46 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/frontend/app/directives/uibootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1598">
+          <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/app/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="748">
+          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/app/controllers/map-load.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1105" max-vertical-offset="2074">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/app/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1360">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/app/templates/showProblem.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1955">
+          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/app/templates/showProblem.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="5644">
@@ -502,9 +524,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="1224">
           <caret line="26" column="15" selection-start-line="26" selection-start-column="15" selection-end-line="26" selection-end-column="15" />
-          <folding>
-            <element signature="e#1250#1708#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -585,13 +605,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/bower_components/requirejs/.bower.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/app/services/module.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27079645" vertical-offset="0" max-vertical-offset="565">
@@ -613,13 +626,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/bower_components/dropzone.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.4240742" vertical-offset="3179" max-vertical-offset="31943">
-          <caret line="264" column="24" selection-start-line="264" selection-start-column="16" selection-end-line="264" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/bower.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35602096" vertical-offset="0" max-vertical-offset="573">
@@ -638,13 +644,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.029010238" vertical-offset="46937" max-vertical-offset="69122">
           <caret line="2762" column="0" selection-start-line="2762" selection-start-column="0" selection-end-line="2889" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/bower_components/requirejs/require.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.148464" vertical-offset="2431" max-vertical-offset="35394">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -683,7 +682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="873">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -715,7 +713,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27991217" vertical-offset="0" max-vertical-offset="911">
           <caret line="15" column="53" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -723,7 +720,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="911">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -731,7 +727,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="911">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -739,7 +734,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -747,15 +741,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4590">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/bower_components/angular-route/angular-route.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43541202" vertical-offset="0" max-vertical-offset="15827">
-          <caret line="23" column="50" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -769,15 +754,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/app/controllers/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="306">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/app/templates/rating.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="170">
+        <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="170">
           <caret line="2" column="67" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="67" />
           <folding />
         </state>
@@ -787,13 +772,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="358">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="969">
+        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="986">
           <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="59" />
           <folding />
         </state>
@@ -801,11 +785,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/app/controllers/show-problem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3180272" vertical-offset="0" max-vertical-offset="1054">
+        <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="1547">
           <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-          <folding>
-            <element signature="e#1250#1708#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -813,9 +795,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1598">
           <caret line="10" column="40" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -853,7 +833,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/app/templates/showProblem.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05831904" vertical-offset="0" max-vertical-offset="6239">
+        <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1955">
           <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
           <folding />
         </state>
