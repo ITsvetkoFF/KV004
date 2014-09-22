@@ -820,9 +820,9 @@ req.getConnection(function(err, connection) {
                     return res.send(401);
                 }
                 var data = {
-            Title: req.body.title,
-            Content: req.body.content,
-            Alias: req.body.alias
+            Title: req.body.Title,
+            Content: req.body.Content,
+            Alias: req.body.Alias
         };
         connection.query("INSERT INTO Resources SET ?", data, function(err, rows, fields) {
                     if (err) {
@@ -867,10 +867,10 @@ req.getConnection(function(err, connection) {
                     return res.send(401);
                 }
                 var data = {
-            Title: req.body.title,
-            Content: req.body.content
+            Title: req.body.Title,
+            Content: req.body.Content
                 };
-                var Alias = req.params.alias
+                var Alias = req.params.Alias
         connection.query("UPDATE Resources SET ? WHERE Alias = ?", [data, Alias], function(err, rows, fields) {
                     if (err) {
                         console.error(err);
@@ -913,7 +913,7 @@ req.getConnection(function(err, connection) {
                 if (decoded.role != 'administrator') {
                     return res.send(401);
                 }
-            var Alias = req.params.alias
+            var Alias = req.params.Alias
         connection.query("DELETE FROM Resources WHERE Alias = ?", Alias, function(err, rows, fields) {
                     if (err) {
                         console.error(err);
