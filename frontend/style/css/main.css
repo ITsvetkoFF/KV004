@@ -455,6 +455,7 @@ html, body {
     height: calc(100% - 52px);
     height: -moz-calc(100% - 52px);
     overflow: auto;
+    font-size:16pt;
 }
 
 .b-container__right-side_hide {
