@@ -284,6 +284,10 @@ html, body {
     height: calc(100% - 52px);
 }
 
+.b-container__center {
+    height: 100%;
+}
+
 .b-map-content {
     height: 100%;
 }
@@ -442,6 +446,7 @@ html, body {
     -moz-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
+    box-shadow: 0 0 10px RGBA(0, 0, 0, .3);
 }
 
 
@@ -456,6 +461,7 @@ html, body {
     background: #FFFFFF;
     height: calc(100% - 52px);
     height: -moz-calc(100% - 52px);
+    box-shadow: 0 0 10px RGBA(0, 0, 0, .3);
 }
 
 .b-container__right-side_hide {

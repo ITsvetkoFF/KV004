@@ -77,7 +77,8 @@ app.delete('/api/problem/:id', routes.deleteProblem);
 app.delete('/api/user/:id', routes.deleteUser);
 app.delete('/api/activity/:id', routes.deleteComment);
 app.delete('/api/photo/:id', routes.deletePhoto);
-app.put('/api/edit', routes.editProblem);
+app.put('/api/edit/:id', routes.editProblem);
+app.post('/api/approve/:id', routes.approveProblem);
 
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);

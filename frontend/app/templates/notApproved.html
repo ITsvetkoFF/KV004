@@ -1,0 +1,17 @@
+<div class="b-problem-list" ng-controller="notApprovedCtrl">
+	<div class="b-problem-list__caption">
+		СПИСОК НОВИХ ПРОБЛЕМ
+	</div>
+	<ul class="b-problem-list-items">
+		<li class="b-items__item" ng-repeat="problem in notApproved | orderBy: Id">
+			<div class="b-item__title" ng-click="showProblem(problem)">{{problem.Title}}</div>
+			<div class="b-item__buttons">
+				<ul class="b-buttons">
+					<li class="b-buttons__button glyphicon glyphicon-ok" ng-click="approveProblem(problem)"></li>
+					<li class="b-buttons__button glyphicon glyphicon-pencil" ng-click="editProblem(problem)"></li>
+					<li class="b-buttons__button glyphicon glyphicon-remove" ng-click="deleteProblem(problem)"></li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</div>

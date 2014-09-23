@@ -32,7 +32,7 @@ define(['./module'], function (services) {
             },
 
             isAdministrator: function() {
-                if(ipCookie('role')=='administrator') {
+                if(ipCookie('userRole')=='administrator') {
                     return true;
                 } else {
                     return false;
