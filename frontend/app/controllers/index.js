@@ -9,9 +9,9 @@ define([
     './map-load',
     './main-controller',
     './show-problem',
-    './not-approved',
-    './add-problem', 
+    './add-problem',
     './socket',
+    './not-approved',
     './resourcesCtrl',
     './editorCtrl',
     './addResourceCtrl'

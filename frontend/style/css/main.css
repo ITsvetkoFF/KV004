@@ -462,6 +462,8 @@ html, body {
     overflow: auto;
     font-size:16pt;
     box-shadow: 0 0 10px RGBA(0, 0, 0, .3);
+    overflow: auto;
+    font-size:16pt;
 }
 
 .b-container__right-side_hide {
