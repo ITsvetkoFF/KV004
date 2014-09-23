@@ -3,25 +3,40 @@ define(['./module'], function(controllers){
     controllers.controller('showProblemCtrl', function ($scope,$routeParams,$http,ipCookie){
 
         if(ipCookie('vote'+$routeParams.problemID)==true){
-		  
-		  $scope.disableVoteButton=true;
-	  }else{
-		  $scope.disableVoteButton=false;
-	  }  
+          
+          $scope.disableVoteButton=true;
+      }else{
+          $scope.disableVoteButton=false;
+      }  
         $scope.showDropField = false;
         $scope.showAddPhotoButton = true;
+        var userID ='';
+        //get problem info
+            var res=$http.get("api/problems/"+$routeParams.problemID);
 
-        var res=$http.get("api/problems/"+$routeParams.problemID);
+            res.success(function(data,status,headers,config){
+                $scope.data=data[0][0];
+                $scope.userID = data[2][0].Users_Id;
+                $scope.severity = data[0][0].Severity;
+                $scope.content = data[0][0].Content;
+                $scope.createdDate = data[2][0].Date;
+                console.log('$scope.severity= ' + $scope.severity);
+                $scope.photos=data[1];
 
-        res.success(function(data,status,headers,config){
+                //get user info by UserID
+                res = $http.get("api/users/"+userID);
+                res.success(function(data,status,headers,config){
+                    $scope.userName = angular.fromJson(data).json[0].Name;
+                });
+                //end get user info by UserID
 
-            $scope.data=data[0][0];
-            $scope.photos=data[1];
+            });
+            res.error(function(err){
+                throw err;
+            });
+        //end get problem request info
 
-        });
-        res.error(function(err){
-            throw err;
-        });
+
         $scope.dropzoneConfig = {
             'options':{autoProcessQueue:false,
                 url:'/api/photo/'+$routeParams.problemID,
@@ -34,7 +49,7 @@ define(['./module'], function(controllers){
                 clickable:".previews,.b-details-body-problem-photo_add",
                 previewsContainer:".previews"
             }
-        }
+        };
         $scope.showDrop = function(){
             if($scope.showDropField==false)
             {
@@ -44,32 +59,28 @@ define(['./module'], function(controllers){
             else{
                 $scope.showDropField = false;
             }
-        }
+        };
         $scope.hideAddPhotoForm = function(){
             $scope.showDropField = false;
             $scope.showAddPhotoButton = true;
             //window.location.href="#/problem/showProblem/"+$routeParams.problemID;
         }
-	 $scope.addOneVote = function(){
-		 
-		 var responce = $http.post('/api/vote',{idProblem:$routeParams.problemID,userId:$scope.userId});
-		 responce.success(function(data,status,headers,config){
-		 	$scope.data.Votes++;
-			 ipCookie('vote'+$routeParams.problemID,true);
-			  $scope.disableVoteButton=true;
-			 
-		 });
-		 responce.error(function(data,status,headers,config){
-		 	throw error;
-		 });
-	 }  
-	 
+     $scope.addOneVote = function(){
+         
+         var responce = $http.post('/api/vote',{idProblem:$routeParams.problemID,userId:$scope.userId});
+         responce.success(function(data,status,headers,config){
+            $scope.data.Votes++;
+             ipCookie('vote'+$routeParams.problemID,true);
+              $scope.disableVoteButton=true;
+             
+         });
+         responce.error(function(data,status,headers,config){
+            throw error;
+         });
+     }  
+     
 
 
-        });
-	 
-
-
-    
+    });
 
 });

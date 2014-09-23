@@ -1,7 +1,5 @@
 var mysql = require('mysql'),
     express = require('express'),
-    app = express(),
-    http = require('http'),
     multer = require('multer'),
     jwt = require('jsonwebtoken'),
     crypto = require('crypto'),
@@ -9,6 +7,8 @@ var mysql = require('mysql'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
     bodyParser = require('body-parser'),
+    http = require('http'),
+    app = express(),
     server = http.createServer(app),
     secret       = require('./config/secret'),
     io = require('socket.io'),
@@ -59,7 +59,8 @@ app.all('*', function(req, res, next) {
 //user
 app.get('/api/problems', routes.getProblems);
 app.get('/api/problems/:id', routes.getProblemId);
-app.get('/api/users/:idUser', routes.getUserId);
+app.get('/api/users/:idUser', routes.getUserById);
+app.get('/api/usersProblem/:idUser', routes.getUserProblemsById);
 app.get('/api/activities/:idUser', routes.getUserActivity);
 app.post('/api/problempost', routes.postProblem);
 app.post('/api/vote', routes.postVote);
@@ -77,6 +78,9 @@ app.delete('/api/problem/:id', routes.deleteProblem);
 app.delete('/api/user/:id', routes.deleteUser);
 app.delete('/api/activity/:id', routes.deleteComment);
 app.delete('/api/photo/:id', routes.deletePhoto);
+app.post('/api/addResource', routes.addResource);
+app.put('/api/editResource/:alias', routes.editResource);
+app.delete('/api/deleteResource/:alias', routes.deleteResource);
 app.put('/api/edit/:id', routes.editProblem);
 app.post('/api/approve/:id', routes.approveProblem);
 

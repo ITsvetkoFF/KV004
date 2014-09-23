@@ -6,15 +6,15 @@ var jwt          = require('jsonwebtoken'),
     secret = require('./config/secret');
 
 exports.getProblems = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
-	req.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
+    req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
             connection.query('SELECT Id, Title, Latitude, Longtitude, ProblemTypes_Id, Status FROM Problems WHERE Moderation=1', function(err, rows, fields) {
                 if (err) {
                     console.error(err);
@@ -31,15 +31,15 @@ exports.getProblems = function(req,res){ // get all moderated problems in brief 
 };
 
 exports.getProblemId = function(req,res){ //get detailed problem description (everything)
-	req.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
+    req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
             var id = req.params.id;
             connection.query('SELECT * FROM Problems WHERE Id=?', [id], function(err1, rows1, fields1) {
                 if (err1) {
@@ -126,8 +126,37 @@ exports.getResource = function(req,res){ //get resourse
         }
     });
 };
+exports.getUserById = function(req,res) { //get all user information(name and etc)
+    req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
+            var idUser = req.params.idUser;
+            connection.query('SELECT Users.Name, Users.Surname FROM Users WHERE Users.Id = ?', [idUser], function(err, rows, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                res.send({
+                    json:   rows,
+                    length: rows.length
+                });
+            });
+        }
+    });
+}
 
-exports.getUserId = function(req,res){ //get all user's problems in brief (coords, type, title)
+
+exports.getUserProblemsById = function(req,res){ //get all user's problems in brief (coords, type, title)
 	req.getConnection(function(err, connection) {
 		if (err) {
 			console.error('CONNECTION error: ',err);
@@ -154,15 +183,15 @@ exports.getUserId = function(req,res){ //get all user's problems in brief (coord
 };
 
 exports.getUserActivity = function(req,res){  //get user's activity list (everything)
-	req.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
+    req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
             var idUser = req.params.idUser;
             connection.query('SELECT Id, Content, Date, ActivityTypes_Id, Problems_Id FROM Activities WHERE Users_Id = ?', [idUser], function(err, rows, fields) {
                 if (err) {
@@ -213,30 +242,30 @@ exports.addNewPhotos = function(req,res){
                         });
                     }
                     rows.push(row);
-			   var activityData = {
-				  Content:photo_data.Link,
-				  Date:new Date(),
-				  ActivityTypes_Id:4,
-				  Users_Id:req.body.userId,
-				  Problems_Id:req.params.id
-		      }   
- 	             connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
-			  
-			 if (err) {
-			      console.error(err);
-			      res.statusCode = 500;
-			      res.send({
-				   result: 'error',
-				   err:    err.code
-			      });
-			  }
+               var activityData = {
+                  Content:photo_data.Link,
+                  Date:new Date(),
+                  ActivityTypes_Id:4,
+                  Users_Id:req.body.userId,
+                  Problems_Id:req.params.id
+              }   
+                 connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
+              
+             if (err) {
+                  console.error(err);
+                  res.statusCode = 500;
+                  res.send({
+                   result: 'error',
+                   err:    err.code
+                  });
+              }
                     });
 
 
                  
                 });
-	     i++;
-	     }
+         i++;
+         }
             res.send({
                 json:   rows,
                 length: rows.length
@@ -246,27 +275,27 @@ exports.addNewPhotos = function(req,res){
     });
 }
 exports.postProblem = function(req,res){  //post new problem
-	req.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
+    req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
 
-		    console.log(req.body);
+            console.log(req.body);
 
-		    var data = {
-		        Title: req.body.title,
-             	Content: req.body.content,
-             	Latitude: req.body.latitude,
-             	Longtitude: req.body.longitude,
+            var data = {
+                Title: req.body.title,
+                Content: req.body.content,
+                Latitude: req.body.latitude,
+                Longtitude: req.body.longitude,
                 Moderation:'1',
-             	Status: 0,
-             	ProblemTypes_Id: req.body.type
-		     };
+                Status: 0,
+                ProblemTypes_Id: req.body.type
+             };
 
             connection.query('INSERT INTO Problems SET ?', [data], function(err, rows, fields) {
                 if (err) {
@@ -279,25 +308,25 @@ exports.postProblem = function(req,res){  //post new problem
                 }
 
                 var i = 0;
-		  var activityData = {
-			  Content:"",
-			  Date:new Date(),
-			  ActivityTypes_Id:1,
-			  Users_Id:req.body.userId,
-			  Problems_Id:rows.insertId
-		  }   
- 	         connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
-			  
-			 if (err) {
-			      console.error(err);
-			      res.statusCode = 500;
-			      res.send({
-				   result: 'error',
-				   err:    err.code
-			      });
-			  }
-			  
-			  while (req.files['file[' + i + ']'] != undefined) {
+          var activityData = {
+              Content:"",
+              Date:new Date(),
+              ActivityTypes_Id:1,
+              Users_Id:req.body.userId,
+              Problems_Id:rows.insertId
+          }   
+             connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
+              
+             if (err) {
+                  console.error(err);
+                  res.statusCode = 500;
+                  res.send({
+                   result: 'error',
+                   err:    err.code
+                  });
+              }
+              
+              while (req.files['file[' + i + ']'] != undefined) {
                        var photo_data = {
                         Link: req.files['file[' + i + ']'].name,
                         Status: 0,
@@ -306,22 +335,22 @@ exports.postProblem = function(req,res){  //post new problem
                        };
 
                         connection.query('INSERT INTO Photos SET ?', [photo_data], function (err, rows, fields) {
-				   if (err) {
-					console.error(err);
-					res.statusCode = 500;
-					res.send({
-					    result: 'error',
-					    err: err.code
-					});
-				   }
+                   if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err: err.code
+                    });
+                   }
                         });
 
                         i++;
                         }  
-			  
-			  
-			  
-		  });
+              
+              
+              
+          });
                 
 
                 res.send({
@@ -334,16 +363,16 @@ exports.postProblem = function(req,res){  //post new problem
 };
 
 exports.postVote = function(req,res){  //+1 vote for a problem
-	 
-	req.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
+     
+    req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
             var problemId = req.body.idProblem;
             var userId = req.body.userId;
             connection.query('UPDATE Problems SET Votes=Votes+1 WHERE Id=?', [problemId], function(err, rows, fields) {
@@ -354,37 +383,37 @@ exports.postVote = function(req,res){  //+1 vote for a problem
                         result: 'error',
                         err:    err.code
                     });
-		  }
-			  if(userId!=undefined){
-			      var activityData = {
-				  Content:"",
-				  Date:new Date(),
-				  ActivityTypes_Id:3,
-				  Users_Id:userId,
-				  Problems_Id:problemId
-			      }   
-			   connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
+          }
+              if(userId!=undefined){
+                  var activityData = {
+                  Content:"",
+                  Date:new Date(),
+                  ActivityTypes_Id:3,
+                  Users_Id:userId,
+                  Problems_Id:problemId
+                  }   
+               connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
 
-				 if (err) {
-				      console.error(err);
-				      res.statusCode = 500;
-				      res.send({
-					   result: 'error',
-					   err:    err.code
-				      });
-				  }  
+                 if (err) {
+                      console.error(err);
+                      res.statusCode = 500;
+                      res.send({
+                       result: 'error',
+                       err:    err.code
+                      });
+                  }  
 
 
-			  });
-			  }
+              });
+              }
                 res.send({
                     json:   rows,
                     length: rows.length,
-		      fields:fields	  
-		       
-		      	  
+              fields:fields   
+               
+                  
                 });
-		   
+           
             });
         }
     });
@@ -393,14 +422,14 @@ exports.postVote = function(req,res){  //+1 vote for a problem
 exports.logIn = function(req, res) {
     console.log("email is - " + req.body.email + ", pass is - " +req.body.password);
     req.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
             console.log('Request: ' + req.body.email);
             var email = req.body.email||'',
             password = req.body.password||'';
@@ -433,14 +462,14 @@ exports.logIn = function(req, res) {
 
 exports.logOut = function(req, res) {
     req.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
             var token;
             if(req.cookies.token) {
                 console.log(req.cookies);
@@ -465,14 +494,14 @@ exports.logOut = function(req, res) {
 
 exports.register = function (req, res) {
     req.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
             var userData = {};
             userData.name = req.body.first_name||'';
             userData.surname = req.body.last_name||'';
@@ -488,8 +517,8 @@ exports.register = function (req, res) {
 
             connection.query("select Id from Users where Email like ?", userData.email, function(err, result) {
 
-	    //todo: send only message (status=200), that user exists
-	    
+        //todo: send only message (status=200), that user exists
+        
             if(result.length !== 0) {
                 return res.send(400);
             }
@@ -514,15 +543,15 @@ exports.register = function (req, res) {
 //admin-------------------------------------------------------------------
 exports.notApprovedProblems = function(req, res) {
 req.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
 
-				err:    err.code
-			});
-		} else {
+                err:    err.code
+            });
+        } else {
             var token;
             if(req.cookies.token) {
                 token = req.cookies.token;
@@ -784,6 +813,144 @@ req.getConnection(function(err, connection) {
                         err:    '',
                         json:   rows,
                         length: rows.length
+                    });
+                    });
+            });
+        }
+    });
+};
+exports.addResource = function(req, res) {
+req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+
+                err:    err.code
+            });
+        } else {
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            }
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
+                }
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+                var data = {
+            Title: req.body.Title,
+            Content: req.body.Content,
+            Alias: req.body.Alias
+        };
+        connection.query("INSERT INTO Resources SET ?", data, function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    ''
+                    });
+                    });
+            });
+        }
+    });
+};
+exports.editResource = function(req, res) {
+req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+
+                err:    err.code
+            });
+        } else {
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            }
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
+                }
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+                var data = {
+            Alias: req.body.Alias,
+            Title: req.body.Title,
+            Content: req.body.Content
+                };
+                var alias = req.params.alias
+        connection.query("UPDATE Resources SET ? WHERE Alias = ?", [data, alias], function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    ''
+                    });
+                    });
+            });
+        }
+    });
+};
+exports.deleteResource = function(req, res) {
+req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+
+                err:    err.code
+            });
+        } else {
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            }
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
+                }
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+            var Alias = req.params.alias
+        connection.query("DELETE FROM Resources WHERE Alias = ?", Alias, function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    ''
                     });
                     });
             });

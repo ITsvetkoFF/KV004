@@ -4,13 +4,14 @@
     <title>Ecomap - Project</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="style/css/bootstrap.css"/>
     <link rel="stylesheet" href="style/css/dropzone.css" />
     <link rel="stylesheet" href="style/css/main.css" />
+    <link rel="stylesheet" href="style/css/admin.css" />
     <link rel="stylesheet" href="style/css/MarkerCluster.css"/>
     <link rel="stylesheet" href="style/css/MarkerCluster.Default.css"/>
     <link rel="stylesheet" href="style/css/admin2.css"/>
-    <link rel="stylesheet" href="style/css/bootstrap.css"/>
-
+    
    <!--<script type="text/javascript" src="/bower_components/dropzone.js"></script>-->
 
     <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
@@ -43,7 +44,7 @@
             </div>
 
             <div class="b-container__right-side{{showRigthSide}}">
-                <div class="b-right-side__pointer" ng-click="rightSidePointerClick()"></div>
+            <a href="#/map" class="close" ng-click="hideDiv()">×</a>
                 <div class="b-view" ng-view></div>
             </div>
         </div>

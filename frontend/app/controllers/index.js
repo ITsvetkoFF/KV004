@@ -9,9 +9,10 @@ define([
     './map-load',
     './main-controller',
     './show-problem',
-    './add-problem',
-    './resources', 
+    './not-approved',
+    './add-problem', 
     './socket',
-    './not-approved'
-
+    './resourcesCtrl',
+    './editorCtrl',
+    './addResourceCtrl'
 ], function () {});

@@ -7,7 +7,7 @@ define([
     'angular',
     'app',
     'routes'
-], function (require, ng) {
+    ], function (require, ng) {
     'use strict';
 
     /*
