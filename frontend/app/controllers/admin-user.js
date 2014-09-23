@@ -2,6 +2,13 @@ define(['./module'], function (controllers) {
 
     'use strict';
     controllers.controller('AdminUserCtrl', ['$scope', '$http', '$location', '$window', 'ipCookie', 'UserService', function ($scope, $http, $location, $window, ipCookie, UserService) {
+
+        $scope.isLoggedIn = UserService.isLoggedIn;
+        $scope.isAdministrator = UserService.isAdministrator;
+        $scope.name = ipCookie('userName');
+        $scope.surname = ipCookie('userSurname');
+        $scope.userId = ipCookie('id');
+        
         /*****--- Register form ---*****/
         $scope.registerClassAppendix = "_hide";
 
@@ -24,6 +31,21 @@ define(['./module'], function (controllers) {
         };
         /*******************************/
 
+        /**--- Getting reg usr problems ---*/
+        
+        if($scope.userId) {
+            getUserProblems($scope.userId);
+            console.log("Your id is ", $scope.userId);
+        }
+
+        function getUserProblems(userId){
+            $http({ method: 'GET', url: "api/usersProblem/" + userId }).success(function (data) {
+                $scope.dataUserProblems = data;
+                console.log("user's problems are: ", $scope.dataUserProblems);
+            });
+        };
+        /*******************************/
+
         /*******--- Login form ---******/
         $scope.postLogIn = function () {
             var data = {};
@@ -32,18 +54,13 @@ define(['./module'], function (controllers) {
 
             UserService.logIn(data.email, data.password).success(function (userData) {
                 successLogIn(userData);
+                getUserProblems($scope.userId);
             }).error(function (status, data) {
                 console.log(status);
                 console.log(data);
             });
         };
         /*******************************/
-
-        $scope.isLoggedIn = UserService.isLoggedIn;
-        $scope.isAdministrator = UserService.isAdministrator;
-        $scope.name = ipCookie('userName');
-        $scope.surname = ipCookie('userSurname');
-	    $scope.userId = ipCookie('id');
 
         /*****--- The main part of facebook authorization ---*****/
         FB.init({

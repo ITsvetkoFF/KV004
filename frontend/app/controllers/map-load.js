@@ -108,8 +108,12 @@ define(['./module'], function (controllers) {
             {name: 'Вирішена', id: 1, selected: true}
         ];
 
+        $scope.placeUserProblemsChecker;
         $scope.toggleSelection = function () {
-            placeMarkers($scope.data);
+            if($scope.placeUserProblemsChecker)
+                placeMarkers($scope.dataUserProblems);
+            else
+                placeMarkers($scope.data);
         };
 
     }]);
