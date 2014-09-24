@@ -156,12 +156,17 @@ function fillProblemsActivities() {
                 ActivityTypes_Id: 1,
                 users_Id: randomIntInc(1, userNames.length),
                 Problems_Id: j,
+                Content:JSON.stringify({
+                        Content:"Проблему додано анонімно",
+                        userName:"(Анонім)"
+                    })
+                }
             };
             connection.query("INSERT INTO Activities SET ?", data, function (err, rows, fields) {
                 //if (err) throw err;
             });
         };
-    };
+    
 };
 
 fillResources()

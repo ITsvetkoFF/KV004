@@ -242,36 +242,95 @@ exports.addNewPhotos = function(req,res){
                         });
                     }
                     rows.push(row);
-               var activityData = {
-                  Content:photo_data.Link,
-                  Date:new Date(),
-                  ActivityTypes_Id:4,
-                  Users_Id:req.body.userId,
-                  Problems_Id:req.params.id
-              }   
-                 connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
-              
-             if (err) {
-                  console.error(err);
-                  res.statusCode = 500;
-                  res.send({
-                   result: 'error',
-                   err:    err.code
-                  });
-              }
+
+
+                    var content ={
+                        Content:"додав фото",
+                        userName:req.body.userName
+                    }
+                    if(req.body.userId==undefined) {
+                        content.Content="Фото додано анонімно";
+                        content.userName="(Анонім)";
+
+
+                    }
+                    var activityData = {
+                        Content:JSON.stringify(content),
+                        Date:new Date(),
+                        ActivityTypes_Id:4,
+                        Users_Id:req.body.userId,
+                        Problems_Id:req.params.id
+                    }
+
+                    connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
+
+                        if (err) {
+                            console.error(err);
+                            res.statusCode = 500;
+                            res.send({
+                                result: 'error',
+                                err:    err.code
+                            });
+                        }
                     });
 
 
-                 
+
                 });
-         i++;
-         }
+                i++;
+            }
             res.send({
                 json:   rows,
                 length: rows.length
             });
 
         }
+    });
+}
+exports.addComment = function(req,res) {
+    req.getConnection(function (err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ', err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err: err.code
+            });
+        } else {
+
+        }
+        var content ={
+            Content:req.body.data.Content,
+            userName:req.body.data.userName
+        }
+        if(req.body.data.userId==undefined) {
+             content.userName="(Анонім)";
+            req.body.userId = 1;
+
+
+        }
+        var activityData = {
+            Content:JSON.stringify(content),
+            //Content: "Корістувачь " + req.body.userName + " залишив коментар: "+req.body.Content,
+            Date: new Date(),
+            ActivityTypes_Id: 5,
+            Users_Id: req.body.data.userId,
+            Problems_Id: req.params.id
+        };
+
+        connection.query('INSERT INTO Activities SET ?', [activityData], function (err, rowsAcivity, fields) {
+
+            if (err) {
+                console.error(err);
+                res.statusCode = 500;
+                res.send({
+                    result: 'error',
+                    err: err.code
+                });
+            }
+
+
+        });
     });
 }
 exports.postProblem = function(req,res){  //post new problem
@@ -294,8 +353,9 @@ exports.postProblem = function(req,res){  //post new problem
                 Longtitude: req.body.longitude,
                 Moderation:'1',
                 Status: 0,
-                ProblemTypes_Id: req.body.type
-             };
+                ProblemTypes_Id: req.body.type,
+                Votes:0
+            };
 
             connection.query('INSERT INTO Problems SET ?', [data], function(err, rows, fields) {
                 if (err) {
@@ -308,50 +368,64 @@ exports.postProblem = function(req,res){  //post new problem
                 }
 
                 var i = 0;
-          var activityData = {
-              Content:"",
-              Date:new Date(),
-              ActivityTypes_Id:1,
-              Users_Id:req.body.userId,
-              Problems_Id:rows.insertId
-          }   
-             connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
-              
-             if (err) {
-                  console.error(err);
-                  res.statusCode = 500;
-                  res.send({
-                   result: 'error',
-                   err:    err.code
-                  });
-              }
-              
-              while (req.files['file[' + i + ']'] != undefined) {
-                       var photo_data = {
-                        Link: req.files['file[' + i + ']'].name,
-                        Status: 0,
-                        Description: req.body.description[i],
-                        Problems_Id: rows.insertId
-                       };
+                var content ={
+                    Content:"додав проблему",
+                    userName:req.body.userName
+                }
+                if(req.body.userId==undefined) {
+                    content.Content="Проблему створено анонімно";
+                    req.body.userId = 1;
+                    content.userName="(Анонім)";
+
+
+
+                }
+                var activityData = {
+                    Content:JSON.stringify(content),
+                    Date:new Date(),
+                    ActivityTypes_Id:1,
+                    Users_Id:req.body.userId,
+                    Problems_Id:rows.insertId
+                };
+
+                connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
+
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+
+                    while (req.files['file[' + i + ']'] != undefined) {
+                        var photo_data = {
+                            Link: req.files['file[' + i + ']'].name,
+                            Status: 0,
+                            Description: req.body.description[i],
+                            Problems_Id: rows.insertId
+                        };
 
                         connection.query('INSERT INTO Photos SET ?', [photo_data], function (err, rows, fields) {
-                   if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err: err.code
-                    });
-                   }
+                            if (err) {
+                                console.error(err);
+                                res.statusCode = 500;
+                                res.send({
+                                    result: 'error',
+                                    err: err.code
+                                });
+                            }
                         });
 
                         i++;
-                        }  
-              
-              
-              
-          });
-                
+                    }
+
+
+
+                });
+
+
 
                 res.send({
                     json:   rows,
@@ -363,7 +437,7 @@ exports.postProblem = function(req,res){  //post new problem
 };
 
 exports.postVote = function(req,res){  //+1 vote for a problem
-     
+
     req.getConnection(function(err, connection) {
         if (err) {
             console.error('CONNECTION error: ',err);
@@ -383,42 +457,53 @@ exports.postVote = function(req,res){  //+1 vote for a problem
                         result: 'error',
                         err:    err.code
                     });
-          }
-              if(userId!=undefined){
-                  var activityData = {
-                  Content:"",
-                  Date:new Date(),
-                  ActivityTypes_Id:3,
-                  Users_Id:userId,
-                  Problems_Id:problemId
-                  }   
-               connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
-
-                 if (err) {
-                      console.error(err);
-                      res.statusCode = 500;
-                      res.send({
-                       result: 'error',
-                       err:    err.code
-                      });
-                  }  
+                }
+                var content ={
+                    Content:"додав голос",
+                    userName:req.body.userName
+                }
+                if(req.body.userId==undefined) {
+                    content.Content="Голос додано анонімно";
+                    userId = 1;
+                    content.userName="(Анонім)";
 
 
-              });
-              }
+                }
+
+                var activityData = {
+                    Content: JSON.stringify(content),
+                    Date: new Date(),
+                    ActivityTypes_Id: 3,
+                    Users_Id: userId,
+                    Problems_Id: problemId
+                }
+
+                connection.query('INSERT INTO Activities SET ?',[activityData],function(err,rowsAcivity,fields){
+
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+
+
+                });
+
                 res.send({
                     json:   rows,
                     length: rows.length,
-              fields:fields   
-               
-                  
+                    fields:fields
+
+
                 });
-           
+
             });
         }
     });
 };
-
 exports.logIn = function(req, res) {
     console.log("email is - " + req.body.email + ", pass is - " +req.body.password);
     req.getConnection(function(err, connection) {
