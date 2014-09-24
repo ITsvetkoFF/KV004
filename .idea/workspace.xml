@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bbcf5b7-058c-4397-828a-4ed671c261e3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="DELETED" beforePath="E:\w_enviromap\KV004\frontend\app\directives\uibootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="E:\w_enviromap\KV004\frontend\app\js\ui-bootstrap.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/style/css/admin.css" afterPath="$PROJECT_DIR$/frontend/style/css/admin.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/app.js" afterPath="$PROJECT_DIR$/frontend/app/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/style/css/bootstrap.css" afterPath="$PROJECT_DIR$/frontend/style/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/bootstrap.js" afterPath="$PROJECT_DIR$/frontend/app/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/bower.json" afterPath="$PROJECT_DIR$/frontend/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/directives/index.js" afterPath="$PROJECT_DIR$/frontend/app/directives/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/style/css/main.css" afterPath="$PROJECT_DIR$/frontend/style/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/main.js" afterPath="$PROJECT_DIR$/frontend/app/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/controllers/show-problem.js" afterPath="$PROJECT_DIR$/frontend/app/controllers/show-problem.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/templates/showProblem.html" afterPath="$PROJECT_DIR$/frontend/app/templates/showProblem.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="KV004.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,10 +27,10 @@
     <splitter split-orientation="horizontal" split-proportion="0.53311896">
       <split-first>
         <leaf>
-          <file leaf-file-name="showProblem.html" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="showProblem.html" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/frontend/app/templates/showProblem.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.81242937" vertical-offset="607" max-vertical-offset="1921">
+                <state vertical-scroll-proportion="0.9965812" vertical-offset="743" max-vertical-offset="1615">
                   <caret line="72" column="50" selection-start-line="72" selection-start-column="50" selection-end-line="72" selection-end-column="50" />
                   <folding>
                     <element signature="tag#div#1;tag#div#0;tag#tab#1;tag#tabset#0;tag#div#0;tag#div#0" expanded="false" />
@@ -55,7 +43,7 @@
           <file leaf-file-name="ui-bootstrap-tpls.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend/bower_components/angular-bootstrap/ui-bootstrap-tpls.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="48468" max-vertical-offset="71485">
+                <state vertical-scroll-proportion="0.0" vertical-offset="48875" max-vertical-offset="70074">
                   <caret line="2875" column="6" selection-start-line="2875" selection-start-column="6" selection-end-line="2875" selection-end-column="6" />
                   <folding>
                     <marker date="1411548764245" expanded="false" signature="123932:123943" placeholder="..." />
@@ -77,10 +65,10 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="show-problem.js" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="show-problem.js" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/frontend/app/controllers/show-problem.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="1.4291987" vertical-offset="160" max-vertical-offset="1581">
+                <state vertical-scroll-proportion="1.0240384" vertical-offset="823" max-vertical-offset="1734">
                   <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
                   <folding />
                 </state>
@@ -90,7 +78,7 @@
           <file leaf-file-name="admin.css" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend/style/css/admin.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="3808" max-vertical-offset="13634">
+                <state vertical-scroll-proportion="0.0" vertical-offset="4097" max-vertical-offset="13600">
                   <caret line="241" column="19" selection-start-line="241" selection-start-column="19" selection-end-line="241" selection-end-column="19" />
                   <folding />
                 </state>
@@ -100,7 +88,7 @@
           <file leaf-file-name="bootstrap.css" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend/style/css/bootstrap.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="62101" max-vertical-offset="106845">
+                <state vertical-scroll-proportion="0.0" vertical-offset="62033" max-vertical-offset="105604">
                   <caret line="3649" column="2" selection-start-line="3649" selection-start-column="2" selection-end-line="3649" selection-end-column="2" />
                   <folding />
                 </state>
@@ -110,7 +98,7 @@
           <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/frontend/app/app.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
+                <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="238">
                   <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
                   <folding />
                 </state>
@@ -321,14 +309,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -339,14 +319,12 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" />
-      <option name="executablePath" />
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
       <option name="filePath" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -354,6 +332,16 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
+      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -374,13 +362,18 @@
       <created>1410939297238</created>
       <updated>1410939297238</updated>
     </task>
+    <task id="LOCAL-00001" summary="problem show window formatted">
+      <created>1411549209947</created>
+      <updated>1411549209947</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30736393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3062967" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1776" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -415,9 +408,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12901527" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -435,7 +428,8 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="problem show window formatted" />
+    <option name="LAST_COMMIT_MESSAGE" value="problem show window formatted" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -761,7 +755,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.83728814" vertical-offset="126" max-vertical-offset="1037">
           <caret line="47" column="67" selection-start-line="47" selection-start-column="67" selection-end-line="47" selection-end-column="78" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -789,14 +782,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/app/controllers/show-problem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4291987" vertical-offset="160" max-vertical-offset="1581">
-          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/bower_components/angular-bootstrap/ui-bootstrap-tpls.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="48468" max-vertical-offset="71485">
@@ -818,12 +803,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/app/templates/showProblem.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81242937" vertical-offset="607" max-vertical-offset="1921">
+        <state vertical-scroll-proportion="0.9965812" vertical-offset="743" max-vertical-offset="1615">
           <caret line="72" column="50" selection-start-line="72" selection-start-column="50" selection-end-line="72" selection-end-column="50" />
           <folding>
             <element signature="tag#div#1;tag#div#0;tag#tab#1;tag#tabset#0;tag#div#0;tag#div#0" expanded="false" />
             <element signature="tag#div#2;tag#div#0;tag#tab#1;tag#tabset#0;tag#div#0;tag#div#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/app/controllers/show-problem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0240384" vertical-offset="823" max-vertical-offset="1734">
+          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
