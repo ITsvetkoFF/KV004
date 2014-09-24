@@ -7,7 +7,7 @@
     "angular-route": "latest",
     "angular-mocks": "latest",
     "angular-cookie": "latest",
-    "bootstrap": "latest",
+    "font-awesome": "latest",
     "requirejs": "latest",
     "requirejs-domready": "latest",
     "angular-sanitize": "latest",
