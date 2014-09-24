@@ -124,7 +124,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Activities` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Content` VARCHAR(500) NULL,
-  `Date` DATE NULL,
+  `Date` DATETIME NULL,
   `ActivityTypes_Id` INT NOT NULL,
   `Users_Id` INT NULL,
   `Problems_Id` INT NOT NULL,
