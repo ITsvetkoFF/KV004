@@ -33,6 +33,6 @@ define([
         'ngSanitize',
         'textAngular',
         'textAngularSetup',
-       'btford.socket-io'
-    ]).value('nickName', 'anonymous');;
+        'btford.socket-io'
+    ]);
 });

@@ -29,8 +29,10 @@
         </div>
         <div class="b-problem-deatiled-info-votes">
             <!--<img class='b-problem-deatiled-info__votes' src='images/icons/heart.jpg'> -->
-            <span class="glyphicon glyphicon-heart"></span>
-            {{problems[problemId].votes}}
+            <button class="simple_like_img" ng-click="addOneVote()" ng-disabled="disableVoteButton">
+                <span class="glyphicon glyphicon-heart" style="font-size:29px"></span>
+            </button>
+            <span class="b-details__likes-count">{{data.Votes}}</span>
         </div>
     </div>
    <div class="b-problem-deatiled-info-header" ng-init="tab=1">
@@ -59,7 +61,8 @@
 
                    <div class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div>
                    <form id="addPhotoDropzone" class="dropzone b-add-problem-form" name="upload_photo" drop="dropzoneConfig" ng-show="showDropField">
-
+                       <input type="text" style="display: none" ng-model="userId" name="userId"/>
+                       <input type="text" style="display: none" ng-model="name" name="userName"/>
                        <div class="previews previews_show" >
                            <p>
                                <span class="b-conteiner__drop-title-1"><strong>+ Перемістить сюди фото </strong>для завантаження</span>
@@ -80,25 +83,9 @@
 
 
            <div class="panel b-problem-tab-panel" ng-show="tab===2">
-                <div class="b-problem-deatiled-info-userComments">
-                    <div class="b-problem-deatiled-info-userComments__title"></div>
-                    <div class="b-problem-deatiled-info-userCommentsList">
-                        <div class="b-problem-deatiled-info-userCommentList__item">
-                            <div class="b-problem-deatiled-info-userComment__userName">Василь Петрович</div>
-                            <div class="b-problem-deatiled-info-userComment__date">24.04.13 о 23:15</div>
-                            <div class="b-problem-deatiled-info-userComment__activityType"></div>
-                        </div>
-                        <div class="b-problem-deatiled-info-userComment__content">Повідомив про проблему</div>
-                    </div>
-                    <div class="b-problem-deatiled-info-userCommentsList">
-                        <div class="b-problem-deatiled-info-userCommentList__item">
-                            <div class="b-problem-deatiled-info-userComment__userName">Петро</div>
-                            <div class="b-problem-deatiled-info-userComment__date">05.07.13 о 23:15</div>
-                            <div class="b-problem-deatiled-info-userComment__activityType"></div>
-                        </div>
-                        <div class="b-problem-deatiled-info-userComment__content">Друзі, Всіх небайдужих запрошуємо долучитися до прибирання в міському парку ім. Л.Українки</div>
-                    </div>
-                </div>
+               <activity></activity>
+
+
            </div>
    </div>
 </div>

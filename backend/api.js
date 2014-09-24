@@ -68,7 +68,7 @@ app.get('/api/getTitles',routes.getTitles);
 app.get('/api/resources/:name',routes.getResource);
 //new api for adding new photos to existed problem
 app.post('/api/photo/:id',routes.addNewPhotos);
-
+app.post('/api/comment/:id',routes.addComment);
 app.post('/api/login', routes.logIn);
 app.get('/api/logout', routes.logOut);
 app.post('/api/register', routes.register);
