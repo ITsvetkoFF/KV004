@@ -20,7 +20,10 @@ require.config({
         'textAngularSetup':'../bower_components/textAngular/src/textAngularSetup',
         'ngResource':  '../bower_components/angular-resource/angular-resource',
         'socket':'../bower_components/angular-socket-io/socket',
-        'socket.io':'../bower_components/socket.io-client/dist/socket.io'
+        'socket.io':'../bower_components/socket.io-client/dist/socket.io',
+        'angular-bootstrap-tpls':'../bower_components/angular-bootstrap/ui-bootstrap-tpls'
+
+
 
     },
 
@@ -60,6 +63,9 @@ require.config({
             deps: ['angular']
         },
         'textAngular': {
+            deps: ['angular']
+        },
+        'angular-bootstrap-tpls':{
             deps: ['angular']
         },
         'facebook' : {

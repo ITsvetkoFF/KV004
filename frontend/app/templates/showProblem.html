@@ -1,85 +1,76 @@
+
+
 <div class="b-right-side__show-problem">
     <div class="b-problems">
 <!-- Часть для вставки / начало -->
 
-    <div class="b-problem-deatiled-info-title">
-        <img ng-src="images/markers/{{data.ProblemTypes_Id}}.png" class="b-problem-deatiled-info-title__icon">
-        <div class="b-problem-deatiled-info-title__text">{{data.Title}}</div>
-        <div class="b-problem-deatiled-info-user">
-            <div class="b-problem-deatiled-info-user__name">{{userName}}</div>
-            <div class="b-problem-deatiled-info-user__date">{{createdDate}}</div>
-        </div>
-    </div>
-    <div class="b-problem-deatiled-info-general">
-        <div class='b-problem-deatiled-info-severity'>
-            <div class="b-problem-deatiled-info__caption">Важливість</div>
-            <div class="b-problem-deatiled-info__severity" >
-               <rating  ng-model="rate" max="5" ></rating>
+        <div class="b-problem-deatiled-info-title">
+            <img ng-src="images/markers/{{data.ProblemTypes_Id}}.png" class="b-problem-deatiled-info-title__icon">
+            <div class="b-problem-deatiled-info-title__text">{{data.Title}}</div>
+            <div class="b-problem-deatiled-info-user">
+                <div class="b-problem-deatiled-info-user__name">{{userName}}</div>
+                <div class="b-problem-deatiled-info-user__date">{{createdDate | date:'dd/MM/yyyy' }}</div>
             </div>
         </div>
-        <div class="btn-group b-problem-deatiled-info__status">
-            <div class="b-problem-deatiled-info-status__text">Status</div>
-            <div class="onoffswitch">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-                <label class="onoffswitch-label" for="myonoffswitch">
-                    <span class="onoffswitch-inner"></span>
-                    <span class="onoffswitch-switch"></span>
-                </label>
+        <div class="b-problem-deatiled-info-general">
+            <div class='b-problem-deatiled-info-severity'>
+                <div class="b-problem-deatiled-info__caption">Важливість</div>
+                <div class="b-problem-deatiled-info__severity"  ng-init="severity">
+                   <rating  ng-model="severity" max="5" readonly="true" class="b-glyphicon__star" ></rating>
+                </div>
+            </div>
+            <div class="btn-group b-problem-deatiled-info__status">
+                <div class="b-problem-deatiled-info-status__text">{{status}}</div>
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="checked" ng-disabled="true" >
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="b-problem-deatiled-info-votes">
+                <!--<img class='b-problem-deatiled-info__votes' src='images/icons/heart.jpg'> -->
+                <span class="glyphicon glyphicon-heart"></span>
+                {{votes}}
             </div>
         </div>
-        <div class="b-problem-deatiled-info-votes">
-            <!--<img class='b-problem-deatiled-info__votes' src='images/icons/heart.jpg'> -->
-            <span class="glyphicon glyphicon-heart"></span>
-            {{problems[problemId].votes}}
-        </div>
-    </div>
-   <div class="b-problem-deatiled-info-header" ng-init="tab=1">
-
-               <ul class="b-problem-tabs nav nav-pills">
-                   <li class="b-problem-subtab" ng-class="{active:tab === 1}">
-                           <a href class="b-problem-tabButton" ng-click="tab=1">Детально</a> </li>
-                   <li class="b-problem-subtab" ng-class="{active:tab === 2}">
-                           <a href  class="b-problem-tabButton" ng-click="tab=2">Коментарі користувачів</a></li>
-               </ul>
-
-            <div class="panel b-problem-tab-panel" ng-show="tab===1">
 
 
+        <tabset justified="true" class="b-problem-tab">
+            <tab heading="Детально" class="b-problem-tab">
+                <div class="b-problem-deatiled-info-description">
+                    <div class="b-problem-deatiled-info-description__title"></div>
+                    <div class="b-problem-deatiled-info-description__content">{{content}}</div>
+                    <div class="b-problem-deatiled-info-description-photos">
 
-           <div class="b-problem-deatiled-info-description">
-               <div class="b-problem-deatiled-info-description__title"></div>
-               <div class="b-problem-deatiled-info-description__content">{{content}}</div>
-               <div class="b-problem-deatiled-info-description-photos">
+                        <div class="show_photo" ng-repeat="photo in photos">
+                            <img  ng-src="photos/large/{{photo.Link}}" class="b-details-body-problem-photo"/>
 
-                   <div class="show_photo" ng-repeat="photo in photos">
-                       <img  ng-src="photos/large/{{photo.Link}}" class="b-details-body-problem-photo"/>
+                            <div class="show_photo_label_{{photo.Status}}"></div>
+                        </div>
 
-                       <div class="show_photo_label_{{photo.Status}}"></div>
-                   </div>
+                        <div class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div>
+                        <form id="addPhotoDropzone" class="dropzone b-add-problem-form" name="upload_photo" drop="dropzoneConfig" ng-show="showDropField">
 
-                   <div class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div>
-                   <form id="addPhotoDropzone" class="dropzone b-add-problem-form" name="upload_photo" drop="dropzoneConfig" ng-show="showDropField">
+                            <div class="previews previews_show" >
+                                <p>
+                                    <span class="b-conteiner__drop-title-1"><strong>+ Перемістить сюди фото </strong>для завантаження</span>
+                                </p>
+                                <span class="b-conteiner__drop-title-2">(або натисніть)</span>
+                            </div>
+                            <div class="b-details-body__status">
+                                Проблема вже вирішена? <br>Так <input type="radio" name="solveProblemMark" value="1">
+                                Ні<input type="radio" name="solveProblemMark" value="0">
 
-                       <div class="previews previews_show" >
-                           <p>
-                               <span class="b-conteiner__drop-title-1"><strong>+ Перемістить сюди фото </strong>для завантаження</span>
-                           </p>
-                           <span class="b-conteiner__drop-title-2">(або натисніть)</span>
-                       </div>
-                       <div class="b-details-body__status">
-                           Проблема вже вирішена? <br>Так <input type="radio" name="solveProblemMark" value="1">
-                           Ні<input type="radio" name="solveProblemMark" value="0">
-
-                       </div>
-                       <input id="btn-submit" type="button"   class="b-add-problem-button btn-forward-step-3 b-public" value="Додати">
-                       <input id="btn-reload" type="button" ng-click="hideAddPhotoForm()" class="b-add-problem-button btn-forward-step-3 b-public" value="Звернути">
-                   </form>
-               </div>
-           </div>
-       </div>
-
-
-           <div class="panel b-problem-tab-panel" ng-show="tab===2">
+                            </div>
+                            <input id="btn-submit" type="button"   class="b-add-problem-button btn-forward-step-3 b-public" value="Додати">
+                            <input id="btn-reload" type="button" ng-click="hideAddPhotoForm()" class="b-add-problem-button btn-forward-step-3 b-public" value="Звернути">
+                        </form>
+                    </div>
+                </div>
+            </tab>
+            <tab heading="Коментарі користувачів">
                 <div class="b-problem-deatiled-info-userComments">
                     <div class="b-problem-deatiled-info-userComments__title"></div>
                     <div class="b-problem-deatiled-info-userCommentsList">
@@ -99,11 +90,26 @@
                         <div class="b-problem-deatiled-info-userComment__content">Друзі, Всіх небайдужих запрошуємо долучитися до прибирання в міському парку ім. Л.Українки</div>
                     </div>
                 </div>
-           </div>
-   </div>
-</div>
+            </tab>
+        </tabset>
 
 
 
+        <!--<div class="b-problem-deatiled-info-header" ng-init="tab=1">
 
+                   <ul class="b-problem-tabs nav nav-pills">
+                       <li class="b-problem-subtab" ng-class="{active:tab === 1}">
+                               <a href class="b-problem-tabButton" ng-click="tab=1">Детально</a> </li>
+                       <li class="b-problem-subtab" ng-class="{active:tab === 2}">
+                               <a href  class="b-problem-tabButton" ng-click="tab=2">Коментарі користувачів</a></li>
+                   </ul>
+
+                <div class="panel b-problem-tab-panel" ng-show="tab===1">
+                </div>
+
+
+               <div class="panel b-problem-tab-panel" ng-show="tab===2">
+               </div>
+        </div>-->
+         </div>
 </div>

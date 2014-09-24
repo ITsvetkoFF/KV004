@@ -3647,6 +3647,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs.nav-justified {
   width: 100%;
   border-bottom: 0;
+  font-family: wwf;
 }
 .nav-tabs.nav-justified > li {
   float: none;

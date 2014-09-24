@@ -9,15 +9,15 @@
     "angular-cookie": "latest",
     "bootstrap": "latest",
     "requirejs": "latest",
-    "requirejs-domready": "latest", 
+    "requirejs-domready": "latest",
     "angular-sanitize": "latest",
-    "angular-route": "latest",
     "socket.io-client": "~0.9.16",
     "angular-socket-io": "~0.4.1",
     "socket.io": "~0.9.15",
     "angular-resource": "latest",
     "angular-cookies": "latest",
-    "dropzone":"latest",
-    "textAngular":"latest"
+    "dropzone": "latest",
+    "textAngular": "latest",
+    "angular-bootstrap": "~0.11.0"
   }
 }
