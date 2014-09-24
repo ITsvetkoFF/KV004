@@ -8,6 +8,7 @@ define(['./module'], function (controllers) {
         $scope.name = ipCookie('userName');
         $scope.surname = ipCookie('userSurname');
         $scope.userId = ipCookie('id');
+        console.log($scope.isAdministrator());
         $scope.getTitles = function() {
             $http({ method: 'GET', url: 'http://ita-kv.tk:8090/api/getTitles' }).success(function (data) {
                 $scope.data = data;
