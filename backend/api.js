@@ -83,13 +83,7 @@ app.post('/api/addResource', routes.addResource);
 app.put('/api/editResource/:alias', routes.editResource);
 app.delete('/api/deleteResource/:alias', routes.deleteResource);
 
-app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
+
 
 server.listen(8090);
 
