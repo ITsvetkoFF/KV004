@@ -23,7 +23,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Problems` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `Title` VARCHAR(70) NULL,
+  `Title` VARCHAR(130) NULL,
   `Content` VARCHAR(500) NULL,
   `Severity` TINYINT UNSIGNED NULL,
   `Moderation` TINYINT(1) NULL,
