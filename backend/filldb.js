@@ -166,7 +166,7 @@ function fillProblemsActivities() {
                 //if (err) throw err;
             });
         };
-    };
+    
 };
 
 fillResources()
