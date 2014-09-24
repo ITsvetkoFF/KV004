@@ -4,13 +4,7 @@ define(['./module'],function(controllers){
 
         $scope.showRigthSide = "_hide";
 
-        $scope.addProblem = function () {
-            $scope.showRigthSide = "";
-        };
 
-        $scope.rightSidePointerClick = function () {
-            $scope.showRigthSide = "_hide";
-        };
         $scope.hideDiv = function() {
             $rootScope.$broadcast('Update', '_hide');
         };

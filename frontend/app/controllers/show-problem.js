@@ -1,6 +1,7 @@
 define(['./module'], function(controllers){
     'use strict';
-    controllers.controller('showProblemCtrl', function ($scope,$routeParams,$http,ipCookie){
+    controllers.controller('showProblemCtrl', function ($scope,$routeParams,$http,ipCookie,$rootScope){
+        $rootScope.$broadcast('Update',"");
 
         if(ipCookie('vote'+$routeParams.problemID)==true){
           
