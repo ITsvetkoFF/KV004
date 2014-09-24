@@ -39,9 +39,7 @@
                 <div class="b-left-side__pointer" ng-click="showFilters()" ng-class = "{left_pointer_reverse : showFiltersVar}"></div>
             </div>
 
-            <div class="b-container__right-side{{showRigthSide}}">
-            <a href="#/map" class="close" ng-click="hideDiv()">×</a>
-                <div class="b-view" ng-view></div>
+            <<div class="b-view b-container__right-side{{showRigthSide}}" ng-view>
             </div>
         </div>
     </div>
