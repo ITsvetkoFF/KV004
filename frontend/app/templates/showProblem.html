@@ -52,7 +52,8 @@
 
                         <div class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div>
                         <form id="addPhotoDropzone" class="dropzone b-add-problem-form" name="upload_photo" drop="dropzoneConfig" ng-show="showDropField">
-
+                        <input type="text" style="display: none" ng-model="userId" name="userId"/>
+                        <input type="text" style="display: none" ng-model="name" name="userName"/>
                             <div class="previews previews_show" >
                                 <p>
                                     <span class="b-conteiner__drop-title-1"><strong>+ Перемістить сюди фото </strong>для завантаження</span>
