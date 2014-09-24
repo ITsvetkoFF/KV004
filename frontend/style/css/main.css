@@ -455,6 +455,7 @@ html, body {
     height: calc(100% - 52px);
     height: -moz-calc(100% - 52px);
     overflow: auto;
+    font-size:16pt;
 }
 
 .b-container__right-side_hide {
@@ -2089,13 +2090,12 @@ form.dropzone {
 }
 .b-details-body-problem-photo_add{
     width: 100px;
-    height:100px;
+    height: 100px;
     background: #f7f7f7;
     border: 2px dashed #dadada;
-    font-style: italic;
-    font-size: 22px;
-    font-family: Arial;
+    font-family: wwf;
     text-align: center;
+    padding: 35px 0 0 0;
 }
 .b-details-body-problem-photo_add:hover{
     cursor: pointer;
