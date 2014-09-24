@@ -17,7 +17,7 @@
                             <a href="#/deleteResource/{{title.Alias}}" class="b-submenu__button" ng-show="isAdministrator()" ng-click="deleteResource(title.Alias)"><i class="fa fa-trash fa-lg"></i></a>
                         </li>
 
-                        <li class="b-submenu__item" ng-if="1">
+                        <li class="b-submenu__item" ng-if="isAdministrator()">
                             <a href="#/addResource" class="b-submenu__link">Додати новий ресурс</a>
                         </li>
                     </ul>
