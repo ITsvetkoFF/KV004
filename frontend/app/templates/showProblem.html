@@ -29,8 +29,10 @@
             </div>
             <div class="b-problem-deatiled-info-votes">
                 <!--<img class='b-problem-deatiled-info__votes' src='images/icons/heart.jpg'> -->
-                <span class="glyphicon glyphicon-heart"></span>
-                {{votes}}
+                <button class="simple_like_img" ng-click="addOneVote()" ng-disabled="disableVoteButton">
+                    <span class="glyphicon glyphicon-heart" style="font-size:29px"></span>
+                </button>
+                {{data.Votes}}
             </div>
         </div>
 
@@ -69,29 +71,11 @@
                 </div>
             </tab>
             <tab heading="Коментарі користувачів">
-                <div class="b-problem-deatiled-info-userComments">
-                    <div class="b-problem-deatiled-info-userComments__title"></div>
-                    <div class="b-problem-deatiled-info-userCommentsList">
-                        <div class="b-problem-deatiled-info-userCommentList__item">
-                            <div class="b-problem-deatiled-info-userComment__userName">Василь Петрович</div>
-                            <div class="b-problem-deatiled-info-userComment__date">24.04.13 о 23:15</div>
-                            <div class="b-problem-deatiled-info-userComment__activityType"></div>
-                        </div>
-                        <div class="b-problem-deatiled-info-userComment__content">Повідомив про проблему</div>
-                    </div>
-                    <div class="b-problem-deatiled-info-userCommentsList">
-                        <div class="b-problem-deatiled-info-userCommentList__item">
-                            <div class="b-problem-deatiled-info-userComment__userName">Петро</div>
-                            <div class="b-problem-deatiled-info-userComment__date">05.07.13 о 23:15</div>
-                            <div class="b-problem-deatiled-info-userComment__activityType"></div>
-                        </div>
-                        <div class="b-problem-deatiled-info-userComment__content">Друзі, Всіх небайдужих запрошуємо долучитися до прибирання в міському парку ім. Л.Українки</div>
-                    </div>
-                </div>
+                 <activity></activity>
             </tab>
         </tabset>
 
 
 
-
+</div>
 </div>
