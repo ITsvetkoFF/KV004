@@ -1,7 +1,8 @@
 define(['./module'],function (controllers){
     'use strict';
-    controllers.controller('addProblemCtrl', function ($scope){
+    controllers.controller('addProblemCtrl', function ($scope,$rootScope){
         $scope.showStep_1 = true;
+        $rootScope.$broadcast('Update',"");
 
         console.log("Add Problem Controller is loaded");
 
