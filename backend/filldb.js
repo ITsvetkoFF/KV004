@@ -121,7 +121,7 @@ function fillActivityTypes() {
 }
 
 function fillProblemsActivities() {
-    for (var i = 0, j = 0, len = probs.length; i < len; i++) {
+    for (var i = 0, j = 0, len = probs.length-1; i < len; i++) {
 
         if (!probs[i].lat || !probs[i].probType || (probs[i].probStatus === null) || !probs[i].lon) { }
         else {
