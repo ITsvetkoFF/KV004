@@ -988,7 +988,7 @@ req.getConnection(function(err, connection) {
             IsResource: req.body.IsResource
                 };
                 var Id = req.params.id
-        connection.query("UPDATE Resources SET ? WHERE Id = ?", [data, alias], function(err, rows, fields) {
+        connection.query("UPDATE Resources SET ? WHERE Id = ?", [data, Id], function(err, rows, fields) {
                     if (err) {
                         console.error(err);
                         res.statusCode = 500;
