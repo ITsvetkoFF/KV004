@@ -112,7 +112,7 @@ exports.getResource = function(req,res){ //get resourse
             });
         } else {
             var name = req.params.name
-            connection.query('SELECT Title, Content FROM Resources WHERE Alias = ?', name, function(err, rows, fields) {
+            connection.query('SELECT Title, Content, Alias, IsResource FROM Resources WHERE Alias = ?', name, function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
