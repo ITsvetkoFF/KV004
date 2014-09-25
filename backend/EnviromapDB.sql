@@ -112,10 +112,12 @@ ENGINE = InnoDB;
 -- Table `Enviromap`.`Resources`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Resources` (
+`Id` INT NOT NULL AUTO_INCREMENT,
 `Alias` VARCHAR(30) NOT NULL,
 `Title` VARCHAR(150) NOT NULL,
 `Content` VARCHAR(10000) NOT NULL,
-PRIMARY KEY (`Alias`))
+`IsResource` TINYINT(1) NOT NULL,
+PRIMARY KEY (`Id`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
