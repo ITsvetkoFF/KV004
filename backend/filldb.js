@@ -157,24 +157,28 @@ function fillProblemsActivities() {
             };
             connection.query("INSERT INTO Problems SET ?", data, function (err, rows, fields) {
                 //if (err) throw err;
-            });
-            var data = {
-                Date: probs[i].created,
-                ActivityTypes_Id: 1,
-                users_Id: randomIntInc(1, userNames.length),
-                Problems_Id: j,
-                Content:JSON.stringify({
-                        Content:"Проблему додано анонімно",
-                        userName:"(Анонім)"
+
+                var data = {
+                    Date: probs[i].created,
+                    ActivityTypes_Id: 1,
+                    users_Id: randomIntInc(1, userNames.length),
+                    Problems_Id: j,
+                    Content: JSON.stringify({
+                        Content: "Проблему додано анонімно",
+                        userName: "(Анонім)"
                     })
                 }
-            };
-            connection.query("INSERT INTO Activities SET ?", data, function (err, rows, fields) {
-                //if (err) throw err;
+
+                connection.query("INSERT INTO Activities SET ?", data, function (err, rows, fields) {
+                    //if (err) throw err;
+                });
             });
-        };
+        }
+
+
+    }
     
-};
+}
 
 fillResources()
 fillProblemTypes();
