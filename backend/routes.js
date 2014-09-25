@@ -987,7 +987,7 @@ req.getConnection(function(err, connection) {
             Content: req.body.Content,
             IsResource: req.body.IsResource
                 };
-                var Id = req.params.Id
+                var Id = req.params.id
         connection.query("UPDATE Resources SET ? WHERE Id = ?", [data, alias], function(err, rows, fields) {
                     if (err) {
                         console.error(err);
@@ -1030,8 +1030,8 @@ req.getConnection(function(err, connection) {
                 if (decoded.role != 'administrator') {
                     return res.send(401);
                 }
-            var Alias = req.params.alias
-        connection.query("DELETE FROM Resources WHERE Id = ?", Alias, function(err, rows, fields) {
+            var Id = req.params.id
+        connection.query("DELETE FROM Resources WHERE Id = ?", Id, function(err, rows, fields) {
                     if (err) {
                         console.error(err);
                         res.statusCode = 500;
