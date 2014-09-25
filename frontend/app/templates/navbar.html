@@ -1,7 +1,6 @@
 <div class="b-header">
     <img src="images/logo.png" class="b-header__logo" />
     <a class="b-header__add-problem" href="#/problem/addProblem" ng-click="addProblem()">Повідомити  про  проблему</a>
-
     <div class="b-header__menu">
         <ul class="b-menu" ng-init="getTitles()">
             <li class="b-menu__item" ng-repeat="title in data" ng-if="!title.IsResource">
