@@ -26,6 +26,12 @@ resources[2].alias = 'removing';
 resources[3].alias = 'stopping-exploitation';
 resources[4].alias = 'stopping-trade';
 
+resources[0].isResource = 0;
+resources[1].isResource = 1;
+resources[2].isResource = 1;
+resources[3].isResource = 1;
+resources[4].isResource = 1;
+
 var problemTypes = ['проблеми лісів', 'сміттєзвалища', 'незаконна забудова', 'проблеми водойм', 'загрози біорізноманіттю', 'браконьєрство', 'інші проблеми'],
     userRoles = ['administrator', 'user'],
     userNames = ['admin', 'name1', 'name2', 'name3', 'name4', 'name5', 'name6', 'name7', 'name8', 'name9'],
@@ -79,7 +85,8 @@ function fillResources() {
         var data = {
             Title: resources[i].title,
             Content: resources[i].content,
-            Alias: resources[i].alias
+            Alias: resources[i].alias,
+            IsResource: resources[1].isResource
         };
         connection.query("INSERT INTO Resources SET ?", data, function (err, rows, fields) {
             if (err) throw err;
