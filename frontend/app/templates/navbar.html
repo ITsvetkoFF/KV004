@@ -4,7 +4,7 @@
     <div class="b-header__menu">
         <ul class="b-menu" ng-init="getTitles()">
             <li class="b-menu__item" ng-repeat="title in data" ng-if="!title.IsResource">
-                <a href="#/resources/about" class="b-menu__link" >{{title.Title}}</a> <a href="#/editResource/{{title.Alias}}" ng-show="isAdministrator()"><i class="fa fa-pencil fa-lg"></i></a> <a href="#/deleteResource/{{title.Alias}}" ng-show="isAdministrator()" ng-click="deleteResource(title.Alias)"><i class="fa fa-trash fa-lg"></i></a>
+                <a href="#/resources/about" class="b-menu__link" >{{title.Title}}</a> <a href="#/editResource/{{title.Alias}}" ng-if="isAdministrator()"><i class="fa fa-pencil fa-lg"></i></a> <a href="#/deleteResource/{{title.Alias}}" ng-if="isAdministrator()" ng-click="deleteResource(title.Alias)"><i class="fa fa-trash fa-lg"></i></a>
             </li>
             <li class="b-menu__item">
                 <a class="b-menu__link" id="b-menu__link-source">Ресурси</a>
