@@ -6,8 +6,8 @@ define(['./module'],function(controllers){
             $http({ method: 'GET', url: 'api/getTitles' }).success(function (data) {
                 $scope.data = data;
             });
-            $scope.deleteResource = function(Alias) {
-                $http.delete('/api/deleteResource/' + Alias)
+            $scope.deleteResource = function(Id) {
+                $http.delete('/api/deleteResource/' + Id)
             };
         };
         $scope.hideDiv = function() {
