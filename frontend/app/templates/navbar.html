@@ -3,26 +3,28 @@
     <a class="b-header__add-problem" href="#/problem/addProblem" ng-click="addProblem()">Повідомити  про  проблему</a>
 
     <div class="b-header__menu">
-        <ul class="b-menu">
-            <li class="b-menu__item">
-                <a href="#/resources/about" class="b-menu__link" >Про проект</a>
+        <ul class="b-menu" ng-init="getTitles()">
+            <li class="b-menu__item" ng-repeat="title in data" ng-if="!title.IsResource">
+                <a href="#/resources/about" class="b-menu__link" >{{title.Title}}</a> <a href="#/editResource/{{title.Alias}}" ng-show="1"><i class="fa fa-pencil fa-lg"></i></a> <a href="#/deleteResource/{{title.Alias}}" ng-show="1" ng-click="deleteResource(title.Alias)"><i class="fa fa-trash fa-lg"></i></a>
             </li>
             <li class="b-menu__item">
                 <a class="b-menu__link" id="b-menu__link-source">Ресурси</a>
-                <div class="b-menu__submenu" ng-init="getTitles()">
+                <div class="b-menu__submenu">
                     <ul class="b-submenu">
-                        <li class="b-submenu__item" ng-repeat="title in data">
+                        <li class="b-submenu__item" ng-repeat="title in data" ng-if="title.IsResource">
                             <a href="#/resources/{{title.Alias}}" class="b-submenu__link" >{{title.Title}}</a> 
-                            <a href="#/editResource/{{title.Alias}}" class="b-submenu__button" ng-show="isAdministrator()"><i class="fa fa-pencil fa-lg"></i></a> 
-                            <a href="#/deleteResource/{{title.Alias}}" class="b-submenu__button" ng-show="isAdministrator()" ng-click="deleteResource(title.Alias)"><i class="fa fa-trash fa-lg"></i></a>
+                            <a href="#/editResource/{{title.Alias}}" ng-show="1"><i class="fa fa-pencil fa-lg"></i></a> 
+                            <a href="#/deleteResource/{{title.Alias}}" ng-show="1" ng-click="deleteResource(title.Alias)"><i class="fa fa-trash fa-lg"></i></a>
                         </li>
 
-                        <li class="b-submenu__item" ng-if="isAdministrator()">
+                        <li class="b-submenu__item" ng-if="1">
                             <a href="#/addResource" class="b-submenu__link">Додати новий ресурс</a>
                         </li>
                     </ul>
                 </div>
             </li>
+            </ul>
+            <ul class="b-menu">
             <li class="b-menu__item">
                 <a href="" class="b-menu__link" id="b-menu__item__enter" ng-hide='isLoggedIn()'>Вхід</a>
                 <!-- Hidden registration form -->
