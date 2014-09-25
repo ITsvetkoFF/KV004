@@ -112,7 +112,7 @@ exports.getResource = function(req,res){ //get resourse
             });
         } else {
             var name = req.params.name
-            connection.query('SELECT Title, Content, Alias, IsResource FROM Resources WHERE Alias = ?', name, function(err, rows, fields) {
+            connection.query('SELECT * FROM Resources WHERE Alias = ?', name, function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -936,7 +936,8 @@ req.getConnection(function(err, connection) {
                 var data = {
             Title: req.body.Title,
             Content: req.body.Content,
-            Alias: req.body.Alias
+            Alias: req.body.Alias,
+            IsResource: req.body.IsResource
         };
         connection.query("INSERT INTO Resources SET ?", data, function(err, rows, fields) {
                     if (err) {
@@ -983,10 +984,11 @@ req.getConnection(function(err, connection) {
                 var data = {
             Alias: req.body.Alias,
             Title: req.body.Title,
-            Content: req.body.Content
+            Content: req.body.Content,
+            IsResource: req.body.IsResource
                 };
-                var alias = req.params.alias
-        connection.query("UPDATE Resources SET ? WHERE Alias = ?", [data, alias], function(err, rows, fields) {
+                var Id = req.params.Id
+        connection.query("UPDATE Resources SET ? WHERE Id = ?", [data, alias], function(err, rows, fields) {
                     if (err) {
                         console.error(err);
                         res.statusCode = 500;
@@ -1029,7 +1031,7 @@ req.getConnection(function(err, connection) {
                     return res.send(401);
                 }
             var Alias = req.params.alias
-        connection.query("DELETE FROM Resources WHERE Alias = ?", Alias, function(err, rows, fields) {
+        connection.query("DELETE FROM Resources WHERE Id = ?", Alias, function(err, rows, fields) {
                     if (err) {
                         console.error(err);
                         res.statusCode = 500;
