@@ -3,7 +3,7 @@ define(['./module'],function(controllers){
     controllers.controller('mainCtrl',['$scope','$rootScope', '$http' ,function($scope,$rootScope, $http){
         $scope.showRigthSide = "_hide";
         $scope.getTitles = function() {
-            $http({ method: 'GET', url: 'http://ita-kv.tk:8090/api/getTitles' }).success(function (data) {
+            $http({ method: 'GET', url: 'api/getTitles' }).success(function (data) {
                 $scope.data = data;
                 for (var i = 0; i < $scope.data.length; i++) {
                     if ($scope.data[i].Alias === 'about') $scope.data.splice(i,1);
