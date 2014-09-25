@@ -86,7 +86,7 @@ exports.getTitles = function(req,res){ //get titles of resources
                 err:    err.code
             });
         } else {
-            connection.query('SELECT Title, Alias, IsResource FROM Resources', function(err, rows, fields) {
+            connection.query('SELECT Title, Alias, Id, IsResource FROM Resources', function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
