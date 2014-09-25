@@ -174,7 +174,7 @@ html, body {
 
 .b-header__menu {
     display: inline-block;
-    width: 300px;
+    width: auto;
     margin: 0 0 0 20px;
     vertical-align: top;
 }
@@ -209,7 +209,7 @@ html, body {
 }
 
 .b-menu__link {
-    display: block;
+    display: inline-block;
     text-decoration: none;
     cursor: pointer;
     height: 30px;
@@ -849,7 +849,7 @@ html, body {
 
 .b-header__menu {
     display: inline-block;
-    width: 300px;
+    width: auto;
     margin: 0 0 0 20px;
     vertical-align: top;
 }
@@ -884,7 +884,7 @@ html, body {
 }
 
 .b-menu__link {
-    display: block;
+    display: inline-block;
     text-decoration: none;
     height: 30px;
     line-height: 30px;
