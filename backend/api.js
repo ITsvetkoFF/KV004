@@ -80,8 +80,8 @@ app.delete('/api/activity/:id', routes.deleteComment);
 app.delete('/api/photo/:id', routes.deletePhoto);
 app.put('/api/edit', routes.editProblem);
 app.post('/api/addResource', routes.addResource);
-app.put('/api/editResource/:alias', routes.editResource);
-app.delete('/api/deleteResource/:alias', routes.deleteResource);
+app.put('/api/editResource/:id', routes.editResource);
+app.delete('/api/deleteResource/:id', routes.deleteResource);
 
 
 
