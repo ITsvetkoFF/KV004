@@ -26,6 +26,12 @@ resources[2].alias = 'removing';
 resources[3].alias = 'stopping-exploitation';
 resources[4].alias = 'stopping-trade';
 
+resources[0].isResource = 0;
+resources[1].isResource = 1;
+resources[2].isResource = 1;
+resources[3].isResource = 1;
+resources[4].isResource = 1;
+
 var problemTypes = ['проблеми лісів', 'сміттєзвалища', 'незаконна забудова', 'проблеми водойм', 'загрози біорізноманіттю', 'браконьєрство', 'інші проблеми'],
     userRoles = ['administrator', 'user'],
     userNames = ['admin', 'name1', 'name2', 'name3', 'name4', 'name5', 'name6', 'name7', 'name8', 'name9'],
@@ -79,7 +85,8 @@ function fillResources() {
         var data = {
             Title: resources[i].title,
             Content: resources[i].content,
-            Alias: resources[i].alias
+            Alias: resources[i].alias,
+            IsResource: resources[1].isResource
         };
         connection.query("INSERT INTO Resources SET ?", data, function (err, rows, fields) {
             if (err) throw err;
@@ -116,7 +123,8 @@ function fillActivityTypes() {
 function fillProblemsActivities() {
     for (var i = 0, j = 0, len = probs.length; i < len; i++) {
 
-        if (!probs[i].lat || !probs[i].probType || (probs[i].probStatus === null) || !probs[i].lon) { }
+        if (!probs[i].lat || !probs[i].probType || (probs[i].probStatus === null) || !probs[i].lon) {
+        }
         else {
             j++;
             if (probs[i].probStatus == 'Нова') probs[i].probStatus = 0;
@@ -130,14 +138,13 @@ function fillProblemsActivities() {
             else if (probs[i].probType == 'Браконьєрство') probs[i].probType = 6;
             else if (probs[i].probType == 'Інші проблеми') probs[i].probType = 7;
 
-            probs[i].created = new Date(probs[i].created * 1000).toISOString();
+            
 
             if (probs[i].content) {
                 probs[i].content = probs[i].content.replace(/'/g, "\\'");
                 probs[i].title = probs[i].title.replace(/'/g, "\\'");
-            };
-
-            var data = {
+            }
+ var data = {
                 Title: probs[i].title,
                 Content: probs[i].content,
                 Severity: probs[i].severity,
@@ -149,26 +156,25 @@ function fillProblemsActivities() {
                 ProblemTypes_Id: probs[i].probType
             };
             connection.query("INSERT INTO Problems SET ?", data, function (err, rows, fields) {
-                //if (err) throw err;
+                if (err) throw err;
             });
             var data = {
-                Date: probs[i].created,
+                Date: new Date(probs[i].created * 1000).toISOString().slice(0, 10),
                 ActivityTypes_Id: 1,
-                users_Id: randomIntInc(1, userNames.length),
+                users_Id: 1,
                 Problems_Id: j,
                 Content:JSON.stringify({
-                        Content:"Проблему додано анонімно",
-                        userName:"(Анонім)"
-                    })
-                }
-            };
+                    Content:"Проблему додано анонімно",
+                    userName:"(Анонім)"
+                })
+            }
+
             connection.query("INSERT INTO Activities SET ?", data, function (err, rows, fields) {
-                //if (err) throw err;
+                if (err) throw err;
             });
         };
-    
+    };
 };
-
 fillResources()
 fillProblemTypes();
 fillUserRoles();
@@ -178,4 +184,7 @@ fillProblemsActivities();
 
 console.log('database filled');
 connection.end();
+
+
+
 

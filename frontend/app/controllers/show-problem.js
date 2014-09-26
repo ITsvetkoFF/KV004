@@ -104,11 +104,12 @@ define(['./module'], function(controllers){
 
         }
         $scope.icons=[];
-        $scope.icons[1]="map-marker";
-        $scope.icons[2]="pencil";
-        $scope.icons[3]="heart";
-        $scope.icons[4]="picture";
-        $scope.icons[5]="comment";
+        $scope.icons[1]="fa-map-marker";
+        $scope.icons[2]="fa-pencil";
+        $scope.icons[3]="fa-heart";
+        $scope.icons[4]="fa-file-image-o";
+        $scope.icons[5]="fa-weixin";
+
 
         $scope.checkpoint = [true,true,true,true,true,true];
         $scope.filterActivity = function(i){

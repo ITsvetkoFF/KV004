@@ -1,10 +1,8 @@
 
-
-                <div class="b-activity">
+<div class="b-activity">
                     <div class="b-activity__filters">
-                        <span  ng-repeat="i in [1,2,3,4,5]" ng-style="myStyle" ng-click="filterActivity(i);myStyle={opacity:x}" class="glyphicon glyphicon-{{icons[i]}} b-activity__comments-item-image" style="margin-left:5px;display: inline-block;float: left;font-size: 24px"></span>
-
-
+                       <!-- <span  ng-repeat="i in [1,2,3,4,5]" ng-style="myStyle" ng-click="filterActivity(i);myStyle={opacity:x}" class="glyphicon glyphicon-{{icons[i]}} b-activity__comments-item-image" style="margin-left:5px;display: inline-block;float: left;font-size: 24px"></span>-->
+                        <i ng-repeat="i in [1,2,3,4,5]" ng-style="myStyle" ng-click="filterActivity(i);myStyle={opacity:x}" class="fa {{icons[i]}} b-activity__comments-item-image" style="margin-left:5px;display: inline-block;float:left;font-size: 24px;margin:0;line-height: 30px"></i>
                     </div>
                     <div class="b-activity__input">
                         <div class="b-activity__input-field">
@@ -16,7 +14,9 @@
                     <div class="b-activity__comments">
                         <div class="b-activity__comments-item" ng-repeat="activity in activities" ng-show="checkpoint[activity.ActivityTypes_Id]">
                           <!--  <img class="b-activity__comments-item-image" src="images/icons/activityMarker_{{activity.ActivityTypes_Id}}.png">-->
-                            <span class="glyphicon glyphicon-{{icons[activity.ActivityTypes_Id]}} b-activity__comments-item-image" style="font-size: 24px"></span>
+                            <!--<span class="glyphicon glyphicon-{{icons[activity.ActivityTypes_Id]}} b-activity__comments-item-image" style="font-size: 24px"></span>-->
+                            <i class="fa {{icons[activity.ActivityTypes_Id]}} b-activity__comments-item-image" style="margin-left:5px;margin:0;padding:1px;display: inline-block;float:left;font-size: 24px;margin:0;line-height: 40px"></i>
+
                             <div class="b-activity__comments-item-date">
                                 <span><b>{{activity.Content.userName}}</b></span>
                                 <span><b>{{activity.Date.substring(0,10)}}</b></span>
