@@ -121,7 +121,7 @@ function fillActivityTypes() {
 }
 
 function fillProblemsActivities() {
-    for (var i = 0, j = 0, len = probs.length - 1; i < len; i++) {
+    for (var i = 0, j = 0, len = probs.length; i < len; i++) {
 
         if (!probs[i].lat || !probs[i].probType || (probs[i].probStatus === null) || !probs[i].lon) {
         }
@@ -138,15 +138,13 @@ function fillProblemsActivities() {
             else if (probs[i].probType == 'Браконьєрство') probs[i].probType = 6;
             else if (probs[i].probType == 'Інші проблеми') probs[i].probType = 7;
 
-            probs[i].created = new Date(probs[i].created * 1000);
+            
 
             if (probs[i].content) {
                 probs[i].content = probs[i].content.replace(/'/g, "\\'");
                 probs[i].title = probs[i].title.replace(/'/g, "\\'");
             }
-            ;
-
-            var data = {
+ var data = {
                 Title: probs[i].title,
                 Content: probs[i].content,
                 Severity: probs[i].severity,
@@ -159,30 +157,24 @@ function fillProblemsActivities() {
             };
             connection.query("INSERT INTO Problems SET ?", data, function (err, rows, fields) {
                 if (err) throw err;
-                var data = {
-                    //Date: probs[i].created,
-                    ActivityTypes_Id: 1,
-                    users_Id: randomIntInc(1, userNames.length),
-                    Problems_Id: j,
-                    Content: JSON.stringify({
-                        Content: "Проблему додано анонімно",
-                        userName: "(Анонім)"
-                    })
-                }
-
-
-                connection.query("INSERT INTO Activities SET ?", data, function (err, rows, fields) {
-                    if (err) throw err;
-                });
-
             });
+            var data = {
+                Date: new Date(probs[i].created * 1000).toISOString().slice(0, 10),
+                ActivityTypes_Id: 1,
+                users_Id: 1,
+                Problems_Id: j,
+                Content:JSON.stringify({
+                    Content:"Проблему додано анонімно",
+                    userName:"(Анонім)"
+                })
+            }
 
-        }
-        ;
-
-    }
-
-}
+            connection.query("INSERT INTO Activities SET ?", data, function (err, rows, fields) {
+                if (err) throw err;
+            });
+        };
+    };
+};
 fillResources()
 fillProblemTypes();
 fillUserRoles();
@@ -191,5 +183,8 @@ fillActivityTypes();
 fillProblemsActivities();
 
 console.log('database filled');
+connection.end();
+
+
 
 
