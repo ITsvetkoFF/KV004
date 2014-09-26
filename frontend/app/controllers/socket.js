@@ -4,7 +4,8 @@ define(['./module'],function(controllers){
 	 
 
  
-	  controllers.controller('SocketCtrl', function ($log, $scope, chatSocket, messageFormatter) {
+	  controllers.controller('SocketCtrl', function ($log, $scope, chatSocket, messageFormatter,$rootScope) {
+	  $rootScope.$broadcast('Update',"");
 	  $scope.nickName = $scope.name;
 	  $scope.messageLog = '';
 	  $scope.sendMessage = function() {
