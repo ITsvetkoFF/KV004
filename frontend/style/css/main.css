@@ -2369,7 +2369,7 @@ fieldset[disabled] .btn-default.active {
   -moz-osx-font-smoothing: grayscale;
 }
     .editor {
-        margin: 40px 5px;
+        margin: 50px 5px;
         padding-left: 20px;
     }
     .editor_ta {
@@ -2381,5 +2381,5 @@ fieldset[disabled] .btn-default.active {
         }
     .editor input {
         line-height: 20px;
-        min-width: 400px;
+        min-width: 300px;
     }
