@@ -8,7 +8,6 @@ define(['./module'], function (controllers) {
         $scope.name = ipCookie('userName');
         $scope.surname = ipCookie('userSurname');
         $scope.userId = ipCookie('id');
-        
         /*****--- Register form ---*****/
         $scope.registerClassAppendix = "_hide";
 

@@ -68,7 +68,7 @@ app.get('/api/getTitles',routes.getTitles);
 app.get('/api/resources/:name',routes.getResource);
 //new api for adding new photos to existed problem
 app.post('/api/photo/:id',routes.addNewPhotos);
-
+app.post('/api/comment/:id',routes.addComment);
 app.post('/api/login', routes.logIn);
 app.get('/api/logout', routes.logOut);
 app.post('/api/register', routes.register);
@@ -84,16 +84,10 @@ app.delete('/api/deleteResource/:alias', routes.deleteResource);
 app.put('/api/edit/:id', routes.editProblem);
 app.post('/api/approve/:id', routes.approveProblem);
 app.post('/api/addResource', routes.addResource);
-app.put('/api/editResource/:alias', routes.editResource);
-app.delete('/api/deleteResource/:alias', routes.deleteResource);
+app.put('/api/editResource/:id', routes.editResource);
+app.delete('/api/deleteResource/:id', routes.deleteResource);
 
-app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
+
 
 server.listen(8090);
 

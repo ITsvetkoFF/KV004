@@ -1,7 +1,7 @@
 define(['./module'], function(controllers){
     'use strict';
-    controllers.controller('showProblemCtrl', function ($scope,$routeParams,$http,ipCookie){
-
+    controllers.controller('showProblemCtrl', function ($scope,$routeParams,$http,ipCookie,$rootScope){
+        $rootScope.$broadcast('Update',"");
         if(ipCookie('vote'+$routeParams.problemID)==true){
           
           $scope.disableVoteButton=true;
@@ -14,14 +14,17 @@ define(['./module'], function(controllers){
         //get problem info
             var res=$http.get("api/problems/"+$routeParams.problemID);
 
-            res.success(function(data,status,headers,config){
-                $scope.data=data[0][0];
-                $scope.userID = data[2][0].Users_Id;
-                $scope.severity = data[0][0].Severity;
-                $scope.content = data[0][0].Content;
-                $scope.createdDate = data[2][0].Date;
-                console.log('$scope.severity= ' + $scope.severity);
-                $scope.photos=data[1];
+        res.success(function (data, status, headers, config) {
+            $scope.data = data[0][0];
+            userID = data[2][0].Users_Id;
+            $scope.severity = parseInt(data[0][0].Severity);
+            $scope.content = data[0][0].Content;
+            $scope.createdDate = data[2][0].Date;
+            $scope.photos = data[1];
+            $scope.status = data[0][0].Status ? 'Вирішена' : 'Активна';
+            $scope.checked = !data[0][0].Status;
+                console.log("$scope.checked=" + $scope.checked);
+            $scope.votes = data[0][0].Votes;
 
                 //get user info by UserID
                 res = $http.get("api/users/"+userID);
@@ -30,10 +33,17 @@ define(['./module'], function(controllers){
                 });
                 //end get user info by UserID
 
-            });
-            res.error(function(err){
-                throw err;
-            });
+            $scope.activities = data[2].reverse();
+            for(var i=0;i<$scope.activities.length;i++){
+                if($scope.activities[i].userId!=1) {
+                    $scope.activities[i].Content = JSON.parse($scope.activities[i].Content);
+                }
+            }
+
+        });
+        res.error(function(err){
+            throw err;
+        });
         //end get problem request info
 
 
@@ -53,8 +63,8 @@ define(['./module'], function(controllers){
         $scope.showDrop = function(){
             if($scope.showDropField==false)
             {
-               $scope.showDropField = true;
-               $scope.showAddPhotoButton = false;
+                $scope.showDropField = true;
+                $scope.showAddPhotoButton = false;
             }
             else{
                 $scope.showDropField = false;
@@ -65,22 +75,63 @@ define(['./module'], function(controllers){
             $scope.showAddPhotoButton = true;
             //window.location.href="#/problem/showProblem/"+$routeParams.problemID;
         }
-     $scope.addOneVote = function(){
-         
-         var responce = $http.post('/api/vote',{idProblem:$routeParams.problemID,userId:$scope.userId});
-         responce.success(function(data,status,headers,config){
-            $scope.data.Votes++;
-             ipCookie('vote'+$routeParams.problemID,true);
-              $scope.disableVoteButton=true;
-             
-         });
-         responce.error(function(data,status,headers,config){
-            throw error;
-         });
-     }  
-     
+        //activity
+        $scope.addOneVote = function(){
+
+            var responce = $http.post('/api/vote',{idProblem:$routeParams.problemID,userId:$scope.userId,userName:$scope.name});
+            responce.success(function(data,status,headers,config){
+                $scope.data.Votes++;
+                ipCookie('vote'+$routeParams.problemID,true);
+                $scope.disableVoteButton=true;
+
+            });
+            responce.error(function(data,status,headers,config){
+                throw error;
+            });
+        }
+
+        $scope.addComment = function(comment) {
+            console.log(comment);
+            var data = {data: {userId: $scope.userId, userName: $scope.name, Content: comment}};
+            var responce = $http.post('/api/comment/' + $routeParams.problemID, JSON.stringify(data));
+            responce.success(function (data, status, headers, config) {
 
 
+            });
+            responce.error(function (data, status, headers, config) {
+                throw error;
+            });
+
+        }
+        $scope.icons=[];
+        $scope.icons[1]="fa-map-marker";
+        $scope.icons[2]="fa-pencil";
+        $scope.icons[3]="fa-heart";
+        $scope.icons[4]="fa-file-image-o";
+        $scope.icons[5]="fa-weixin";
+
+
+        $scope.checkpoint = [true,true,true,true,true,true];
+        $scope.filterActivity = function(i){
+
+            if($scope.checkpoint[i]==true){
+                $scope.checkpoint[i]=false;
+                $scope.x=0.3;
+
+            }
+            else{
+
+                $scope.checkpoint[i]=true;
+
+                $scope.x=0.7;
+
+            }
+
+        }
     });
+
+
+
+
 
 });

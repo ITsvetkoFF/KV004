@@ -4,16 +4,14 @@
     <title>Ecomap - Project</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"/>
+    <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css">    
     <link rel="stylesheet" href="style/css/dropzone.css" />
     <link rel="stylesheet" href="style/css/main.css" />
+    <link rel="stylesheet" href="style/css/admin.css" />
     <link rel="stylesheet" href="style/css/MarkerCluster.css"/>
     <link rel="stylesheet" href="style/css/MarkerCluster.Default.css"/>
-    <link rel="stylesheet" href="style/css/admin.css"/>
-    <link rel="stylesheet" href="style/css/bootstrap.css"/>
-    <link rel="stylesheet" href="https:\\netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="icon" type="image/icon" href="images/icons/favicon.ico">
-
    <!--<script type="text/javascript" src="/bower_components/dropzone.js"></script>-->
 
     <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
@@ -45,9 +43,7 @@
                 <div class="b-left-side__pointer" ng-click="showFilters()" ng-class = "{left_pointer_reverse : showFiltersVar}"></div>
             </div>
 
-            <div class="b-container__right-side{{showRigthSide}}">
-            <a href="#/map" class="close" ng-click="hideDiv()">×</a>
-                <div class="b-view" ng-view></div>
+            <<div class="b-view b-container__right-side{{showRigthSide}}" ng-view>
             </div>
         </div>
     </div>

@@ -162,7 +162,7 @@
 
 .b-problem-tab-panel{
     border-top:1px solid #449d44;
-    margin-top: -10px;
+    margin-top: -9px;
 }
 
 .b-problem-deatiled-info-title {
@@ -185,7 +185,7 @@
     font-weight: normal;
     line-height: 1em;
     margin: 0 0 0 8px;
-    padding: 0 5px 0 0;
+    padding: 5px 5px 0 0;
     right: 0;
     text-align: left;
     width: 90%;
@@ -216,25 +216,30 @@
 
 .b-problem-deatiled-info-severity{
     display:inline-block;
-    width:30%;
     text-align: center;
     vertical-align: middle;
+    margin: 0 15px;
 }
 
 .b-problem-deatiled-info__caption{
     display: inline-block;
-    font-size: 0.7em;
+    font-size: 0.8em;
+    vertical-align: top;
 }
 
 .b-problem-deatiled-info__severity {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
+}
+.b-glyphicon__star{
+    font-size: 0.8em;
 }
 .b-problem-deatiled-info-votes{
     display: inline-block;
     text-align: center;
-    width: 25%;
-    font-size: 0.7em;
+    font-size: 0.8em;
+    vertical-align: top;
+    margin: 0 15px;
 
 }
 .glyphicon-heart{
@@ -248,21 +253,20 @@
     height: 20px;
     margin: 0 6px 0 0;
     width: 20px;
-    vertical-align: middle;
+    vertical-align: top;
 }
 .b-problem-deatiled-info__status {
     display: inline-block;
-    margin: 0 0 0 22px;
+    margin: 0 15px;
     padding: 0;
-    vertical-align: middle;
-    width: 35%;
-    font-size: 0.6em;
+    vertical-align: top;
+    font-size: 0.8em;
     font-family: Arial;
 }
 
 .b-problem-deatiled-info-status__text{
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 .b-problem-status {
@@ -488,6 +492,7 @@
     vertical-align: top;
     width: 600px;
     font-size: 16pt;
+
 }
 .b-problem-deatiled-info-header {
     box-sizing: border-box;
@@ -528,7 +533,6 @@
     vertical-align: top;
     width: 25px;
     float:left;
-    
 }
 .b-problem-deatiled-info-title__text {
     display: inline-block;
@@ -709,7 +713,7 @@ margin: 0 10px 0 10px;
 .onoffswitch {
     -moz-user-select: none;
     position: relative;
-    width: 30px;
+    width: 60px;
     display: inline-block;
     vertical-align: middle;
 }

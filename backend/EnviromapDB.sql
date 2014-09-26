@@ -23,8 +23,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Problems` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `Title` VARCHAR(70) NULL,
-  `Content` VARCHAR(500) NULL,
+  `Title` VARCHAR(130) NULL,
+  `Content` VARCHAR(5000) NULL,
   `Severity` TINYINT UNSIGNED NULL,
   `Moderation` TINYINT(1) NULL,
   `Votes` SMALLINT UNSIGNED NULL,
@@ -112,10 +112,12 @@ ENGINE = InnoDB;
 -- Table `Enviromap`.`Resources`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Resources` (
+`Id` INT NOT NULL AUTO_INCREMENT,
 `Alias` VARCHAR(30) NOT NULL,
 `Title` VARCHAR(150) NOT NULL,
 `Content` VARCHAR(10000) NOT NULL,
-PRIMARY KEY (`Alias`))
+`IsResource` TINYINT(1) NOT NULL,
+PRIMARY KEY (`Id`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -124,7 +126,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Activities` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `Content` VARCHAR(500) NULL,
-  `Date` DATE NULL,
+  `Date` DATETIME NULL,
   `ActivityTypes_Id` INT NOT NULL,
   `Users_Id` INT NULL,
   `Problems_Id` INT NOT NULL,
