@@ -6,12 +6,13 @@
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link rel="stylesheet" href="style/css/dropzone.css" />
     <link rel="stylesheet" href="style/css/main.css" />
-    <link rel="stylesheet" href="style/css/admin.css" />
     <link rel="stylesheet" href="style/css/MarkerCluster.css"/>
     <link rel="stylesheet" href="style/css/MarkerCluster.Default.css"/>
-    <link rel="stylesheet" href="style/css/admin2.css"/>
+    <link rel="stylesheet" href="style/css/admin.css"/>
     <link rel="stylesheet" href="style/css/bootstrap.css"/>
     <link rel="stylesheet" href="https:\\netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="icon" type="image/icon" href="images/icons/favicon.ico">
 
    <!--<script type="text/javascript" src="/bower_components/dropzone.js"></script>-->
 
@@ -36,7 +37,7 @@
         <div class="b-container__map-content" ng-controller="mapLoadCtrl">
             <div class="b-container__center">
                 <div class="b-map-content" id="map-content"></div>
-                <div class="b-unmoderated-problems-list" not-approved ng-if="isAdministrator()"></div>
+                <div class="b-unmoderated-problems-list" not-approved></div>
             </div>
 
             <div class="b-container__left-side" ng-class = "{left_filter_show : showFiltersVar}">
