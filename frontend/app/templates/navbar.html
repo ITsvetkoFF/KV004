@@ -60,6 +60,11 @@
                 </div>
             </li>
         </ul>
+        <ul class="b-menu">
+            <li class="b-menu__item" ng-if="isLoggedIn()">
+                <a class="b-menu__link" ng-href="#/chat" ng-click="showChat()">Чат</a>
+            </li>
+        </ul>
     </div>
 
     <div class="b-menu__user-data" ng-show="isLoggedIn()">
