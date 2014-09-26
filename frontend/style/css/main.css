@@ -2369,8 +2369,8 @@ fieldset[disabled] .btn-default.active {
   -moz-osx-font-smoothing: grayscale;
 }
     .editor {
-        margin-top: 30px;
-        padding-left: 30px;
+        margin: 40px 5px;
+        padding-left: 20px;
     }
     .editor_ta {
         max-width: 95%;
