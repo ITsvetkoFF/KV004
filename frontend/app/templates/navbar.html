@@ -5,7 +5,7 @@
     <div class="b-header__menu">
         <ul class="b-menu" ng-init="getTitles()">
             <li class="b-menu__item" ng-repeat="title in data" ng-if="!title.IsResource">
-                <a href="#/resources/{{title.Alias}}" class="b-menu__link" >{{title.Title}}</a> <a href="#/editResource/{{title.Alias}}" ng-show="1"><i class="fa fa-pencil fa-lg"></i></a> <a href="#/deleteResource/{{title.Alias}}" ng-show="1" ng-click="deleteResource(title.Id)"><i class="fa fa-trash fa-lg"></i></a>
+                <a href="#/resources/{{title.Alias}}" class="b-menu__link" >{{title.Title}}</a> <a href="#/editResource/{{title.Alias}}" ng-if="isAdministrator()"><i class="fa fa-pencil fa-lg"></i></a> <a href="#/deleteResource/{{title.Alias}}" ng-if="isAdministrator()" ng-click="deleteResource(title.Id)"><i class="fa fa-trash fa-lg"></i></a>
             </li>
             <li class="b-menu__item">
                 <a class="b-menu__link" id="b-menu__link-source">Ресурси</a>
@@ -13,11 +13,11 @@
                     <ul class="b-submenu">
                         <li class="b-submenu__item" ng-repeat="title in data" ng-if="title.IsResource">
                             <a href="#/resources/{{title.Alias}}" class="b-submenu__link" >{{title.Title}}</a> 
-                            <a href="#/editResource/{{title.Alias}}" ng-show="1"><i class="fa fa-pencil fa-lg"></i></a> 
-                            <a href="#/deleteResource/{{title.Alias}}" ng-show="1" ng-click="deleteResource(title.Id)"><i class="fa fa-trash fa-lg"></i></a>
+                            <a href="#/editResource/{{title.Alias}}" ng-if="isAdministrator()"><i class="fa fa-pencil fa-lg"></i></a> 
+                            <a href="#/deleteResource/{{title.Alias}}" ng-if="isAdministrator()" ng-click="deleteResource(title.Id)"><i class="fa fa-trash fa-lg"></i></a>
                         </li>
 
-                        <li class="b-submenu__item" ng-if="1">
+                        <li class="b-submenu__item" ng-if="isAdministrator()">
                             <a href="#/addResource" class="b-submenu__link">Додати новий ресурс</a>
                         </li>
                     </ul>

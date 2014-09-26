@@ -15,7 +15,7 @@ exports.getProblems = function(req,res){ // get all moderated problems in brief 
                 err:    err.code
             });
         } else {
-            connection.query('SELECT Id, Title, Latitude, Longtitude, ProblemTypes_Id, Status FROM Problems WHERE Moderation=1', function(err, rows, fields) {
+            connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Problems.ProblemTypes_Id, Problems.Status, Activities.Date FROM Problems, Activities WHERE (Problems.Id = Activities.Problems_Id) and (Problems.Moderation=1)', function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
