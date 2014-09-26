@@ -807,7 +807,8 @@ margin: 0 10px 0 10px;
 
     .b-new-problem-list__caption {
         display: block;
-        width: 100%;
+        box-sizing: border-box;
+        width: 600px;
         text-align: left;
         font-family: WWF;
         font-size: 1.1em;
@@ -823,6 +824,7 @@ margin: 0 10px 0 10px;
         display: block;
         font-weight: 400;
         list-style: none outside none;
+        width: 600px;
     }
 
         .b-new-items__item {
