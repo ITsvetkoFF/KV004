@@ -2375,17 +2375,19 @@ fieldset[disabled] .btn-default.active {
   -moz-osx-font-smoothing: grayscale;
 }
     .editor {
-        margin: 50px 5px;
-        padding-left: 20px;
+        margin: 40px 5px;
+        overflow: auto;
     }
     .editor_ta {
         max-width: 95%;
-        max-height: 90%;
     }
     .editor div {
         margin: 5px;
         }
     .editor input {
         line-height: 20px;
-        min-width: 300px;
+        min-width: 400px;
+    }
+    .editor_btn {
+        width: 100px !important;
     }
