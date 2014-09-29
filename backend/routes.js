@@ -224,6 +224,9 @@ exports.addNewPhotos = function(req,res){
             var i=0;
             var rows=[];
             console.log(req.body.solveProblemMark);
+            if(req.body.description==undefined){
+                req.body.description=[];
+            }
             while (req.files['file[' + i + ']'] != undefined) {
                 var photo_data = {
                     Link: req.files['file[' + i + ']'].name,
@@ -398,6 +401,10 @@ exports.postProblem = function(req,res){  //post new problem
                             err:    err.code
                         });
                     }
+                    if(req.body.description==undefined){
+                        req.body.description=[];
+                    }
+
 
                     while (req.files['file[' + i + ']'] != undefined) {
                         var photo_data = {
