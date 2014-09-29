@@ -8,7 +8,8 @@ define(['./module'], function (controllers) {
     });
 
     controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope', function ($scope, $http, $rootScope) {
-        
+        console.log('mapload ctrl is loaded');
+
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             maxZoom: 13,
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -30,15 +31,19 @@ define(['./module'], function (controllers) {
             zoom: 7, 
             layers:[tiles, geoJson] //disabling geoJson because of blocking ukraine-zone on the map
         });
-        $scope.geoJson = geoJson; //forwarding geoJson object to $scope
+        $rootScope.geoJson = geoJson; //forwarding geoJson object to $scope
+        $scope.map = map;
         var markers = L.markerClusterGroup();
         $scope.data = {};
         var markerIcon;
 
-        $http({ method: 'GET', url: '/api/problems' }).success(function (data) {
-            $scope.data = data;
-            placeMarkers($scope.data);
-        });
+        $rootScope.getProblemsAndPlaceMarkers = function(){
+            $http({ method: 'GET', url: '/api/problems' }).success(function (data) {
+                $scope.data = data;
+                placeMarkers($scope.data);
+            });
+        };
+        $scope.getProblemsAndPlaceMarkers();
         navigator.geolocation.getCurrentPosition(getUserPosition);
 
         function getUserPosition(position) {
@@ -49,7 +54,7 @@ define(['./module'], function (controllers) {
             map.setView(mapCenter, 10);
         }
 
-        function onMarkerClick(marker){
+        $scope.onMarkerClick = function(marker){
             window.location.href="#/problem/showProblem/"+ this._id;
             $rootScope.$broadcast('Update',"");
             map.panTo(marker.latlng);
@@ -65,7 +70,7 @@ define(['./module'], function (controllers) {
                 });
 
                 var marker = L.marker([location.Latitude, location.Longtitude], {icon: markerIcon});
-                marker.on('click', onMarkerClick);
+                marker.on('click', $scope.onMarkerClick);
                 marker._id = location['Id'];
                 markers.addLayer(marker);
                 map.addLayer(markers);

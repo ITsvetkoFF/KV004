@@ -5,9 +5,9 @@ define(['./module'],function(controllers){
         console.log('MainCTRL has loaded');
         $scope.$on('$routeChangeStart', function(next, current) { 
             console.log('routing was changed');
-            console.log($rootScope.tempMarker);
+            //console.log($rootScope.tempMarker);
             if ($rootScope.tempMarker)
-                $rootScope.tempMarker.setOpacity(0);
+                $rootScope.geoJson.removeLayer($rootScope.tempMarker);
         });
 
         $scope.showRigthSide = "_hide";

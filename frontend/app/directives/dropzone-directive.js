@@ -12,11 +12,11 @@ define(['./module','dropzone'], function(directives,Dropzone){
             var myDropzone = drop;
             var counter = 0;
             submitButton.addEventListener("click", function() {
-               if (myDropzone.files.length > 0) {
-                        myDropzone.processQueue();
-                    } else {
-                        myDropzone.uploadFile({name:"",length:0}); //send empty
-                    }
+                if (myDropzone.files.length > 0) {
+                    myDropzone.processQueue();
+                } else {
+                    myDropzone.uploadFile({name:"",length:0}); //send empty
+                }
             });
             myDropzone.on("addedfile", function(file) {
                 var arr = document.getElementsByClassName("dz-preview");
@@ -43,11 +43,23 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     counter--;
                     e.stopPropagation();
                 };
-            })
+                console.log(document.getElementById('select-field').value);
+            });
+
+            myDropzone.on('successmultiple', function() {
+                console.log('succesmultiple');
+                if(scope.isLoggedIn()){
+                    scope.submitProblem();
+                }
+                else {
+                    location.href = "#/map";
+                    alert('you are an anonim, your problem is added but go on an approving');
+                }
+            });
             console.log(drop);
             //bind the given event handlers
             angular.forEach(config.eventHandlers,function (handler, event){
-               drop.on(event, handler);
+                drop.on(event, handler);
             });
 
 
