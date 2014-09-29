@@ -650,7 +650,7 @@ req.getConnection(function(err, connection) {
                 if (decoded.role != 'administrator') {
                     return res.send(401);
                 }
-                connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Activities.Date FROM Problems JOIN Activities ON Problems.Id = Activities.Problems_Id WHERE Moderation =0;', function(err, rows, fields) {
+                connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Activities.Date FROM Problems JOIN Activities ON Problems.Id = Activities.Problems_Id WHERE Moderation=0', function(err, rows, fields) {
                     if (err) {
                         console.error(err);
                         res.statusCode = 500;
@@ -659,12 +659,7 @@ req.getConnection(function(err, connection) {
                             err:    err.code
                         });
                     }
-                        res.send({
-                            result: 'success',
-                        err:    '',
-                        json:   rows,
-                        length: rows.length
-                    });
+                    	res.send(rows);
                    });
             });
         }
@@ -888,7 +883,7 @@ req.getConnection(function(err, connection) {
              Status : req.body.status,
              ProblemTypes_Id : req.body.problemTypes_Id
                 };
-            var id = req.body.id;
+            var id = req.params.id;
             connection.query("UPDATE Problems SET ? WHERE Id = ?", [data, id], function(err, rows, fields) {
                     if (err) {
                         console.error(err);
@@ -1043,6 +1038,52 @@ req.getConnection(function(err, connection) {
                     res.send({
                         result: 'success',
                         err:    ''
+                    });
+                    });
+            });
+        }
+    });
+};
+
+exports.approveProblem = function(req, res) {
+req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+
+                err:    err.code
+            });
+        } else {
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            }
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
+                }
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+            var id = req.params.id;
+            connection.query("UPDATE Problems SET Moderation=1 WHERE Id = ?", [id], function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    '',
+                        json:   rows,
+                        length: rows.length
                     });
                     });
             });

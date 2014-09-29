@@ -282,6 +282,10 @@ html, body {
     height: calc(100% - 52px);
 }
 
+.b-container__center {
+    height: 100%;
+}
+
 .b-map-content {
     height: 100%;
 }
@@ -440,6 +444,7 @@ html, body {
     -moz-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
+    box-shadow: 0 0 10px RGBA(0, 0, 0, .3);
 }
 
 
@@ -456,6 +461,7 @@ html, body {
     height: -moz-calc(100% - 52px);
     overflow: auto;
     font-size:16pt;
+    box-shadow: 0 0 10px RGBA(0, 0, 0, .3);
 }
 
 .b-container__right-side_hide {
@@ -1634,7 +1640,7 @@ td.b-details-body__title[colspan] {
 
     .simple_like_img:hover {
         cursor: pointer;
-        1background: url("../../images/icons/like_icon_hover.png") no-repeat center center;
+        background: url("../../images/icons/like_icon_hover.png") no-repeat center center;
         background-size: cover;
      border: 0;
     }
@@ -2369,12 +2375,11 @@ fieldset[disabled] .btn-default.active {
   -moz-osx-font-smoothing: grayscale;
 }
     .editor {
-        margin-top: 30px;
-        padding-left: 30px;
+        margin: 40px 5px;
+        overflow: auto;
     }
     .editor_ta {
         max-width: 95%;
-        max-height: 90%;
     }
     .editor div {
         margin: 5px;
@@ -2382,4 +2387,7 @@ fieldset[disabled] .btn-default.active {
     .editor input {
         line-height: 20px;
         min-width: 400px;
+    }
+    .editor_btn {
+        width: 100px !important;
     }

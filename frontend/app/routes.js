@@ -36,6 +36,10 @@ define(['./app'], function (app) {
               templateUrl: 'app/templates/editorPage.html',
               controller:'editorCtrl'
           }).
+          when('/chat',{
+              templateUrl:'app/templates/chat.html',
+              controller:'SocketCtrl'
+          }).
         otherwise({
             redirectTo: '/map'
         });
