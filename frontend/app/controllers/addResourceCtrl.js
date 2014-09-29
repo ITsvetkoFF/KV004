@@ -3,7 +3,6 @@ define(['./module'], function (controllers) {
     controllers.controller('addResourceCtrl',['$scope', '$rootScope', '$http', '$routeParams', function ($scope, $rootScope, $http, $routeParams) {
 		$rootScope.$broadcast('Update', '_full');
 		$scope.sendResource = function(Alias, Content, Title, IsResource) {
-            console.log(Alias, Content, Title, IsResource);
 			if (Alias === undefined || Content === undefined || Title === undefined  || IsResource === undefined) {
                 $scope.delPhotoErrorMsg = 'Всі поля обов\'язкові для заповнення';
                 return;
