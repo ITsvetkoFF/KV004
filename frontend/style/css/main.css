@@ -2244,68 +2244,9 @@ form.dropzone {
 .ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-corner-tr{top: 0; right: 0; border-right: 1px solid black; border-top: 1px solid black;}
 .ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-corner-bl{bottom: 0; left: 0; border-left: 1px solid black; border-bottom: 1px solid black;}
 .ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-corner-br{bottom: 0; right: 0; border: 1px solid black; cursor: se-resize; background-color: white;}
-.btn-default {
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
-}
-.btn-default:hover,
-.btn-default:focus,
-.btn-default:active,
-.btn-default.active,
-.open .dropdown-toggle.btn-default {
-  color: #333;
-  background-color: #ebebeb;
-  border-color: #adadad;
-}
-.btn-default:active,
-.btn-default.active,
-.open .dropdown-toggle.btn-default {
-  background-image: none;
-}
-.btn-default.disabled,
-.btn-default[disabled],
-fieldset[disabled] .btn-default,
-.btn-default.disabled:hover,
-.btn-default[disabled]:hover,
-fieldset[disabled] .btn-default:hover,
-.btn-default.disabled:focus,
-.btn-default[disabled]:focus,
-fieldset[disabled] .btn-default:focus,
-.btn-default.disabled:active,
-.btn-default[disabled]:active,
-fieldset[disabled] .btn-default:active,
-.btn-default.disabled.active,
-.btn-default[disabled].active,
-fieldset[disabled] .btn-default.active {
-  background-color: #fff;
-  border-color: #ccc;
-}
-.btn-default .badge {
-  color: #fff;
-  background-color: #333;
-}
-.btn {
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
 .btn-group,
 .btn-group-vertical {
+    margin: 1px 10px 5px 0px;
   position: relative;
   display: inline-block;
   vertical-align: middle;
@@ -2364,7 +2305,6 @@ fieldset[disabled] .btn-default.active {
 .btn-group .btn-group + .btn-group {
   margin-left: -1px;
 }
-
 .fa {
   display: inline-block;
   font-family: FontAwesome;
@@ -2375,19 +2315,45 @@ fieldset[disabled] .btn-default.active {
   -moz-osx-font-smoothing: grayscale;
 }
     .editor {
-        margin: 40px 5px;
+        height: 100%;
+        padding: 30px 5px 55px 5px;
         overflow: auto;
+        background: #E4E2D1;
+        background: -webkit-linear-gradient( top, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
+        background: -o-linear-gradient(top, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
+        background: -moz-linear-gradient( top, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
+        background: linear-gradient(to bottom, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
+    }
+    .editor label {
+        font-weight: bold;
+        text-align: right;
+        padding: 5px 0px 5px 10px;
+    }
+    .editor_horizontal {
+        padding: 10px 5px;
+        clear: both;
+    }
+    .editor_left {
+        float: left;
+        width: 400px;
+    }
+    .editor_right {
+        float: left;
     }
     .editor_ta {
-        max-width: 95%;
+        background-color: #FFFFFF;
+        border-radius: 0;
+        width: auto;
     }
-    .editor div {
-        margin: 5px;
-        }
+    .editor_ta >*,
+    .editor_ta >*>*,
+    .editor_ta >*>*>* {
+        border-radius: 0;
+    }
     .editor input {
-        line-height: 20px;
-        min-width: 400px;
+        min-width: 200px;
+        border-radius: 0;
     }
-    .editor_btn {
-        width: 100px !important;
-    }
+    /*.editor_btn {
+        width: 120px !important;
+    }*/
