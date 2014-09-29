@@ -79,13 +79,10 @@ app.delete('/api/user/:id', routes.deleteUser);
 app.delete('/api/activity/:id', routes.deleteComment);
 app.delete('/api/photo/:id', routes.deletePhoto);
 app.post('/api/addResource', routes.addResource);
-app.put('/api/editResource/:alias', routes.editResource);
-app.delete('/api/deleteResource/:alias', routes.deleteResource);
-app.put('/api/edit/:id', routes.editProblem);
-app.post('/api/approve/:id', routes.approveProblem);
-app.post('/api/addResource', routes.addResource);
 app.put('/api/editResource/:id', routes.editResource);
 app.delete('/api/deleteResource/:id', routes.deleteResource);
+app.put('/api/edit/:id', routes.editProblem);
+app.post('/api/approve/:id', routes.approveProblem);
 
 
 

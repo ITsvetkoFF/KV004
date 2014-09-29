@@ -2316,7 +2316,7 @@ form.dropzone {
 }
     .editor {
         height: 100%;
-        padding: 30px 5px 55px 5px;
+        padding: 30px 5px 5px 5px;
         overflow: auto;
         background: #E4E2D1;
         background: -webkit-linear-gradient( top, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
@@ -2353,4 +2353,7 @@ form.dropzone {
     .editor input {
         min-width: 200px;
         border-radius: 0;
+    }
+    .editor span {
+        color: #800000;
     }
