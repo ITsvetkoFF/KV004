@@ -2472,3 +2472,8 @@ form.dropzone {
     .editor span {
         color: #800000;
     }
+    .resource {
+        font-family: WWF;
+        padding: 5px 0px 5px 10px;
+    font-size: 20px;
+    }
