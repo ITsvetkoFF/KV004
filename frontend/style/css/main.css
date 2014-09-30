@@ -2335,7 +2335,7 @@ form.dropzone {
   text-decoration: none;
   position: absolute;
   top: 5px;
-  right: 5px;
+  right: 15px;
 }
 .close:hover {
   color: #000000;
@@ -2450,7 +2450,6 @@ form.dropzone {
     }
     .editor_left {
         float: left;
-        width: 400px;
     }
     .editor_right {
         float: left;
@@ -2474,6 +2473,6 @@ form.dropzone {
     }
     .resource {
         font-family: WWF;
-        padding: 5px 0px 5px 10px;
-    font-size: 20px;
+        padding: 20px 0px 15px 10px;
+        font-size: 22px;
     }
