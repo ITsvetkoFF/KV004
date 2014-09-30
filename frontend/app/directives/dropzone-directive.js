@@ -43,7 +43,6 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     counter--;
                     e.stopPropagation();
                 };
-                console.log(document.getElementById('select-field').value);
             });
 
             myDropzone.on('successmultiple', function() {
@@ -53,7 +52,7 @@ define(['./module','dropzone'], function(directives,Dropzone){
                 }
                 else {
                     location.href = "#/map";
-                    alert('you are an anonim, your problem is added but go on an approving');
+                    alert('Ви не зареєстрований користувач, тому проблема спочатку пройде модерацію і потім буде додана на карту.');
                 }
             });
             console.log(drop);

@@ -5,7 +5,7 @@ define(['./module'],function (controllers){
         $rootScope.$broadcast('Update',"");
 
         console.log("Add Problem Controller is loaded");
-        console.log($rootScope.getProblemsAndPlaceMarkers);
+        console.log($scope.userId);
 
         //function that places marker on the map
         function getCoordinates(e) {
@@ -113,7 +113,7 @@ define(['./module'],function (controllers){
         $scope.submitProblem = function() {
             location.href = "#/map";
             $rootScope.getProblemsAndPlaceMarkers();
-
+            $scope.getUserProblems($scope.userId);
         }
     });
 });
