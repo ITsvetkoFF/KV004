@@ -14,5 +14,6 @@ define([
     './not-approved',
     './resourcesCtrl',
     './editorCtrl',
-    './addResourceCtrl'
+    './addResourceCtrl',
+    './socket-user'
 ], function () {});

@@ -442,7 +442,154 @@ exports.postProblem = function(req,res){  //post new problem
         }
     });
 };
+exports.postNews = function(req,res) {
+    console.log("post news");
+    req.getConnection(function (err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ', err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err: err.code
+            });
+        } else {
 
+        }
+
+        console.log(req.body);
+
+        var data = {
+
+            Content: req.body.news
+
+        };
+
+        connection.query('INSERT INTO News SET ?', [data], function (err, rows, fields) {
+            if (err) {
+                console.error(err);
+                res.statusCode = 500;
+                res.send({
+                    result: 'error',
+                    err: err.code
+                });
+            }
+        });
+        res.send({
+            result:"ok"
+        });
+
+
+    });
+}
+exports.getNews = function(req,res) {
+    req.getConnection(function (err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ', err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err: err.code
+            });
+        } else {
+
+        }
+
+        console.log(req.body);
+
+        var data = {
+
+            Content: req.body.news
+
+        };
+
+        connection.query('SELECT * FROM News ', function (err, rows, fields) {
+            if (err) {
+                console.error(err);
+                res.statusCode = 500;
+                res.send({
+                    result: 'error',
+                    err: err.code
+                });
+            }
+            res.send({
+                news:rows
+            });
+        });
+
+
+    });
+}
+
+exports.clearNews = function(req,res) {
+    req.getConnection(function (err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ', err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err: err.code
+            });
+        } else {
+
+        }
+
+        console.log(req.body);
+
+        var data = {
+
+            Content: req.body.news
+
+        };
+
+        connection.query('DELETE FROM News ', function (err, rows, fields) {
+            if (err) {
+                console.error(err);
+                res.statusCode = 500;
+                res.send({
+                    result: 'error',
+                    err: err.code
+                });
+            }
+            res.send({
+                news:rows
+            });
+        });
+
+
+    });
+}
+exports.clearOneNews = function(req,res) {
+    req.getConnection(function (err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ', err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err: err.code
+            });
+        } else {
+
+        }
+
+        console.log(req.body.id);
+
+        connection.query('DELETE FROM News WHERE Content=?',req.body.content, function (err, rows, fields) {
+            if (err) {
+                console.error(err);
+                res.statusCode = 500;
+                res.send({
+                    result: 'error',
+                    err: err.code
+                });
+            }
+            res.send({
+                news:rows
+            });
+        });
+
+
+    });
+}
 exports.postVote = function(req,res){  //+1 vote for a problem
 
     req.getConnection(function(err, connection) {

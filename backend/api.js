@@ -34,7 +34,8 @@ var connectionPool = {
  
 
 // optional - set socket.io logging level
-io.set('log level', 1000);
+io.set('log level', 1);
+
 
 app.use(multer(
     {
@@ -83,7 +84,11 @@ app.put('/api/editResource/:id', routes.editResource);
 app.delete('/api/deleteResource/:id', routes.deleteResource);
 app.put('/api/edit/:id', routes.editProblem);
 app.post('/api/approve/:id', routes.approveProblem);
-
+//admin - newsline Api
+app.post('/api/postNews',routes.postNews);
+app.post('/api/getNews',routes.getNews);
+app.post('/api/clearNews',routes.clearNews);
+app.post('/api/clearOneNews',routes.clearOneNews);
 
 
 server.listen(8090);

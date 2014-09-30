@@ -14,7 +14,12 @@ module.exports = function (io) {
         source: from
       });
       console.log('broadcast complete');
+
     });
+      socket.on('error', function (err) {
+          console.log("Socket.IO Error");
+          console.log(err.stack); // this is changed from your code in last comment
+      });
   });
 };
 

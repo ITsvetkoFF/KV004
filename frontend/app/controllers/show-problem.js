@@ -95,6 +95,14 @@ define(['./module'], function(controllers){
             var data = {data: {userId: $scope.userId, userName: $scope.name, Content: comment}};
             var responce = $http.post('/api/comment/' + $routeParams.problemID, JSON.stringify(data));
             responce.success(function (data, status, headers, config) {
+                $scope.activities = data[0].reverse();
+                for(var i=0;i<$scope.activities.length;i++){
+                    if($scope.activities[i].userId!=1) {
+                        $scope.activities[i].Content = JSON.parse($scope.activities[i].Content);
+                    }
+                }
+
+                $scope.commentContent="";
 
 
             });
