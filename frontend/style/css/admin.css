@@ -1,3 +1,5 @@
+
+
 .b-wrapper-inside-blocks {
     display: block;
     left: 0;
@@ -123,26 +125,25 @@
     font-size: 0.7em;
 }
 .b-problem-deatiled-info_edit {
-    background: none repeat scroll 0 0 #449d44;
-    border: medium none;
-    color: #ffffff;
-    height: 32px;
-    opacity: 0.8;
+    font-family: fontawesome;
+    font-size: 0.8em;
+    text-align: right;
+    display: inline-block;
+    float: right;
+    margin: 5px 30px 0 0;
 }
 .b-problem-deatiled-info_delete {
-    background: none repeat scroll 0 0 #d9534f;
-    border: medium none;
-    color: #ffffff;
-    height: 32px;
-    opacity: 0.6;
-}
-.b-problem-deatiled-info_delete:hover, .b-problem-deatiled-info_edit:hover {
-    opacity: 1;
+    font-family: fontawesome;
+    font-size: 0.8em;
+    text-align: right;
+    display: inline-block;
+    float: right;
+    margin: 5px 30px 0 0;
 }
 
-.b-problem-tabs{
-    display: inline-block;
-    margin: 0 0 0 20px;
+
+.b-problem-tab{
+   font-size:0.8em;
 }
 
 .b-problem-subtab{
@@ -173,10 +174,9 @@
 }
 .b-problem-deatiled-info-title__icon {
     display: inline-block;
-    padding: 0 0 0 0;
-    vertical-align: top;
+    padding: 10px 0 0 0;
     width: 25px;
-    float:left;
+    float: left;
 }
 .b-problem-deatiled-info-title__text {
     display: inline-block;
@@ -185,7 +185,6 @@
     font-weight: normal;
     line-height: 1em;
     margin: 0 0 0 8px;
-    padding: 5px 5px 0 0;
     right: 0;
     text-align: left;
     width: 90%;
@@ -195,7 +194,6 @@
     display: block;
     font-family: arial;
     font-size: 0.6em;
-    font-weight: bold;
     margin: 5px 10px 0 35px;
     color: #CFCFCF;
     font-style: italic;
@@ -219,6 +217,7 @@
     text-align: center;
     vertical-align: middle;
     margin: 0 15px;
+
 }
 
 .b-problem-deatiled-info__caption{
@@ -230,10 +229,18 @@
 .b-problem-deatiled-info__severity {
     display: inline-block;
     vertical-align: top;
+    font-family: FontAwesome;
+
 }
-.b-glyphicon__star{
-    font-size: 0.8em;
+
+.sr-only{
+    display:none;
 }
+
+.b-problem-deatiled-info__severity span i{
+    font-style:none;
+}
+
 .b-problem-deatiled-info-votes{
     display: inline-block;
     text-align: center;
@@ -242,9 +249,7 @@
     margin: 0 15px;
 
 }
-.glyphicon-heart{
-    color: #444;
-}
+
 .b-problem-deatiled-info__votes {
     display: inline-block;
     font-family: arial;
@@ -261,12 +266,12 @@
     padding: 0;
     vertical-align: top;
     font-size: 0.8em;
-    font-family: Arial;
 }
 
 .b-problem-deatiled-info-status__text{
     display: inline-block;
     vertical-align: top;
+    padding:3px 0 0 0 ;
 }
 
 .b-problem-status {
@@ -305,7 +310,7 @@
 .b-problem-deatiled-info-description__content {
     display: block;
     font-family: arial;
-    font-size: 0.7em;
+    font-size: 0.8em;
     font-weight: normal;
     line-height: 1.2em;
     margin: 10px 0;
@@ -505,17 +510,18 @@
     margin: 0 10px 10px 0;
     text-align: right;
 }
+.b-editproblemctrl{
+    display: block;
+}
 .b-problem-deatiled-info_edit {
-    background: none repeat scroll 0 0 #449d44;
     border: medium none;
-    color: #ffffff;
+    color: #000000;
     height: 32px;
     opacity: 0.8;
 }
 .b-problem-deatiled-info_delete {
-    background: none repeat scroll 0 0 #d9534f;
     border: medium none;
-    color: #ffffff;
+    color: #000000;
     height: 32px;
     opacity: 0.8;
 }
@@ -572,6 +578,7 @@ margin: 0 10px 0 10px;
     display: inline-block;
     text-align: center;
     vertical-align: middle;
+    font-family: FontAwesome;
 }
 .b-problem-deatiled-info__votes {
     display: inline-block;
