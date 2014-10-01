@@ -282,6 +282,10 @@ html, body {
     height: calc(100% - 52px);
 }
 
+.b-container__center {
+    height: 100%;
+}
+
 .b-map-content {
     height: 100%;
 }
