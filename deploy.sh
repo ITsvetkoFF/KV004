@@ -4,7 +4,7 @@ forever stop api.js
 rm -r KV004/
 git clone https://github.com/ITsvetkoFF/KV004.git
 cd KV004/frontend/ 
-bower install 
+bower install --allow-root
 cd ../backend 
 npm install
 mysql -u root -proot < EnviromapDB.sql
