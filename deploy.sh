@@ -1,4 +1,3 @@
-#!/bin/sh -
 # it assumes you have forever, npm, node, bower, mysql installed 
 cd /var/tmp/deploy/
 forever stop api.js 
