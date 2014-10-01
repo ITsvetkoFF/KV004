@@ -1,3 +1,4 @@
+# it assumes you have forever, npm, node, bower, mysql installed 
 cd /var/tmp/deploy/
 forever stop api.js 
 rm -r KV004/
@@ -8,4 +9,4 @@ cd ../backend
 npm install
 mysql -u root -proot < EnviromapDB.sql
 nodejs filldb.js
-forever start -l forever.log -o out.log -e err.log api.js
+forever start -a -l forever.log -o out.log -e err.log api.js
