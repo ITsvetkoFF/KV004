@@ -7,7 +7,8 @@
 define([
     './dropzone-directive',
     './chat-directive',
-    './activity-directive'
+    './activity-directive',
+    './chatUser-directive'
 
 
 ], function () {});

@@ -13,7 +13,7 @@ var mysql = require('mysql'),
     secret       = require('./config/secret'),
     io = require('socket.io'),
     routes = require('./routes.js');
-    
+
     io = io.listen(server);
     require('./sockets/base')(io);
 
@@ -34,7 +34,8 @@ var connectionPool = {
  
 
 // optional - set socket.io logging level
-io.set('log level', 1000);
+io.set('log level', 1);
+io.set('transports', ['flashsocket', 'websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 
 app.use(multer(
     {
@@ -54,6 +55,15 @@ app.all('*', function(req, res, next) {
   res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
   if ('OPTIONS' === req.method) return res.send(200);
   next();
+});
+// production error handler
+// no stacktraces leaked to user
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
 //user
@@ -82,6 +92,11 @@ app.put('/api/edit', routes.editProblem);
 app.post('/api/addResource', routes.addResource);
 app.put('/api/editResource/:id', routes.editResource);
 app.delete('/api/deleteResource/:id', routes.deleteResource);
+//admin - newsline Api
+app.post('/api/postNews',routes.postNews);
+app.post('/api/getNews',routes.getNews);
+app.post('/api/clearNews',routes.clearNews);
+app.post('/api/clearOneNews',routes.clearOneNews);
 
 
 

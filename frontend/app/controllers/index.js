@@ -7,5 +7,6 @@ define([
     './socket',
     './resourcesCtrl',
     './editorCtrl',
-    './addResourceCtrl'
+    './addResourceCtrl',
+    './socket-user'
 ], function () {});

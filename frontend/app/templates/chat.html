@@ -1,14 +1,19 @@
-<div class='b-chat__container'>
-    Ваше ім`я в чаті: <span ng-bind="name"></span>.<br/>
-
+<div  class='b-chat__container'>
+    <a href="#/map" class="close" ng-click="hideDiv()">×</a>
+     <div class="b-chat__currentNews">
+         <h3 style="text-align: center">Новини що відображаються зараз на сайті: </h3>
+         <ul class="b-chat__newsItem" ng-repeat="news in messageLogs">
+             <li class="b-chat__newsItem-li">{{news.Content}}</li>
+             <i  class="fa fa-close b-chat__newsItem-li-i"  ng-click="sendMessage($index+1)"></i>
+         </ul>
+     </div>
     <form role='form' novalidate name='form'>
-        <input type="text" ng-model="userId" name="userId" style="display:none">
+       <!-- <input type="text" ng-model="userId" name="userId" style="display:none">
         <input type="text" ng-model="id" name="problemId" style="display:none">
-        <textarea style='width: 100%; height: 400px; resize:none; font-size:20px ' class="chatField" ng-disabled="true" ng-model='messageLog'></textarea>
+        <div style='width: 100%;cursor: pointer; height: 400px; font-size:20px ' class="chatField"  ng-model='messageLog'>{{messageLog}}</div>-->
         <div class='form-group'>
-            <span class="b-chat-comment__title">Додати коментар</span>
-            <textarea class="b-chat-comment__field" ng-model='message' s
-                      focus placeholder="Напишіть тут свій коментар..."></textarea>
+            <span class="b-chat-comment__title">Додати повідомлення</span>
+            <textarea class="b-chat-comment__field" ng-model="message"  placeholder="Напишіть тут свій коментар..."></textarea>
 
             <input type="button" class="b-chat-comment__btn"
                    ng-enable='form.$valid'

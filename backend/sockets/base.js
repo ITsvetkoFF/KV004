@@ -2,11 +2,8 @@ module.exports = function (io) {
   'use strict';
   io.on('connection', function (socket) {
     socket.broadcast.emit('user connected');
-
     socket.on('message', function (from, msg) {
-
       console.log('recieved message from', from, 'msg', JSON.stringify(msg));
-
       console.log('broadcasting message');
       console.log('payload is', msg);
       io.sockets.emit('broadcast', {
@@ -15,6 +12,10 @@ module.exports = function (io) {
       });
       console.log('broadcast complete');
     });
+      socket.on('error', function (err) {
+          console.log("Socket.IO Error");
+          console.log(err.stack); // this is changed from your code in last comment
+      });
   });
 };
 

@@ -31,6 +31,7 @@ exports.getProblems = function(req,res){ // get all moderated problems in brief 
 };
 
 exports.getProblemId = function(req,res){ //get detailed problem description (everything)
+    console.log("get problems");
     req.getConnection(function(err, connection) {
         if (err) {
             console.error('CONNECTION error: ',err);
@@ -102,6 +103,7 @@ exports.getTitles = function(req,res){ //get titles of resources
 };
 
 exports.getResource = function(req,res){ //get resourse
+    console.log("get resource");
     req.getConnection(function(err, connection) {
         if (err) {
             console.error('CONNECTION error: ',err);
@@ -224,6 +226,9 @@ exports.addNewPhotos = function(req,res){
             var i=0;
             var rows=[];
             console.log(req.body.solveProblemMark);
+            if(req.body.description==undefined){
+                req.body.description=[];
+            }
             while (req.files['file[' + i + ']'] != undefined) {
                 var photo_data = {
                     Link: req.files['file[' + i + ']'].name,
@@ -328,6 +333,17 @@ exports.addComment = function(req,res) {
                     err: err.code
                 });
             }
+            connection.query('SELECT * FROM Activities WHERE Activities.Problems_Id=?', [req.params.id], function(err3, rows3, fields3) {
+                if (err3) {
+                    console.error(err3);
+                    res.statusCode = 500;
+                    res.send({
+                        result3: 'error',
+                        err3:    err3.code
+                    });
+                }
+                res.send([rows3]);
+            });
 
 
         });
@@ -351,7 +367,7 @@ exports.postProblem = function(req,res){  //post new problem
                 Content: req.body.content,
                 Latitude: req.body.latitude,
                 Longtitude: req.body.longitude,
-                Moderation:'1',
+                Moderation:'0',
                 Status: 0,
                 ProblemTypes_Id: req.body.type,
                 Votes:0
@@ -398,6 +414,9 @@ exports.postProblem = function(req,res){  //post new problem
                             err:    err.code
                         });
                     }
+                    if(req.body.description==undefined){
+                        req.body.description=[];
+                    }
 
                     while (req.files['file[' + i + ']'] != undefined) {
                         var photo_data = {
@@ -435,7 +454,154 @@ exports.postProblem = function(req,res){  //post new problem
         }
     });
 };
+exports.postNews = function(req,res) {
+    console.log("post news");
+    req.getConnection(function (err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ', err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err: err.code
+            });
+        } else {
 
+        }
+
+        console.log(req.body);
+
+        var data = {
+
+            Content: req.body.news
+
+        };
+
+        connection.query('INSERT INTO News SET ?', [data], function (err, rows, fields) {
+            if (err) {
+                console.error(err);
+                res.statusCode = 500;
+                res.send({
+                    result: 'error',
+                    err: err.code
+                });
+            }
+        });
+        res.send({
+           result:"ok"
+        });
+
+
+    });
+}
+exports.getNews = function(req,res) {
+    req.getConnection(function (err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ', err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err: err.code
+            });
+        } else {
+
+        }
+
+        console.log(req.body);
+
+        var data = {
+
+            Content: req.body.news
+
+        };
+
+        connection.query('SELECT * FROM News ', function (err, rows, fields) {
+            if (err) {
+                console.error(err);
+                res.statusCode = 500;
+                res.send({
+                    result: 'error',
+                    err: err.code
+                });
+            }
+            res.send({
+               news:rows
+            });
+        });
+
+
+    });
+}
+
+exports.clearNews = function(req,res) {
+    req.getConnection(function (err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ', err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err: err.code
+            });
+        } else {
+
+        }
+
+        console.log(req.body);
+
+        var data = {
+
+            Content: req.body.news
+
+        };
+
+        connection.query('DELETE FROM News ', function (err, rows, fields) {
+            if (err) {
+                console.error(err);
+                res.statusCode = 500;
+                res.send({
+                    result: 'error',
+                    err: err.code
+                });
+            }
+            res.send({
+                news:rows
+            });
+        });
+
+
+    });
+}
+exports.clearOneNews = function(req,res) {
+    req.getConnection(function (err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ', err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err: err.code
+            });
+        } else {
+
+        }
+
+console.log(req.body.id);
+
+        connection.query('DELETE FROM News WHERE Content=?',req.body.content, function (err, rows, fields) {
+            if (err) {
+                console.error(err);
+                res.statusCode = 500;
+                res.send({
+                    result: 'error',
+                    err: err.code
+                });
+            }
+            res.send({
+                news:rows
+            });
+        });
+
+
+    });
+}
 exports.postVote = function(req,res){  //+1 vote for a problem
 
     req.getConnection(function(err, connection) {
@@ -449,6 +615,7 @@ exports.postVote = function(req,res){  //+1 vote for a problem
         } else {
             var problemId = req.body.idProblem;
             var userId = req.body.userId;
+            console.log(req.body.userId);
             connection.query('UPDATE Problems SET Votes=Votes+1 WHERE Id=?', [problemId], function(err, rows, fields) {
                 if (err) {
                     console.error(err);

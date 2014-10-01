@@ -159,7 +159,7 @@ function fillProblemsActivities() {
                 if (err) throw err;
             });
             var data = {
-                Date: new Date(probs[i].created * 1000).toISOString().slice(0, 10),
+                Date: new Date(probs[i].created * 1000).toISOString().slice(0,10),
                 ActivityTypes_Id: 1,
                 users_Id: 1,
                 Problems_Id: j,
