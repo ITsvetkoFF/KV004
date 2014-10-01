@@ -1,8 +1,6 @@
 var mysql = require('mysql'),
     express = require('express'),
     multer = require('multer'),
-    jwt = require('jsonwebtoken'),
-    crypto = require('crypto'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
@@ -10,7 +8,6 @@ var mysql = require('mysql'),
     http = require('http'),
     app = express(),
     server = http.createServer(app),
-    secret       = require('./config/secret'),
     io = require('socket.io'),
     routes = require('./routes.js');
     
