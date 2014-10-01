@@ -10,20 +10,23 @@ define(['./module'],function (controllers){
         function getCoordinates(e) {
 
             console.log(e.latlng);                                             // logs into console clicked position !!!need to remove in production
-            $scope.$apply(function(){$scope.latitude = e.latlng.lat;});        // binds lat value to the input on the form
-            $scope.$apply(function(){$scope.longtitude = e.latlng.lng;});      // binds lng value to the input on the form
+            $scope.$apply(function(){$scope.latitude = e.latlng.lat;});        // binds latln values to the input on the form
+            $scope.$apply(function(){$scope.longtitude = e.latlng.lng;});      
 
-            $scope.geoJson.addLayer(L.marker([$scope.latitude, $scope.longtitude], // adding marker to the map
-                    {/*icon: L.icon({                                          // commented, cause we dont have special mark for placing new Marker
-                        iconUrl: 'images/markers/other_icon.png',
-                        iconAnchor: [25,79]
-                    })
-                        ,*/ draggable: true
-                    }).on('drag', function(e){console.log(e.target._latlng);   // onDrag listener for Marker that binds lat & lng values to the input on the form !!!need to remove in production console.logging
-                        $scope.$apply(function(){$scope.latitude = e.target._latlng.lat;});
-                        $scope.$apply(function(){$scope.longtitude = e.target._latlng.lng;});
-                    })
-            );
+            var tempMarker = L.marker(e.latlng, {draggable: true}).on('drag', function(e) { // onDrag listener for Marker that binds lat & lng values to the input on the form
+                $scope.$apply(function() { 
+                    $scope.latitude = e.target._latlng.lat;
+                }); 
+                $scope.$apply(function() { 
+                    $scope.longtitude = e.target._latlng.lng;
+                }); 
+            });
+                        
+                     
+            $scope.geoJson.addLayer(tempMarker);                               // adding marker to the map
+                                
+            $rootScope.tempMarker = tempMarker;
+            
             $scope.clearGetCoordinatesListener();                              // disable onMapClickListener that binds eventListener "click" & function that places marker on the map
         }
 
@@ -106,6 +109,11 @@ define(['./module'],function (controllers){
             }
         }
 
+        $scope.submitProblem = function() {
+            location.href = "#/map";
+            $rootScope.getProblemsAndPlaceMarkers();
+            $scope.getUserProblems($scope.userId);
+        }
 
     });
 });

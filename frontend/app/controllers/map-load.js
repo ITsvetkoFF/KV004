@@ -30,15 +30,19 @@ define(['./module'], function (controllers) {
             zoom: 7, 
             layers:[tiles, geoJson] //disabling geoJson because of blocking ukraine-zone on the map
         });
-        $scope.geoJson = geoJson; //forwarding geoJson object to global $scope
+        $rootScope.geoJson = geoJson; //forwarding geoJson object to $rooTscope
         var markers = L.markerClusterGroup();
         $scope.data = {};
         var markerIcon;
 
-        $http({ method: 'GET', url: '/api/problems' }).success(function (data) {
-            $scope.data = data;
-            placeMarkers($scope.data);
-        });
+        $rootScope.getProblemsAndPlaceMarkers = function(){
+            $http({ method: 'GET', url: '/api/problems' }).success(function (data) {
+                $scope.data = data;
+                placeMarkers($scope.data);
+            });
+        };
+        $scope.getProblemsAndPlaceMarkers();
+        
         navigator.geolocation.getCurrentPosition(getUserPosition);
 
         function getUserPosition(position) {
