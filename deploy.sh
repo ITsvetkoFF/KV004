@@ -10,4 +10,4 @@ cd ../backend
 npm install
 mysql -u root -proot < EnviromapDB.sql
 nodejs filldb.js
-forever start -a -l ../frontend/forever.log -o ../frontend/out.log -e ../frontend/err.log api.js
+forever start -a -l /var/tmp/deploy/KV004/frontend/forever.log -o /var/tmp/deploy/KV004/out.log -e /var/tmp/deploy/KV004/err.log api.js
