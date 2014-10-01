@@ -3,3 +3,5 @@ photos/
 node_modules/
 bower_components/
 .idea/
+*.DS_Store
+*.log

@@ -33,7 +33,10 @@
         <div class="b-container__header" ng-include="'app/templates/navbar.html'"></div>
 
         <div class="b-container__map-content" ng-controller="mapLoadCtrl">
-            <div class="b-map-content" id="map-content"></div>
+            <div class="b-container__center">
+                <div class="b-map-content" id="map-content"></div>
+                <div class="b-unmoderated-problems-list" not-approved></div>
+            </div>
 
             <div class="b-container__left-side" ng-class = "{left_filter_show : showFiltersVar}">
                 <div class="b-left-side" problem-filters></div>

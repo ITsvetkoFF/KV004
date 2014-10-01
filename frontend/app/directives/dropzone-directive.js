@@ -43,7 +43,19 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     counter--;
                     e.stopPropagation();
                 };
-            })
+            });
+
+            myDropzone.on('successmultiple', function() {
+                console.log('succesmultiple');
+                if(scope.isLoggedIn()){
+                    scope.submitProblem();
+                }
+                else {
+                    location.href = "#/map";
+                    alert('Ви не зареєстрований користувач, тому проблема спочатку пройде модерацію і потім буде додана на карту.');
+                }
+            });
+            
             console.log(drop);
             //bind the given event handlers
             angular.forEach(config.eventHandlers,function (handler, event){

@@ -31,18 +31,17 @@ define(['./module'], function (controllers) {
         /*******************************/
 
         /**--- Getting reg usr problems ---*/
-        
-        if($scope.userId) {
-            getUserProblems($scope.userId);
-            console.log("Your id is ", $scope.userId);
-        }
-
-        function getUserProblems(userId){
+        $scope.getUserProblems = function(userId){
             $http({ method: 'GET', url: "api/usersProblem/" + userId }).success(function (data) {
                 $scope.dataUserProblems = data;
                 console.log("user's problems are: ", $scope.dataUserProblems);
             });
         };
+
+        if($scope.userId) {
+            $scope.getUserProblems($scope.userId);
+            console.log("Your id is ", $scope.userId);
+        }
         /*******************************/
 
         /*******--- Login form ---******/
@@ -53,7 +52,7 @@ define(['./module'], function (controllers) {
 
             UserService.logIn(data.email, data.password).success(function (userData) {
                 successLogIn(userData);
-                getUserProblems($scope.userId);
+                $scope.getUserProblems($scope.userId);
             }).error(function (status, data) {
                 console.log(status);
                 console.log(data);

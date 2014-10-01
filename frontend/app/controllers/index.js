@@ -7,5 +7,6 @@ define([
     './socket',
     './resourcesCtrl',
     './editorCtrl',
-    './socket-user'
+    './socket-user',
+    './not-approved'
 ], function () {});

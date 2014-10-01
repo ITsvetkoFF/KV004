@@ -799,3 +799,82 @@ margin: 0 10px 0 10px;
     width: 100%;
     z-index: 100;
 }
+
+.b-new-problem-list {
+    display: block;
+    position: absolute; 
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    overflow-y: auto;
+    border: none;
+    padding: 0 610px 10px 110px;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+    .b-new-problem-list__caption {
+        display: block;
+        box-sizing: border-box;
+        width: 600px;
+        text-align: left;
+        font-family: WWF;
+        font-size: 1.1em;
+        font-weight: lighter;
+        letter-spacing: 2px;
+        padding: 40px 0 20px 100px;
+        background-color: #FFF;
+        border: 2px solid #FFF;
+        box-shadow: 0 0 10px RGBA(0, 0, 0, .3);
+    }
+
+    .b-new-problem-list-items {
+        display: block;
+        font-weight: 400;
+        list-style: none outside none;
+        width: 600px;
+    }
+
+        .b-new-items__item {
+            display: block;
+            margin: 10px 0;
+            padding: 3px 5px 3px;
+            border: 1px solid #FFF;
+            background-color: #FFF;
+            box-shadow: 0 0 10px RGBA(0, 0, 0, .3);
+        }
+
+
+        .b-new-items__item:hover{
+            background-color: #f5f5f5;
+        }
+
+            .b-new-item__title {
+                position: relative;
+                display: inline-block;
+                text-align: left;
+                line-height: 22px;
+                max-width: 600px;
+                cursor: pointer;
+            }
+
+            .b-new-item__buttons {
+                position: relative;
+                display: inline-block;
+                float: right;
+                margin: auto;
+                height: 22px;
+            }
+
+                .b-buttons {
+                    display: inline-block;
+                    list-style: none;
+                    float: none;
+                    margin: auto;
+                }
+
+                    .b-buttons__button {
+                        position: relative;
+                        display: inline-block;
+                        padding: 0 5px;
+                        cursor: pointer;
+                    }
