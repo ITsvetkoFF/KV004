@@ -2474,6 +2474,13 @@ form.dropzone {
     .editor_ta >*>*,
     .editor_ta >*>*>* {
         border-radius: 0;
+        outline: none;
+    }
+    .editor_ta p {
+        margin: 0 0 10px;
+    }
+    .editor ul {
+        padding-left: 40px;
     }
     .editor input {
         min-width: 275px;
@@ -2482,11 +2489,16 @@ form.dropzone {
     .editor span {
         color: #800000;
     }
-    .resource {
+    .resource h1{
         font-family: WWF;
-        padding: 0px 15px 10px 30px;
-        font-size: 20px;
+        font-size: 4em;
     }
+    .resource {
+        padding: 0px 15px 10px 30px;
+        }
     .resource p {
-    margin: 0;
+    margin: 0 0 10px;
+    }
+    .resource ul {
+        padding-left: 40px;
     }
