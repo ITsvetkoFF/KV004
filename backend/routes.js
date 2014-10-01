@@ -1055,7 +1055,7 @@ req.getConnection(function(err, connection) {
              Status : req.body.status,
              ProblemTypes_Id : req.body.problemTypes_Id
                 };
-            var id = req.body.id;
+            var id = req.params.id;
             connection.query("UPDATE Problems SET ? WHERE Id = ?", [data, id], function(err, rows, fields) {
                     if (err) {
                         console.error(err);

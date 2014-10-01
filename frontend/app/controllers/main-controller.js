@@ -11,9 +11,6 @@ define(['./module'],function(controllers){
                 $http.delete('/api/deleteResource/' + Id)
             };
         };
-        $scope.hideDiv = function() {
-            $scope.showRigthSide = "_hide";
-        };
         $rootScope.$on("Update", function(event, message) {
             $scope.messageLog=$rootScope.messageLog;
 

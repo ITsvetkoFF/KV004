@@ -16,10 +16,6 @@ define(['./app'], function (app) {
               templateUrl: 'app/templates/showProblem.html',
               controller: 'showProblemCtrl'
           })
-          .when('/addDoc',{
-            templateUrl: 'app/templates/editor.html',
-             controller: 'editorController'
-          })
           .when('/problem/addProblem', {
               templateUrl: 'app/templates/addProblem.html',
               controller: 'addProblemCtrl'
@@ -30,7 +26,7 @@ define(['./app'], function (app) {
           }).
           when('/addResource', {
               templateUrl: 'app/templates/editorPage.html',
-              controller:'addResourceCtrl'
+              controller:'editorCtrl'
           }).
           when('/editResource/:Alias', {
               templateUrl: 'app/templates/editorPage.html',

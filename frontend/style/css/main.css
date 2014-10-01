@@ -2321,7 +2321,7 @@ form.dropzone {
   text-decoration: none;
   position: absolute;
   top: 5px;
-  right: 15px;
+  right: 5px;
 }
 .close:hover {
   color: #000000;
@@ -2334,7 +2334,7 @@ form.dropzone {
 .ta-scroll-window.form-control{max-height: 90%; min-height: 300px; overflow: auto; font-family: inherit; font-size: 100%; position: relative; padding: 0;} 
 .ta-root.focussed .ta-scroll-window.form-control{border-color: #66afe9; outline: 0; -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);}
 .ta-editor.ta-html{min-height: 300px; height: auto; overflow: auto; font-family: inherit; font-size: 100%;}
-.ta-scroll-window > .ta-bind{height: auto; min-height: 300px; padding: 6px 12px;}
+.ta-scroll-window > .ta-bind{max-height: 700px; padding: 6px 12px;}
 
 /* add the styling for the awesomness of the resizer */
 .ta-root .ta-resizer-handle-overlay{z-index: 100; position: absolute; display: none;}
@@ -2345,68 +2345,9 @@ form.dropzone {
 .ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-corner-tr{top: 0; right: 0; border-right: 1px solid black; border-top: 1px solid black;}
 .ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-corner-bl{bottom: 0; left: 0; border-left: 1px solid black; border-bottom: 1px solid black;}
 .ta-root .ta-resizer-handle-overlay > .ta-resizer-handle-corner-br{bottom: 0; right: 0; border: 1px solid black; cursor: se-resize; background-color: white;}
-.btn-default {
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
-}
-.btn-default:hover,
-.btn-default:focus,
-.btn-default:active,
-.btn-default.active,
-.open .dropdown-toggle.btn-default {
-  color: #333;
-  background-color: #ebebeb;
-  border-color: #adadad;
-}
-.btn-default:active,
-.btn-default.active,
-.open .dropdown-toggle.btn-default {
-  background-image: none;
-}
-.btn-default.disabled,
-.btn-default[disabled],
-fieldset[disabled] .btn-default,
-.btn-default.disabled:hover,
-.btn-default[disabled]:hover,
-fieldset[disabled] .btn-default:hover,
-.btn-default.disabled:focus,
-.btn-default[disabled]:focus,
-fieldset[disabled] .btn-default:focus,
-.btn-default.disabled:active,
-.btn-default[disabled]:active,
-fieldset[disabled] .btn-default:active,
-.btn-default.disabled.active,
-.btn-default[disabled].active,
-fieldset[disabled] .btn-default.active {
-  background-color: #fff;
-  border-color: #ccc;
-}
-.btn-default .badge {
-  color: #fff;
-  background-color: #333;
-}
-.btn {
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
 .btn-group,
 .btn-group-vertical {
+    margin: 1px 10px 5px 1px;
   position: relative;
   display: inline-block;
   vertical-align: middle;
@@ -2465,7 +2406,6 @@ fieldset[disabled] .btn-default.active {
 .btn-group .btn-group + .btn-group {
   margin-left: -1px;
 }
-
 .fa {
   display: inline-block;
   font-family: FontAwesome;
@@ -2475,49 +2415,7 @@ fieldset[disabled] .btn-default.active {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-    .editor {
-<<<<<<< HEAD
-        margin-top: 30px;
-        padding-left: 30px;
-=======
-        height: 100%;
-        padding: 30px 5px 5px 5px;
-        overflow: auto;
-        background: #E4E2D1;
-        background: -webkit-linear-gradient( top, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
-        background: -o-linear-gradient(top, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
-        background: -moz-linear-gradient( top, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
-        background: linear-gradient(to bottom, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
-    }
-    .editor label {
-        font-weight: bold;
-        text-align: right;
-        padding: 5px 0px 5px 10px;
-    }
-    .editor_horizontal {
-        padding: 10px 5px;
-        clear: both;
-    }
-    .editor_left {
-        float: left;
-    }
-    .editor_right {
-        float: left;
->>>>>>> origin/master
-    }
-    .editor_ta {
-        max-width: 95%;
-        max-height: 90%;
-    }
-    .editor div {
-        margin: 5px;
-        }
-    .editor input {
-        line-height: 20px;
-        min-width: 400px;
-    }
-<<<<<<< HEAD
-.editproblemtitle span,
+    .editproblemtitle span,
 .editproblemcontent span{
     cursor: pointer;
 }
@@ -2541,13 +2439,54 @@ fieldset[disabled] .btn-default.active {
     height: 100px;
     overflow-x: hidden;
 }
-=======
+    .editor {
+        height: 100%;
+        padding: 30px 5px 5px 5px;
+        overflow: auto;
+        background: #E4E2D1;
+        background: -webkit-linear-gradient( top, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
+        background: -o-linear-gradient(top, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
+        background: -moz-linear-gradient( top, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
+        background: linear-gradient(to bottom, rgb(230, 227, 208) 10%, rgb(255, 255, 255));
+    }
+    .editor label {
+        font-weight: bold;
+        text-align: right;
+        padding: 5px 0px 5px 10px;
+    }
+    .editor_horizontal {
+        padding: 10px 5px;
+        clear: both;
+    }
+    .editor_left {
+        float: left;
+        width: 450px;
+    }
+    .editor_right {
+        float: left;
+    }
+    .editor_ta {
+        background-color: #FFFFFF;
+        border-radius: 0;
+        width: auto;
+    }
+    .editor_ta >*,
+    .editor_ta >*>*,
+    .editor_ta >*>*>* {
+        border-radius: 0;
+    }
+    .editor input {
+        min-width: 275px;
+        border-radius: 0;
+    }
     .editor span {
         color: #800000;
     }
     .resource {
         font-family: WWF;
-        padding: 20px 0px 15px 10px;
-        font-size: 22px;
+        padding: 0px 15px 10px 15px;
+        font-size: 20px;
     }
->>>>>>> origin/master
+    .resource p {
+    margin: 0;
+    }

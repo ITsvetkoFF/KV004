@@ -1,13 +1,29 @@
-<a href="#/map" class="close" ng-click="hideDiv()">×</a>
-<form class="editor">
-<div> Введіть назву реcурсу: <input type="text" ng-model="Title"></div>
-<div> 
-Введіть контент:
-<div text-angular="text-angular" name="htmlcontent" ng-model="Content" class="editor_ta"></div>
+<a href="#/map" class="close">×</a>
+<form class="editor" name="EditForm">
+<div class="editor_horizontal">
+	<div class="editor_left">
+		<label >Заголовок ресурсу: </label>
+		<input type="text" name="Title" ng-model="Title" required>
+	</div>
+	<div class="editor_right">
+		<label>Alias для ресурсу: </label>
+		<input type="text" ng-model="Alias" name="Alias" required ng-pattern="/^[0-9a-zA-Z\-]+$/">
+		<span ng-if="EditForm.Alias.$error.pattern">Це поле може містити лише латинські літери, цифри та символ "-" !</span>
+	</div>
 </div>
-<div> Введіть alias: <input type="text" ng-model="Alias"> </div>
-Вкажіть де ви хочете бачити цей ресурс: <br> 
-<input type="radio" ng-model="IsResource" value="0" checked="!IsResource"> У шапці <br>
-<input type="radio" ng-model="IsResource" value="1" checked="IsResource"> В ресурсах <br>
-<button type="submit" ng-click="sendResource(Alias, Content, Title, IsResource, Id)">Відправити</button>
+<div class="editor_horizontal">
+	<div text-angular="text-angular" name="htmlontent" ng-model="Content" class="editor_ta"></div>
+</div>
+<div class="editor_horizontal">
+	<div class="editor_left">
+		<label>Де розмістити цей ресурс: </label>
+				<select ng-model="IsResource" name="IsResource" required>
+					<option value="0">У верхньому меню</option>
+					<option value="1" selected>В розділі "Ресурси"</option>
+				</select>
+	</div>
+	<div class="editor_right">
+		<button type="submit" class="b-form__button editor_btn" type="submit" ng-click="sendResource(Alias, Content, Title, IsResource, Id)">Відправити</button>
+	</div>
+</div>
 </form>
