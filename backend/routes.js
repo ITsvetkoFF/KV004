@@ -826,12 +826,7 @@ req.getConnection(function(err, connection) {
                             err:    err.code
                         });
                     }
-                        res.send({
-                            result: 'success',
-                        err:    '',
-                        json:   rows,
-                        length: rows.length
-                    });
+                        res.send(rows);
                    });
             });
         }
