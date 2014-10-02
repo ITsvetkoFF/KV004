@@ -372,6 +372,10 @@ exports.postProblem = function(req,res){  //post new problem
                 ProblemTypes_Id: req.body.type,
                 Votes:0
             };
+                        if(req.body.userId==undefined){
+                data.Moderation ='0';
+            }
+
 
             connection.query('INSERT INTO Problems SET ?', [data], function(err, rows, fields) {
                 if (err) {
