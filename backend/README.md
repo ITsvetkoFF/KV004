@@ -3,23 +3,35 @@ API
 User's API:
 -----------
 
-+ app.get('/problems', routes.getProblems) - get all moderated problems in brief (id, title, coordinates, type);
++ app.get('/problems', routes.getProblems) - get all moderated problems in brief (id, title, coordinates, type and status);
 
-+ app.get('/problems/:id', routes.getProblemId) - get detailed problem description (all information from tables 'Problems', 'Activities', 'Photos') by its id;
++ app.get('/problems/:id', routes.getProblemId) - get detailed problem description (all information from tables 'Problems', 'Activities', 'Photos') by it's id;
 
-+ app.get('/users/:idUser', routes.getUserId) - get all user's problems in brief (id, title, coordinates, type) by user's id;
++ app.get('/users/:idUser', routes.getUserId) - get user's name and surmane by id;
+
++ app.get('/api/usersProblem/:idUser', routes.getUserProblemsById) - get all user's problems in brief (id, title, coordinates, type and status) by user's id;
+
++ app.get('/api/activities/:idUser', routes.getUserActivity) - get all user's activity (id, type, description and id of related problem);
+
++ app.post('/api/problempost', routes.postProblem) - post new problem;
+
++ app.post('/api/vote', routes.postVote) - vote for problem;
+
++ app.get('/api/getTitles',routes.getTitles) - get title, id and alias of all resources;
+
++ app.get('/api/resources/:name',routes.getResource) -get all information about resource by it's id;
 
 + app.get('/activities/:idUser', routes.getUserActivity) - get user's activity list by user's id;
 
-+ app.post('/problempost', routes.postProblem) - post new problem;
++ app.post('/api/photo/:id',routes.addNewPhotos) - add new photo to existing problem by problem's id;
 
-+ app.post('/vote', routes.postVote) - vote for problem;
++ app.post('/api/comment/:id',routes.addComment) - add new comment to problem by problem's id;
 
-+ app.post('/login', routes.logIn) - log in (email and password are required). User's id, name, surname, role and secret token will be returned;
++ app.post('/api/login', routes.logIn) - log in (email and password are required). User's id, name, surname, role and secret token will be returned;
 
-+ app.get('/logout', routes.logOut) - log out; 
++ app.get('/api/logout', routes.logOut) - log out; 
 
-+ app.post('/register', routes.register) - register (name, surname, email, password are required). User's id, name, surname, role and secret token will be returned;
++ app.post('/api/register', routes.register) - register (name, surname, email, password are required). User's id, name, surname, role and secret token will be returned;
 
 Admin's API:
 ------------
