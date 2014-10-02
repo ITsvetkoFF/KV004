@@ -2653,6 +2653,13 @@ NAV
     background-color: transparent;
 }
 
+.modal-backdrop.fade.in{
+        z-index: 2000 !important;
+    }
+.modal.fade.in {
+    z-index:2001 !important;
+}
+
 
 
 /*****************************?????????????????*/

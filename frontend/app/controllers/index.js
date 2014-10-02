@@ -9,5 +9,6 @@ define([
     './editorCtrl',
     './socket-user',
     './not-approved',
-    './slider-controller'
+    './slider-controller',
+    './register'
 ], function () {});

@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h3 class="modal-title">Реєстрація нового користувача:</h3>
+</div>
+<div class="modal-body">
+    <form method="post" action="http://localhost:8090/api/register" class="b-registration__form" name="registerForm">
+        <div class="form-group">
+            <input type="text" class="form-control" name="first_name" placeholder="Ім’я" required>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="last_name" placeholder="Прізвище" required>
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" name="email" placeholder="Пошта" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Пароль" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password_second" placeholder="Пароль ще раз" required>
+        </div>
+        <div class="modal-footer">
+            <input type="button" value="Зареєструватися!" class="b-form__button" ng-click="registerNewUser()" />
+        </div>
+    </form>
+</div>
+
