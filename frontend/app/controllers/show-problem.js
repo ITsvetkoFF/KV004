@@ -2,6 +2,11 @@ define(['./module'], function(controllers){
     'use strict';
     controllers.controller('showProblemCtrl', function ($scope,$routeParams,$http,ipCookie,$rootScope){
         $rootScope.$broadcast('Update',"");
+        $rootScope.$emit('showSlider','false');
+        $scope.showSlider = false;
+        $scope.showSliderFunc = function(){
+            $rootScope.$emit('showSlider','true');
+        }
         if(ipCookie('vote'+$routeParams.problemID)==true){
           
           $scope.disableVoteButton=true;
@@ -21,6 +26,7 @@ define(['./module'], function(controllers){
             $scope.content = data[0][0].Content;
             $scope.createdDate = data[2][0].Date;
             $scope.photos = data[1];
+            $rootScope.photos = $scope.photos;
             $scope.status = data[0][0].Status ? 'Вирішена' : 'Активна';
             $scope.checked = !data[0][0].Status;
                 console.log("$scope.checked=" + $scope.checked);
@@ -102,6 +108,26 @@ define(['./module'], function(controllers){
                 for(var i=0;i<$scope.activities.length;i++){
                     if($scope.activities[i].userId!=1) {
                         $scope.activities[i].Content = JSON.parse($scope.activities[i].Content);
+                    }
+                }
+
+                $scope.commentContent="";
+
+
+            });
+            responce.error(function (data, status, headers, config) {
+                throw error;
+            });
+
+        }
+        $scope.deleteComment = function(id) {
+
+
+            var responce = $http.delete('/api/activity/' + id);
+            responce.success(function (data, status, headers, config) {
+                for(var i=0;i<$scope.activities.length;i++){
+                    if($scope.activities[i].Id==id) {
+                        $scope.activities.splice(i,1);
                     }
                 }
 

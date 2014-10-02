@@ -10,7 +10,8 @@ define([
     './activity-directive',
     './chatUser-directive',
 	'./editProblemTitle',
-    './editProblemContent'
+    './editProblemContent',
+    './slider-directive'
 
 
 ], function () {});

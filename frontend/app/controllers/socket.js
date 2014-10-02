@@ -4,8 +4,9 @@ define(['./module'],function(controllers){
 
 
 
-    controllers.controller('SocketCtrl', function ($log, $scope, chatSocket, messageFormatter,$rootScope,$interval,$http) {
+    controllers.controller('SocketCtrl', function ($log, $scope, chatSocket, messageFormatter,$rootScope,$interval,$http,ipCookie) {
         $rootScope.$broadcast('Update',"");
+        $rootScope.$emit('showSlider','false');
         $scope.deleteItem="clear";
 
         $scope.currentItemNews=-1;
@@ -13,26 +14,7 @@ define(['./module'],function(controllers){
         $scope.nickName = $scope.name;
         var i = 0;
 
-        //$scope.messageLogHide = "";
-        var repeat = function () {
-            console.log(i);
-            for (var j = 0; j < $scope.messageLogs.length; j++) {
-                if ($scope.messageLogs[j]) {
-                    $scope.messageLogs[j].show = "none";
-                }
-            }
-            console.log($scope.messageLogs);
-            if ($scope.messageLogs[i]) {
-                $scope.messageLogs[i].show = "block";
 
-                i++;
-                if (i >= $scope.messageLogs.length) {
-                    i = 0;
-                    console.log("reverse");
-                }
-            }
-
-        }
         $scope.messageLogs = [];
         var responce = $http.post('/api/getNews',{});
         responce.success(function(data,status,headers,config){
@@ -49,13 +31,13 @@ define(['./module'],function(controllers){
         });
 
 
-        $scope.interval = $interval(repeat, 5000);
+
         $scope.sendMessage = function(message) {
 
             console.log("$scope.message"+$scope.message+"message"+message);
 
             $log.debug('sending message', message);
-            chatSocket.emit('message', $scope.nickName, message);
+            chatSocket.emit('message', ipCookie('token'), message);
             if(isNaN(message)) {
 
                 var responce = $http.post('/api/postNews', {news: message});

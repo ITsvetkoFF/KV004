@@ -21,7 +21,9 @@ require.config({
         'ngResource':  '../bower_components/angular-resource/angular-resource',
         'socket':'../bower_components/angular-socket-io/socket',
         'socket.io':'../bower_components/socket.io-client/dist/socket.io',
-        'angular-bootstrap-tpls':'../bower_components/angular-bootstrap/ui-bootstrap-tpls'
+        'angular-bootstrap-tpls':'../bower_components/angular-bootstrap/ui-bootstrap-tpls',
+        'ngTouch':'../bower_components/angular-touch/angular-touch',
+        'ngAnimate':'../bower_components/angular-animate/angular-animate'
 
 
 
@@ -45,6 +47,12 @@ require.config({
             deps: ['angular']
         },
          'ngResource': {
+            deps: ['angular']
+        },
+        'ngTouch':{
+            deps: ['angular']
+        },
+        'ngAnimate':{
             deps: ['angular']
         },
          'socket': {

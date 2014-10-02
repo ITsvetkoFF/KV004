@@ -55,7 +55,7 @@
                     <div class="b-problem-deatiled-info-description-photos">
 
                         <div class="show_photo" ng-repeat="photo in photos">
-                            <img  ng-src="photos/large/{{photo.Link}}" class="b-details-body-problem-photo"/>
+                            <img ng-click="showSliderFunc()" ng-src="photos/large/{{photo.Link}}" class="b-details-body-problem-photo"/>
 
                             <div class="show_photo_label_{{photo.Status}}"></div>
                         </div>

@@ -1,0 +1,20 @@
+
+
+<div class="container slider" ng-show="showSlider">
+    <a href=""class="close" style="top:0px; right:0px;z-index: 5" ng-click="hideSlider()">x</a>
+<img ng-repeat="photo in photos" class="slide slide-animation nonDraggableImage"
+     ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()"
+     ng-hide="!isCurrentSlideIndex($index)" ng-src="../photos/large/{{photo.Link}}">
+
+<a class="arrow prev"  ng-click="nextSlide()"></a>
+<a class="arrow next"   ng-click="prevSlide()"></a>
+<nav class="navSlider">
+    <div class="wrapper">
+        <ul class="dots">
+            <li class="dot" ng-repeat="photo in photos">
+                <a  ng-class="{'active':isCurrentSlideIndex($index)}"
+                   ng-click="setCurrentSlideIndex($index);">{{photo.description}}</a></li>
+        </ul>
+    </div>
+</nav>
+</div>

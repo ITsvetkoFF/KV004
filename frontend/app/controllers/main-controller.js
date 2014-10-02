@@ -1,7 +1,7 @@
 define(['./module'],function(controllers){
     'use strict';
     controllers.controller('mainCtrl',['$scope','$rootScope', '$http' ,function($scope,$rootScope, $http){
-
+        $scope.showSlider=false;
         console.log('MainCTRL has loaded');
         $scope.$on('$routeChangeStart', function(next, current) { 
             console.log('routing was changed');
@@ -27,5 +27,9 @@ define(['./module'],function(controllers){
                 $scope.showRigthSide = message;
             }
         });
+        $rootScope.$on('showSlider',function(event,message){
+            $scope.showSlider = message;
+        });
+
     }]);
 });

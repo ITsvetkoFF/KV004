@@ -9,6 +9,8 @@
     "angular-cookie": "latest",
     "font-awesome": "latest",
     "requirejs": "latest",
+    "angular-touch":"latest",
+    "angular-animate":"latest",
     "requirejs-domready": "latest",
     "angular-sanitize": "latest",
     "socket.io-client": "~0.9.16",
