@@ -1134,14 +1134,16 @@ req.getConnection(function(err, connection) {
                     return res.send(401);
                 }
                 var data = {
-             Title : req.body.title,
-             Content : req.body.content,
-             Severity : req.body.severity,
-             Moderation : req.body.moderation,
-             Status : req.body.status,
-             ProblemTypes_Id : req.body.problemTypes_Id
+             Title : req.body.Title,
+             Content : req.body.Content,
+             Severity : req.body.Severity,
+             //ProblemTypes_Id : req.body.problemTypes_Id,
+                    //Moderation : req.body.moderation,
+             Status : req.body.ProblemStatus
                 };
             var id = req.params.id;
+                console.log("id="+id);
+                console.log('data=' + data);
             connection.query("UPDATE Problems SET ? WHERE Id = ?", [data, id], function(err, rows, fields) {
                     if (err) {
                         console.error(err);

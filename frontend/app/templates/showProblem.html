@@ -8,7 +8,7 @@
         <div class="b-problem-deatiled-info-title">
             <img ng-src="images/markers/{{data.ProblemTypes_Id}}.png" class="b-problem-deatiled-info-title__icon">
             <div  class="b-problem-deatiled-info-title__text">
-                <editproblemtitle  value="data.Title" ></editproblemtitle>
+                <editproblemtitle  value="title" ></editproblemtitle>
             </div>
             <div class="b-problem-deatiled-info-user">
                 <div class="b-problem-deatiled-info-user__name">
@@ -29,7 +29,7 @@
             <div class="btn-group b-problem-deatiled-info__status">
                 <div class="b-problem-deatiled-info-status__text">{{status}}</div>
                 <div class="onoffswitch">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-false-value="Вирішена" ng-true-value="Активна" ng-model="status" ng-disabled="!isAdministrator()" >
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-false-value="Активна" ng-true-value="Вирішена" ng-model="status" ng-disabled="!isAdministrator()" >
                     <label class="onoffswitch-label" for="myonoffswitch">
                         <span class="onoffswitch-inner"></span>
                         <span class="onoffswitch-switch"></span>
@@ -50,7 +50,8 @@
             <tab heading="Детально" >
                 <div class="b-problem-deatiled-info-description">
                     <div class="b-problem-deatiled-info-description__title"></div>
-                    <div class="b-problem-deatiled-info-description__content"><editproblemcontent  value="content" ></editproblemcontent>
+                    <div class="b-problem-deatiled-info-description__content">
+                        <editproblemcontent  value="content"></editproblemcontent>
                     </div>
                     <div class="b-problem-deatiled-info-description-photos">
 
@@ -85,8 +86,11 @@
                  <activity></activity>
             </tab>
         </tabset>
+        <button type="button" class="btn {{editStatus}} btn-sm" ng-click="saveChangestoDb(data.Title,severity, status, content)" >Збережіть зміни</button>
+        <a href="#/"><button type="button" class="btn {{delStatus}} btn-sm" ng-click="deleteProblemFromDb()" >Видалити проблему з бази</button></a>
 
 
 
-</div>
+
+    </div>
 </div>

@@ -1,6 +1,15 @@
 define(['./module'], function(controllers){
     'use strict';
-    controllers.controller('showProblemCtrl', function ($scope,$routeParams,$http,ipCookie,$rootScope){
+    controllers.controller('showProblemCtrl',['$scope','$routeParams','$http','ipCookie','$rootScope', function ($scope,$routeParams,$http,ipCookie,$rootScope){
+        $rootScope.getProblemsAndPlaceMarkers();
+        if (!$scope.isAdministrator()){
+            $scope.editStatus = 'btn-editStatus';
+            $scope.delStatus = 'btn-delete';
+        } else {
+            $scope.editStatus = 'btn-warning';
+            $scope.delStatus = 'btn-danger';
+        }
+
         $rootScope.$broadcast('Update',"");
         $rootScope.$emit('showSlider','false');
         $scope.showSlider = false;
@@ -16,19 +25,44 @@ define(['./module'], function(controllers){
         $scope.showDropField = false;
         $scope.showAddPhotoButton = true;
         var userID ='';
+        var problemID = '';
         //get problem info
             var res=$http.get("api/problems/"+$routeParams.problemID);
+
+        $scope.$watch('title', function(newValue, oldValue) {
+            if (!oldValue) {
+                return;
+            }
+            $scope.editStatus = 'btn-warning';
+        });
+
+        $scope.$watch('severity', function(newValue, oldValue) {
+            if (!oldValue) {
+                return;
+            }
+            $scope.editStatus = 'btn-warning';
+        });
+        $scope.$watch('content', function(newValue, oldValue) {
+            if (!oldValue) {
+                return;
+            }
+            $scope.$parent.editStatus = 'btn-warning';
+            $scope.$parent.content = newValue;
+        });
+
 
         res.success(function (data, status, headers, config) {
             $scope.data = data[0][0];
             userID = data[2][0].Users_Id;
+            problemID = parseInt(data[0][0].Id);
             $scope.severity = parseInt(data[0][0].Severity);
             $scope.content = data[0][0].Content;
+            $scope.title = data[0][0].Title;
             $scope.createdDate = data[2][0].Date;
             $scope.photos = data[1];
             $rootScope.photos = $scope.photos;
-            $scope.status = data[0][0].Status ? 'Вирішена' : 'Активна';
-            $scope.checked = !data[0][0].Status;
+            $scope.status = data[0][0].Status ? 'Активна' : 'Вирішена';
+            $scope.checked = data[0][0].Status;
                 console.log("$scope.checked=" + $scope.checked);
             $scope.votes = data[0][0].Votes;
 
@@ -38,6 +72,16 @@ define(['./module'], function(controllers){
                     $scope.userName = angular.fromJson(data).json[0].Name;
                 });
                 //end get user info by UserID
+
+            $scope.$watch('status', function(newValue, oldValue) {
+                if (!oldValue) {
+                    return;
+                }
+                if (!$scope.isAdministrator()) {
+                    $scope.editStatus = 'btn-editStatus';
+                };
+
+            });
 
             $scope.activities = data[2].reverse();
             for(var i=0;i<$scope.activities.length;i++){
@@ -165,7 +209,39 @@ define(['./module'], function(controllers){
             }
 
         }
-    });
+
+        //save changes to db
+        $scope.saveChangestoDb = function(){
+            var title = $scope.title;
+            var severity = $scope.severity;
+            var problemStatus = $scope.checked ?0:1;
+            var content = $scope.content;
+            $http.put('/api/editProblem/' + problemID, {Title: title, Content: content, Severity: severity, ProblemStatus: problemStatus})
+                .success(function () {
+                    console.log('Problem description with '+ problemID + 'updated');
+                    $scope.editStatus = 'btn-editStatus';
+
+                })
+                .error(function (status, data) {
+                    console.log(status);
+                    console.log(data);
+                });
+        }
+
+        //delete problem from DB
+        $scope.deleteProblemFromDb = function(){
+            $http.delete('/api/problem/' + problemID,{id:problemID} )
+                .success(function () {
+                    console.log('Problem with '+ problemID + 'has been deleted');
+                    $rootScope.getProblemsAndPlaceMarkers();
+                })
+                .error(function (status, data) {
+                    console.log(status);
+                    console.log(data);
+                });
+        }
+
+    }]);
 
 
 

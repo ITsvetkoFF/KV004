@@ -752,15 +752,15 @@ margin: 0 10px 0 10px;
     width: 50%;
 }
 .onoffswitch-inner:before {
-    background-color: #d9533f;
-    color: #d9533f;
+    background-color: #449d44;
+    color: #449d44;
     content: "Активна";
     padding-left: 10px;
     text-align: left;
 }
 .onoffswitch-inner:after {
-    background-color: #449d44;;
-    color: #449d44;;
+    background-color: #d9533f;
+    color:#d9533f;
     content: "Вирішена";
     padding-right: 10px;
     text-align: right;
@@ -877,4 +877,44 @@ margin: 0 10px 0 10px;
                         display: inline-block;
                         padding: 0 5px;
                         cursor: pointer;
-                    }
+                    }.btn-warning{
+    position: absolute;
+    display: inline-block;
+    bottom: 10px;
+    right: 300px;
+    width: 250px;
+    opacity: 1;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -ms-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
+}
+.btn-editStatus {
+    opacity: 0;
+    position: absolute;
+    bottom: 10px;
+    right: 300px;
+    width: 250px;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -ms-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
+}
+.btn-danger{
+    position: absolute;
+    display: inline-block;
+    bottom: 10px;
+    right: 20px;
+    width: 250px;
+    opacity: 1;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -ms-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
+}
+.btn-delete{
+    opacity: 0;
+}

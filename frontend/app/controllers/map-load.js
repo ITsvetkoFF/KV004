@@ -1,14 +1,8 @@
 define(['./module'], function (controllers) {
     'use strict';
-    controllers.directive('problemFilters', function(){
-        return {
-            restrict: 'A',
-            templateUrl: 'app/templates/filters.html'
-        }
-    });
+    controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location) {
+        $scope.isAdministrator = UserService.isAdministrator;
 
-    controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope', function ($scope, $http, $rootScope) {
-        
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             maxZoom: 13,
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -26,8 +20,8 @@ define(['./module'], function (controllers) {
         });
         var latlng  = L.latLng(50.00, 32.00);
         var map     = L.map('map-content', {
-            center: latlng, 
-            zoom: 7, 
+            center: latlng,
+            zoom: 7,
             layers:[tiles, geoJson] //disabling geoJson because of blocking ukraine-zone on the map
         });
         $rootScope.geoJson = geoJson; //forwarding geoJson object to $rooTscope
@@ -42,7 +36,7 @@ define(['./module'], function (controllers) {
             });
         };
         $scope.getProblemsAndPlaceMarkers();
-        
+
         navigator.geolocation.getCurrentPosition(getUserPosition);
 
         function getUserPosition(position) {
@@ -54,10 +48,14 @@ define(['./module'], function (controllers) {
         }
 
         function onMarkerClick(marker){
-            window.location.href="#/problem/showProblem/"+ this._id;
+            if($scope.isAdministrator()) {
+                window.location.href = "#/problem/editProblem/" + this._id;
+            } else{
+                window.location.href="#/problem/showProblem/"+ this._id;
+            }
             $rootScope.$broadcast('Update',"");
             map.panTo(marker.latlng);
-        }
+        };
 
         function placeMarkers(data) {
             markers.clearLayers();
@@ -121,4 +119,11 @@ define(['./module'], function (controllers) {
         };
 
     }]);
+
+    controllers.directive('problemFilters', function(){
+        return {
+            restrict: 'A',
+            templateUrl: 'app/templates/filters.html'
+        }
+    });
 });
