@@ -1,6 +1,5 @@
-<div ng-show="showNewsContainer">
+<div ng-show="showNewsContainer" class="chat-user-label">
 <!--<div ng-repeat="messageLog in messageLogs" ng-style={display:messageLog.show} class="chat-user-label{{messageLogHide}}">{{messageLog.Content}}</div>-->
-<div class="chat-user-label"><marquee>{{allNews}}</marquee>
-</div>
-<i  class="fa fa-close close chat-user-label-close" ng-click="showNewsContainer=false"></i>
+	<marquee>{{allNews}}</marquee>
+	<i class="fa fa-close close" ng-click="showNewsContainer=false"></i>
 </div>

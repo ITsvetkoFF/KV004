@@ -826,12 +826,7 @@ req.getConnection(function(err, connection) {
                             err:    err.code
                         });
                     }
-                        res.send({
-                            result: 'success',
-                        err:    '',
-                        json:   rows,
-                        length: rows.length
-                    });
+                        res.send(rows);
                    });
             });
         }
@@ -864,6 +859,52 @@ req.getConnection(function(err, connection) {
                 }
                 var id=req.params.id;
                 connection.query('DELETE FROM Problems WHERE Id = ?', id, function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    res.send({
+                        result: 'success',
+                        err:    '',
+                        json:   rows,
+                        length: rows.length
+                    });
+                    });
+            });
+        }
+    });
+};
+
+exports.approveProblem = function(req, res) {
+req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+
+                err:    err.code
+            });
+        } else {
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
+            };
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
+                }
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+                var id=req.params.id;
+                connection.query('UPDATE Problems SET Moderation=1 WHERE Id = ?', id, function(err, rows, fields) {
                     if (err) {
                         console.error(err);
                         res.statusCode = 500;

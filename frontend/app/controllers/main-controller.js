@@ -18,6 +18,9 @@ define(['./module'],function(controllers){
             $scope.deleteResource = function(Id) {
                 $http.delete('/api/deleteResource/' + Id)
             };
+            $scope.editResource = function(Alias) {
+                window.location.href="#/editResource/"+ Alias;
+            }
         };
         $rootScope.$on("Update", function(event, message) {
             $scope.messageLog=$rootScope.messageLog;

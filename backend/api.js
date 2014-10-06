@@ -92,6 +92,7 @@ app.put('/api/edit/:id', routes.editProblem);
 app.post('/api/addResource', routes.addResource);
 app.put('/api/editResource/:id', routes.editResource);
 app.delete('/api/deleteResource/:id', routes.deleteResource);
+app.post('/api/approve/:id', routes.approveProblem);
 //admin - newsline Api
 app.post('/api/postNews',routes.postNews);
 app.post('/api/getNews',routes.getNews);

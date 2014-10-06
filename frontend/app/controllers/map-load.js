@@ -1,12 +1,5 @@
 define(['./module'], function (controllers) {
     'use strict';
-    controllers.directive('problemFilters', function(){
-        return {
-            restrict: 'A',
-            templateUrl: 'app/templates/filters.html'
-        }
-    });
-
     controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope', function ($scope, $http, $rootScope) {
         
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {

@@ -1,12 +1,5 @@
 define(['./module'],function(controllers){
     'use strict';
-    controllers.directive('notApproved', function(){
-        return {
-            restrict: 'A',
-            templateUrl: 'app/templates/notApproved.html'
-        }
-    });
-
     controllers.controller('notApprovedCtrl', ['$scope', '$http', '$rootScope', 'UserService', function($scope, $http, $rootScope, UserService){
         $scope.isAdministrator = UserService.isAdministrator;
         $scope.notApproved = [];
