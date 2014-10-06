@@ -29,6 +29,15 @@ div.navbar-collapse.collapse.in {
     z-index: 2000;
 }
 
+@media (max-width: 768px) {
+    .b-header__logo {
+        width: 65px;
+        height: auto;
+        clip: rect(0px,60px,62px,5px);
+        margin-top: -10px;
+    }
+}
+
 .navbar .container-fluid .navbar-brand {
     color: #ffffff;
     background-color: #23527B;
@@ -68,7 +77,12 @@ div.navbar-collapse.collapse.in {
 
 #link {
     display: inline-block;
-    
+}
+
+@media (max-width: 992px) {
+    #link {
+        padding-right: 0;
+    }
 }
 
 #b-header__resources {
@@ -86,12 +100,6 @@ div.navbar-collapse.collapse.in {
 .navbar-nav > li > .dropdown-menu > li > form > div > input,
 .navbar-nav > li > .dropdown-menu > li > form > button {
     border-radius: 0;
-}
-
-@media (max-width: 768px) {
-    .nav > li {
-        padding-left: 120px;
-    }
 }
 
 #b-header__login-menu {
@@ -121,7 +129,7 @@ div.navbar-collapse.collapse.in {
     width: 49%;
 }
 
-.chat-user-label{
+.chat-user-label {
     display: block;
     font-family: Arial;
     font-size: 18px;
@@ -132,6 +140,12 @@ div.navbar-collapse.collapse.in {
     overflow: auto;
     color: #777;
     padding-right: 30px;
+    line-height: 1;
+}
+
+.chat-user-label i {
+    line-height: 18px;
+    font-size: 22px;
 }
 
 @media (max-width: 992px) {
@@ -140,14 +154,6 @@ div.navbar-collapse.collapse.in {
     }
 }
 
-.chat-user-label_hide{
+.chat-user-label_hide {
     display: none;
-}
-
-.chat-user-label-close{
-    position: absolute;
-    top: -36px !important;
-    right: -884px !important;
-    color: white;
-    font-size: 16px !important;
 }
