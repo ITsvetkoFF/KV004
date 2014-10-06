@@ -13,11 +13,23 @@ define(['./module'],function(controllers){
             data.password = document.registerForm.password.value;
 
             $http.post('api/register', data);
-            $modalInstance.close(console.log('registered'));
-
+            $scope.alerts.push({type: 'success', msg: 'Well done! You have successfully registered!'});
+            var mainModal = document.querySelector('.modal-content');
+            var modal1 = document.querySelector('.modal-header');
+            var modal2 = document.querySelector('.modal-body');
+            mainModal.removeChild(modal1);
+            mainModal.removeChild(modal2);
         };
 
+        $scope.alerts = [];
 
+        $scope.addAlert = function() {
+            console.log($scope.alerts);
+            $scope.alerts.push({type: 'success', msg: 'Ви успішно зареєструвались!'});
+        };
+        $scope.closeAlert = function(index) {
+            $modalInstance.close(console.log('alert closed'));
+        };
 
     }]);
 });

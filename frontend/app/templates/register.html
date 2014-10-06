@@ -1,26 +1,32 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 <div class="modal-header">
     <h3 class="modal-title">Реєстрація нового користувача:</h3>
 </div>
 <div class="modal-body">
     <form method="post" action="http://localhost:8090/api/register" class="b-registration__form" name="registerForm">
+
         <div class="form-group">
-            <input type="text" class="form-control" name="first_name" placeholder="Ім’я" required>
+            <label for = "first_name">Ім’я</label>
+            <input type="text" id = "first_name" class="form-control" name="first_name" required>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="last_name" placeholder="Прізвище" required>
+            <label for = "last_name">Прізвище</label>
+            <input type="text" id = "last_name" class="form-control" name="last_name" required>
         </div>
         <div class="form-group">
-            <input type="email" class="form-control" name="email" placeholder="Пошта" required>
+            <label for = "email">Пошта</label>
+            <input type="email" id = "email" class="form-control" name="email" required>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Пароль" required>
+            <label for = "password">Пароль</label>
+            <input type="password" id = "password" class="form-control" name="password" required>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" name="password_second" placeholder="Пароль ще раз" required>
+            <label for = "password_second">Повторіть пароль</label>
+            <input type="password" id = "password_second" class="form-control" name="password_second" required>
         </div>
         <div class="modal-footer">
             <input type="button" value="Зареєструватися!" class="b-form__button" ng-click="registerNewUser()" />
         </div>
     </form>
 </div>
-
