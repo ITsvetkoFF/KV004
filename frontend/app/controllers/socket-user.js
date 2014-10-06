@@ -5,7 +5,7 @@ define(['./module'],function(controllers){
 
 
     controllers.controller('SocketUserCtrl', function ($log, $scope, chatSocket, messageFormatter,$rootScope,$interval,$http) {
-        $rootScope.$broadcast('Update',"");
+        
         $scope.messageLogHide="_hide";
         $scope.showNewsContainer=false;
         $scope.allNews="";

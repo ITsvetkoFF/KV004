@@ -8,27 +8,7 @@ define(['./module'], function (controllers) {
         $scope.name = ipCookie('userName');
         $scope.surname = ipCookie('userSurname');
         $scope.userId = ipCookie('id');
-        /*****--- Register form ---*****/
-        $scope.registerClassAppendix = "_hide";
-
-        $scope.showRegisterForm = function () {
-            $scope.registerClassAppendix = "_show";
-        }
-
-        $scope.closeRegisterForm = function () {
-            $scope.registerClassAppendix = "_hide";
-        };
-
-        $scope.postRegistrationForm = function () {
-            var data = {};
-            data.first_name = document.registerForm.first_name.value;
-            data.last_name = document.registerForm.last_name.value;
-            data.email = document.registerForm.email.value;
-            data.password = document.registerForm.password.value;
-
-            $http.post('api/register', data);
-        };
-        /*******************************/
+        
 
         /**--- Getting reg usr problems ---*/
         $scope.getUserProblems = function(userId){

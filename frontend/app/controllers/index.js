@@ -8,5 +8,7 @@ define([
     './resourcesCtrl',
     './editorCtrl',
     './socket-user',
-    './not-approved'
+    './not-approved',
+    './slider-controller',
+    './register'
 ], function () {});

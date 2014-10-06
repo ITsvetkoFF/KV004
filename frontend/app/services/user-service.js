@@ -2,7 +2,7 @@ define(['./module'], function (services) {
     'use strict';
 
         
-    services.factory('UserService', function($http, ipCookie) {
+    services.factory('UserService', function($http, ipCookie ) {
         return {
             logIn: function (email, password) {
                 return $http.post('/api/login', {email: email, password: password});

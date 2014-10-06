@@ -13,7 +13,8 @@ define([
     './editProblemContent',
     './stopEvent-directive',
     './problemFilters-directive',
-    './notApproved-directive'
+    './notApproved-directive',
+    './slider-directive'
 
 
 ], function () {});

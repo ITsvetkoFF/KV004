@@ -2,25 +2,34 @@ define(['./module'],function(directives){
     directives.directive('editproblemtitle',function(){
         return {
             restrict: 'AE',
-            scope: { value: '=' },
-            template: '<span ng-click="edit()" ng-bind="value"></span><input ng-model="value"/>',
+            scope: {
+                value: '='
+            },
+            template: '<span ng-click="edit()">{{ tempValue }}</span><input ng-model="tempValue"/>',
             controller: function($scope,UserService){
                 $scope.isAdministrator = UserService.isAdministrator;
             },
             link: function ( $scope, element, attrs ) {
                 // Let's get a reference to the input element, as we'll want to reference it.
                 var inputElement = angular.element( element.children()[1] );
-
                 // This directive should have a set class so we can style it.
                 element.addClass( 'editproblemtitle' );
 
+
                 // Initially, we're not editing.
                 $scope.editing = false;
+
+                $scope.$watch('value', function() {
+                    $scope.tempValue = $scope.value;
+                });
+
 
                 // ng-click handler to activate edit-in-place
                 $scope.edit = function () {
                     if ($scope.isAdministrator()){
                         $scope.editing = true;
+                        //$scope.editStatusChange (true);
+
 
                         // We control display through a class on the directive itself. See the CSS.
                         element.addClass( 'active' );
@@ -32,20 +41,25 @@ define(['./module'],function(directives){
                     }
                 };
 
+                var onEdit = function() {
+                    $scope.$apply(function() {
+                        $scope.editing = false;
+                        $scope.value = $scope.tempValue;
+                        element.removeClass('active');
+                    });
+                };
+
                 // When we leave the input, we're done editing.
-                inputElement.prop( 'onblur', function() {
-                    $scope.editing = false;
-                    element.removeClass( 'active' );
-                });
+                inputElement.prop( 'onblur', onEdit);
 
                 //when enter pressed
                 inputElement.prop( 'onkeypress', function() {
                     if(event.keyCode == 13){
-                        $scope.editing = false;
-                        element.removeClass( 'active' );
+                       onEdit();
                     }
                 });
             }
         };
-    });
+    })
+
 });

@@ -2,8 +2,10 @@ define(['./module'],function(directives){
     directives.directive('editproblemcontent',function(){
         return {
             restrict: 'AE',
-            scope: { value: '=' },
-            template: '<span ng-click="edit()" ng-bind="value"></span><textarea ng-model="value"></textarea>',
+            scope: {
+               value: '='
+            },
+            template: '<span ng-click="edit()">{{tempValue}}</span><textarea ng-model="tempValue"></textarea>',
             controller: function($scope,UserService){
                 $scope.isAdministrator = UserService.isAdministrator;
             },
@@ -17,12 +19,17 @@ define(['./module'],function(directives){
                 // Initially, we're not editing.
                 $scope.editing = false;
 
+                $scope.$watch('value', function() {
+                    $scope.tempValue = $scope.value;
+
+                });
+
                 // ng-click handler to activate edit-in-place
                 $scope.edit = function () {
                     if ($scope.isAdministrator()){
                         $scope.editing = true;
 
-                        // We control display through a class on the directive itself. See the CSS.
+               // We control display through a class on the directive itself. See the CSS.
                         element.addClass( 'active' );
 
                         // And we must focus the element.
@@ -33,10 +40,16 @@ define(['./module'],function(directives){
                 };
 
                 // When we leave the input, we're done editing.
-                inputElement.prop( 'onblur', function() {
-                    $scope.editing = false;
-                    element.removeClass( 'active' );
-                });
+                var onEdit = function() {
+                    $scope.$apply(function() {
+                        $scope.editing = false;
+                        $scope.value = $scope.tempValue;
+                        element.removeClass('active');
+                    });
+                };
+
+                // When we leave the input, we're done editing.
+                inputElement.prop( 'onblur', onEdit);
             }
         };
     });

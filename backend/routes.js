@@ -372,6 +372,10 @@ exports.postProblem = function(req,res){  //post new problem
                 ProblemTypes_Id: req.body.type,
                 Votes:0
             };
+                        if(req.body.userId==undefined){
+                data.Moderation ='0';
+            }
+
 
             connection.query('INSERT INTO Problems SET ?', [data], function(err, rows, fields) {
                 if (err) {
@@ -465,31 +469,44 @@ exports.postNews = function(req,res) {
                 err: err.code
             });
         } else {
-
-        }
-
-        console.log(req.body);
-
-        var data = {
-
-            Content: req.body.news
-
-        };
-
-        connection.query('INSERT INTO News SET ?', [data], function (err, rows, fields) {
-            if (err) {
-                console.error(err);
-                res.statusCode = 500;
-                res.send({
-                    result: 'error',
-                    err: err.code
-                });
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
             }
-        });
-        res.send({
-           result:"ok"
-        });
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if(err) {
+                    return res.send(401);
+                }
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
 
+
+                console.log(req.body);
+
+                var data = {
+
+                    Content: req.body.news
+
+                };
+
+                connection.query('INSERT INTO News SET ?', [data], function (err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err: err.code
+                        });
+                    }
+                });
+                res.send({
+                    result: "ok"
+                });
+            });
+        }
 
     });
 }
@@ -542,30 +559,44 @@ exports.clearNews = function(req,res) {
                 err: err.code
             });
         } else {
-
-        }
-
-        console.log(req.body);
-
-        var data = {
-
-            Content: req.body.news
-
-        };
-
-        connection.query('DELETE FROM News ', function (err, rows, fields) {
-            if (err) {
-                console.error(err);
-                res.statusCode = 500;
-                res.send({
-                    result: 'error',
-                    err: err.code
-                });
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
             }
-            res.send({
-                news:rows
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if (err) {
+                    return res.send(401);
+                }
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }
+
+
+                console.log(req.body);
+
+                var data = {
+
+                    Content: req.body.news
+
+                };
+
+                connection.query('DELETE FROM News ', function (err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err: err.code
+                        });
+                    }
+                    res.send({
+                        news: rows
+                    });
+                });
             });
-        });
+        }
 
 
     });
@@ -580,26 +611,38 @@ exports.clearOneNews = function(req,res) {
                 err: err.code
             });
         } else {
-
-        }
-
-console.log(req.body.id);
-
-        connection.query('DELETE FROM News WHERE Content=?',req.body.content, function (err, rows, fields) {
-            if (err) {
-                console.error(err);
-                res.statusCode = 500;
-                res.send({
-                    result: 'error',
-                    err: err.code
-                });
+            var token;
+            if(req.cookies.token) {
+                token = req.cookies.token;
+            } else {
+                return res.send(401);
             }
-            res.send({
-                news:rows
+            jwt.verify(token, secret.secretToken, function(err, decoded) {
+                if (err) {
+                    return res.send(401);
+                }
+                if (decoded.role != 'administrator') {
+                    return res.send(401);
+                }else {
+
+                    console.log(req.body.id);
+
+                    connection.query('DELETE FROM News WHERE Content=?', req.body.content, function (err, rows, fields) {
+                        if (err) {
+                            console.error(err);
+                            res.statusCode = 500;
+                            res.send({
+                                result: 'error',
+                                err: err.code
+                            });
+                        }
+                        res.send({
+                            news: rows
+                        });
+                    });
+                }
             });
-        });
-
-
+        }
     });
 }
 exports.postVote = function(req,res){  //+1 vote for a problem
@@ -972,7 +1015,7 @@ req.getConnection(function(err, connection) {
 };
 
 exports.deleteComment = function(req, res) {
-req.getConnection(function(err, connection) {
+    req.getConnection(function(err, connection) {
         if (err) {
             console.error('CONNECTION error: ',err);
             res.statusCode = 503;
@@ -982,6 +1025,8 @@ req.getConnection(function(err, connection) {
                 err:    err.code
             });
         } else {
+            console.log("req.body.id"+req.body.id);
+            console.log("req.params.id"+req.params.id)
             var token;
             if(req.cookies.token) {
                 token = req.cookies.token;
@@ -994,29 +1039,29 @@ req.getConnection(function(err, connection) {
                 }
                 if (decoded.role != 'administrator') {
                     return res.send(401);
-                }
-                var id=req.params.id;
-                connection.query('DELETE FROM Activities WHERE Id = ?', id, function(err, rows, fields) {
-                    if (err) {
-                        console.error(err);
-                        res.statusCode = 500;
+                }else {
+
+                    connection.query('DELETE FROM Activities WHERE Id = ?', req.params.id, function (err, rows, fields) {
+                        if (err) {
+                            console.error(err);
+                            res.statusCode = 500;
+                            res.send({
+                                result: 'error',
+                                err: err.code
+                            });
+                        }
+
                         res.send({
-                            result: 'error',
-                            err:    err.code
+                            result: 'success'
+
                         });
-                    }
-                    res.send({
-                        result: 'success',
-                        err:    '',
-                        json:   rows,
-                        length: rows.length
+
                     });
-                    });
+                }
             });
         }
     });
 };
-
 exports.deletePhoto = function(req, res) {
 req.getConnection(function(err, connection) {
         if (err) {
@@ -1089,14 +1134,16 @@ req.getConnection(function(err, connection) {
                     return res.send(401);
                 }
                 var data = {
-             Title : req.body.title,
-             Content : req.body.content,
-             Severity : req.body.severity,
-             Moderation : req.body.moderation,
-             Status : req.body.status,
-             ProblemTypes_Id : req.body.problemTypes_Id
+             Title : req.body.Title,
+             Content : req.body.Content,
+             Severity : req.body.Severity,
+             //ProblemTypes_Id : req.body.problemTypes_Id,
+                    //Moderation : req.body.moderation,
+             Status : req.body.ProblemStatus
                 };
             var id = req.params.id;
+                console.log("id="+id);
+                console.log('data=' + data);
             connection.query("UPDATE Problems SET ? WHERE Id = ?", [data, id], function(err, rows, fields) {
                     if (err) {
                         console.error(err);

@@ -88,7 +88,7 @@ app.delete('/api/problem/:id', routes.deleteProblem);
 app.delete('/api/user/:id', routes.deleteUser);
 app.delete('/api/activity/:id', routes.deleteComment);
 app.delete('/api/photo/:id', routes.deletePhoto);
-app.put('/api/edit/:id', routes.editProblem);
+app.put('/api/editProblem/:id', routes.editProblem);
 app.post('/api/addResource', routes.addResource);
 app.put('/api/editResource/:id', routes.editResource);
 app.delete('/api/deleteResource/:id', routes.deleteResource);

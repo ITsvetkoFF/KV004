@@ -35,8 +35,12 @@ define(['./app'], function (app) {
           when('/chat',{
               templateUrl:'app/templates/chat.html',
               controller:'SocketCtrl'
-          }).
-        otherwise({
+          })
+          .when('/problem/editProblem/:problemID', {
+              templateUrl: 'app/templates/showProblem.html',
+              controller: 'showProblemCtrl'
+          })
+          .otherwise({
             redirectTo: '/map'
         });
   }]);
