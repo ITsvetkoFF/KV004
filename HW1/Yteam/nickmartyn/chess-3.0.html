@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">   <script src="chess-3.0.js"></script>
+    <style>
+        h1 { text-align: center;
+            text-transform: uppercase;}
+        .content { width: 90%;
+                    margin: 0 auto;
+                    }
+        
+        
+    </style>
+        <title>Конь 3.0</title>
+    </head>
+<body>
+    <div class="header">
+        <h1>ход коня 3.0</h1>
+    </div>
+    <div class="content">
+        <fieldset><legend>Введите координаты</legend>
+        <label for id="startX">X</label>
+        <input type="text" name="start_x" id="startX" value="0"> 
+        <label for id="startY">Y</label>
+        <input type="text" name="start_y" id="startY" value="0">
+        <p>Введите конечную точку</p>
+        <label for id="finalX">X</label>
+        <input type="text" name="final_x" id="finalX" value="999"> 
+        <label for id="finalY">Y</label>
+        <input type="text" name="final_y" id="finalY" value="999">
+        <p><button onclick="">Поехали</button></p>
+        </fieldset>
+        <p>
+        <fieldset><legend>Результаты</legend>
+            <p id="countOfMoves">Количество шагов:</p>
+            <p>Маршрут коня:</p>
+            <p id="time"></p>
+            
+        
+        
+        
+        
+        
+        </fieldset>
+        </p>
+    </div>
+        <script src="chess-3.0.js"></script>
+        
+</body>
+    
+</html>
