@@ -1,6 +1,6 @@
 define(['./module'], function (controllers) {
    'use strict';
-    controllers.controller('editorCtrl',['$scope', '$rootScope', '$http', '$routeParams', function ($scope, $rootScope, $http, $routeParams) {
+    controllers.controller('editorCtrl',['$scope', '$rootScope', '$http', '$routeParams', '$location', function ($scope, $rootScope, $http, $routeParams, $location) {
         if ($routeParams.Alias) {
         $http.get('api/resources/' + $routeParams.Alias).success(function(data) {
             $scope.resource = data[0];
@@ -21,6 +21,8 @@ define(['./module'], function (controllers) {
                 if (Id){
             $http.put('api/editResource/' + Id, {Alias: Alias, Content: Content, Title: Title, IsResource : IsResource}).success(function() {
             console.log('Query has been successfully sent');
+            $rootScope.getTitles();
+            $location.path('resources/' + Alias);
            }).error(function(status, data) {
                     console.log(status);
                     console.log(data);
@@ -29,6 +31,8 @@ define(['./module'], function (controllers) {
        else {
             $http.post('api/addResource', { Alias: Alias, Content: Content, Title: Title, IsResource: IsResource}).success(function() {
             console.log('Query has been successfully sent');
+            $rootScope.getTitles();
+            $location.path('resources/' + Alias);
            }).error(function(status, data) {
                     console.log(status);
                     console.log(data);
