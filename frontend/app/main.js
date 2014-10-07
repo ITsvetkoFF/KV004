@@ -12,7 +12,8 @@ require.config({
         'angular-cookie': '../bower_components/angular-cookie/angular-cookie',
         'domReady': '../bower_components/requirejs-domready/domReady',
         'require': '../bower_components/requirejs/require',
-        'facebook': 'https://connect.facebook.net/en_US/all',
+        'facebook': './js/facebook',
+
         'dropzone':'../bower_components/dropzone/downloads/dropzone',
     /* 'btford.socket-io': '../bower_components/btford.socket-io',*/
         'textAngular':'../bower_components/textAngular/src/textAngular',
@@ -37,8 +38,10 @@ require.config({
         'angular': {
             exports: 'angular'
         },
+
         'socket.io': {
-            exports: 'io'
+            exports: 'io',
+            deps: ['angular']
         },
         'angular-route': {
             deps: ['angular']
@@ -58,9 +61,7 @@ require.config({
          'socket': {
             deps: ['socket.io']
         },
-         'socket.io': {
-            deps: ['angular']
-        },
+
         'angular-mocks': {
             deps: ['angular']
         },
@@ -79,6 +80,7 @@ require.config({
         'facebook' : {
             exports: 'FB'
         }
+
     },
 
     deps: [

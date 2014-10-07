@@ -3,22 +3,28 @@
 <head>
     <title>Ecomap - Project</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <!-- build:css  style/css/main.css -->
+
     <link rel="stylesheet" href="style/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css">    
 	<link rel="stylesheet" href="style/css/dropzone.css" />
-    <link rel="stylesheet" href="style/css/main.css" />
+
     <link rel="stylesheet" href="style/css/admin.css" />
     <link rel="stylesheet" href="style/css/MarkerCluster.css"/>
     <link rel="stylesheet" href="style/css/MarkerCluster.Default.css"/>
-    <link rel="icon" type="image/icon" href="images/icons/favicon.ico">
+
    <!--<script type="text/javascript" src="/bower_components/dropzone.js"></script>-->
     <link rel="stylesheet" href="style/css/header.css"/>
 
-    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <link rel="stylesheet" href="style/css/main.css" />
+    <link rel="stylesheet" href="style/css/leaflet.css" />
+    <!-- endbuild -->
+    <link rel="icon" type="image/icon" href="images/icons/favicon.ico">
+    <!-- build:js  app/js/main.js -->
+    <script type="text/javascript" src="app/js/leaflet.js"></script>
     <script src="app/js/leaflet.markercluster-src.js"></script>
     <script src="ukraineBorders.js"></script>
-
+    <!-- endbuild -->
     <!-- ***** Block of scripts depend from Dropzone ***** -->
 <!--
     <script type="text/javascript" src="app/js/dropzone.js"></script>
@@ -49,5 +55,6 @@
     </div>
     <script src="bower_components/requirejs/require.js" data-main="app/main.js"></script>
     <div id="status"></div>
+
 </body>
 </html>
