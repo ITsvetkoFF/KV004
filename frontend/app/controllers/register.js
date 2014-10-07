@@ -13,7 +13,7 @@ define(['./module'],function(controllers){
             data.password = document.registerForm.password.value;
 
             $http.post('api/register', data);
-            $scope.alerts.push({type: 'success', msg: 'Well done! You have successfully registered!'});
+            
             var mainModal = document.querySelector('.modal-content');
             var modal1 = document.querySelector('.modal-header');
             var modal2 = document.querySelector('.modal-body');
