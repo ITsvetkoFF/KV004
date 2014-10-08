@@ -1649,11 +1649,10 @@ NAV
 
 .modal-backdrop.fade.in{
         z-index: 2000 !important;
-    }
+}
 .modal.fade.in {
     z-index:2001 !important;
 }
-
 .alert {
     margin-bottom: 0;
 }
@@ -1666,10 +1665,10 @@ NAV
 .b-registration__form .form-control {
     display: inline-block;
     border-radius: 0;
-    width: 63%;
+    width: 62%;
 }
 .b-registration__form .form-group label {
-    width:35%;
+    width:36%;
     text-align: right;
 }
 .b-form__button {
@@ -1688,4 +1687,18 @@ NAV
 
 .b-form__button:hover {
     background-color: #367dbb;
+}
+
+.b-registration__form .help-block, .b-registration__form span{
+    color: #800000;
+    text-align:right;
+}
+
+.alert-success {
+    border-radius:0;
+}
+
+.modal-header h3 {
+    font-family: WWF;
+    letter-spacing: 2px;
 }
