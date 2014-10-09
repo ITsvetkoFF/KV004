@@ -4,7 +4,7 @@ define(['./module'], function (controllers) {
         $scope.isAdministrator = UserService.isAdministrator;
 
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            maxZoom: 13,
+            minZoom: 2,
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         });
         var geoJson = L.geoJson (ukraineBorders, {
