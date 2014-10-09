@@ -98,6 +98,11 @@ app.post('/api/postNews',routes.postNews);
 app.post('/api/getNews',routes.getNews);
 app.post('/api/clearNews',routes.clearNews);
 app.post('/api/clearOneNews',routes.clearOneNews);
+app.get('/api/getStats1/:val', routes.getStats1);
+app.get('/api/getStats2/:val', routes.getStats2);
+app.get('/api/getStats3', routes.getStats3);
+app.get('/api/getStats4', routes.getStats4);
+app.get('/api/getStats5/:val', routes.getStats5);
 
 
 
