@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var app = angular.module('app', ['ngCookies'],['ndSanitize']);
 
 
