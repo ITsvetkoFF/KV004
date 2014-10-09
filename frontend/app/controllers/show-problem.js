@@ -10,7 +10,7 @@ define(['./module'], function(controllers){
             $scope.delStatus = 'btn-danger';
         }
 
-        $rootScope.$broadcast('Update',"");
+        $rootScope.$broadcast('Update',"_problem");
         $rootScope.$emit('showSlider','false');
         $scope.showSlider = false;
         $scope.showSliderFunc = function(){

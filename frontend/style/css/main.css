@@ -85,6 +85,22 @@ html, body {
     overflow: auto;
     font-size:16pt;
 }
+.b-container__right-side_problem {
+    z-index: 1005;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 600px;
+    min-width: 320px;
+    background: #FFFFFF;
+    height: calc(100% - 52px);
+    height: -moz-calc(100% - 52px);
+    overflow: auto;
+    font-size:16pt;
+
+}
+
 
 .b-container__right-side_hide {
     z-index: 1005;
@@ -448,7 +464,7 @@ html, body {
 
 }
 .b-activity{
- width:99%;
+ width:100%;
 }
 .b-activity__filters{
 
@@ -515,7 +531,7 @@ html, body {
 
     height: 100%;
     padding: 0;
-    border: 1px solid #449d44;
+    border: 1px solid #ccc;
     border-top:none;
     resize: none;
 
@@ -1701,4 +1717,83 @@ NAV
 .modal-header h3 {
     font-family: WWF;
     letter-spacing: 2px;
+}
+/**
+add adaptive style to showProblem
+
+*/
+@media only screen and (max-width:1000px){
+    .b-container__right-side_problem {
+        z-index: 1006;
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        min-width: 320px;
+        background: #FFFFFF;
+        height: calc(100% - 52px);
+        height: -moz-calc(100% - 52px);
+        overflow: auto;
+        font-size:16pt;
+
+    }
+    .container{
+        left:0px;
+        width: 100%;
+        height: auto;
+    }
+    .container img{
+
+        width: 100%;
+    }
+
+
+
+}
+@media only screen and (max-width:768px){
+
+
+    .nav-justified > li {
+        display: table-cell;
+        width: 1%;
+    }
+    .nav-justified > li > a {
+        margin-bottom: 0;
+    }
+    .nav-tabs.nav-justified > li > a {
+        border-bottom: 1px solid #ddd;
+        border-radius: 4px 4px 0 0;
+    }
+    .nav-tabs.nav-justified > .active > a,
+    .nav-tabs.nav-justified > .active > a:hover,
+    .nav-tabs.nav-justified > .active > a:focus {
+        border-bottom-color: #fff;
+    }
+    .btn-warning{
+        width:140px;
+    }
+    .btn-danger{
+        width:200px;
+    }
+    #btn-reload{
+        width: 100%;
+        margin: 5px 0 50px 0;
+    }
+    #btn-submit{
+        width: 100%;
+        margin: 5px 0 5px 0;
+    }
+    .b-problem-deatiled-info-severity{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .b-problem-deatiled-info-votes{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+}
+.b-problem-tab{
+    padding-bottom: 60px;
 }
