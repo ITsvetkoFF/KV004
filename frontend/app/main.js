@@ -24,7 +24,8 @@ require.config({
         'socket.io':'../bower_components/socket.io-client/dist/socket.io',
         'angular-bootstrap-tpls':'../bower_components/angular-bootstrap/ui-bootstrap-tpls',
         'ngTouch':'../bower_components/angular-touch/angular-touch',
-        'ngAnimate':'../bower_components/angular-animate/angular-animate'
+        'ngAnimate':'../bower_components/angular-animate/angular-animate',
+        'd3': '../bower_components/d3/d3'
 
 
 
