@@ -44,8 +44,13 @@ define(['./app'], function (app) {
               templateUrl:'app/templates/statistic.html',
               controller:'statsCtrl'
           })
+           
+
           .otherwise({
-            redirectTo: '/map'
+            redirectTo: '/map',
+ 
+             
+        
         });
   }]);
 });

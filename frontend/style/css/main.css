@@ -65,10 +65,10 @@ html, body {
     width: 300px;
     z-index: 1006;
     display: block;
-    -webkit-transition-duration: 0.3s;
-    -moz-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
-    transition-duration: 0.3s;
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
 }
 
 .b-container__right-side {
@@ -76,7 +76,7 @@ html, body {
     display: block;
     position: absolute;
     top: 0;
-    right: 0;
+    right: -600px;
     width: 600px;
     min-width: 320px;
     background: #FFFFFF;
@@ -84,36 +84,31 @@ html, body {
     height: -moz-calc(100% - 52px);
     overflow: auto;
     font-size:16pt;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+
 }
-.b-container__right-side_problem {
+.b-container__right-side_problem  {
+    right: 0;
+
+}
+
+.b-container__right-side_hide {
     z-index: 1005;
     display: block;
     position: absolute;
     top: 0;
-    right: 0;
+    right: -600px;
     width: 600px;
     min-width: 320px;
     background: #FFFFFF;
     height: calc(100% - 52px);
     height: -moz-calc(100% - 52px);
-    overflow: auto;
-    font-size:16pt;
 
 }
 
-
-.b-container__right-side_hide {
-    z-index: 1005;
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 600px;
-    min-width: 320px;
-    background: #FFFFFF;
-    height: calc(100% - 52px);
-    height: -moz-calc(100% - 52px);
-}
 
 .b-container__right-side_full {
     z-index: 1006;
@@ -138,6 +133,7 @@ html, body {
 .b-right-side__show-problem {
     height: 100%;
     width: 100%;
+    overflow: auto;
 }
 .b-left-side__pointer:hover {
     cursor: pointer;
@@ -641,9 +637,12 @@ html, body {
 }
 
 .b-details-body-problem-photo {
-    width: 100px;
-    position: relative;
-    font-size: 0;
+    /* width: 100px; */
+   position: relative;
+   font-size: 0;
+   height: 100px;
+   /* width: 100px; */
+   margin: 0 4px 4px 0;
 }
 .show_photo{
     position: relative;
@@ -1229,12 +1228,14 @@ form.dropzone {
 }
 .b-details-body-problem-photo_add{
     width: 100px;
-    height:65px;
+    height:100px;
+    display: inline-block;
     background: #f7f7f7;
     border: 2px dashed #dadada;
     font-family: wwf;
     text-align: center;
-    padding: 35px 0 0 0;
+    padding: 40px 0 0 0;
+    margin-left: -3px;
 }
 .b-details-body-problem-photo_add:hover{
     cursor: pointer;
@@ -1532,17 +1533,22 @@ form.dropzone {
 
 .slider {
     width: 700px;
-    height: 400px;
+    height: 380px;
     overflow: hidden;
     position: relative;
-    background: #fff;
-    border: 20px solid #FFF;
+     padding: 0;
+margin: 0;
+1background: #000;
+    z-index: 5000;
+     
     margin-top: 20px;
     position: absolute;
     left: 300px;
     top: 150px;
     text-align: center;
-}
+	padding-top: 2px;
+	
+} 
 
 .slide {
 
@@ -1722,7 +1728,7 @@ NAV
 add adaptive style to showProblem
 
 */
-@media only screen and (max-width:1000px){
+@media  screen and (max-width:1000px){
     .b-container__right-side_problem {
         z-index: 1006;
         display: block;
@@ -1738,22 +1744,33 @@ add adaptive style to showProblem
         font-size:16pt;
 
     }
+    .b-activity__filters{
+        padding-top: 30px;
+    
+    }
     .container{
         left:0px;
         width: 100%;
         height: auto;
+	    max-height: 400px;
     }
     .container img{
 
-        width: 100%;
+        
     }
+	.b-problems{
+		margin-top: 30px;
+	}
 
 
 
 }
-@media only screen and (max-width:768px){
+@media  screen and (max-width:768px){
 
-
+    .b-activity__filters{
+        padding-top: 0px;
+    
+    }
     .nav-justified > li {
         display: table-cell;
         width: 1%;
@@ -1792,8 +1809,49 @@ add adaptive style to showProblem
         margin-left: 5px;
         margin-right: 5px;
     }
+	.b-problems{
+		margin-top: 0px;
+	}
 
 }
 .b-problem-tab{
     padding-bottom: 60px;
 }
+.carousel-1{
+	height: 100%;
+		
+}
+.rn-carousel-slide{
+	background-size: auto 100%;
+	background-position:center;
+	background-repeat: no-repeat;
+
+}
+.rn-carousel-indicator{
+	background: none;
+}
+.rn-carousel-control{
+    color: #fff;
+}
+@media  screen and (max-width:560px){
+	.rn-carousel-slide{
+	background-size: 100% auto;
+	background-position:center;
+	background-repeat: no-repeat;
+
+}
+}
+.slider-fon{
+    height: 100%;
+position: fixed;
+background: #000;
+top: 0;
+left: 0;
+width: 100%;
+z-index: 4000;
+opacity: 0.6;
+     
+    
+}
+
+

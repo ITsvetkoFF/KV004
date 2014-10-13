@@ -1,6 +1,6 @@
 <div class="b-right-side__show-problem">
     <div class="b-editproblemctr" >
-        <a href="#/map" class="close">×</a>
+        <a href="" ng-click="swipeHide()" class="close">×</a>
     </div>
     <div class="b-problems" >
 <!-- Часть для вставки / начало -->
@@ -86,8 +86,8 @@
                  <activity></activity>
             </tab>
         </tabset>
-        <button type="button" class="btn {{editStatus}} btn-sm" ng-click="saveChangestoDb(data.Title,severity, status, content)" >Збережіть зміни</button>
-        <a href="#/"><button type="button" class="btn {{delStatus}} btn-sm" ng-click="deleteProblemFromDb()" >Видалити проблему з бази</button></a>
+        <button type="button" class="btn btn{{showRightSide}} {{editStatus}} btn-sm" ng-click="saveChangestoDb(data.Title,severity, status, content)" >Збережіть зміни</button>
+        <a href="#/map"><button type="button" class="btn {{delStatus}} btn-sm" ng-click="deleteProblemFromDb()" >Видалити проблему з бази</button></a>
 
 
 

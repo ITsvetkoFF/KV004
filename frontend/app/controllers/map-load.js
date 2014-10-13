@@ -1,7 +1,9 @@
 define(['./module'], function (controllers) {
     'use strict';
     controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location) {
+         
         $scope.isAdministrator = UserService.isAdministrator;
+                $rootScope.$broadcast('Update',"");
 
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             minZoom: 2,
@@ -49,11 +51,14 @@ define(['./module'], function (controllers) {
 
         function onMarkerClick(marker){
             if($scope.isAdministrator()) {
+                window.location.href="#/map";
                 window.location.href = "#/problem/editProblem/" + this._id;
             } else{
+                window.location.href="#/map";
                 window.location.href="#/problem/showProblem/"+ this._id;
             }
-            $rootScope.$broadcast('Update',"");
+             
+            $rootScope.$broadcast('Update',"_problem");
             map.panTo(marker.latlng);
         };
 

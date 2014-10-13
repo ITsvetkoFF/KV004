@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
       </button>
       <img src="images/logo.png" class="b-header__logo" />
-      <a class="navbar-brand b-menu__button" href="#/problem/addProblem" ng-click="addProblem()">Повідомити  про  проблему</a>
+      <a class="navbar-brand b-menu__button" ng-href="#/problem/addProblem" ng-click="swipeHide()">Повідомити  про  проблему</a>
     </div>
 
     <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'" ng-init="getTitles()">
@@ -60,7 +60,7 @@
         </li>
 
         <li ng-if="isLoggedIn()">
-          <a class="b-menu__button" ng-href="#/chat" ng-click="showChat()"><i class="fa fa-weixin"></i> Чат</a>
+          <a class="b-menu__button" ng-href="#/chat" ng-click="swipeHide()"><i class="fa fa-weixin"></i> Чат</a>
         </li>
 
         <li>

@@ -23,6 +23,7 @@ var connectionPool = {
     password : 'root',
     database : 'Enviromap'
 };
+
  
  var router = express.Router();
 

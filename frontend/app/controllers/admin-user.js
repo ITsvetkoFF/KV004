@@ -1,7 +1,7 @@
 define(['./module'], function (controllers) {
 
     'use strict';
-    controllers.controller('AdminUserCtrl', ['$scope', '$http', '$location', '$window', 'ipCookie', 'UserService', function ($scope, $http, $location, $window, ipCookie, UserService) {
+    controllers.controller('AdminUserCtrl', ['$scope', '$http', '$location', '$window', 'ipCookie', 'UserService','$rootScope', function ($scope, $http, $location, $window, ipCookie, UserService,$rootScope) {
 
         $scope.isLoggedIn = UserService.isLoggedIn;
         $scope.isAdministrator = UserService.isAdministrator;
@@ -115,6 +115,7 @@ define(['./module'], function (controllers) {
             ipCookie.remove('userSurname');
             ipCookie.remove('userRole');
             ipCookie.remove('id');
+            
 
         }
 
@@ -165,9 +166,11 @@ define(['./module'], function (controllers) {
 
         $scope.logOut = function logOut() {
             successLogOut();
+            $rootScope.$broadcast('Update',"");
             FB.logout(function(response) {
                 console.log(response);
             });
+            
         }
     }]);
 });

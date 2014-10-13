@@ -5,7 +5,7 @@ define(['./module'],function(controllers){
 
 
     controllers.controller('SocketCtrl', function ($log, $scope, chatSocket, messageFormatter,$rootScope,$interval,$http,ipCookie) {
-        $rootScope.$broadcast('Update',"");
+        $rootScope.$broadcast('Update',"_problem");
         $rootScope.$emit('showSlider','false');
         $scope.deleteItem="clear";
 

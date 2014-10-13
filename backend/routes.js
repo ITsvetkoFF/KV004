@@ -222,12 +222,20 @@ exports.addNewPhotos = function(req,res){
             });
         }
         else{
+            
             console.log(req.body);
             var i=0;
             var rows=[];
             console.log(req.body.solveProblemMark);
             if(req.body.description==undefined){
                 req.body.description=[];
+            }
+            if(!Array.isArray(req.body.description)){
+                console.log("!!!!");
+                var temp=req.body.description;
+                req.body.description=[];
+                req.body.description.push(temp);
+                
             }
             while (req.files['file[' + i + ']'] != undefined) {
                 var photo_data = {
@@ -236,6 +244,7 @@ exports.addNewPhotos = function(req,res){
                     Description: req.body.description[i],
                     Problems_Id: req.params.id
                 };
+                  
 
                 connection.query('INSERT INTO Photos SET ?', [photo_data], function (err, row, fields) {
                     if (err) {
@@ -256,6 +265,7 @@ exports.addNewPhotos = function(req,res){
                     if(req.body.userId==undefined) {
                         content.Content="Фото додано анонімно";
                         content.userName="(Анонім)";
+                        req.body.userId = 2;
 
 
                     }
@@ -310,7 +320,7 @@ exports.addComment = function(req,res) {
         }
         if(req.body.data.userId==undefined) {
              content.userName="(Анонім)";
-            req.body.userId = 1;
+            req.body.userId = 2;
 
 
         }
@@ -394,7 +404,7 @@ exports.postProblem = function(req,res){  //post new problem
                 }
                 if(req.body.userId==undefined) {
                     content.Content="Проблему створено анонімно";
-                    req.body.userId = 1;
+                    req.body.userId = 2;
                     content.userName="(Анонім)";
 
 
@@ -674,7 +684,7 @@ exports.postVote = function(req,res){  //+1 vote for a problem
                 }
                 if(req.body.userId==undefined) {
                     content.Content="Голос додано анонімно";
-                    userId = 1;
+                    userId = 2;
                     content.userName="(Анонім)";
 
 

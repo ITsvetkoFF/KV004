@@ -2,8 +2,9 @@ define(['./module'],function (controllers){
     'use strict';
     controllers.controller('addProblemCtrl', function ($scope,$rootScope){
         $scope.showStep_1 = true;
-        $rootScope.$broadcast('Update',"");
-
+        //inserted
+$rootScope.$broadcast('Update',"_problem");
+         /////////
         console.log("Add Problem Controller is loaded");
 
         //function that places marker on the map

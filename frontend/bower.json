@@ -21,6 +21,7 @@
     "dropzone": "latest",
     "textAngular": "latest",
     "angular-bootstrap": "~0.11.0",
-    "d3": "~3.4.12"
+    "d3": "~3.4.12",
+    "angular-carousel":"~0.2.5"
   }
 }

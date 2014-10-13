@@ -25,7 +25,8 @@ require.config({
         'angular-bootstrap-tpls':'../bower_components/angular-bootstrap/ui-bootstrap-tpls',
         'ngTouch':'../bower_components/angular-touch/angular-touch',
         'ngAnimate':'../bower_components/angular-animate/angular-animate',
-        'd3': '../bower_components/d3/d3'
+        'd3': '../bower_components/d3/d3',
+        'angular-carousel':'../bower_components/angular-carousel/dist/angular-carousel'
 
 
 
@@ -39,7 +40,9 @@ require.config({
         'angular': {
             exports: 'angular'
         },
-
+        'angular-carousel':{
+            deps: ['angular']
+        },
         'socket.io': {
             exports: 'io',
             deps: ['angular']
