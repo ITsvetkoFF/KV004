@@ -35,6 +35,7 @@ div.navbar-collapse.collapse.in {
         height: auto;
         clip: rect(0px,60px,62px,5px);
         margin-top: -10px;
+        margin-left: 0;
     }
 }
 
@@ -42,6 +43,12 @@ div.navbar-collapse.collapse.in {
     color: #ffffff;
     background-color: #23527B;
     margin-left: 120px;
+}
+
+@media (max-width: 768px) {
+    .navbar .container-fluid .navbar-brand {
+        margin-left: 66px;
+    }
 }
 
 .navbar .container-fluid .navbar-brand:hover {
