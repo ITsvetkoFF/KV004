@@ -12,11 +12,6 @@ define(['./module'], function (controllers) {
             style: {
                 opacity:     0,
                 fillOpacity: 0
-            },
-            onEachFeature: function (feature, layer) {
-                layer.on('contextmenu', function(e) {
-                    alert("Замість цього повідомлення, буде відкриватися вікно 'Повідомити про проблему'");
-                });
             }
         });
         var latlng  = L.latLng(50.00, 32.00);
