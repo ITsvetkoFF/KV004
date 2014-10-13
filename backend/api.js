@@ -13,7 +13,9 @@ var mysql = require('mysql'),
     secret       = require('./config/secret'),
     io = require('socket.io'),
     routes = require('./routes.js');
-
+    // for image processing !!!! use with GraphicsMagick and gm module
+    // var gm = require('gm');
+ 
     io = io.listen(server);
     require('./sockets/base')(io);
 
@@ -42,6 +44,31 @@ app.use(multer(
     {
         dest: '../frontend/photos/large'
     }));
+    /*    // for image processing !!!! use with GraphicsMagick and gm module
+app.use(multer(
+    {
+        dest: '../frontend/photos/large',
+        onFileUploadComplete: function(file){
+                    
+             
+            gm("../frontend/photos/large/"+file.name)
+            .size(function (err, size) {
+              if (!err && size.height>=1000){
+                  this.resize(3000, 1000)
+            .write("../frontend/photos/large/"+file.name, function (err) {
+            if (!err) console.log('done');
+            });
+                
+              }
+            if(err) throw err;
+            })
+            
+ 
+    }
+    }));
+*/
+    
+    
 app.use(bodyParser());
 app.use(cookieParser());
 app.use(bodyParser());
