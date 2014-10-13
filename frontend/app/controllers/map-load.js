@@ -6,6 +6,7 @@ define(['./module'], function (controllers) {
 
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             minZoom: 2,
+            detectRetina: true,
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         });
         var geoJson = L.geoJson (ukraineBorders, {
