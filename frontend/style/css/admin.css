@@ -902,7 +902,7 @@ margin: 0 10px 0 10px;
     -o-transition: all 0.5s ease-out;
     transition: all 0.5s ease-out;
 }
-.btn-danger{
+a .btn-danger{
     position: absolute;
     display: inline-block;
     bottom: 10px;

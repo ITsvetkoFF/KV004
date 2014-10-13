@@ -10,5 +10,6 @@ define([
     './socket-user',
     './not-approved',
     './slider-controller',
-    './register'
+    './register',
+    './datepicker'
 ], function () {});

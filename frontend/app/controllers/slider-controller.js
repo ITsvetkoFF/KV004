@@ -2,7 +2,6 @@ define(['./module'], function(controllers) {
     'use strict';
     controllers.controller('SlideCtrl', function ($scope,$rootScope) {
 
-           console.log($scope.photos);
             $scope.hideSlider = function(){
                 $rootScope.$emit('showSlider','false');
             }

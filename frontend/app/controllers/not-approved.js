@@ -20,7 +20,7 @@ define(['./module'],function(controllers){
             if ($scope.notApproved.length != 0) {
                 $scope.showProblem($scope.notApproved[0]);
             }else{
-                $scope.hideDiv();
+                // $scope.hideDiv();
                 window.location.href="#/map"
                 window.location.reload();
             }

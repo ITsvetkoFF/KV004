@@ -3,12 +3,11 @@
 		СПИСОК НОВИХ ПРОБЛЕМ
 	</div>
 	<ul class="b-new-problem-list-items">
-		<li class="b-new-items__item" ng-repeat="problem in notApproved">
-			<div class="b-new-item__title" ng-click="showProblem(problem)">{{problem.Title}}</div>
+		<li class="b-new-items__item" ng-repeat="problem in notApproved" ng-click="showProblem(problem)">
+			<div class="b-new-item__title">{{problem.Title}}</div>
 			<div class="b-new-item__buttons">
 				<ul class="b-buttons">
 					<li class="b-buttons__button fa fa-check" ng-click="approveProblem(problem)"></li>
-					<li class="b-buttons__button fa fa-pencil" ng-click="editProblem(problem)"></li>
 					<li class="b-buttons__button fa fa-remove" ng-click="deleteProblem(problem)"></li>
 				</ul>
 			</div>

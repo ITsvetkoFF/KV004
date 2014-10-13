@@ -34,8 +34,6 @@ define(['./module'],function(controllers){
 
         $scope.sendMessage = function(message) {
 
-            console.log("$scope.message"+$scope.message+"message"+message);
-
             $log.debug('sending message', message);
             chatSocket.emit('message', ipCookie('token'), message);
             if(isNaN(message)) {
@@ -68,9 +66,6 @@ define(['./module'],function(controllers){
                 var news={};
                 $scope.message = '';
                 if(!isNaN(data.payload)){
-                    console.log("!is nun");
-                    console.log($scope.messageLogs[data.payload-1].Content);
-                    console.log(data.payload-1);
                     var responce = $http.post('/api/clearOneNews', {content:$scope.messageLogs[data.payload-1].Content});
                     responce.success(function (data, status, headers, config) {
 
@@ -96,7 +91,6 @@ define(['./module'],function(controllers){
 
 
                     } else {
-                        console.log("is NUNNUNUNUN");
                         news.show = "none";
                         news.Content = data.payload;
 

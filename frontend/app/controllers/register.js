@@ -4,7 +4,6 @@
 define(['./module'],function(controllers){
     'use strict';
     controllers.controller('registerCtrl', ['$scope','$rootScope','$modal', '$log','$http','$modalInstance' ,function ($scope,$rootScope,  $modal, $log,$http,$modalInstance){
-        console.log('registerCtrl is loaded');
         $scope.registerNewUser = function(){
             var data = {};
             data.first_name = document.registerForm.first_name.value;

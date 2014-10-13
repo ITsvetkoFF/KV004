@@ -15,7 +15,7 @@ exports.getProblems = function(req,res){ // get all moderated problems in brief 
                 err:    err.code
             });
         } else {
-            connection.query('SELECT Id, Title, Latitude, Longtitude, ProblemTypes_Id, Status FROM Problems WHERE Moderation=1', function(err, rows, fields) {
+            connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Problems.ProblemTypes_Id, Problems.Status, Activities.Date FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Moderation=1', function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -159,15 +159,15 @@ exports.getUserById = function(req,res) { //get all user information(name and et
 
 
 exports.getUserProblemsById = function(req,res){ //get all user's problems in brief (coords, type, title)
-	req.getConnection(function(err, connection) {
-		if (err) {
-			console.error('CONNECTION error: ',err);
-			res.statusCode = 503;
-			res.send({
-				result: 'error',
-				err:    err.code
-			});
-		} else {
+    req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
             var idUser = req.params.idUser;
             connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Problems.ProblemTypes_Id, Problems.Status FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Activities.Users_Id = ?', [idUser], function(err, rows, fields) {
                 if (err) {

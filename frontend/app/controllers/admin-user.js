@@ -14,13 +14,11 @@ define(['./module'], function (controllers) {
         $scope.getUserProblems = function(userId){
             $http({ method: 'GET', url: "api/usersProblem/" + userId }).success(function (data) {
                 $scope.dataUserProblems = data;
-                console.log("user's problems are: ", $scope.dataUserProblems);
             });
         };
 
         if($scope.userId) {
             $scope.getUserProblems($scope.userId);
-            console.log("Your id is ", $scope.userId);
         }
         /*******************************/
 
@@ -54,7 +52,6 @@ define(['./module'], function (controllers) {
 
         function statusChangeCallback(response) {
 
-            console.log('statusChangeCallback');
             console.log(response);
 
             if (response.status === 'connected') {

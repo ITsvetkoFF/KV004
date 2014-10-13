@@ -5,7 +5,6 @@ define(['./module','dropzone'], function(directives,Dropzone){
             var config, drop;
             config = scope[attrs.drop];
             //create a Dropzone for the element with the given options
-            console.log(element[0]);
             drop = new Dropzone(element[0], config.options);
             var submitButton = document.querySelector("#btn-submit");
 
@@ -20,7 +19,6 @@ define(['./module','dropzone'], function(directives,Dropzone){
             });
             myDropzone.on("addedfile", function(file) {
                 var arr = document.getElementsByClassName("dz-preview");
-                console.log(myDropzone);
                 for (var i = counter; i < arr.length; i++){
                     arr[i].addEventListener('click', function(e) {
                         e.stopPropagation();
@@ -46,7 +44,6 @@ define(['./module','dropzone'], function(directives,Dropzone){
             });
 
             myDropzone.on('successmultiple', function() {
-                console.log('succesmultiple');
                 if(scope.isLoggedIn()){
                     scope.submitProblem();
                 }
@@ -56,7 +53,6 @@ define(['./module','dropzone'], function(directives,Dropzone){
                 }
             });
             
-            console.log(drop);
             //bind the given event handlers
             angular.forEach(config.eventHandlers,function (handler, event){
                drop.on(event, handler);

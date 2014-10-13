@@ -20,7 +20,6 @@ define(['./module'], function (controllers) {
             else {
                 if (Id){
             $http.put('api/editResource/' + Id, {Alias: Alias, Content: Content, Title: Title, IsResource : IsResource}).success(function() {
-            console.log('Query has been successfully sent');
             $rootScope.getTitles();
             $location.path('resources/' + Alias);
            }).error(function(status, data) {
@@ -30,7 +29,6 @@ define(['./module'], function (controllers) {
        }
        else {
             $http.post('api/addResource', { Alias: Alias, Content: Content, Title: Title, IsResource: IsResource}).success(function() {
-            console.log('Query has been successfully sent');
             $rootScope.getTitles();
             $location.path('resources/' + Alias);
            }).error(function(status, data) {

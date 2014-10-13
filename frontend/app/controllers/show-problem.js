@@ -63,7 +63,6 @@ define(['./module'], function(controllers){
             $rootScope.photos = $scope.photos;
             $scope.status = data[0][0].Status ? 'Активна' : 'Вирішена';
             $scope.checked = data[0][0].Status;
-                console.log("$scope.checked=" + $scope.checked);
             $scope.votes = data[0][0].Votes;
 
                 //get user info by UserID
@@ -144,7 +143,6 @@ define(['./module'], function(controllers){
         }
 
         $scope.addComment = function(comment) {
-            console.log(comment);
             var data = {data: {userId: $scope.userId, userName: $scope.name, Content: comment}};
             var responce = $http.post('/api/comment/' + $routeParams.problemID, JSON.stringify(data));
             responce.success(function (data, status, headers, config) {
@@ -218,7 +216,6 @@ define(['./module'], function(controllers){
             var content = $scope.content;
             $http.put('/api/editProblem/' + problemID, {Title: title, Content: content, Severity: severity, ProblemStatus: problemStatus})
                 .success(function () {
-                    console.log('Problem description with '+ problemID + 'updated');
                     $scope.editStatus = 'btn-editStatus';
 
                 })
@@ -232,7 +229,6 @@ define(['./module'], function(controllers){
         $scope.deleteProblemFromDb = function(){
             $http.delete('/api/problem/' + problemID,{id:problemID} )
                 .success(function () {
-                    console.log('Problem with '+ problemID + 'has been deleted');
                     $rootScope.getProblemsAndPlaceMarkers();
                 })
                 .error(function (status, data) {

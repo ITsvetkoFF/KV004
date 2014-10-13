@@ -1,6 +1,6 @@
 define(['./module'], function (controllers) {
     'use strict';
-    controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location) {
+    controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location','todayTime', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location, todayTime) {
         $scope.isAdministrator = UserService.isAdministrator;
 
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -75,15 +75,16 @@ define(['./module'], function (controllers) {
         };
 
         function userSelectionFilterMarkers(data) {
-            var newData = [];
+            var tempData = [];
             for (var i = 0; i < data.length; i++) {
                 var location = data[i];
                 var problemTypeSelected = isSelected($scope.problemTypes, location.ProblemTypes_Id);
                 var problemStatusSelected = isSelected($scope.problemStatuses, location.Status);
                 if (problemTypeSelected && problemStatusSelected){
-                    newData.push(location);
+                    tempData.push(location);
                 }
             };
+            var newData = dateRange(tempData);
             return newData;
         };
 
@@ -94,6 +95,21 @@ define(['./module'], function (controllers) {
                 }
             };
         };
+
+        function dateRange (data) {
+            var dateFrom = Date.parse(todayTime.formDataDt);
+            var dateTill = Date.parse(todayTime.formDataDtSecond);
+            var tempData = [];
+            for (var i = 0; i < data.length; i++) {
+                var location = data[i];
+                var locationDate = Date.parse(location.Date);
+                if (dateFrom < locationDate && locationDate < dateTill) {
+                    tempData.push(location);
+                };
+            };
+            var newData = tempData;
+            return newData;
+        }
 
         $scope.problemTypes = [
             {name: 'Проблеми лісів',            id: 1, selected: true},

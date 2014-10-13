@@ -3,6 +3,7 @@
 <head>
     <title>Ecomap - Project</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link rel="stylesheet" href="style/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css">    
@@ -18,6 +19,7 @@
     <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="app/js/leaflet.markercluster-src.js"></script>
     <script src="ukraineBorders.js"></script>
+    
 
     <!-- ***** Block of scripts depend from Dropzone ***** -->
 <!--
@@ -43,7 +45,7 @@
                 <div class="b-left-side__pointer" ng-click="showFilters()" ng-class = "{left_pointer_reverse : showFiltersVar}"></div>
             </div>
 
-            <<div class="b-view b-container__right-side{{showRigthSide}}" ng-view>
+            <div class="b-view b-container__right-side{{showRigthSide}}" ng-view>
             </div>
         </div>
     </div>

@@ -12,20 +12,17 @@ define(['./module'],function(controllers){
         $scope.nickName = $scope.name;
         var i = 0;
         var repeat = function () {
-            console.log(i);
             for (var j = 0; j < $scope.messageLogs.length; j++) {
                 if ($scope.messageLogs[j]) {
                     $scope.messageLogs[j].show = "none";
                 }
             }
-            console.log($scope.messageLogs);
             if ($scope.messageLogs[i]) {
                 $scope.messageLogs[i].show = "block";
 
                 i++;
                 if (i >= $scope.messageLogs.length) {
                     i = 0;
-                    console.log("reverse");
                 }
             }
 
@@ -38,7 +35,6 @@ define(['./module'],function(controllers){
                 $scope.messageLogs[i].show="none";
                 $scope.allNews+=$scope.messageLogs[i].Content+". ";
             }
-            console.log("Message lofgs"+$scope.messageLogs[0]);
             if($scope.messageLogs[0]!=undefined){$scope.showNewsContainer=true;}
 
         });
@@ -56,7 +52,6 @@ define(['./module'],function(controllers){
 
 
         $scope.$on('socket:broadcast', function(event, data) {
-            console.log(data);
             $scope.showNewsContainer=true;
 
             $log.debug('got a message', event.name);
@@ -68,7 +63,6 @@ define(['./module'],function(controllers){
                 //$scope.messageLog = messageFormatter(new Date(), data.source, data.payload) + $scope.messageLog;
                 var news={};
                 if(!isNaN(data.payload)){
-                    console.log("!is nun");
                     $scope.messageLogs.splice(data.payload-1,1);
                     $scope.allNews="";
                     for(var i=0;i<$scope.messageLogs.length;i++){
@@ -98,20 +92,17 @@ define(['./module'],function(controllers){
 
                         //$scope.messageLogHide = "";
                         var repeat = function () {
-                            console.log(i);
                             for (var j = 0; j < $scope.messageLogs.length; j++) {
                                 if ($scope.messageLogs[j]) {
                                     $scope.messageLogs[j].show = "none";
                                 }
                             }
-                            console.log($scope.messageLogs);
                             if ($scope.messageLogs[i]) {
                                 $scope.messageLogs[i].show = "block";
 
                                 i++;
                                 if (i >= $scope.messageLogs.length) {
                                     i = 0;
-                                    console.log("reverse");
                                 }
                             }
 
