@@ -35,7 +35,7 @@ div.navbar-collapse.collapse.in {
         height: auto;
         clip: rect(0px,60px,62px,5px);
         margin-top: -10px;
-        margin-left: 0;
+        margin-left: -5px;
     }
 }
 
@@ -47,7 +47,7 @@ div.navbar-collapse.collapse.in {
 
 @media (max-width: 768px) {
     .navbar .container-fluid .navbar-brand {
-        margin-left: 66px;
+        margin-left: 55px;
     }
 }
 
@@ -58,10 +58,17 @@ div.navbar-collapse.collapse.in {
 .b-menu__button,
 .navbar .container-fluid .navbar-brand {
     font-family: WWF;
-    font-size: 16px;
+    font-size: 1.1em;
     letter-spacing: 2px;
     font-weight: lighter;
     text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .navbar .container-fluid .navbar-brand {
+        font-size: 1em;
+        letter-spacing: 1px;
+    }
 }
 
 .navbar-default .navbar-toggle,
