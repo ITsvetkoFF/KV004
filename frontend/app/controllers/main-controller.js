@@ -2,11 +2,22 @@ define(['./module'],function(controllers){
     'use strict';
     controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http' ,function($scope,$rootScope,$modal, $log, $http){
         $scope.showSlider=false;
+        
+        $rootScope.$broadcast('Update',"");
+        $scope.swipeHide = function(params){
+            if(params=="dropzone"){
+                        $rootScope.$broadcast('Update',"");
+            
+            }else{
+                window.location.href="#/map";
+                $rootScope.$broadcast('Update',"");
+            }
+        }
         $scope.$on('$routeChangeStart', function(next, current) { 
             if ($rootScope.tempMarker)
                 $rootScope.geoJson.removeLayer($rootScope.tempMarker);
         });
-        $scope.showRigthSide = "_hide";
+       // $scope.showRigthSide = "_hide";
         $rootScope.getTitles = function() {
             $http({ method: 'GET', url: 'api/getTitles' }).success(function (data) {
                 $rootScope.data = data;

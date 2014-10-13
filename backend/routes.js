@@ -229,6 +229,13 @@ exports.addNewPhotos = function(req,res){
             if(req.body.description==undefined){
                 req.body.description=[];
             }
+            if(!Array.isArray(req.body.description)){
+                console.log("!!!!");
+                var temp=req.body.description;
+                req.body.description=[];
+                req.body.description.push(temp);
+                
+            }
             while (req.files['file[' + i + ']'] != undefined) {
                 var photo_data = {
                     Link: req.files['file[' + i + ']'].name,
@@ -256,6 +263,7 @@ exports.addNewPhotos = function(req,res){
                     if(req.body.userId==undefined) {
                         content.Content="Фото додано анонімно";
                         content.userName="(Анонім)";
+                        req.body.userId = 2;
 
 
                     }
@@ -310,7 +318,7 @@ exports.addComment = function(req,res) {
         }
         if(req.body.data.userId==undefined) {
              content.userName="(Анонім)";
-            req.body.userId = 1;
+            req.body.userId = 2;
 
 
         }
@@ -394,7 +402,7 @@ exports.postProblem = function(req,res){  //post new problem
                 }
                 if(req.body.userId==undefined) {
                     content.Content="Проблему створено анонімно";
-                    req.body.userId = 1;
+                    req.body.userId = 2;
                     content.userName="(Анонім)";
 
 
@@ -674,7 +682,7 @@ exports.postVote = function(req,res){  //+1 vote for a problem
                 }
                 if(req.body.userId==undefined) {
                     content.Content="Голос додано анонімно";
-                    userId = 1;
+                    userId = 2;
                     content.userName="(Анонім)";
 
 
@@ -1304,3 +1312,150 @@ req.getConnection(function(err, connection) {
         }
     });
 };
+exports.getStats1 = function (req, res) {
+     req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
+            var val
+                switch(req.params.val){
+        case "D": val = "%Y-%m-%d";
+            break;
+        case "W": val = "%Y-%v";
+            break;
+        case "M": val = "%Y-%m";
+            break;
+        };
+            connection.query('SELECT count(Id) as value, DATE_FORMAT(Date,'+ '"' + val + '"' +') as date FROM Activities where ActivityTypes_Id = 1 GROUP BY DATE_FORMAT(Date,'+ '"' + val + '"' +');', function(err, rows, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                res.send(rows);
+            });
+        }
+    });
+}
+exports.getStats2 = function (req, res) {
+     req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
+            var val
+                switch(req.params.val){
+        case "Y": val = "YEAR";
+            break;
+        case "W": val = "WEEK";
+            break;
+        case "M": val = "MONTH";
+            break;
+        };
+            connection.query('SELECT Problems.ProblemTypes_Id as id, count(Problems.Id) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE (Activities.ActivityTypes_Id = 1) AND (' + val + '(Activities.Date) = '+ val +'(NOW()) ) GROUP BY Problems.ProblemTypes_Id;', function(err, rows, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                res.send(rows);
+            });
+        }
+    });
+}
+exports.getStats3 = function (req, res) {
+     req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
+            connection.query('SELECT Problems.Status as status, count(Problems.Id) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Activities.ActivityTypes_Id = 1 GROUP BY Problems.Status;', function(err, rows, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                res.send(rows);
+            });
+        }
+    });
+    }
+exports.getStats4 = function (req, res) {
+     req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
+            connection.query('SELECT Problems.ProblemTypes_Id as id, SUM(Problems.Votes) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Activities.ActivityTypes_Id = 1 GROUP BY Problems.ProblemTypes_Id;', function(err, rows, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                res.send(rows);
+            });
+        }
+    });
+    }
+exports.getStats5 = function (req, res) {
+     req.getConnection(function(err, connection) {
+        if (err) {
+            console.error('CONNECTION error: ',err);
+            res.statusCode = 503;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        } else {
+            var val
+                switch(req.params.val){
+        case "D": val = "%Y-%m-%d";
+            break;
+        case "W": val = "%Y-%v";
+            break;
+        case "M": val = "%Y-%m";
+            break;
+        };
+            connection.query('SELECT count(Id) as value, DATE_FORMAT(Date,'+ '"' + val + '"' +') as date FROM Activities where ActivityTypes_Id = 3 GROUP BY DATE_FORMAT(Date,'+ '"' + val + '"' +');', function(err, rows, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                res.send(rows);
+            });
+        }
+    });
+}

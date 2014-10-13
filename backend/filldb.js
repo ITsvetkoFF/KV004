@@ -161,7 +161,7 @@ function fillProblemsActivities() {
             var data = {
                 Date: new Date(probs[i].created * 1000).toISOString().slice(0,10),
                 ActivityTypes_Id: 1,
-                users_Id: 1,
+                users_Id: 2,
                 Problems_Id: j,
                 Content:JSON.stringify({
                     Content:"Проблему додано анонімно",

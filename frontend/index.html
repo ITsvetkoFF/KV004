@@ -3,24 +3,31 @@
 <head>
     <title>Ecomap - Project</title>
     <meta charset="utf-8">
+    <!-- build:css  style/css/main.css -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <link rel="stylesheet" href="style/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css">    
+    <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css"> 
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-carousel/dist/angular-carousel.css">    
+
 	<link rel="stylesheet" href="style/css/dropzone.css" />
-    <link rel="stylesheet" href="style/css/main.css" />
+
     <link rel="stylesheet" href="style/css/admin.css" />
     <link rel="stylesheet" href="style/css/MarkerCluster.css"/>
     <link rel="stylesheet" href="style/css/MarkerCluster.Default.css"/>
-    <link rel="icon" type="image/icon" href="images/icons/favicon.ico">
+
    <!--<script type="text/javascript" src="/bower_components/dropzone.js"></script>-->
     <link rel="stylesheet" href="style/css/header.css"/>
 
-    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <link rel="stylesheet" href="style/css/main.css" />
+    <link rel="stylesheet" href="style/css/leaflet.css" />
+    <!-- endbuild -->
+    <link rel="icon" type="image/icon" href="images/icons/favicon.ico">
+    <!-- build:js  app/js/leaflet.js -->
+    <script type="text/javascript" src="app/js/leaflet.js"></script>
     <script src="app/js/leaflet.markercluster-src.js"></script>
     <script src="ukraineBorders.js"></script>
-    
-
+    <!-- endbuild -->
     <!-- ***** Block of scripts depend from Dropzone ***** -->
 <!--
     <script type="text/javascript" src="app/js/dropzone.js"></script>
@@ -40,16 +47,20 @@
                 <div class="b-unmoderated-problems-list" not-approved></div>
             </div>
 
-            <div class="b-container__left-side" ng-class = "{left_filter_show : showFiltersVar}">
+            <div class="b-container__left-side" ng-class = "{left_filter_show : showFiltersVar}" ng-swipe-left="showFilters()">
                 <div class="b-left-side" problem-filters></div>
                 <div class="b-left-side__pointer" ng-click="showFilters()" ng-class = "{left_pointer_reverse : showFiltersVar}"></div>
             </div>
 
-            <div class="b-view b-container__right-side{{showRigthSide}}" ng-view>
-            </div>
+
+<div class=" b-view b-container__right-side b-view b-container__right-side{{showRigthSide}}" ng-swipe-right="swipeHide()">
+    <div style="transition-duration: 0.1s !important;" class="b-view b-container__right-side b-view b-container__right-side{{showRigthSide}}" ng-view >
+    </div>
+</div>
         </div>
     </div>
     <script src="bower_components/requirejs/require.js" data-main="app/main.js"></script>
     <div id="status"></div>
+
 </body>
 </html>

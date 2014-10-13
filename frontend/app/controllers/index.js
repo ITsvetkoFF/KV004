@@ -11,5 +11,6 @@ define([
     './not-approved',
     './slider-controller',
     './register',
+    './stats',
     './datepicker'
 ], function () {});

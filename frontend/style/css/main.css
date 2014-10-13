@@ -65,10 +65,10 @@ html, body {
     width: 300px;
     z-index: 1006;
     display: block;
-    -webkit-transition-duration: 0.3s;
-    -moz-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
-    transition-duration: 0.3s;
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
 }
 
 .b-container__right-side {
@@ -76,7 +76,7 @@ html, body {
     display: block;
     position: absolute;
     top: 0;
-    right: 0;
+    right: -600px;
     width: 600px;
     min-width: 320px;
     background: #FFFFFF;
@@ -84,14 +84,23 @@ html, body {
     height: -moz-calc(100% - 52px);
     overflow: auto;
     font-size:16pt;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+
+}
+.b-container__right-side_problem  {
+    right: 0;
+
 }
 
 .b-container__right-side_hide {
     z-index: 1005;
-    display: none;
+    display: block;
     position: absolute;
     top: 0;
-    right: 0;
+    right: -600px;
     width: 600px;
     min-width: 320px;
     background: #FFFFFF;
@@ -122,6 +131,7 @@ html, body {
 .b-right-side__show-problem {
     height: 100%;
     width: 100%;
+    overflow: auto;
 }
 .b-left-side__pointer:hover {
     cursor: pointer;
@@ -448,7 +458,7 @@ html, body {
 
 }
 .b-activity{
- width:99%;
+ width:100%;
 }
 .b-activity__filters{
 
@@ -515,7 +525,7 @@ html, body {
 
     height: 100%;
     padding: 0;
-    border: 1px solid #449d44;
+    border: 1px solid #ccc;
     border-top:none;
     resize: none;
 
@@ -625,9 +635,12 @@ html, body {
 }
 
 .b-details-body-problem-photo {
-    width: 100px;
-    position: relative;
-    font-size: 0;
+    /* width: 100px; */
+   position: relative;
+   font-size: 0;
+   height: 100px;
+   /* width: 100px; */
+   margin: 0 4px 4px 0;
 }
 .show_photo{
     position: relative;
@@ -1245,12 +1258,14 @@ form.dropzone {
 }
 .b-details-body-problem-photo_add{
     width: 100px;
-    height:65px;
+    height:100px;
+    display: inline-block;
     background: #f7f7f7;
     border: 2px dashed #dadada;
     font-family: wwf;
     text-align: center;
-    padding: 35px 0 0 0;
+    padding: 40px 0 0 0;
+    margin-left: -3px;
 }
 .b-details-body-problem-photo_add:hover{
     cursor: pointer;
@@ -1548,17 +1563,22 @@ form.dropzone {
 
 .slider {
     width: 700px;
-    height: 400px;
+    height: 380px;
     overflow: hidden;
     position: relative;
-    background: #fff;
-    border: 20px solid #FFF;
+     padding: 0;
+margin: 0;
+1background: #000;
+    z-index: 5000;
+     
     margin-top: 20px;
     position: absolute;
     left: 300px;
     top: 150px;
     text-align: center;
-}
+	padding-top: 2px;
+	
+} 
 
 .slide {
 
@@ -1681,11 +1701,10 @@ NAV
 
 .modal-backdrop.fade.in{
         z-index: 2000 !important;
-    }
+}
 .modal.fade.in {
     z-index:2001 !important;
 }
-
 .alert {
     margin-bottom: 0;
 }
@@ -1698,10 +1717,10 @@ NAV
 .b-registration__form .form-control {
     display: inline-block;
     border-radius: 0;
-    width: 63%;
+    width: 62%;
 }
 .b-registration__form .form-group label {
-    width:35%;
+    width:36%;
     text-align: right;
 }
 .b-form__button {
@@ -1721,4 +1740,148 @@ NAV
 .b-form__button:hover {
     background-color: #367dbb;
 }
+
+.b-registration__form .help-block, .b-registration__form span{
+    color: #800000;
+    text-align:right;
+}
+
+.alert-success {
+    border-radius:0;
+}
+
+.modal-header h3 {
+    font-family: WWF;
+    letter-spacing: 2px;
+}
+/**
+add adaptive style to showProblem
+
+*/
+@media  screen and (max-width:1000px){
+    .b-container__right-side_problem {
+        z-index: 1006;
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        min-width: 320px;
+        background: #FFFFFF;
+        height: calc(100% - 52px);
+        height: -moz-calc(100% - 52px);
+        overflow: auto;
+        font-size:16pt;
+
+    }
+    .b-activity__filters{
+        padding-top: 30px;
+    
+    }
+    .container{
+        left:0px;
+        width: 100%;
+        height: auto;
+	    max-height: 400px;
+    }
+    .container img{
+
+        
+    }
+	.b-problems{
+		margin-top: 30px;
+	}
+
+
+
+}
+@media  screen and (max-width:768px){
+
+    .b-activity__filters{
+        padding-top: 0px;
+    
+    }
+    .nav-justified > li {
+        display: table-cell;
+        width: 1%;
+    }
+    .nav-justified > li > a {
+        margin-bottom: 0;
+    }
+    .nav-tabs.nav-justified > li > a {
+        border-bottom: 1px solid #ddd;
+        border-radius: 4px 4px 0 0;
+    }
+    .nav-tabs.nav-justified > .active > a,
+    .nav-tabs.nav-justified > .active > a:hover,
+    .nav-tabs.nav-justified > .active > a:focus {
+        border-bottom-color: #fff;
+    }
+    .btn-warning{
+        width:140px;
+    }
+    .btn-danger{
+        width:200px;
+    }
+    #btn-reload{
+        width: 100%;
+        margin: 5px 0 50px 0;
+    }
+    #btn-submit{
+        width: 100%;
+        margin: 5px 0 5px 0;
+    }
+    .b-problem-deatiled-info-severity{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .b-problem-deatiled-info-votes{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+	.b-problems{
+		margin-top: 0px;
+	}
+
+}
+.b-problem-tab{
+    padding-bottom: 60px;
+}
+.carousel-1{
+	height: 100%;
+		
+}
+.rn-carousel-slide{
+	background-size: auto 100%;
+	background-position:center;
+	background-repeat: no-repeat;
+
+}
+.rn-carousel-indicator{
+	background: none;
+}
+.rn-carousel-control{
+    color: #fff;
+}
+@media  screen and (max-width:560px){
+	.rn-carousel-slide{
+	background-size: 100% auto;
+	background-position:center;
+	background-repeat: no-repeat;
+
+}
+}
+.slider-fon{
+    height: 100%;
+position: fixed;
+background: #000;
+top: 0;
+left: 0;
+width: 100%;
+z-index: 4000;
+opacity: 0.6;
+     
+    
+}
+
 

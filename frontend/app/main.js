@@ -12,7 +12,8 @@ require.config({
         'angular-cookie': '../bower_components/angular-cookie/angular-cookie',
         'domReady': '../bower_components/requirejs-domready/domReady',
         'require': '../bower_components/requirejs/require',
-        'facebook': 'https://connect.facebook.net/en_US/all',
+        'facebook': './js/facebook',
+
         'dropzone':'../bower_components/dropzone/downloads/dropzone',
     /* 'btford.socket-io': '../bower_components/btford.socket-io',*/
         'textAngular':'../bower_components/textAngular/src/textAngular',
@@ -23,7 +24,9 @@ require.config({
         'socket.io':'../bower_components/socket.io-client/dist/socket.io',
         'angular-bootstrap-tpls':'../bower_components/angular-bootstrap/ui-bootstrap-tpls',
         'ngTouch':'../bower_components/angular-touch/angular-touch',
-        'ngAnimate':'../bower_components/angular-animate/angular-animate'
+        'ngAnimate':'../bower_components/angular-animate/angular-animate',
+        'd3': '../bower_components/d3/d3',
+        'angular-carousel':'../bower_components/angular-carousel/dist/angular-carousel'
 
 
 
@@ -37,8 +40,12 @@ require.config({
         'angular': {
             exports: 'angular'
         },
+        'angular-carousel':{
+            deps: ['angular']
+        },
         'socket.io': {
-            exports: 'io'
+            exports: 'io',
+            deps: ['angular']
         },
         'angular-route': {
             deps: ['angular']
@@ -58,9 +65,7 @@ require.config({
          'socket': {
             deps: ['socket.io']
         },
-         'socket.io': {
-            deps: ['angular']
-        },
+
         'angular-mocks': {
             deps: ['angular']
         },
@@ -79,6 +84,7 @@ require.config({
         'facebook' : {
             exports: 'FB'
         }
+
     },
 
     deps: [

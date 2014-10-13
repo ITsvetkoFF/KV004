@@ -14,7 +14,8 @@ define([
     './stopEvent-directive',
     './problemFilters-directive',
     './notApproved-directive',
-    './slider-directive'
+    './slider-directive',
+    './closeBut'
 
 
 ], function () {});

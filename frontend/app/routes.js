@@ -40,8 +40,17 @@ define(['./app'], function (app) {
               templateUrl: 'app/templates/showProblem.html',
               controller: 'showProblemCtrl'
           })
+          .when('/stats',{
+              templateUrl:'app/templates/statistic.html',
+              controller:'statsCtrl'
+          })
+           
+
           .otherwise({
-            redirectTo: '/map'
+            redirectTo: '/map',
+ 
+             
+        
         });
   }]);
 });

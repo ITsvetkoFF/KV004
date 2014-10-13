@@ -1,0 +1,23 @@
+{
+    "name":"enviromap",
+    "version":"0.0.0",
+    "dependencies":{},
+    "devDependencies":{
+        "grunt":"latest",
+        "grunt-usemin":"latest",
+        "grunt-contrib-copy":"latest",
+        "grunt-contrib-concat":"latest",
+        "grunt-contrib-cssmin":"latest",
+        "grunt-contrib-uglify":"latest",
+        "grunt-requirejs":"latest",
+        "grunt-bower-task":"latest",
+        "grunt-contrib-clean":"latest",
+        "grunt-html2js":"latest",
+        "grunt-html2js-templating":"latest",
+        "grunt-contrib-htmlmin":"latest",
+        "grunt-preprocess":"latest"
+    },
+    "engines": {
+        "node": ">=0.10.0"
+    }
+}

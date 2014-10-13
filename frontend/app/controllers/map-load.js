@@ -2,9 +2,10 @@ define(['./module'], function (controllers) {
     'use strict';
     controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location','todayTime', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location, todayTime) {
         $scope.isAdministrator = UserService.isAdministrator;
+                $rootScope.$broadcast('Update',"");
 
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            maxZoom: 13,
+            minZoom: 2,
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         });
         var geoJson = L.geoJson (ukraineBorders, {
@@ -49,11 +50,14 @@ define(['./module'], function (controllers) {
 
         function onMarkerClick(marker){
             if($scope.isAdministrator()) {
+                window.location.href="#/map";
                 window.location.href = "#/problem/editProblem/" + this._id;
             } else{
+                window.location.href="#/map";
                 window.location.href="#/problem/showProblem/"+ this._id;
             }
-            $rootScope.$broadcast('Update',"");
+             
+            $rootScope.$broadcast('Update',"_problem");
             map.panTo(marker.latlng);
         };
 

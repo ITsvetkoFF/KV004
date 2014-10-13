@@ -6,6 +6,7 @@
             $(".b-container__right-side").css("display", "block");
 
             map.setView([arguments[0].latlng.lat, arguments[0].latlng.lng]);
+            console.log(arguments);
         }
         $(".b-header__add-problem").click(function () {
             $(".b-right-side__show-problem").css("display", "none");

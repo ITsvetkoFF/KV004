@@ -1,7 +1,7 @@
 define(['./module','dropzone'], function(directives,Dropzone){
     directives.directive('drop', function(){
         return function(scope,element,attrs){
-
+            
             var config, drop;
             config = scope[attrs.drop];
             //create a Dropzone for the element with the given options
@@ -12,9 +12,16 @@ define(['./module','dropzone'], function(directives,Dropzone){
             var counter = 0;
             submitButton.addEventListener("click", function() {
                if (myDropzone.files.length > 0) {
+                         
                         myDropzone.processQueue();
+                                       
+                    
+                     
+                   
                     } else {
                         myDropzone.uploadFile({name:"",length:0}); //send empty
+                                            
+                     
                     }
             });
             myDropzone.on("addedfile", function(file) {
@@ -41,14 +48,25 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     counter--;
                     e.stopPropagation();
                 };
+                
+
+                
             });
 
             myDropzone.on('successmultiple', function() {
                 if(scope.isLoggedIn()){
                     scope.submitProblem();
+                    scope.swipeHide("dropzone");
+                    window.location.href="#/map";
                 }
                 else {
-                    location.href = "#/map";
+                     
+                    scope.swipeHide("dropzone");
+                    window.location.href="#/map";
+ 
+
+                
+                      
                     alert('Ви не зареєстрований користувач, тому проблема спочатку пройде модерацію і потім буде додана на карту.');
                 }
             });

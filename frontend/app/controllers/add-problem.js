@@ -2,11 +2,11 @@ define(['./module'],function (controllers){
     'use strict';
     controllers.controller('addProblemCtrl', function ($scope,$rootScope){
         $scope.showStep_1 = true;
-        $rootScope.$broadcast('Update',"");
-
+        $rootScope.$broadcast('Update',"_problem");
         //function that places marker on the map
         function getCoordinates(e) {
 
+            console.log(e.latlng);                                             // logs into console clicked position !!!need to remove in production
             $scope.$apply(function(){$scope.latitude = e.latlng.lat;});        // binds latln values to the input on the form
             $scope.$apply(function(){$scope.longtitude = e.latlng.lng;});      
 

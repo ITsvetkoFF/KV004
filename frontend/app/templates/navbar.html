@@ -1,4 +1,5 @@
 <nav class="navbar navbar-default b-header" role="navigation">
+<slider></slider>
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
@@ -8,7 +9,7 @@
         <span class="icon-bar"></span>
       </button>
       <img src="images/logo.png" class="b-header__logo" />
-      <a class="navbar-brand b-menu__button" href="#/problem/addProblem" ng-click="addProblem()">Повідомити  про  проблему</a>
+      <a class="navbar-brand b-menu__button" ng-href="#/problem/addProblem" ng-click="swipeHide()">Повідомити  про  проблему</a>
     </div>
 
     <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'" ng-init="getTitles()">
@@ -35,7 +36,7 @@
             </li>
           </ul>
         </li>
-
+        <li class="b-menu__button"> <a ng-href="#/stats">Статистика</a></li>
         <li class="dropdown" ng-hide="isLoggedIn()">
           <a class="dropdown-toggle b-menu__button" href="#">Вхід 
             <span class="fa fa-caret-down"></span>
@@ -59,7 +60,7 @@
         </li>
 
         <li ng-if="isLoggedIn()">
-          <a class="b-menu__button" ng-href="#/chat" ng-click="showChat()"><i class="fa fa-weixin"></i> Чат</a>
+          <a class="b-menu__button" ng-href="#/chat" ng-click="swipeHide()"><i class="fa fa-weixin"></i> Чат</a>
         </li>
 
         <li>
