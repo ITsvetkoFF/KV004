@@ -69,8 +69,8 @@ define(['./module'], function (controllers) {
                 marker.on('click', onMarkerClick);
                 marker._id = location['Id'];
                 markers.addLayer(marker);
-                map.addLayer(markers);
             });
+            map.addLayer(markers);
         };
 
         function userSelectionFilterMarkers(data) {
