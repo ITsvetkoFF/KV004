@@ -7,17 +7,17 @@
 
         <div class="form-group">
             <label for = "first_name">Ім’я</label>
-            <input type="text" id = "first_name" class="form-control" name="first_name" ng-model="user.first_name" ng-minlength="3" ng-maxlength="10" required>
+            <input type="text" id = "first_name" class="form-control" name="first_name" ng-model="user.first_name" ng-minlength="3" ng-maxlength="40" required>
             <p ng-show="registerForm.first_name.$error.required && !registerForm.first_name.$pristine" class="help-block">Це поле обов’язкове.</p>
             <p ng-show="registerForm.first_name.$error.minlength" class="help-block">Ім’я має бути не менше ніж 3 символи.</p>
-            <p ng-show="registerForm.first_name.$error.maxlength" class="help-block">Ім’я має бути не довше ніж 8 символів.</p>
+            <p ng-show="registerForm.first_name.$error.maxlength" class="help-block">Ім’я має бути не довше ніж 45 символів.</p>
         </div>
         <div class="form-group">
             <label for = "last_name">Прізвище</label>
-            <input type="text" id = "last_name" class="form-control" name="last_name" ng-model="user.last_name" ng-minlength="3" ng-maxlength="15" required>
+            <input type="text" id = "last_name" class="form-control" name="last_name" ng-model="user.last_name" ng-minlength="3" ng-maxlength="45" required>
             <p ng-show="registerForm.last_name.$error.required && !registerForm.last_name.$pristine" class="help-block">Це поле обов’язкове.</p>
             <p ng-show="registerForm.last_name.$error.minlength" class="help-block">Прізвище має бути не менше ніж 3 символи.</p>
-            <p ng-show="registerForm.last_name.$error.maxlength" class="help-block">Прізвище має бути не довше ніж 15 символів.</p>
+            <p ng-show="registerForm.last_name.$error.maxlength" class="help-block">Прізвище має бути не довше ніж 45 символів.</p>
         </div>
         <div class="form-group">
             <label for = "email">Пошта</label>

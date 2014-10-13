@@ -1,7 +1,8 @@
 define(['./module'], function (controllers) {
 
     'use strict';
-    controllers.controller('AdminUserCtrl', ['$scope', '$http', '$location', '$window', 'ipCookie', 'UserService','$rootScope', function ($scope, $http, $location, $window, ipCookie, UserService,$rootScope) {
+
+    controllers.controller('AdminUserCtrl', ['$scope', '$rootScope', '$http', '$location', '$window', 'ipCookie', 'UserService', function ($scope,$rootScope, $http, $location, $window, ipCookie, UserService) {
 
         $scope.isLoggedIn = UserService.isLoggedIn;
         $scope.isAdministrator = UserService.isAdministrator;
@@ -29,7 +30,7 @@ define(['./module'], function (controllers) {
             data.password = document.login.password.value;
 
             UserService.logIn(data.email, data.password).success(function (userData) {
-                successLogIn(userData);
+                $scope.successLogIn(userData);
                 $scope.getUserProblems($scope.userId);
             }).error(function (status, data) {
                 console.log(status);
@@ -59,7 +60,7 @@ define(['./module'], function (controllers) {
 
                     UserService.logIn(response.email, response.id).success(function(userData) {
 
-                        successLogIn(userData);
+                        $scope.successLogIn(userData);
 
                     }).error(function(status, data) {
                         console.log(status);
@@ -67,7 +68,7 @@ define(['./module'], function (controllers) {
 
                         UserService.register(response.first_name, response.last_name, response.email, response.id).success(function(userData) {
 
-                            successLogIn(userData);
+                            $scope.successLogIn(userData);
 
                         }).error(function(status, data) {
                             console.log(status);
@@ -92,7 +93,7 @@ define(['./module'], function (controllers) {
         /**********************************************************/
 
         // This function is called after success login procedure
-        function successLogIn(userData) {
+        $rootScope.successLogIn = function(userData) {
 
             ipCookie('userName', userData.name, {expires: 10});
             ipCookie('userSurname', userData.surname, {expires: 10});
@@ -142,7 +143,7 @@ define(['./module'], function (controllers) {
             //here must be validation!
 
             UserService.logIn(email, password).success(function(userData) {
-                successLogIn(userData);
+                $scope.successLogIn(userData);
             }).error(function(status, data) {
                 console.log(status);
                 console.log(data);
@@ -154,7 +155,7 @@ define(['./module'], function (controllers) {
             //and here must be validation!
 
             UserService.register(username, surname, email, password).success(function(userData) {
-                successLogIn(userData);
+                $scope.successLogIn(userData);
             }).error(function(status, data) {
                 console.log(status);
                 console.log(data);
@@ -171,5 +172,3 @@ define(['./module'], function (controllers) {
         }
     }]);
 });
-
-
