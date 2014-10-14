@@ -6,6 +6,8 @@ rm -r KV004/
 git clone https://github.com/ITsvetkoFF/KV004.git
 cd KV004/frontend/ 
 bower install --allow-root
+npm install
+grunt
 cd ../backend 
 npm install
 mysql -u root -proot < EnviromapDB.sql
