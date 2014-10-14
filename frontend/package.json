@@ -15,7 +15,8 @@
         "grunt-html2js":"latest",
         "grunt-html2js-templating":"latest",
         "grunt-contrib-htmlmin":"latest",
-        "grunt-preprocess":"latest"
+        "grunt-preprocess":"latest",
+        "load-grunt-tasks":"latest"
     },
     "engines": {
         "node": ">=0.10.0"

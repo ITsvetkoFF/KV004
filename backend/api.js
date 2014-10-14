@@ -12,7 +12,8 @@ var mysql = require('mysql'),
     server = http.createServer(app),
     secret       = require('./config/secret'),
     io = require('socket.io'),
-    routes = require('./routes.js');
+    routes = require('./routes.js'),
+    location = require('./config.js');
     // for image processing !!!! use with GraphicsMagick and gm module
     // var gm = require('gm');
  
@@ -42,28 +43,28 @@ io.set('transports', ['flashsocket', 'websocket', 'htmlfile', 'xhr-polling', 'js
 
 app.use(multer(
     {
-        dest: '../frontend/photos/large'
+        dest: location+'photos/large'
     }));
     /*    // for image processing !!!! use with GraphicsMagick and gm module
 app.use(multer(
     {
-        dest: '../frontend/photos/large',
+        dest: location+"/photos/large/",
         onFileUploadComplete: function(file){
-                    
-             
-            gm("../frontend/photos/large/"+file.name)
+
+
+            gm(location+"/photos/large/"+file.name)
             .size(function (err, size) {
               if (!err && size.height>=1000){
                   this.resize(3000, 1000)
-            .write("../frontend/photos/large/"+file.name, function (err) {
+            .write(location+"/photos/large/"+file.name, function (err) {
             if (!err) console.log('done');
             });
-                
+
               }
             if(err) throw err;
             })
-            
- 
+
+
     }
     }));
 */
@@ -73,7 +74,7 @@ app.use(bodyParser());
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(myConnection(mysql, connectionPool, 'pool'));
-app.use('/',express.static('../frontend'));
+app.use('/',express.static(location));
 console.log(__dirname);
 
 app.all('*', function(req, res, next) {
