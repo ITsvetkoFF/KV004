@@ -1,4 +1,5 @@
 # it assumes you have forever, npm, node, bower, mysql installed 
+mkdir -p /var/tmp/deploy/
 cd /var/tmp/deploy/
 forever stop api.js 
 rm -r KV004/
