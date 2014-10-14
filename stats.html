@@ -3,14 +3,13 @@
 <meta charset="UTF-8">
 <title>Swimlane using d3.js</title>
 <script type="text/javascript" src="http://mbostock.github.com/d3/d3.v2.js"></script>
-<script type="text/javascript" src="randomData.js"></script>
 <style>
 .chart {
 	shape-rendering: crispEdges;
 }
 
 .mini text {
-	font: 9px sans-serif;	
+	font: 12px sans-serif;	
 }
 
 .main text {
@@ -29,21 +28,6 @@
 .axis line, .axis path {
 	stroke: black;
 }
-
-.miniItem {
-	stroke-width: 6;	
-}
-
-.future {
-	stroke: gray;
-	fill: #ddd;
-}
-
-.past {
-	stroke: green;
-	fill: lightgreen;
-}
-
 .brush .extent {
 	stroke: gray;
 	fill: blue;
@@ -54,27 +38,23 @@
 <body>
 
 <script type="text/javascript">
-Date.prototype.addHours= function(h){
+Date.prototype.addHours= function(h) {
     var copiedDate = new Date(this.getTime());
     copiedDate.setHours(copiedDate.getHours()+h);
     return copiedDate;
 }
 var now = new Date();
-var data2 = [{"id":1,"start":"2014-02-27T15:24:53.000Z","act":1,"lane":4},{"id":2,"start":"2014-08-11T11:26:57.000Z","act":1,"lane":4},{"id":3,"start":"2014-08-07T11:50:34.000Z","act":1,"lane":1},{"id":4,"start":"2014-02-18T07:15:52.000Z","act":1,"lane":4},{"id":5,"start":"2014-02-18T15:54:51.000Z","act":1,"lane":5},{"id":6,"start":"2014-02-19T12:00:51.000Z","act":1,"lane":4},{"id":7,"start":"2014-02-27T18:16:08.000Z","act":1,"lane":3},{"id":8,"start":"2014-02-27T18:29:48.000Z","act":1,"lane":1},{"id":9,"start":"2014-02-27T18:37:27.000Z","act":1,"lane":5},{"id":10,"start":"2014-02-27T21:15:34.000Z","act":1,"lane":2},{"id":11,"start":"2014-03-03T11:09:47.000Z","act":1,"lane":4},{"id":12,"start":"2014-03-03T11:15:14.000Z","act":1,"lane":1},{"id":13,"start":"2014-03-03T12:32:04.000Z","act":1,"lane":5},{"id":14,"start":"2014-03-03T12:35:22.000Z","act":1,"lane":5},{"id":15,"start":"2014-03-03T12:39:08.000Z","act":1,"lane":5},{"id":16,"start":"2014-03-06T16:59:11.000Z","act":1,"lane":2},{"id":17,"start":"2014-03-06T19:20:47.000Z","act":1,"lane":5},{"id":18,"start":"2014-03-02T20:25:40.000Z","act":1,"lane":2},{"id":19,"start":"2014-03-11T11:28:18.000Z","act":1,"lane":2},{"id":20,"start":"2014-03-13T00:43:36.000Z","act":1,"lane":2},{"id":21,"start":"2014-03-13T19:20:55.000Z","act":1,"lane":7},{"id":22,"start":"2014-03-14T15:10:33.000Z","act":1,"lane":1},{"id":23,"start":"2014-03-17T14:22:13.000Z","act":1,"lane":7},{"id":24,"start":"2014-03-17T14:23:07.000Z","act":1,"lane":7},{"id":25,"start":"2014-03-17T14:39:07.000Z","act":1,"lane":2},{"id":26,"start":"2014-03-17T16:21:56.000Z","act":1,"lane":4},{"id":27,"start":"2014-03-18T06:14:00.000Z","act":1,"lane":2},{"id":28,"start":"2014-03-18T06:14:28.000Z","act":1,"lane":2},{"id":29,"start":"2014-03-18T09:14:05.000Z","act":1,"lane":2},{"id":30,"start":"2014-03-18T12:30:14.000Z","act":1,"lane":7},{"id":31,"start":"2014-03-18T13:51:48.000Z","act":1,"lane":2},{"id":32,"start":"2014-03-18T14:50:45.000Z","act":1,"lane":7},{"id":33,"start":"2014-03-18T15:35:48.000Z","act":1,"lane":2},{"id":34,"start":"2014-03-18T16:36:34.000Z","act":1,"lane":4},{"id":35,"start":"2014-03-18T21:41:47.000Z","act":1,"lane":4},{"id":36,"start":"2014-03-19T05:04:13.000Z","act":1,"lane":2},{"id":37,"start":"2014-03-18T12:21:23.000Z","act":1,"lane":1},{"id":38,"start":"2014-03-19T11:06:55.000Z","act":1,"lane":4},{"id":39,"start":"2014-03-19T18:09:37.000Z","act":1,"lane":2},{"id":40,"start":"2014-03-20T06:08:28.000Z","act":1,"lane":2},{"id":41,"start":"2014-02-26T16:45:04.000Z","act":1,"lane":4},{"id":42,"start":"2014-03-17T13:24:59.000Z","act":1,"lane":7},{"id":43,"start":"2014-03-22T15:29:23.000Z","act":1,"lane":5},{"id":44,"start":"2014-03-25T04:22:51.000Z","act":1,"lane":2},{"id":45,"start":"2014-03-25T09:04:23.000Z","act":1,"lane":2},{"id":46,"start":"2014-03-18T12:36:04.000Z","act":1,"lane":2},{"id":47,"start":"2014-03-02T20:35:19.000Z","act":1,"lane":2},{"id":48,"start":"2014-03-25T17:50:15.000Z","act":1,"lane":2},{"id":49,"start":"2014-03-25T18:16:53.000Z","act":1,"lane":4},{"id":50,"start":"2014-03-25T18:31:53.000Z","act":1,"lane":2},{"id":51,"start":"2014-03-26T12:15:11.000Z","act":1,"lane":2},{"id":52,"start":"2014-03-26T13:34:10.000Z","act":1,"lane":4},{"id":53,"start":"2014-02-27T15:19:56.000Z","act":1,"lane":4},{"id":54,"start":"2014-03-18T14:54:32.000Z","act":1,"lane":3},{"id":55,"start":"2014-03-26T14:10:04.000Z","act":1,"lane":2},{"id":56,"start":"2014-03-26T14:13:07.000Z","act":1,"lane":7},{"id":57,"start":"2014-03-26T14:13:44.000Z","act":1,"lane":4},{"id":58,"start":"2014-03-26T14:15:15.000Z","act":1,"lane":2},{"id":59,"start":"2014-03-26T14:16:29.000Z","act":1,"lane":4},{"id":60,"start":"2014-03-26T14:16:57.000Z","act":1,"lane":2},{"id":61,"start":"2014-03-26T14:20:40.000Z","act":1,"lane":6},{"id":62,"start":"2014-03-26T14:25:32.000Z","act":1,"lane":7},{"id":63,"start":"2014-03-26T14:26:07.000Z","act":1,"lane":1},{"id":64,"start":"2014-03-26T14:25:12.000Z","act":1,"lane":2},{"id":65,"start":"2014-03-26T14:35:48.000Z","act":1,"lane":2},{"id":66,"start":"2014-03-26T14:39:54.000Z","act":1,"lane":2},{"id":67,"start":"2014-03-26T14:43:56.000Z","act":1,"lane":7},{"id":68,"start":"2014-03-26T15:00:23.000Z","act":1,"lane":2},{"id":69,"start":"2014-03-26T15:11:30.000Z","act":1,"lane":2},{"id":70,"start":"2014-03-26T15:15:07.000Z","act":1,"lane":2},{"id":71,"start":"2014-03-26T15:47:51.000Z","act":1,"lane":6},{"id":72,"start":"2014-03-26T16:09:31.000Z","act":1,"lane":7},{"id":73,"start":"2014-03-26T16:20:22.000Z","act":1,"lane":1},{"id":74,"start":"2014-03-26T16:28:10.000Z","act":1,"lane":4},{"id":75,"start":"2014-03-26T16:45:01.000Z","act":1,"lane":7},{"id":76,"start":"2014-03-26T17:04:13.000Z","act":1,"lane":7},{"id":77,"start":"2014-03-26T17:20:33.000Z","act":1,"lane":6},{"id":78,"start":"2014-03-26T17:22:44.000Z","act":1,"lane":4},{"id":79,"start":"2014-03-26T17:59:57.000Z","act":1,"lane":2},{"id":80,"start":"2014-03-26T18:06:30.000Z","act":1,"lane":2},{"id":81,"start":"2014-03-26T18:16:22.000Z","act":1,"lane":7},{"id":82,"start":"2014-03-26T19:33:02.000Z","act":1,"lane":6},{"id":83,"start":"2014-03-26T19:48:47.000Z","act":1,"lane":1},{"id":84,"start":"2014-02-26T12:09:47.000Z","act":1,"lane":1},{"id":85,"start":"2014-03-26T20:34:45.000Z","act":1,"lane":7},{"id":86,"start":"2014-03-26T20:55:33.000Z","act":1,"lane":2},{"id":87,"start":"2014-03-27T05:11:51.000Z","act":1,"lane":4},{"id":88,"start":"2014-03-27T05:15:51.000Z","act":1,"lane":7},{"id":89,"start":"2014-03-27T05:31:38.000Z","act":1,"lane":6},{"id":90,"start":"2014-03-27T05:35:11.000Z","act":1,"lane":7},{"id":91,"start":"2014-03-27T05:40:13.000Z","act":1,"lane":4},{"id":92,"start":"2014-03-27T05:48:04.000Z","act":1,"lane":2},{"id":93,"start":"2014-03-27T05:48:20.000Z","act":1,"lane":2},{"id":94,"start":"2014-03-27T05:52:01.000Z","act":1,"lane":4},{"id":95,"start":"2014-03-27T05:53:40.000Z","act":1,"lane":2},{"id":96,"start":"2014-03-27T06:08:14.000Z","act":1,"lane":2},{"id":97,"start":"2014-03-27T06:10:58.000Z","act":1,"lane":4},{"id":98,"start":"2014-03-27T06:12:20.000Z","act":1,"lane":2},{"id":99,"start":"2014-03-27T06:18:53.000Z","act":1,"lane":4},{"id":100,"start":"2014-03-27T07:45:44.000Z","act":1,"lane":2},{"id":101,"start":"2014-03-27T07:49:11.000Z","act":1,"lane":1},{"id":102,"start":"2014-03-27T07:51:15.000Z","act":1,"lane":1},{"id":103,"start":"2014-03-27T07:51:36.000Z","act":1,"lane":1},{"id":104,"start":"2014-03-27T08:00:30.000Z","act":1,"lane":2},{"id":105,"start":"2014-03-27T08:08:36.000Z","act":1,"lane":1},{"id":106,"start":"2014-03-27T08:13:59.000Z","act":1,"lane":3},{"id":107,"start":"2014-03-27T08:15:56.000Z","act":1,"lane":3},{"id":108,"start":"2014-03-27T08:23:08.000Z","act":1,"lane":4},{"id":109,"start":"2014-03-27T08:25:52.000Z","act":1,"lane":6},{"id":110,"start":"2014-03-27T08:28:59.000Z","act":1,"lane":2},{"id":111,"start":"2014-03-27T08:32:59.000Z","act":1,"lane":4},{"id":112,"start":"2014-03-27T08:53:02.000Z","act":1,"lane":2},{"id":113,"start":"2014-03-27T08:57:50.000Z","act":1,"lane":4},{"id":114,"start":"2014-03-27T09:00:01.000Z","act":1,"lane":2},{"id":115,"start":"2014-03-27T09:12:46.000Z","act":1,"lane":4},{"id":116,"start":"2014-03-27T09:17:19.000Z","act":1,"lane":5},{"id":117,"start":"2014-03-27T09:22:22.000Z","act":1,"lane":2},{"id":118,"start":"2014-03-27T10:18:31.000Z","act":1,"lane":2},{"id":119,"start":"2014-03-27T10:44:55.000Z","act":1,"lane":2},{"id":120,"start":"2014-03-03T14:15:35.000Z","act":1,"lane":2},{"id":121,"start":"2014-03-27T12:22:55.000Z","act":1,"lane":4},{"id":122,"start":"2014-03-27T12:48:52.000Z","act":1,"lane":7},{"id":123,"start":"2014-03-27T13:24:37.000Z","act":1,"lane":4},{"id":124,"start":"2014-03-27T13:42:41.000Z","act":1,"lane":4},{"id":125,"start":"2014-03-27T13:44:46.000Z","act":1,"lane":4},{"id":126,"start":"2014-03-27T14:58:50.000Z","act":1,"lane":2},{"id":127,"start":"2014-03-26T14:35:05.000Z","act":1,"lane":3},{"id":128,"start":"2014-03-27T16:40:59.000Z","act":1,"lane":7},{"id":129,"start":"2014-03-27T16:56:16.000Z","act":1,"lane":7},{"id":130,"start":"2014-03-25T19:48:56.000Z","act":1,"lane":7},{"id":131,"start":"2014-03-27T17:41:31.000Z","act":1,"lane":2},{"id":132,"start":"2014-03-27T18:34:54.000Z","act":1,"lane":2},{"id":133,"start":"2014-03-27T19:06:19.000Z","act":1,"lane":7},{"id":134,"start":"2014-03-27T22:05:32.000Z","act":1,"lane":7},{"id":135,"start":"2014-03-28T06:14:04.000Z","act":1,"lane":4},{"id":136,"start":"2014-03-28T06:17:11.000Z","act":1,"lane":4},{"id":137,"start":"2014-03-28T06:28:52.000Z","act":1,"lane":1},{"id":138,"start":"2014-03-28T10:43:01.000Z","act":1,"lane":2},{"id":139,"start":"2014-03-28T10:55:49.000Z","act":1,"lane":2},{"id":140,"start":"2014-03-28T10:59:43.000Z","act":1,"lane":2},{"id":141,"start":"2014-03-28T11:19:42.000Z","act":1,"lane":1},{"id":142,"start":"2014-03-27T05:03:45.000Z","act":1,"lane":1},{"id":143,"start":"2014-03-28T18:04:24.000Z","act":1,"lane":2},{"id":144,"start":"2014-03-28T18:26:12.000Z","act":1,"lane":7},{"id":145,"start":"2014-03-29T00:13:48.000Z","act":1,"lane":7},{"id":146,"start":"2014-03-29T05:12:00.000Z","act":1,"lane":2},{"id":147,"start":"2014-03-29T05:18:22.000Z","act":1,"lane":4},{"id":148,"start":"2014-03-29T08:24:01.000Z","act":1,"lane":2},{"id":149,"start":"2014-03-27T10:10:19.000Z","act":1,"lane":7},{"id":150,"start":"2014-03-26T14:21:24.000Z","act":1,"lane":4},{"id":151,"start":"2014-03-26T14:09:09.000Z","act":1,"lane":3},{"id":152,"start":"2014-03-27T02:08:19.000Z","act":1,"lane":7},{"id":153,"start":"2014-03-27T08:59:38.000Z","act":1,"lane":7},{"id":154,"start":"2014-03-29T11:05:36.000Z","act":1,"lane":4},{"id":155,"start":"2014-03-29T13:29:34.000Z","act":1,"lane":2},{"id":156,"start":"2014-03-29T16:14:27.000Z","act":1,"lane":5},{"id":157,"start":"2014-03-29T18:01:19.000Z","act":1,"lane":2},{"id":158,"start":"2014-03-26T18:14:12.000Z","act":1,"lane":6},{"id":159,"start":"2014-03-26T12:12:02.000Z","act":1,"lane":3},{"id":160,"start":"2014-03-29T21:00:20.000Z","act":1,"lane":2},{"id":161,"start":"2014-03-30T00:24:08.000Z","act":1,"lane":1},{"id":162,"start":"2014-03-30T00:31:12.000Z","act":1,"lane":5},{"id":163,"start":"2014-03-30T04:58:29.000Z","act":1,"lane":7},{"id":164,"start":"2014-04-02T17:48:30.000Z","act":1,"lane":2},{"id":165,"start":"2014-04-06T10:00:39.000Z","act":1,"lane":1},{"id":166,"start":"2014-04-08T14:52:40.000Z","act":1,"lane":2},{"id":167,"start":"2014-04-09T14:31:43.000Z","act":1,"lane":1},{"id":168,"start":"2014-04-09T14:38:37.000Z","act":1,"lane":7},{"id":169,"start":"2014-04-09T17:19:49.000Z","act":1,"lane":2},{"id":170,"start":"2014-04-11T06:26:54.000Z","act":1,"lane":2},{"id":171,"start":"2014-04-12T10:55:59.000Z","act":1,"lane":2},{"id":172,"start":"2014-04-18T11:24:47.000Z","act":1,"lane":7},{"id":173,"start":"2014-04-24T10:55:04.000Z","act":1,"lane":2},{"id":174,"start":"2014-04-24T11:06:53.000Z","act":1,"lane":1},{"id":175,"start":"2014-04-25T13:21:47.000Z","act":1,"lane":1},{"id":176,"start":"2014-03-27T10:38:44.000Z","act":1,"lane":1},{"id":177,"start":"2014-05-06T06:46:49.000Z","act":1,"lane":1},{"id":178,"start":"2014-04-14T12:04:18.000Z","act":1,"lane":2},{"id":179,"start":"2014-05-14T11:46:02.000Z","act":1,"lane":7},{"id":180,"start":"2014-05-16T17:46:37.000Z","act":1,"lane":1},{"id":181,"start":"2014-05-16T19:03:49.000Z","act":1,"lane":6},{"id":182,"start":"2014-05-17T04:40:23.000Z","act":1,"lane":4},{"id":183,"start":"2014-04-06T15:14:32.000Z","act":1,"lane":4},{"id":184,"start":"2014-05-21T10:07:08.000Z","act":1,"lane":4},{"id":185,"start":"2014-05-18T05:25:48.000Z","act":1,"lane":4},{"id":186,"start":"2014-05-25T03:43:42.000Z","act":1,"lane":2},{"id":187,"start":"2014-05-26T18:10:55.000Z","act":1,"lane":4},{"id":188,"start":"2014-03-27T08:03:00.000Z","act":1,"lane":4},{"id":189,"start":"2014-05-24T19:03:55.000Z","act":1,"lane":2},{"id":190,"start":"2014-06-04T10:01:41.000Z","act":1,"lane":6},{"id":191,"start":"2014-08-06T06:28:26.000Z","act":1,"lane":1},{"id":192,"start":"2014-08-06T07:22:07.000Z","act":1,"lane":2},{"id":193,"start":"2014-08-07T11:06:25.000Z","act":1,"lane":3},{"id":194,"start":"2014-08-07T11:08:09.000Z","act":1,"lane":2},{"id":195,"start":"2014-08-11T05:17:31.000Z","act":1,"lane":1},{"id":196,"start":"2014-08-11T05:41:28.000Z","act":1,"lane":3},{"id":197,"start":"2014-08-13T17:15:24.000Z","act":1,"lane":7},{"id":198,"start":"2014-08-14T15:18:48.000Z","act":1,"lane":7},{"id":199,"start":"2014-08-20T13:10:46.000Z","act":1,"lane":4},{"id":200,"start":"2014-08-24T04:23:43.000Z","act":1,"lane":4},{"id":201,"start":"2014-04-02T10:22:12.000Z","act":1,"lane":4},{"id":202,"start":"2014-10-02T08:35:16.000Z","act":1,"lane":7},{"id":203,"start":"2014-10-02T11:13:11.000Z","act":1,"lane":1},{"id":204,"start":"2014-10-11T17:46:29.000Z","act":3,"lane":3},{"id":205,"start":"2014-10-11T17:46:31.000Z","act":3,"lane":4},{"id":206,"start":"2014-10-11T17:46:35.000Z","act":3,"lane":1},{"id":207,"start":"2014-10-11T17:47:04.000Z","act":5,"lane":4},{"id":208,"start":"2014-10-11T17:47:08.000Z","act":5,"lane":7}];
-var data3 = [{"id":1,"label":"проблеми лісів"},{"id":2,"label":"сміттєзвалища"},{"id":3,"label":"незаконна забудова"},{"id":4,"label":"проблеми водойм"},{"id":5,"label":"загрози біорізноманіттю"},{"id":6,"label":"браконьєрство"},{"id":7,"label":"інші проблеми"}];
+var items = [{"start":"2014-02-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-08-10T21:00:00.000Z","act":1,"lane":4},{"start":"2014-08-06T21:00:00.000Z","act":1,"lane":1},{"start":"2014-02-17T22:00:00.000Z","act":1,"lane":4},{"start":"2014-02-17T22:00:00.000Z","act":1,"lane":5},{"start":"2014-02-18T22:00:00.000Z","act":1,"lane":4},{"start":"2014-02-26T22:00:00.000Z","act":1,"lane":3},{"start":"2014-02-26T22:00:00.000Z","act":1,"lane":1},{"start":"2014-02-26T22:00:00.000Z","act":1,"lane":5},{"start":"2014-02-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-02T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-02T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-02T22:00:00.000Z","act":1,"lane":5},{"start":"2014-03-02T22:00:00.000Z","act":1,"lane":5},{"start":"2014-03-02T22:00:00.000Z","act":1,"lane":5},{"start":"2014-03-05T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-05T22:00:00.000Z","act":1,"lane":5},{"start":"2014-03-01T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-10T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-12T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-12T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-13T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-16T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-16T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-16T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-16T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-17T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-17T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-17T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-17T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-17T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-17T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-17T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-17T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-17T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-18T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-17T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-18T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-18T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-19T22:00:00.000Z","act":1,"lane":2},{"start":"2014-02-25T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-16T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-21T22:00:00.000Z","act":1,"lane":5},{"start":"2014-03-24T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-24T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-17T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-01T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-24T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-24T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-24T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":4},{"start":"2014-02-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-17T22:00:00.000Z","act":1,"lane":3},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":6},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":6},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":6},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":6},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":1},{"start":"2014-02-25T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":6},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":3},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":3},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":6},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":5},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-02T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":3},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-24T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-27T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-27T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-27T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-27T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-27T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-27T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-27T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-27T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-27T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-27T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-28T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-28T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-28T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-28T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":3},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":7},{"start":"2014-03-28T22:00:00.000Z","act":1,"lane":4},{"start":"2014-03-28T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-28T22:00:00.000Z","act":1,"lane":5},{"start":"2014-03-28T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":6},{"start":"2014-03-25T22:00:00.000Z","act":1,"lane":3},{"start":"2014-03-28T22:00:00.000Z","act":1,"lane":2},{"start":"2014-03-29T22:00:00.000Z","act":1,"lane":1},{"start":"2014-03-29T22:00:00.000Z","act":1,"lane":5},{"start":"2014-03-29T22:00:00.000Z","act":1,"lane":7},{"start":"2014-04-01T21:00:00.000Z","act":1,"lane":2},{"start":"2014-04-05T21:00:00.000Z","act":1,"lane":1},{"start":"2014-04-07T21:00:00.000Z","act":1,"lane":2},{"start":"2014-04-08T21:00:00.000Z","act":1,"lane":1},{"start":"2014-04-08T21:00:00.000Z","act":1,"lane":7},{"start":"2014-04-08T21:00:00.000Z","act":1,"lane":2},{"start":"2014-04-10T21:00:00.000Z","act":1,"lane":2},{"start":"2014-04-11T21:00:00.000Z","act":1,"lane":2},{"start":"2014-04-17T21:00:00.000Z","act":1,"lane":7},{"start":"2014-04-23T21:00:00.000Z","act":1,"lane":2},{"start":"2014-04-23T21:00:00.000Z","act":1,"lane":1},{"start":"2014-04-24T21:00:00.000Z","act":1,"lane":1},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":1},{"start":"2014-05-05T21:00:00.000Z","act":1,"lane":1},{"start":"2014-04-13T21:00:00.000Z","act":1,"lane":2},{"start":"2014-05-13T21:00:00.000Z","act":1,"lane":7},{"start":"2014-05-15T21:00:00.000Z","act":1,"lane":1},{"start":"2014-05-15T21:00:00.000Z","act":1,"lane":6},{"start":"2014-05-16T21:00:00.000Z","act":1,"lane":4},{"start":"2014-04-05T21:00:00.000Z","act":1,"lane":4},{"start":"2014-05-20T21:00:00.000Z","act":1,"lane":4},{"start":"2014-05-17T21:00:00.000Z","act":1,"lane":4},{"start":"2014-05-24T21:00:00.000Z","act":1,"lane":2},{"start":"2014-05-25T21:00:00.000Z","act":1,"lane":4},{"start":"2014-03-26T22:00:00.000Z","act":1,"lane":4},{"start":"2014-05-23T21:00:00.000Z","act":1,"lane":2},{"start":"2014-06-03T21:00:00.000Z","act":1,"lane":6},{"start":"2014-08-05T21:00:00.000Z","act":1,"lane":1},{"start":"2014-08-05T21:00:00.000Z","act":1,"lane":2},{"start":"2014-08-06T21:00:00.000Z","act":1,"lane":3},{"start":"2014-08-06T21:00:00.000Z","act":1,"lane":2},{"start":"2014-08-10T21:00:00.000Z","act":1,"lane":1},{"start":"2014-08-10T21:00:00.000Z","act":1,"lane":3},{"start":"2014-08-12T21:00:00.000Z","act":1,"lane":7},{"start":"2014-08-13T21:00:00.000Z","act":1,"lane":7},{"start":"2014-08-19T21:00:00.000Z","act":1,"lane":4},{"start":"2014-08-23T21:00:00.000Z","act":1,"lane":4},{"start":"2014-04-01T21:00:00.000Z","act":1,"lane":4},{"start":"2014-10-02T13:55:24.000Z","act":3,"lane":6},{"start":"2014-10-06T07:38:21.000Z","act":3,"lane":3}];
+var lanes = [{"id":1,"label":"Проблеми лісів"},{"id":2,"label":"Сміттєзвалища"},{"id":3,"label":"Незаконна забудова"},{"id":4,"label":"Проблеми водойм"},{"id":5,"label":"Загрози біорізноманіттю"},{"id":6,"label":"Браконьєрство"},{"id":7,"label":"Інші проблеми"}];
 var colors = ["#095B0F", "#231F20", "#98442B", "#1B9AD6", "#71BF44", "#FFAB09", "#50095B"];
-var color = ["#f00", "#fcc", "#0f0", "#cfc", "#00f"]
- for (var i = data2.length - 1; i >= 0; i--) {
- 	data2[i].start = new Date(data2[i].start);
- 	data2[i].end = data2[i].start.addHours(10);
- 	data2[i].class = "past";
- };
- items = data2;
- lanes = data3;
- console.log(items);
- console.log(lanes);
-var margin = {top: 20, right: 15, bottom: 15, left: 60}
-  , width = 960 - margin.left - margin.right
+var color = ["#f00", "", "#00f"]
+    items.forEach(function(d) {
+    	d.start = new Date(d.start);
+    	d.end = d.start.addHours(10);
+    	d.class = "past";
+    });
+var margin = {top: 20, right: 15, bottom: 15, left: 170}
+  , width = window.innerWidth - margin.left - margin.right
   , height = 500 - margin.top - margin.bottom
   , miniHeight = lanes.length * 12 + 50
   , mainHeight = height - miniHeight - 50;
@@ -123,14 +103,23 @@ main.append('g').selectAll('.laneLines')
 	.attr('y2', function(d) { return d3.round(y1(d.id)) + 0.5; })
 	.attr('stroke', function(d) { return d.label === '' ? 'white' : 'lightgray' });
 
-main.append('g').selectAll('.laneText')
+/*main.append('g').selectAll('.laneText')
 	.data(lanes)
 	.enter().append("circle")
 	.attr("cx", function (d) { return -30; })
 	.attr("cy", function (d) { return d3.round(y1(d.id)) + 20; })
 	.attr("r", function (d) { return 10; })
-	.style("fill", function(d) { return colors[d.id-1]; });
+	.style("fill", function(d) { return colors[d.id-1]; });*/
 
+main.append('g').selectAll('.laneText')
+	.data(lanes)
+	.enter().append('text')
+	.text(function(d) { return d.label; })
+	.attr('x', -30)
+	.attr('y', function(d) { return d3.round(y1(d.id)) + 20; })
+	.attr('dy', '0.5ex')
+	.attr('text-anchor', 'end')
+.style("fill", function(d) { return colors[d.id-1]; });
 // draw the lanes for the mini chart
 mini.append('g').selectAll('.laneLines')
 	.data(lanes)
@@ -141,14 +130,23 @@ mini.append('g').selectAll('.laneLines')
 	.attr('y2', function(d) { return d3.round(y2(d.id)) + 0.5; })
 	.attr('stroke', function(d) { return d.label === '' ? 'white' : 'lightgray' });
 
-mini.append('g').selectAll('.laneText')
+/*mini.append('g').selectAll('.laneText')
 	.data(lanes)
 	.enter().append("circle")
 	.attr("cx", function (d) { return -30; })
 	.attr("cy", function (d) { return d3.round(y1(d.id/2.1)) + 30; })
 	.attr("r", function (d) { return 5; })
-	.style("fill", function(d) { return colors[d.id-1]; });
+	.style("fill", function(d) { return colors[d.id-1]; });*/
 	
+	mini.append('g').selectAll('.laneText')
+	.data(lanes)
+	.enter().append('text')
+	.text(function(d) { return d.label; })
+	.attr('x', -30)
+	.attr('y', function(d) { return d3.round(y1(d.id/2.1)) + 30; })
+	.attr('dy', '0.5ex')
+	.attr('text-anchor', 'end')
+	.style("fill", function(d) { return colors[d.id-1]; });
 
 // draw the x axis
 var xDateAxis = d3.svg.axis()
@@ -232,7 +230,7 @@ var itemRects = main.append('g')
 mini.append('g').selectAll('miniItems')
 	.data(getPaths(items))
 	.enter().append('path')
-	.attr('stroke', function(d) { return  '#000'; })
+	.attr('stroke', function(d) { return "#000"; })
 	.attr('d', function(d) { return d.path; })
 	.attr('stroke-width', function(d) { return 8; });
 
@@ -247,7 +245,7 @@ mini.append('rect')
 // draw the selection area
 var brush = d3.svg.brush()
 	.x(x)
-	.extent([d3.time.monday(now),d3.time.saturday.ceil(now)])
+	.extent([d3.time.monday(now),d3.time.saturday(now)])
 	.on("brush", display);
 
 mini.append('g')
@@ -259,27 +257,50 @@ mini.append('g')
 
 mini.selectAll('rect.background').remove();
 display();
-
 function display () {
 
 	var rects, labels
 	  , minExtent = d3.time.day(brush.extent()[0])
 	  , maxExtent = d3.time.day(brush.extent()[1])
 	  , visItems = items.filter(function (d) { return d.start < maxExtent && d.end > minExtent});
-
+	 // maxExtent.setDate(maxExtent.getDate()+7)
+	  console.log(minExtent, maxExtent);
 	mini.select('.brush').call(brush.extent([minExtent, maxExtent]));		
 
 	x1.domain([minExtent, maxExtent]);
-
-	if ((maxExtent - minExtent) > 1468800000) {
+	console.log(maxExtent - minExtent);
+	if ((maxExtent - minExtent) > 20041400000) {
+		console.log('if-1')
+		x1DateAxis.ticks(d3.time.years, 1).tickFormat(d3.time.format('%M'))
+		x1MonthAxis.ticks(d3.time.months, 1).tickFormat(d3.time.format('Year %Y'))
+	}
+	else if ((maxExtent - minExtent) > 11919600000 ) {
+		console.log('if-2')
+		x1DateAxis.ticks(d3.time.weeks, 1).tickFormat(d3.time.format('Week %W'))
+		x1MonthAxis.ticks(d3.time.months, 1).tickFormat(d3.time.format('%B - Year%Y'))
+	}
+	else if ((maxExtent - minExtent) > 6217200000  ) {
+		console.log('if-3')
+		x1DateAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%a %d'))
+		x1MonthAxis.ticks(d3.time.months, 1).tickFormat(d3.time.format('%B - Year%Y'))
+	}
+	else if ((maxExtent - minExtent) > 1468800000) {
+		console.log('if-4')
 		x1DateAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%a %d'))
 		x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%b - Week %W'))		
 	}
-	else if ((maxExtent - minExtent) > 172800000) {
-		x1DateAxis.ticks(d3.time.days, 1).tickFormat(d3.time.format('%a %d'))
+	else if ((maxExtent - minExtent) > 345600000) {
+		console.log('if-5')
+		x1DateAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%a %d'))
 		x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%b - Week %W'))
 	}
+	else if ((maxExtent - minExtent) > 172800000) {
+		console.log('if-6')
+		x1DateAxis.ticks(d3.time.days, 1).tickFormat(d3.time.format('%a %d'))
+		x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%b - Week %W'))
+	} 
 	else {
+		console.log('else')
 		x1DateAxis.ticks(d3.time.hours, 4).tickFormat(d3.time.format('%I %p'))
 		x1MonthAxis.ticks(d3.time.days, 1).tickFormat(d3.time.format('%b %e'))
 	}
@@ -303,44 +324,44 @@ function display () {
 	rects = itemRects.selectAll('rect')
 		.data(visItems, function (d) { return d.id; })
 		.attr('x', function(d) { return x1(d.start); })
-		.attr('width', function(d) { return 20; });
+		.attr('width', function(d) { return 5; });
 
 	rects.enter().append('rect')
 		.attr('x', function(d) { return x1(d.start); })
-		.attr('y', function(d) { return y1(d.lane) + 15; })
-		.attr('width', function(d) { return 25; })
-		.attr('height', function(d) { return 12; })
+		.attr('y', function(d) { return y1(d.lane) + 1; })
+		.attr('width', function(d) { return 5; })
+		.attr('height', function(d) { return 38; })
 		.attr('fill', function(d) { return color[d.act-1]; })
-		.attr('stroke', function(d) { return  '#000'; })
+		.attr("fill-opacity", function(d) {return "0.2";})
 
 	rects.exit().remove();
 
 	// update the item labels
 	labels = itemRects.selectAll('text')
-		.data(visItems, function (d) { return d.id; })
+		.data(visItems, function (d) { return /*d.act*/; })
 		.attr('x', function(d) { return x1(Math.max(d.start, minExtent)) + 2; });
 				
 	labels.enter().append('text')
-		.text(function (d) { return d.id; })
+		//.text(function (d) { return d.act; })
 		.attr('x', function(d) { return x1(Math.max(d.start, minExtent)) + 2; })
-		.attr('y', function(d) { return y1(d.lane) + 25; })
+		.attr('y', function(d) { return y1(d.lane-1) + 25; })
 		.attr('text-anchor', 'start')
 		.attr('class', 'itemLabel');
 
 	labels.exit().remove();
 }
-
 function moveBrush () {
 	var origin = d3.mouse(this)
 	  , point = x.invert(origin[0])
 	  , halfExtent = (brush.extent()[1].getTime() - brush.extent()[0].getTime()) / 2
 	  , start = new Date(point.getTime() - halfExtent)
+	 // , end = start;
+	  //end.setDate(end.getDate()+7);
 	  , end = new Date(point.getTime() + halfExtent);
 
 	brush.extent([start,end]);
 	display();
 }
-
 // generates a single path for each item class in the mini display
 // ugly - but draws mini 2x faster than append lines or line generator
 // is there a better way to do a bunch of lines as a single path with d3?
@@ -351,14 +372,11 @@ function getPaths(items) {
 		if (!paths[d.class]) paths[d.class] = '';	
 		paths[d.class] += ['M',x(d.start),(y2(d.lane) + offset),'H',x(d.end)].join(' ');
 	}
-
 	for (var className in paths) {
 		result.push({class: className, path: paths[className]});
 	}
-
 	return result;
 }
-
 </script>
 </body>
 </html>
