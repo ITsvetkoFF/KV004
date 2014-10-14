@@ -26,7 +26,8 @@ require.config({
         'ngTouch':'../bower_components/angular-touch/angular-touch',
         'ngAnimate':'../bower_components/angular-animate/angular-animate',
         'd3': '../bower_components/d3/d3',
-        'angular-carousel':'../bower_components/angular-carousel/dist/angular-carousel'
+        'angular-carousel':'../bower_components/angular-carousel/dist/angular-carousel',
+        'ngLocale':'./js/angular-locale_uk-ua'
 
 
 
@@ -83,6 +84,9 @@ require.config({
         },
         'facebook' : {
             exports: 'FB'
+        },
+        'ngLocale':{
+            deps: ['angular']
         }
 
     },

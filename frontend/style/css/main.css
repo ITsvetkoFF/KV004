@@ -888,6 +888,10 @@ td.b-details-body__title[colspan] {
     border-radius: 0;
 }
 
+.datepicker table {
+    margin: auto;
+}
+
 .datepicker input,
 .datepicker button {
     border-radius: 0;

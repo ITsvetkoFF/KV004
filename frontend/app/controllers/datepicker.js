@@ -1,6 +1,6 @@
 define(['./module'],function(controllers){
 	'use strict';
-	controllers.controller('datePicker',['$scope','$rootScope','todayTime', function ($scope,$rootScope, todayTime){
+	controllers.controller('datePicker',['$scope','$rootScope','todayTime','$locale', function ($scope,$rootScope, todayTime, $locale){
 		$scope.todayTime = todayTime;
 
 		$scope.clear = function () {
@@ -8,7 +8,7 @@ define(['./module'],function(controllers){
 		};
 
 		$scope.toggleMin = function() {
-			$scope.minDate = new Date("2014-02-18 00:00:00");
+			$scope.minDate = new Date(2014,2,18);
 		};
 		$scope.toggleMin();
 
@@ -23,7 +23,8 @@ define(['./module'],function(controllers){
 		$scope.dateOptions = {
 			formatYear: 'yy',
 			startingDay: 1,
-			showWeeks: 'false'
+			showWeeks: 'false',
+			formatMonth: 'MMM'
 		};
 
 		$scope.datepickers = {
@@ -31,7 +32,7 @@ define(['./module'],function(controllers){
 	        dtSecond: false
 	    }
 
-		$scope.format = 'dd-MMMM-yyyy';
+		$scope.format = 'dd MMM yyyy';
 		$scope.texts = {
 			close: 'Закрити',
 			clear: 'Очистити',
