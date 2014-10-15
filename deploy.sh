@@ -11,5 +11,5 @@ grunt
 cd ../backend 
 npm install
 mysql -u root -proot < EnviromapDB.sql
-nodejs filldb.js true
+nodejs filldb.js
 forever start -a -l /var/log/forever.log -o /var/log/out.log -e /var/log/err.log api.js
