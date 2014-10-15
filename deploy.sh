@@ -1,7 +1,7 @@
 # it assumes you have forever, npm, node, bower, mysql installed 
 mkdir -p /var/tmp/deploy/
 cd /var/tmp/deploy/
-forever stop api.js 
+forever stopall 
 rm -r KV004/
 git clone https://github.com/ITsvetkoFF/KV004.git
 cd KV004/frontend/ 
