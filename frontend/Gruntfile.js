@@ -1,14 +1,15 @@
-module.exports = function(grunt){
+module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
-
-    grunt.initConfig({
-
-        copy:{
-            html: {
-                src: './index.html', dest: 'dist/index.html'
-            },
-            dist: {
-                files: [{
+  // Project configuration.
+grunt.initConfig({
+    
+    copy:{
+	    html: {
+	    	src: './index.html', dest: 'dist/index.html'
+	    },
+        dist: {
+            files: [
+                {
                     expand: true,
                     dot: true,
                     cwd: './',
@@ -16,58 +17,91 @@ module.exports = function(grunt){
                     src: [
                         'images/**/*',
                         'style/fonts/*',
-                        'photos/**/*'
                     ]
                 },
-                    {
+                {
                     expand: true,
                     cwd: '.',
                     dest: 'dist',
                     src: ['bower_components/requirejs/*.js','bower_components/requirejs-domready/*.js']
                 }]
-            }
-
         },
-
-        useminPrepare: {
-            html: 'index.html',
-            options: {
-                dest: 'dist'
-            }
+        leaflet: {
+            src: '.tmp/concat/app/leaflet.js',
+            dest:'dist/app/leaflet.js',
         },
-
-
-        usemin: {
-            html: ['dist/index.html']
-
+        templates: {
+            files: [{
+                expand: true,
+                flatten: true,
+                dot: true,
+                cwd: './',
+                dest: 'dist/app/templates/',
+                src: ['.tmp/scripts/templates/*'],
+                    }]
         },
-        /*
-        bower: {
-            'bower.json': {
-                rjsConfig: 'app/main.js',
-                options: {
-                    exclude: ['facebook']
-                }
-            }
-        },*/
-        bower: {
-            install: {
-                options: {
-                    targetDir: "./bower_components",
-                    copy: false
-
-            }
-
-            }
+        jstemplates: {
+            src: '.tmp/templates.js', dest: 'bower_components/templates.js'
         },
-
-        requirejs: {
-            dist: {
+                    
+    },
+    
+   useminPrepare: {
+	      html: 'index.html',
+	      options: {
+	        dest: 'dist'
+	      }
+	  },
+    
+    usemin:{
+        html:['dist/index.html']
+          },
+    
+    htmlmin: {                                     // Task
+        dist: {                                    // Target
+          options: {                               // Target options
+            removeComments: true,
+            collapseWhitespace: true
+          },
+          files: [{
+            expand: true,
+            src: ['app/**/*.html','*.html'],
+            dest:'dist/',
+          }]
+        }
+      },
+    
+    html2js: {
+        options: {
+            base: '.',
+            module: 'app.templates',
+            singleModule: true,
+            useStrict: true,
+            htmlmin: {
+              collapseBooleanAttributes: true,
+              collapseWhitespace: true,
+              removeAttributeQuotes: true,
+              removeComments: true,
+              removeEmptyAttributes: true,
+              removeRedundantAttributes: true,
+              removeScriptTypeAttributes: true,
+              removeStyleLinkTypeAttributes: true
+            } 
+        },
+        main: {
+          src: ['app/templates/*.html'],
+          dest: 'app/templates/maintemplate.js'
+        },
+    },
+               
+   requirejs: {
+            generated: {
                 options: {
                     dir: '.tmp/scripts/',
                     modules: [{
                         name: 'main'
                     }],
+                    
                     preserveLicenseComments: false,
                     removeCombined: true,
                     baseUrl: 'app',
@@ -79,128 +113,85 @@ module.exports = function(grunt){
                 }
             }
         },
-        clean: {
+    concat: {
+        dist: {
+            src: ['.tmp/scripts/main.js'],
+            dest: 'dist/app/main.js'
+            }
+        },
+    clean: {
             dist: {
                 files: [{
                     dot: true,
                     src: [
                         '.tmp',
                         'dist/{,*/}*'
-
-                    ]
+                        ]
                 }]
-            }
-
-        },
-        concat:
-
-        {
-            options: {
-
             },
-            dist: {
-                src: ['.tmp/scripts/main.js'],
-                dest: 'dist/app/main.js'
-            }
+            tmp: {
+                 files: [{
+                    dot: true,
+                    src: '.tmp',
+                 }]
+                 }
         },
-
-        html2js: {
-            options: {
-
-                        base: 'app',
-                        module: 'app.templates',
-                        singleModule: true,
-                        useStrict: true,
-                        htmlmin: {
-                            collapseBooleanAttributes: true,
-                            collapseWhitespace: true,
-                            removeAttributeQuotes: true,
-                            removeComments: true,
-                            removeEmptyAttributes: true,
-                            removeRedundantAttributes: true,
-                            removeScriptTypeAttributes: true,
-                            removeStyleLinkTypeAttributes: true
+    bower: {
+            install: {
+                options: {
+                    targetDir: "./bower_components",
+                    copy: false
                         }
-                    },
-
-
-            main: {
-                src: ['app/**/*.html'],
-                dest: '.tmp/concat/scripts/templates.js'
-            }
-        },
-        html2js_templating: {
-            default_options: {
-                options: {
-                },
-                files: {
-                    "tmp/default_options.js": "app/templates/*.html"
-                }
-            }
-        },
-        htmlmin: {
-            dist: {
-                options: {
-                    collapseWhitespace: true,
-                    conservativeCollapse: true,
-                    collapseBooleanAttributes: true,
-                    removeCommentsFromCDATA: true,
-                    removeOptionalTags: true
-                },
-                files: [{
-                    expand: true,
-                    cwd: 'app/templates',
-                    src: ['*.html', '/{,*/}*.html'],
-                    dest: 'dist/app/templates'
-                }]
-            }
-        },
-
-        preprocess : {
-            options: {
-                inline: true,
-                context : {
-                    DEBUG: false
-                }
+                    }
             },
-            html : {
-                src : [
-                    'index.html'
+    
+});
+    
 
-                ]
-            },
-            js : {
-                src: '.tmp/concat/scripts/*.js'
-            }
-        }
-
-
-
-
-
-    });
-
-    grunt.registerTask('default',[
-        'clean',
-        'bower',
-        'copy:html',
-
-        'copy:dist',
-        'useminPrepare',
-        'concat',
-        'uglify',
-        'cssmin',
-        'usemin',
-        'html2js',
-        'html2js_templating',
-        'requirejs',
-        'concat',
-        'htmlmin',
-        'preprocess:js',  // Remove DEBUG code from production builds
-        'preprocess:html'
-
-
-    ]);
-
-
-}
+    // Default task(s). and build task
+    grunt.registerTask('default', [
+                      'clean:dist',
+                      'copy:html',
+                      'copy:dist',
+                      'useminPrepare',
+                      'concat:generated',
+                      'cssmin:generated',
+                      'requirejs:generated',
+                      'concat',
+                      'copy:leaflet',
+                      'usemin'
+                    ]);
+    grunt.registerTask('build', [
+                      //'bower',
+                      'clean',
+                      'copy:html',
+                      'copy:dist',
+                      'useminPrepare',
+                      'concat:generated',
+                      'cssmin:generated',
+                      'requirejs:generated',
+                      'concat',
+                      'copy:leaflet',
+                      'copy:templates',
+                      'copy:jstemplates',
+                      'usemin',
+                      'clean:tmp',
+                    ]);
+    grunt.registerTask('build2', [
+                      //'bower',
+                      'html2js',
+                      //'copy:templates',
+                      'copy:html',
+                      'copy:dist',
+                      'useminPrepare',
+                      'concat:generated',
+                      'cssmin:generated',
+                      'requirejs:generated',
+                      'concat',
+                      'copy:leaflet',
+                      //'copy:templates',
+                      'copy:jstemplates',
+                      'usemin',
+                      //'clean:tmp',
+                    ]);
+};

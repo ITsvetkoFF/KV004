@@ -27,7 +27,8 @@ require.config({
         'ngAnimate':'../bower_components/angular-animate/angular-animate',
         'd3': '../bower_components/d3/d3',
         'angular-carousel':'../bower_components/angular-carousel/dist/angular-carousel',
-        'ngLocale':'./js/angular-locale_uk-ua'
+        'ngLocale':'./js/angular-locale_uk-ua',
+        'app.templates':'./templates/maintemplate'
 
 
 
@@ -86,6 +87,9 @@ require.config({
             exports: 'FB'
         },
         'ngLocale':{
+            deps: ['angular']
+        },
+        'app.template': {
             deps: ['angular']
         }
 
