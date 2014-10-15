@@ -16,7 +16,7 @@ var mysql = require('mysql'),
     //location = require('./config.js');
     // for image processing !!!! use with GraphicsMagick and gm module
     // var gm = require('gm');
-    var productionVersion = process.argv[0];
+    var productionVersion = process.argv[2];
     var locationProduction = "../frontend/dist";
     var locationDevelop = "../frontend";
     var location="";
