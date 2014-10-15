@@ -1,6 +1,6 @@
 var productionVersion = true;
-var locationProduction = "../frontend/dist";
-var locationDevelop = "../frontend";
+var locationProduction = "../frontend/dist/";
+var locationDevelop = "../frontend/";
 var location="";
 if(productionVersion){
     location = locationProduction;
