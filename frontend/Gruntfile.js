@@ -152,7 +152,7 @@ grunt.initConfig({
 
 
     grunt.registerTask('default', [
-                      //'bower',
+                      'bower',
                       'html2js',
                       //'copy:templates',
                       'copy:html',
