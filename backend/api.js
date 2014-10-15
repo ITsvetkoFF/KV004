@@ -13,18 +13,10 @@ var mysql = require('mysql'),
     secret       = require('./config/secret'),
     io = require('socket.io'),
     routes = require('./routes.js'),
-    //location = require('./config.js');
+    location = require('./config.js');
     // for image processing !!!! use with GraphicsMagick and gm module
     // var gm = require('gm');
-    var productionVersion = process.argv[2];
-    var locationProduction = "../frontend/dist";
-    var locationDevelop = "../frontend";
-    var location="";
-    if(productionVersion){
-        location = locationProduction;
-    }else{
-        location = locationDevelop;
-    }
+    
     io = io.listen(server);
     require('./sockets/base')(io);
 
