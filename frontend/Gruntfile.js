@@ -149,35 +149,9 @@ grunt.initConfig({
     
 
     // Default task(s). and build task
+
+
     grunt.registerTask('default', [
-                      'clean:dist',
-                      'copy:html',
-                      'copy:dist',
-                      'useminPrepare',
-                      'concat:generated',
-                      'cssmin:generated',
-                      'requirejs:generated',
-                      'concat',
-                      'copy:leaflet',
-                      'usemin'
-                    ]);
-    grunt.registerTask('build', [
-                      //'bower',
-                      'clean',
-                      'copy:html',
-                      'copy:dist',
-                      'useminPrepare',
-                      'concat:generated',
-                      'cssmin:generated',
-                      'requirejs:generated',
-                      'concat',
-                      'copy:leaflet',
-                      'copy:templates',
-                      'copy:jstemplates',
-                      'usemin',
-                      'clean:tmp',
-                    ]);
-    grunt.registerTask('build2', [
                       //'bower',
                       'html2js',
                       //'copy:templates',
