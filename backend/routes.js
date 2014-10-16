@@ -36,72 +36,84 @@ var jwt          = require('jsonwebtoken'),
     });
 
 exports.getProblems = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
+    console.log("start to get information about all moderated problems");
     req.getConnection(function(err, connection) {
         if (err) {
-            console.error('CONNECTION error: ',err);
-            res.statusCode = 503;
+            res.statusCode = 500;
             res.send({
-                result: 'error',
-                err:    err.code
+                err: err.code
             });
+            console.log('Can`t connect to db in getProblems API call\n' + err +"\n");
         } else {
             connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Problems.ProblemTypes_Id, Problems.Status, Activities.Date FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Moderation=1 AND ActivityTypes_Id=1', function(err, rows, fields) {
                 if (err) {
-                    console.error(err);
                     res.statusCode = 500;
                     res.send({
-                        result: 'error',
-                        err:    err.code
+                        err: err.code
                     });
+                    console.error('Can`t make SELECTrequest to Problems db\n', err);
+                } else {
+                    res.send(rows);
+                    console.log("end to get information about all moderated problems \n");
                 }
-                res.send(rows);
             });
         }
     });
 };
 
 exports.getProblemId = function(req,res){ //get detailed problem description (everything)
-    console.log("get problems");
+    console.log("start to get information about problem  with id:" + req.params.id);
     req.getConnection(function(err, connection) {
         if (err) {
-            console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
-                result: 'error',
                 err:    err.code
             });
+            console.log('Can`t connect to db in getProblemId API call\n' + err +"\n");
         } else {
-            var id = req.params.id;
-            connection.query('SELECT * FROM Problems WHERE Id=?', [id], function(err1, rows1, fields1) {
-                if (err1) {
-                    console.error(err1);
-                    res.statusCode = 500;
-                    res.send({
-                        result1: 'error',
-                        err1:    err1.code
-                    });
-                }
-                connection.query('SELECT * FROM Photos WHERE Problems_Id=?', [id], function(err2, rows2, fields2) {
-                    if (err2) {
-                        console.error(err2);
+            var id = req.params.id ;
+                connection.query('SELECT * FROM Problems WHERE Id=?', [id], function(err1, rows1) {
+                    if (err1) {
+                        console.log('Can`t make SELECT request to Problems db with id=' + id +'\n' + err1);
                         res.statusCode = 500;
                         res.send({
-                            result2: 'error',
-                            err2:    err2.code
+                            err1: err1.code
                         });
                     }
-                    connection.query('SELECT * FROM Activities WHERE Activities.Problems_Id=?', [id], function(err3, rows3, fields3) {
-                        if (err3) {
-                        console.error(err3);
-                        res.statusCode = 500;
+                    if (rows1.length == 0) {
+                        res.statusCode = 404;
                         res.send({
-                            result3: 'error',
-                            err3:    err3.code
+                            error: "there is no problem with id:" + id
+                        });
+                        console.log("there is no problem with id:" + id);
+                    }else{
+                        connection.query('SELECT * FROM Photos WHERE Problems_Id=?', [id], function (err2, rows2) {
+                            if (err2) {
+                                console.log('Can`t make SELECT request FROM Photos WHERE Problems_Id=' + id +'\n' + err2);
+                                res.statusCode = 500;
+                                res.send({
+                                    err2: err2.code
+                                });
+                            }
+                            if (rows2.length == 0) {
+                                console.log("there is no photos referring to problem with id:" + id);
+                            }
+                            connection.query('SELECT * FROM Activities WHERE Activities.Problems_Id=?', [id], function (err3, rows3) {
+                                if (err3) {
+                                    console.log('Can`t make SELECT request FROM Activities WHERE Activities.Problems_Id=' + id +'\n' + err3);
+                                    res.statusCode = 500;
+                                    res.send({
+                                        err3: err3.code
+                                    });
+                                }
+                                if (rows3.length == 0) {
+                                    console.log("there is no Activities referring to problem with id:" + id);
+                                }
+                                res.send([rows1, rows2, rows3]);
+                                console.log("end of query to get information about problem  with id:" + req.params.id + '\n');
                             });
-                        }
-                        res.send([rows1, rows2, rows3]);
-                    });
-                });
+                        });
+                    }
             });
         }
     });
@@ -110,23 +122,26 @@ exports.getProblemId = function(req,res){ //get detailed problem description (ev
 exports.getTitles = function(req,res){ //get titles of resources
     req.getConnection(function(err, connection) {
         if (err) {
-            console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
-                result: 'error',
                 err:    err.code
             });
+            console.log('Can`t connect to db in getTitles API call\n' + err +"\n");
         } else {
             connection.query('SELECT Title, Alias, Id, IsResource FROM Resources', function(err, rows, fields) {
                 if (err) {
-                    console.error(err);
                     res.statusCode = 500;
                     res.send({
-                        result: 'error',
                         err:    err.code
                     });
+                    console.log('Can`t make SELECT Title, Alias, Id, IsResource FROM Resources\n' + err +"\n");
                 }
-                res.send(rows);
+                try{
+                    res.send(rows);
+                }
+                catch(err){
+                    console.log('Can`t send rows to client');
+                }
             });
         }
     });
@@ -558,7 +573,20 @@ exports.getNews = function(req,res) {
                 err: err.code
             });
         } else {
-
+            connection.query('SELECT * FROM News ', function (err, rows, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'Can`t connect to db server',
+                        err: err.code
+                    });
+                    return;
+                }
+                res.send({
+                    news: rows
+                });
+            });
         }
 
         console.log(req.body);
@@ -569,23 +597,8 @@ exports.getNews = function(req,res) {
 
         };
 
-        connection.query('SELECT * FROM News ', function (err, rows, fields) {
-            if (err) {
-                console.error(err);
-                res.statusCode = 500;
-                res.send({
-                    result: 'error',
-                    err: err.code
-                });
-            }
-            res.send({
-               news:rows
-            });
-        });
-
-
     });
-}
+};
 
 exports.clearNews = function(req,res) {
     req.getConnection(function (err, connection) {
