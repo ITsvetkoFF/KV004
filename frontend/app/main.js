@@ -89,7 +89,7 @@ require.config({
         'ngLocale':{
             deps: ['angular']
         },
-        'app.template': {
+        'app.templates': {
             deps: ['angular']
         }
 
