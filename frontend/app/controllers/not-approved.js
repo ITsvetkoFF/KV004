@@ -1,31 +1,31 @@
-
-
-    controllers.controller('notApprovedCtrl', ['$scope', '$http', '$rootScope', 'UserService','adminToShowProblemService', function($scope, $http, $rootScope, UserService,adminToShowProblemService){
+define(['./module'],function (controllers) {
+    'use strict';
+    controllers.controller('notApprovedCtrl', ['$scope', '$http', '$rootScope', 'UserService', 'adminToShowProblemService', function ($scope, $http, $rootScope, UserService, adminToShowProblemService) {
         $scope.isAdministrator = UserService.isAdministrator;
 
-        if($scope.isAdministrator()){
-            adminToShowProblemService.getNotApprovedProblem(function(notApproved){
+        if ($scope.isAdministrator()) {
+            adminToShowProblemService.getNotApprovedProblem(function (notApproved) {
                 $scope.notApproved = notApproved;
-                if(adminToShowProblemService.getNotApprovedProblemListQty()){
+                if (adminToShowProblemService.getNotApprovedProblemListQty()) {
                     $scope.showProblem($scope.notApproved[0]);
                 }
             });
 
         }
 
-        $scope.showProblem = function (problem){
+        $scope.showProblem = function (problem) {
             adminToShowProblemService.showScopeNotApprovedProblemFromList(problem);
         };
 
         $scope.editProblem = function (problem) {
-            window.location.href="#/problem/showProblem/"+problem.Id;
+            window.location.href = "#/problem/showProblem/" + problem.Id;
         };
 
         $scope.approveProblem = function (problem) {
-            if(UserService.getSaveChangeStatus()){
+            if (UserService.getSaveChangeStatus()) {
                 $scope.notApproved = adminToShowProblemService.deleteNotApprovedProblemFromList(problem);
-                adminToShowProblemService.approveNotApprovedProblem(problem).then(function(){
-                    if(adminToShowProblemService.getNotApprovedProblemListQty()){
+                adminToShowProblemService.approveNotApprovedProblem(problem).then(function () {
+                    if (adminToShowProblemService.getNotApprovedProblemListQty()) {
                         adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
                     } else {
                         adminToShowProblemService.redirectToMap();
@@ -35,18 +35,17 @@
         };
 
         $scope.deleteProblem = function (problem) {
-                if(UserService.getSaveChangeStatus()){
-                    $scope.notApproved = adminToShowProblemService.deleteNotApprovedProblemFromList(problem);
-                    adminToShowProblemService.deleteNotApprovedProblemDB(problem).then(function() {
-                        if(adminToShowProblemService.getNotApprovedProblemListQty()){
-                            adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
-                        } else {
-                            adminToShowProblemService.redirectToMap();
-                        }
-                    })
-                }
+            if (UserService.getSaveChangeStatus()) {
+                $scope.notApproved = adminToShowProblemService.deleteNotApprovedProblemFromList(problem);
+                adminToShowProblemService.deleteNotApprovedProblemDB(problem).then(function () {
+                    if (adminToShowProblemService.getNotApprovedProblemListQty()) {
+                        adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
+                    } else {
+                        adminToShowProblemService.redirectToMap();
+                    }
+                })
+            }
         };
-
 
 
     }]);

@@ -13,7 +13,6 @@ require.config({
         'domReady': '../bower_components/requirejs-domready/domReady',
         'require': '../bower_components/requirejs/require',
         'facebook': './js/facebook',
-
         'dropzone':'../bower_components/dropzone/downloads/dropzone',
     /* 'btford.socket-io': '../bower_components/btford.socket-io',*/
         'textAngular':'../bower_components/textAngular/src/textAngular',
