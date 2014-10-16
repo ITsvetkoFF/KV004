@@ -1,7 +1,7 @@
 define(['./module'], function(controllers){
     'use strict';
     controllers.controller('showProblemCtrl',['$scope','$routeParams','$http','ipCookie','$rootScope', function ($scope,$routeParams,$http,ipCookie,$rootScope){
-         
+        //
         $rootScope.getProblemsAndPlaceMarkers();
         if (!$scope.isAdministrator()){
             $scope.editStatus = 'btn-editStatus';

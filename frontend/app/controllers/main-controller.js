@@ -1,3 +1,4 @@
+//
 define(['./module'],function(controllers){
     'use strict';
     controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http' ,function($scope,$rootScope,$modal, $log, $http){

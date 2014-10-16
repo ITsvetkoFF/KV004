@@ -1,3 +1,4 @@
+//
 define(['./module'],function(controllers){
     'use strict';
     controllers.controller('notApprovedCtrl', ['$scope', '$http', '$rootScope', 'UserService', function($scope, $http, $rootScope, UserService){

@@ -1,3 +1,4 @@
+//
 define(['./module'], function (controllers) {
     'use strict';
     controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location','todayTime', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location, todayTime) {
