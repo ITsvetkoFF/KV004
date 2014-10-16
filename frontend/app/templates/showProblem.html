@@ -1,9 +1,9 @@
 <div class="b-right-side__show-problem">
     <div class="b-editproblemctr" >
-        <a href="#/map" class="close">×</a>
+        <a href="" ng-click="swipeHide()" class="close">×</a>
     </div>
     <div class="b-problems" >
-<!-- Часть для в ставки / начало -->
+<!-- Часть для вставки / начало -->
 
         <div class="b-problem-deatiled-info-title">
             <img ng-src="images/markers/{{problem.ProblemTypes_Id}}.png" class="b-problem-deatiled-info-title__icon">
@@ -38,13 +38,13 @@
                     </div>
 
             </div>
-            <div class="b-problem-deatiled-info-votes">
-                <!--<img class='b-problem-deatiled-info__votes' src='images/icons/heart.jpg'> -->
-                <button class="simple_like_img" ng-click="addOneVote()" ng-disabled="disableVoteButton">
-                    <span ><i class="fa fa-fw"></i></span>
-                </button>
-                {{problem.Votes}}
-            </div>
+                <div class="b-problem-deatiled-info-votes">
+                    <!--<img class='b-problem-deatiled-info__votes' src='images/icons/heart.jpg'> -->
+                    <button class="simple_like_img" ng-click="addOneVote()" ng-disabled="disableVoteButton">
+                        <span ><i class="fa fa-fw"></i></span>
+                    </button>
+                    {{data.Votes}}
+                </div>
         </div>
 
 
