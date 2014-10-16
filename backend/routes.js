@@ -788,7 +788,7 @@ exports.logIn = function(req, res) {
 
             var userData = {};
 
-            connection.query("select Users.Id, Users.Name, Users.Surname, UserRoles.Role from Users left join UserRoles on Users.UserRoles_Id = UserRoles.Id where Email like  '" + email + "' and Password like '" + password + "'", function(err, result) {
+            connection.query("select Users.Id, Users.Name, Users.Surname, Users.Email, UserRoles.Role from Users left join UserRoles on Users.UserRoles_Id = UserRoles.Id where Email like  '" + email + "' and Password like '" + password + "'", function(err, result) {
                 if(err) console.log;
 
                 if(result.length === 0) {
@@ -799,6 +799,7 @@ exports.logIn = function(req, res) {
                 userData.surname = result[0].Surname;
                 userData.role = result[0].Role;
                 userData.token = jwt.sign(userData, secret.secretToken);
+                userData.email = result[0].Email;
                 return res.json(userData);
 
             });
