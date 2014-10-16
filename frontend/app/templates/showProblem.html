@@ -1,47 +1,49 @@
 <div class="b-right-side__show-problem">
     <div class="b-editproblemctr" >
-        <a href="" ng-click="swipeHide()" class="close">×</a>
+        <a href="#/map" class="close">×</a>
     </div>
     <div class="b-problems" >
 <!-- Часть для вставки / начало -->
 
         <div class="b-problem-deatiled-info-title">
-            <img ng-src="images/markers/{{data.ProblemTypes_Id}}.png" class="b-problem-deatiled-info-title__icon">
+            <img ng-src="images/markers/{{problem.ProblemTypes_Id}}.png" class="b-problem-deatiled-info-title__icon">
             <div  class="b-problem-deatiled-info-title__text">
-                <editproblemtitle  value="title" ></editproblemtitle>
+                <editproblemtitle  value="problem.Title"></editproblemtitle>
             </div>
             <div class="b-problem-deatiled-info-user">
                 <div class="b-problem-deatiled-info-user__name">
-                    {{userName}}
+                    {{problem.userName}}
                 </div>
                 <div class="b-problem-deatiled-info-user__date">
-                    {{createdDate | date:'dd/MM/yyyy HH:MM'}}
+                    {{problem.CreatedDate | date:'dd/MM/yyyy HH:MM'}}
                 </div>
             </div>
         </div>
         <div class="b-problem-deatiled-info-general">
             <div class='b-problem-deatiled-info-severity'>
                 <div class="b-problem-deatiled-info__caption"> Важливість</div>
-                <div class="b-problem-deatiled-info__severity"  ng-init="severity">
-                   <rating  ng-model="severity" readonly="!isAdministrator()" state-on="'fa-star'" state-off="'fa-star-o'"></rating>
+                <div class="b-problem-deatiled-info__severity"  ng-init="problem.Severity">
+                   <rating  ng-model="problem.Severity" readonly="!isAdministrator()" state-on="'fa-star'" state-off="'fa-star-o'"></rating>
                 </div>
             </div>
             <div class="btn-group b-problem-deatiled-info__status">
-                <div class="b-problem-deatiled-info-status__text">{{status}}</div>
-                <div class="onoffswitch">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-false-value="Активна" ng-true-value="Вирішена" ng-model="status" ng-disabled="!isAdministrator()" >
-                    <label class="onoffswitch-label" for="myonoffswitch">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
-                </div>
+                <div class="b-problem-deatiled-info-status__text" >{{problem.Status}}
+                    <div class="onoffswitch">
+                        <input type="checkbox"   name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="problem.Status" ng-true-value="Вирішина" ng-false-value="Актуальна" ng-change="checked = !checked"
+                               ng-disabled="!isAdministrator()">
+                        <label class="onoffswitch-label" for="myonoffswitch">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+
             </div>
             <div class="b-problem-deatiled-info-votes">
                 <!--<img class='b-problem-deatiled-info__votes' src='images/icons/heart.jpg'> -->
                 <button class="simple_like_img" ng-click="addOneVote()" ng-disabled="disableVoteButton">
                     <span ><i class="fa fa-fw"></i></span>
                 </button>
-                {{data.Votes}}
+                {{problem.Votes}}
             </div>
         </div>
 
@@ -51,7 +53,7 @@
                 <div class="b-problem-deatiled-info-description">
                     <div class="b-problem-deatiled-info-description__title"></div>
                     <div class="b-problem-deatiled-info-description__content">
-                        <editproblemcontent  value="content"></editproblemcontent>
+                        <editproblemcontent  value="problem.Content"></editproblemcontent>
                     </div>
                     <div class="b-problem-deatiled-info-description-photos">
 
@@ -76,7 +78,7 @@
                                 Ні<input type="radio" name="solveProblemMark" value="0">
 
                             </div>
-                            <input id="btn-submit" type="button"   class="b-add-problem-button btn-forward-step-3 b-public" value="Додати">
+                            <input id="btn-submit" type="button" class="b-add-problem-button btn-forward-step-3 b-public" value="Додати">
                             <input id="btn-reload" type="button" ng-click="hideAddPhotoForm()" class="b-add-problem-button btn-forward-step-3 b-public" value="Звернути">
                         </form>
                     </div>
@@ -86,9 +88,11 @@
                  <activity></activity>
             </tab>
         </tabset>
-        <button type="button" class="btn btn{{showRightSide}} {{editStatus}} btn-sm" ng-click="saveChangestoDb(data.Title,severity, status, content)" >Збережіть зміни</button>
-        <a href="#/map"><button type="button" class="btn {{delStatus}} btn-sm" ng-click="deleteProblemFromDb()" >Видалити проблему з бази</button></a>
-
+        <div>
+            <button type="button" class="btn btn-sm {{editStatusClass}}" ng-show="isAdministrator()" ng-click="saveChangestoDb(problem.Title,problem.Severity, problem.Status, problem.Content)" >Збережіть зміни</button>
+            <button type="button" class="btn {{addStatus}} btn-sm" ng-show="isAdministrator()"ng-click="addProblemToDB()" >Додати проблему до бази</button>
+            <button type="button" class="btn {{delStatus}} btn-sm" ng-show="isAdministrator()" ng-click="deleteProblemFromDb()" >Видалити проблему з бази</button>
+        </div>
 
 
 
