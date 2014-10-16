@@ -113,7 +113,7 @@ define(['./module'], function (controllers) {
             ipCookie.remove('userSurname');
             ipCookie.remove('userRole');
             ipCookie.remove('id');
-            
+            ipCookie.remove('userEmail');
 
         }
 
