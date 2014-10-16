@@ -22,7 +22,7 @@
     width: 300px;
 }
 .b-problem-list {
-    box-sizing: border-box ;
+    box-sizing: border-box;
     display: inline-block;
     height: 85%;
     left: 312px;
@@ -184,7 +184,7 @@
     font-size: 1.1em;
     font-weight: normal;
     line-height: 1em;
-    margin: 0 0 0 8px;
+    margin: 5px 0 0 8px;
     right: 0;
     text-align: left;
     width: 90%;
@@ -283,16 +283,8 @@
     height: 23px;
     width: 70px;
 }
-.b-problem-status_opened {
-    background: none repeat scroll 0 0 #449d44;
-    color: #ffffff;
-    margin: 0;
-}
-.b-problem-status_closed {
-    background: none repeat scroll 0 0 #d9534f;
-    color: #ffffff;
-    margin: 0 8px 0 -8px;
-}
+
+
 .b-problem-deatiled-info-description {
     box-sizing: border-box;
     display: block;
@@ -317,6 +309,7 @@
     overflow-y: auto;
     padding: 0 5px 0 0;
     text-align: justify;
+    width:100%;
 }
 .b-problem-deatiled-info-description-photos {
     display: block;
@@ -780,6 +773,9 @@ margin: 0 10px 0 10px;
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0;
 }
+
+
+
 .b-empty-bottom {
     background: none repeat scroll 0 0 #fff;
     bottom: 0;
@@ -853,7 +849,7 @@ margin: 0 10px 0 10px;
                 display: inline-block;
                 text-align: left;
                 line-height: 22px;
-                max-width: 600px;
+                max-width: 85%;
                 cursor: pointer;
             }
 
@@ -877,12 +873,12 @@ margin: 0 10px 0 10px;
                         display: inline-block;
                         padding: 0 5px;
                         cursor: pointer;
-                    }.btn-warning{
-    position: fixed;                                             position: fixed;position: fixed;
+                    }
+.btn-warning{
+    position: fixed;
     display: inline-block;
     bottom: 10px;
-    right: 300px;
-    width: 250px;
+    width: 31%;
     opacity: 1;
     -webkit-transition: all 0.5s ease-out;
     -moz-transition: all 0.5s ease-out;
@@ -894,20 +890,17 @@ margin: 0 10px 0 10px;
     opacity: 0;
     position: absolute;
     bottom: 10px;
-    right: 300px;
-    width: 250px;
+    width: 31%;
     -webkit-transition: all 0.5s ease-out;
     -moz-transition: all 0.5s ease-out;
     -ms-transition: all 0.5s ease-out;
     -o-transition: all 0.5s ease-out;
     transition: all 0.5s ease-out;
 }
-a .btn-danger{
-    position: fixed;
+.btn-danger{
     display: inline-block;
     bottom: 10px;
-    right: 20px;
-    width: 250px;
+    width: 31%;
     opacity: 1;
     -webkit-transition: all 0.5s ease-out;
     -moz-transition: all 0.5s ease-out;
@@ -917,4 +910,13 @@ a .btn-danger{
 }
 .btn-delete{
     opacity: 0;
+    transition: all 0.5s ease-out;
+    visibility: hidden;
+}
+.btn-success{
+    display: inline-block;
+    bottom: 10px;
+    width: 31%;
+    opacity: 1;
+    transition: all 0.5s ease-out;
 }

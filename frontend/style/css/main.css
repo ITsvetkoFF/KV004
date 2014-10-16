@@ -22,7 +22,7 @@ html, body, ul, h2 {
 }
 
 body {
-    overflow: hidden ;
+    overflow: hidden;
 }
 
 html, body {
@@ -1482,10 +1482,18 @@ form.dropzone {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-    .editproblemtitle span,
+.editproblemtitle span,
 .editproblemcontent span{
     cursor: pointer;
+    white-space: pre-wrap;
 }
+
+.editproblemtitleNotAdmin span,
+.editproblemcontentNotAdmin span {
+    cursor: default;
+    white-space: pre;
+}
+
 .editproblemtitle  input,
 .editproblemcontent textarea{
     display: none;
@@ -1502,9 +1510,6 @@ form.dropzone {
 .editproblemcontent.active textarea{
     display: inline-block;
     margin: 0px 0px 0px 0px;
-    width: 525px;
-    height: 100px;
-    overflow-x: hidden;
 }
     .editor {
         height: 100%;
