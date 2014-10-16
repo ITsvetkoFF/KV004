@@ -1,4 +1,3 @@
-//
 define(['./module'],function(directives){
     directives.directive('editproblemcontent',function(){
         return {
@@ -6,7 +5,7 @@ define(['./module'],function(directives){
             scope: {
                value: '='
             },
-            template: '<span ng-click="edit()">{{tempValue}}</span><textarea ng-model="tempValue"></textarea>',
+            template: '<span ng-click="edit()" ng-bind-html = "tempValue"></span><textarea  ng-model="tempValue" wrap="hard" cols="74" rows="15"></textarea>',
             controller: function($scope,UserService){
                 $scope.isAdministrator = UserService.isAdministrator;
             },
@@ -22,7 +21,6 @@ define(['./module'],function(directives){
 
                 $scope.$watch('value', function() {
                     $scope.tempValue = $scope.value;
-
                 });
 
                 // ng-click handler to activate edit-in-place
@@ -37,6 +35,8 @@ define(['./module'],function(directives){
                         // `angular.element()` provides a chainable array, like jQuery so to access a native DOM function,
                         // we have to reference the first element in the array.
                         inputElement[0].focus();
+                    }else{
+                        element.addClass('cursorUser');
                     }
                 };
 

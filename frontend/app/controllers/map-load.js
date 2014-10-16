@@ -1,4 +1,3 @@
-//
 define(['./module'], function (controllers) {
     'use strict';
     controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location','todayTime', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location, todayTime) {
@@ -46,16 +45,11 @@ define(['./module'], function (controllers) {
         }
 
         function onMarkerClick(marker){
-            if($scope.isAdministrator()) {
-                window.location.href="#/map";
-                window.location.href = "#/problem/editProblem/" + this._id;
-            } else{
-                window.location.href="#/map";
+            if (UserService.getSaveChangeStatus()){
                 window.location.href="#/problem/showProblem/"+ this._id;
+                map.panTo(marker.latlng);
             }
-             
-            $rootScope.$broadcast('Update',"_problem");
-            map.panTo(marker.latlng);
+
         };
 
         function placeMarkers(data) {
@@ -71,6 +65,7 @@ define(['./module'], function (controllers) {
                 marker.on('click', onMarkerClick);
                 marker._id = location['Id'];
                 markers.addLayer(marker);
+                map.addLayer(markers);
             });
             map.addLayer(markers);
         };
