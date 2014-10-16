@@ -1,18 +1,21 @@
 define(['./module'], function (controllers) {
     'use strict';
-    controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location','todayTime', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location, todayTime) {
+    controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location) {
         $scope.isAdministrator = UserService.isAdministrator;
-                $rootScope.$broadcast('Update',"");
 
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            minZoom: 2,
-            detectRetina: true,
+            maxZoom: 13,
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         });
         var geoJson = L.geoJson (ukraineBorders, {
             style: {
                 opacity:     0,
                 fillOpacity: 0
+            },
+            onEachFeature: function (feature, layer) {
+                layer.on('contextmenu', function(e) {
+                    alert("Замість цього повідомлення, буде відкриватися вікно 'Повідомити про проблему'");
+                });
             }
         });
         var latlng  = L.latLng(50.00, 32.00);
@@ -45,16 +48,11 @@ define(['./module'], function (controllers) {
         }
 
         function onMarkerClick(marker){
-            if($scope.isAdministrator()) {
-                window.location.href="#/map";
-                window.location.href = "#/problem/editProblem/" + this._id;
-            } else{
-                window.location.href="#/map";
+            if (UserService.getSaveChangeStatus()){
                 window.location.href="#/problem/showProblem/"+ this._id;
+                map.panTo(marker.latlng);
             }
-             
-            $rootScope.$broadcast('Update',"_problem");
-            map.panTo(marker.latlng);
+
         };
 
         function placeMarkers(data) {
@@ -70,21 +68,20 @@ define(['./module'], function (controllers) {
                 marker.on('click', onMarkerClick);
                 marker._id = location['Id'];
                 markers.addLayer(marker);
+                map.addLayer(markers);
             });
-            map.addLayer(markers);
         };
 
         function userSelectionFilterMarkers(data) {
-            var tempData = [];
+            var newData = [];
             for (var i = 0; i < data.length; i++) {
                 var location = data[i];
                 var problemTypeSelected = isSelected($scope.problemTypes, location.ProblemTypes_Id);
                 var problemStatusSelected = isSelected($scope.problemStatuses, location.Status);
                 if (problemTypeSelected && problemStatusSelected){
-                    tempData.push(location);
+                    newData.push(location);
                 }
             };
-            var newData = dateRange(tempData);
             return newData;
         };
 
@@ -95,21 +92,6 @@ define(['./module'], function (controllers) {
                 }
             };
         };
-
-        function dateRange (data) {
-            var dateFrom = Date.parse(todayTime.formDataDt);
-            var dateTill = Date.parse(todayTime.formDataDtSecond);
-            var tempData = [];
-            for (var i = 0; i < data.length; i++) {
-                var location = data[i];
-                var locationDate = Date.parse(location.Date);
-                if (dateFrom < locationDate && locationDate < dateTill) {
-                    tempData.push(location);
-                };
-            };
-            var newData = tempData;
-            return newData;
-        }
 
         $scope.problemTypes = [
             {name: 'Проблеми лісів',            id: 1, selected: true},
@@ -135,4 +117,11 @@ define(['./module'], function (controllers) {
         };
 
     }]);
+
+    controllers.directive('problemFilters', function(){
+        return {
+            restrict: 'A',
+            templateUrl: 'app/templates/filters.html'
+        }
+    });
 });

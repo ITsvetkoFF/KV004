@@ -1,87 +1,89 @@
 define(['./module'], function(controllers){
     'use strict';
-    controllers.controller('showProblemCtrl',['$scope','$routeParams','$http','ipCookie','$rootScope', function ($scope,$routeParams,$http,ipCookie,$rootScope){
-         
-        $rootScope.getProblemsAndPlaceMarkers();
-        if (!$scope.isAdministrator()){
-            $scope.editStatus = 'btn-editStatus';
-            $scope.delStatus = 'btn-delete';
-        } else {
-            $scope.editStatus = 'btn-warning';
-            $scope.delStatus = 'btn-danger';
+    controllers.controller('showProblemCtrl',['$scope','$routeParams','$http','ipCookie','$rootScope','$modal','adminToShowProblemService','$window','UserService', function ($scope,$routeParams,$http,ipCookie,$rootScope,$modal,adminToShowProblemService,$window, UserService){
+
+
+        adminToShowProblemService.setEditStatus($scope.isAdministrator());
+        $scope.editStatusClass = adminToShowProblemService.getEditStatus(3);
+        $scope.delStatus = adminToShowProblemService.getEditStatus(0);
+        if(adminToShowProblemService.getNotApprovedProblemListQty () != 0){
+            $scope.addStatus = adminToShowProblemService.getEditStatus(2);
+        }else{
+            $scope.addStatus = adminToShowProblemService.getEditStatus(3);
         }
 
-        $rootScope.$broadcast('Update',"_problem");
+        $rootScope.$broadcast('Update',"");
         $rootScope.$emit('showSlider','false');
         $scope.showSlider = false;
         $scope.showSliderFunc = function(){
             $rootScope.$emit('showSlider','true');
-            $rootScope.$emit('get');
-        }
+        };
+
         if(ipCookie('vote'+$routeParams.problemID)==true){
-          
-          $scope.disableVoteButton=true;
-      }else{
-          $scope.disableVoteButton=false;
-      }  
+            $scope.disableVoteButton=true;
+        }else{
+            $scope.disableVoteButton=false;
+        }
         $scope.showDropField = false;
         $scope.showAddPhotoButton = true;
         var userID ='';
         var problemID = '';
+        var problem ='';
+        var problemModerationStatus = '';
+        var tempContent = '';
         //get problem info
-            var res=$http.get("api/problems/"+$routeParams.problemID);
 
-        $scope.$watch('title', function(newValue, oldValue) {
-            if (!oldValue) {
-                return;
-            }
-            $scope.editStatus = 'btn-warning';
-        });
-
-        $scope.$watch('severity', function(newValue, oldValue) {
-            if (!oldValue) {
-                return;
-            }
-            $scope.editStatus = 'btn-warning';
-        });
-        $scope.$watch('content', function(newValue, oldValue) {
-            if (!oldValue) {
-                return;
-            }
-            $scope.$parent.editStatus = 'btn-warning';
-            $scope.$parent.content = newValue;
-        });
+        var res=$http.get("api/problems/"+$routeParams.problemID);
 
 
         res.success(function (data, status, headers, config) {
-            $scope.data = data[0][0];
+            $scope.problem = data[0][0];
+            problem = data[0][0];
             userID = data[2][0].Users_Id;
             problemID = parseInt(data[0][0].Id);
-            $scope.severity = parseInt(data[0][0].Severity);
-            $scope.content = data[0][0].Content;
-            $scope.title = data[0][0].Title;
-            $scope.createdDate = data[2][0].Date;
+            $scope.problem.Severity = parseInt(data[0][0].Severity) || 1;
+            $scope.problem.Content = data[0][0].Content || 'опис відсутній';
+            $scope.problem.Title = data[0][0].Title || 'назва відсутня';
+            $scope.problem.CreatedDate = data[2][0].Date;
             $scope.photos = data[1];
             $rootScope.photos = $scope.photos;
-            $scope.status = data[0][0].Status ? 'Активна' : 'Вирішена';
-            $scope.checked = data[0][0].Status;
-            $scope.votes = data[0][0].Votes;
+            $scope.problem.Status = data[0][0].Status?"Вирішина":"Актуальна";
+            $scope.checked = data[0][0].Status?1:0;
+            problemModerationStatus = data[0][0].Moderation ;
+            $scope.problem.Votes = data[0][0].Votes;
+            var tempUser = JSON.parse(data[2][0].Content);
+            $scope.problem.userName = tempUser.userName;
 
-                //get user info by UserID
-                res = $http.get("api/users/"+userID);
-                res.success(function(data,status,headers,config){
-                    $scope.userName = angular.fromJson(data).json[0].Name;
-                });
-                //end get user info by UserID
 
-            $scope.$watch('status', function(newValue, oldValue) {
-                if (!oldValue) {
-                    return;
+            $scope.$watch('problem.Status', function(newValue, oldValue) {
+                if(newValue != oldValue ) {
+                    $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
+                    $scope.problem.Status = newValue;
+                    UserService.setSaveChangeStatus(false);
                 }
-                if (!$scope.isAdministrator()) {
-                    $scope.editStatus = 'btn-editStatus';
-                };
+            });
+            $scope.$watch('problem.Title', function(newValue, oldValue) {
+                if(newValue != oldValue ){
+                    $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
+                    $scope.problem.Title = newValue;
+                    UserService.setSaveChangeStatus(false);
+                }
+            });
+            $scope.$watch('problem.Severity', function(newValue, oldValue) {
+                if(newValue != oldValue ) {
+                    $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
+                    $scope.problem.Severity = newValue;
+                    UserService.setSaveChangeStatus(false);
 
+                }
+            });
+            $scope.$watch('problem.Content', function(newValue, oldValue) {
+                if(newValue != oldValue && UserService.getSaveChangeStatus() == true) {
+                    $scope.$parent.problem.Content = newValue;
+                    UserService.setSaveChangeStatus(false);
+                    console.log('apply');
+                    $scope.$parent.editStatusClass =  adminToShowProblemService.getEditStatus(1);
+                }
             });
 
             $scope.activities = data[2].reverse();
@@ -95,7 +97,7 @@ define(['./module'], function(controllers){
         res.error(function(err){
             throw err;
         });
-        //end get problem request info
+
 
 
         $scope.dropzoneConfig = {
@@ -131,7 +133,7 @@ define(['./module'], function(controllers){
 
             var responce = $http.post('/api/vote',{idProblem:$routeParams.problemID,userId:$scope.userId,userName:$scope.name});
             responce.success(function(data,status,headers,config){
-                $scope.data.Votes++;
+                $scope.problem.Votes++;
                 ipCookie('vote'+$routeParams.problemID,true);
                 $scope.disableVoteButton=true;
                 window.location.href="#/problem/showProblem/"+$routeParams.problemID;
@@ -145,6 +147,7 @@ define(['./module'], function(controllers){
         }
 
         $scope.addComment = function(comment) {
+            console.log(comment);
             var data = {data: {userId: $scope.userId, userName: $scope.name, Content: comment}};
             var responce = $http.post('/api/comment/' + $routeParams.problemID, JSON.stringify(data));
             responce.success(function (data, status, headers, config) {
@@ -165,8 +168,6 @@ define(['./module'], function(controllers){
 
         }
         $scope.deleteComment = function(id) {
-
-
             var responce = $http.delete('/api/activity/' + id);
             responce.success(function (data, status, headers, config) {
                 for(var i=0;i<$scope.activities.length;i++){
@@ -174,10 +175,7 @@ define(['./module'], function(controllers){
                         $scope.activities.splice(i,1);
                     }
                 }
-
                 $scope.commentContent="";
-
-
             });
             responce.error(function (data, status, headers, config) {
                 throw error;
@@ -210,40 +208,100 @@ define(['./module'], function(controllers){
 
         }
 
-        //save changes to db
-        $scope.saveChangestoDb = function(){
-            var title = $scope.title;
-            var severity = $scope.severity;
-            var problemStatus = $scope.checked ?0:1;
-            var content = $scope.content;
-            $http.put('/api/editProblem/' + problemID, {Title: title, Content: content, Severity: severity, ProblemStatus: problemStatus})
-                .success(function () {
-                    $scope.editStatus = 'btn-editStatus';
+        //if user did not submit changes
+        $rootScope.$on('$locationChangeStart', function(event) {
+            if (!UserService.getSaveChangeStatus()) {
+                event.preventDefault();
+            }
+        });
 
-                })
-                .error(function (status, data) {
-                    console.log(status);
-                    console.log(data);
+        //save changes to db
+        $scope.saveChangestoDb = function() {
+            adminToShowProblemService.saveChangestoDbProblemDescription(problem, $scope.problem.Severity, $scope.problem.Content,$scope.problem.Title, $scope.checked)
+                .then(function() {
+                    adminToShowProblemService.showScopeNotApprovedProblemFromList(problem);
+                    $scope.editStatusClass = adminToShowProblemService.getEditStatus(3);
+                    UserService.setSaveChangeStatus(true);
                 });
+        };
+
+        //addproblemtoDB
+        $scope.addProblemToDB = function(){
+            if(UserService.getSaveChangeStatus()){
+                $scope.notApproved = adminToShowProblemService.deleteNotApprovedProblemFromList(problem);
+                adminToShowProblemService.approveNotApprovedProblem(problem).then(function(){
+                    if(adminToShowProblemService.getNotApprovedProblemListQty()){
+                        adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
+                    } else {
+                        adminToShowProblemService.redirectToMap();
+                    }
+                })
+            }
         }
 
         //delete problem from DB
         $scope.deleteProblemFromDb = function(){
-            $http.delete('/api/problem/' + problemID,{id:problemID} )
-                .success(function () {
-                    $rootScope.getProblemsAndPlaceMarkers();
-                })
-                .error(function (status, data) {
-                    console.log(status);
-                    console.log(data);
-                });
-            $scope.swipeHide();
-        }
+            $scope.open('sm') ;
+        };
 
+        //modal window
+        $scope.open = function (size) {
+
+            var modalInstance = $modal.open({
+                template:'<div class="modal-header">'+
+                    '<h3 class="modal-title">Увага</h3>'+
+                    '</div>'+
+                    '<div class="modal-body">'+
+                    'Будь ласка, підтвердіть видалення проблеми'+
+                    '</div>' +
+                    ' <div class="modal-footer">'+
+                    '<button class="btn btn-primary" ng-click="ok()">OK</button>'+
+                    '<button class="btn btn-warning1" ng-click="cancel()">Cancel</button>'+
+                    '</div>',
+                controller: 'ModalInstanceCtrl',
+                size: size
+            });
+
+            modalInstance.result.then(
+                function () {
+                    if($scope.isAdministrator()){
+                        if(problemModerationStatus) {
+                            adminToShowProblemService.deleteNotApprovedProblemDB(problem).then(function() {
+                                window.location.href="#/map";
+                                $rootScope.getProblemsAndPlaceMarkers();
+                            })
+                        } else {
+                            if(UserService.getSaveChangeStatus()){
+                                $scope.notApproved = adminToShowProblemService.deleteNotApprovedProblemFromList(problem);
+                                adminToShowProblemService.deleteNotApprovedProblemDB(problem).then(function() {
+                                    if(adminToShowProblemService.getNotApprovedProblemListQty()){
+                                        adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
+                                    } else {
+                                        adminToShowProblemService.redirectToMap();//window.location.href='#/map';
+                                    }
+                                })
+                            }
+                        }
+                    }
+                },
+                function(){
+                    return true;
+                }
+            );
+        };
     }]);
 
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $modal service used above.
+        controllers.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
 
+            $scope.ok = function () {
+                $modalInstance.close('ok');
+            };
 
-
+            $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+            };
+        });
 
 });
