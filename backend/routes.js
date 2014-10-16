@@ -3,7 +3,37 @@ var jwt          = require('jsonwebtoken'),
     bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
-    secret = require('./config/secret');
+    secret = require('./config/secret'),
+    mcapi = require('mailchimp-api');
+
+    mc = new mcapi.Mailchimp('23740bea44a8cfd98fb228dd5691e2b5-us9');
+
+    var mailchimpListID;
+    mc.lists.list(function(data) {
+        mailchimpListID = data.data[0].id;
+    
+        //look for all existing segments in the list
+        mc.lists.segments({id:mailchimpListID}, function(data){
+            console.log(data.static);
+            for(var i=0;i<data.static.length;i++)
+            console.log(data.static[i].name + ': ' +data.static[i].id);
+        
+        });
+
+        //adding 7 segment for each type of problems - in development
+        /*mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'newSegment1'}}, function(data){
+            console.log('Segment was created!');
+
+        }, 
+        function(error) {
+            if (error.error) {
+                console.log(error.code + ": " + error.error);
+                
+            } else {
+                console.log('There was an error subscribing that user');
+            }
+        });*/
+    });
 
 exports.getProblems = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
     req.getConnection(function(err, connection) {
@@ -825,6 +855,27 @@ exports.register = function (req, res) {
             if(result.length !== 0) {
                 return res.send(400);
             }
+            var mcReq = {
+                id: mailchimpListID,
+                email: { email: userData.email },
+                merge_vars: {
+                    EMAIL: userData.email,
+                    FNAME: userData.name,
+                    LNAME: userData.surname
+                }, double_optin: false
+            };
+
+            console.log('MailChimp List ID is: ' + mailchimpListID);
+            mc.lists.subscribe(mcReq, function(data) {
+              console.log('User with email ' + req.body.email + ' subscribed successfully!');
+            },
+            function(error) {
+              if (error.error) {
+                console.log(error.code + ": " + error.error);
+              } else {
+                console.log('There was an error subscribing that user');
+              }
+            });
 
             connection.query("insert into Users set ?", userData, function(err, recordId) {
                 userData.id = recordId;

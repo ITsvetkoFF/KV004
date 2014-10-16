@@ -13,12 +13,17 @@ var mysql = require('mysql'),
     secret       = require('./config/secret'),
     io = require('socket.io'),
     routes = require('./routes.js'),
-    location = require('./config.js');
+    location = require('./config.js')
+    //mcapi = require('./node_modules/mailchimp-api/mailchimp');
+    /*mcapi = require('mailchimp-api/mailchimp')*/;
     // for image processing !!!! use with GraphicsMagick and gm module
     // var gm = require('gm');
     
     io = io.listen(server);
     require('./sockets/base')(io);
+
+    // set MailChimp API key here
+    //mc = new mcapi.Mailchimp('23740bea44a8cfd98fb228dd5691e2b5-us9');
 
 var connectionPool = {
     host     : 'localhost',
@@ -27,7 +32,6 @@ var connectionPool = {
     database : 'Enviromap'
 };
 
- 
  var router = express.Router();
 
   /* GET users listing. */
@@ -68,7 +72,7 @@ app.use(multer(
     }
     }));
 */
-    
+   
     
 app.use(bodyParser());
 app.use(cookieParser());

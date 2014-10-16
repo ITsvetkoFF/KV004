@@ -13,7 +13,8 @@
 	  "xmlhttprequest":"*",
 	  "socket.io":"~0.9.17",
 	  "jade":"*",
-          "multer":"*"
+    "multer":"*",
+    "mailchimp-api": "*"
   },
   "devDependencies": {
     "bower": "*"
