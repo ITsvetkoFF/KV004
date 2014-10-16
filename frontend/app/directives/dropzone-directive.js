@@ -13,7 +13,7 @@ define(['./module','dropzone'], function(directives,Dropzone){
             submitButton.addEventListener("click", function() {
                if (myDropzone.files.length > 0) {
                     for(var i=0;i<document.upload_photo.description.length;i++){
-                        console.log(upload_photo.description[i].value);
+                         
                           if( document.upload_photo.description[i].value==""){
                            document.upload_photo.description[i].value = " ";
                            
