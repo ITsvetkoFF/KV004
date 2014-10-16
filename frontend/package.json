@@ -16,6 +16,7 @@
     "grunt-html2js": "^0.2.9",
     "grunt-requirejs": "^0.4.2",
     "grunt-usemin": "^2.4.0",
+    "grunt-zip": "^0.16.0",
     "load-grunt-tasks": "^0.6.0"
   },
   "engines": {
