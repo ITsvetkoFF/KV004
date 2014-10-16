@@ -153,6 +153,24 @@ grunt.initConfig({
                 },
         },
     },
+    zip: {
+        dist: {
+              cwd: 'dist',
+              src: ['dist/app/*.js',
+                   'dist/bower_components/**/*.js',
+                    'dist/style/css/main.css',
+                    'dist/style/fonts/*.*',
+                    'dist/images/*.*',
+                    'dist/images/icons/*.*',
+                    'dist/images/markers/*.*',
+                    'dist/index.html',
+                    
+                   ],
+              dest: 'dist/ecomap.zip'
+        },
+
+        
+  }
     
 });
     
