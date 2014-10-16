@@ -100,7 +100,7 @@ define(['./module'], function (controllers) {
             ipCookie('userRole', userData.role, {expires: 10});
             ipCookie('token', userData.token, {expires: 10});
             ipCookie('id', userData.id, {expires: 10});
-
+            ipCookie('userEmail', userData.email, {expires:10});
 
             $scope.name = ipCookie('userName');
             $scope.surname = ipCookie('userSurname');
