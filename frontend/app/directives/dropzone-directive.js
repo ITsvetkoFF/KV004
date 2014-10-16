@@ -12,6 +12,7 @@ define(['./module','dropzone'], function(directives,Dropzone){
             var counter = 0;
             submitButton.addEventListener("click", function() {
                if (myDropzone.files.length > 0) {
+                  if(document.upload_photo){
                     for(var i=0;i<document.upload_photo.description.length;i++){
                          
                           if( document.upload_photo.description[i].value==""){
@@ -19,6 +20,7 @@ define(['./module','dropzone'], function(directives,Dropzone){
                            
                        }
                       }
+                   }
                          
                         myDropzone.processQueue();
                                        
