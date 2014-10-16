@@ -22,7 +22,7 @@
     width: 300px;
 }
 .b-problem-list {
-    box-sizing: border-box;
+    box-sizing: border-box ;
     display: inline-block;
     height: 85%;
     left: 312px;
