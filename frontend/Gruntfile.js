@@ -144,13 +144,20 @@ grunt.initConfig({
                         }
                     }
             },
+    watch: {
+        scripts: {
+            files: 'app/templates/*.html',
+            tasks: ['html2js'],
+                options: {
+                    debounceDelay: 250,
+                },
+        },
+    },
     
 });
     
 
     // Default task(s). and build task
-
-
     grunt.registerTask('default', [
                       'bower',
                       'html2js',
@@ -163,9 +170,25 @@ grunt.initConfig({
                       'requirejs:generated',
                       'concat',
                       'copy:leaflet',
-                      //'copy:templates',
+                      'copy:jstemplates',
+                      'usemin',
+                      'clean:tmp',
+                    ]);
+    
+    grunt.registerTask('dev', [
+                      //'bower',
+                      'html2js',
+                      'copy:html',
+                      'copy:dist',
+                      'useminPrepare',
+                      'concat:generated',
+                      'cssmin:generated',
+                      'requirejs:generated',
+                      'concat',
+                      'copy:leaflet',
                       'copy:jstemplates',
                       'usemin',
                       //'clean:tmp',
+                      'watch'
                     ]);
 };
