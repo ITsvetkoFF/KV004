@@ -10,12 +10,17 @@ define(['./module'], function (controllers) {
             $scope.IsResource = $scope.resource.IsResource
             $scope.Id = $scope.resource.Id;
             });
-        };
+        }
+        else {
+            $scope.IsResource = 1
+        }
         $rootScope.$broadcast('Update', '_full');
-        console.log($rootScope.data)
         $scope.sendResource = function(Alias, Content, Title, IsResource, Id) {
+            /*$rootScope.data.forEach( function(d) {
+                   if (d.Alias == Alias) Id = d.Id
+                });*/
             if (Alias === undefined || Content === undefined  || IsResource === undefined) {
-                $scope.delPhotoErrorMsg = 'Всі поля обов\'язкові для заповнення';
+                $scope.errorMsq = "Всі поля обов'язкові для заповнення";
                 return;
             }
             else {

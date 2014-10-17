@@ -19,11 +19,12 @@
 		<label>Де розмістити цей ресурс: </label>
 				<select ng-model="IsResource" name="IsResource" required>
 					<option value="0">У верхньому меню</option>
-					<option value="1" selected>В розділі "Ресурси"</option>
+					<option value="1">В розділі "Ресурси"</option>
 				</select>
 	</div>
 	<div class="editor_right">
 		<button type="submit" class="b-form__button editor_btn" type="submit" ng-click="sendResource(Alias, Content, Title, IsResource, Id)">Відправити</button>
 	</div>
+	<span ng-if="errorMsq">errorMsq</span>
 </div>
 </form>
