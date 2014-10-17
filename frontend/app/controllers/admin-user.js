@@ -41,7 +41,7 @@ define(['./module'], function (controllers) {
 
         /*****--- The main part of facebook authorization ---*****/
         FB.init({
-            appId: '1458754107737788',
+            appId: '615883928521055',
             cookie     : true,
             xfbml      : true,
             version    : 'v2.1'
