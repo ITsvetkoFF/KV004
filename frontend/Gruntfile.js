@@ -170,7 +170,25 @@ grunt.initConfig({
         },
 
         
-  }
+  },
+  replace: {
+      distOn: {
+        src: ['../backend/config.js'],
+        overwrite: true,                 
+        replacements: [{
+          from: "productionVersion = false",
+          to: "productionVersion = true"
+        }]
+      },
+    distOff: {
+        src: ['../backend/config.js'],
+        overwrite: true,                 
+        replacements: [{
+          from: "productionVersion = true",
+          to: "productionVersion = false"
+        }]
+      },
+    }  
     
 });
     
@@ -209,4 +227,6 @@ grunt.initConfig({
                       //'clean:tmp',
                       'watch'
                     ]);
+    grunt.registerTask('distOn', ['replace:distOn']); //use grunt disOn to switch server path to dist
+    grunt.registerTask('distOff', ['replace:distOff']); //use grunt distOff to switch server path to frontend
 };

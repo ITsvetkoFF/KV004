@@ -9,6 +9,7 @@ cd KV004/frontend/
 bower install --allow-root
 npm install
 grunt
+grunt zip
 cd ../backend 
 npm install
 mysql -u root -proot < EnviromapDB.sql
