@@ -188,7 +188,16 @@ grunt.initConfig({
           to: "productionVersion = false"
         }]
       },
-    }  
+    },
+   //run this: grunt shell to start node api.js
+    shell: {
+        multiple: {
+            command: [
+                'cd ../backend',
+                'node api',
+            ].join('&&')
+        }
+    }
     
 });
     
