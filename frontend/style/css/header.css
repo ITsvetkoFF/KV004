@@ -87,6 +87,10 @@ div.navbar-collapse.collapse.in {
 
 .navbar-nav li i {
     letter-spacing: 0;
+    cursor: pointer;
+}
+.navbar-nav li i:hover {
+    color: #BFBAB3;
 }
 
 #link {

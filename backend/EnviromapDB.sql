@@ -117,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `Resources` (
 `Title` VARCHAR(150) NOT NULL,
 `Content` VARCHAR(10000) NOT NULL,
 `IsResource` TINYINT(1) NOT NULL,
+UNIQUE (`Alias`),
 PRIMARY KEY (`Id`))
 ENGINE = InnoDB;
 
@@ -151,13 +152,9 @@ CREATE TABLE IF NOT EXISTS `Activities` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `Documents` (
-`Id` INT NOT NULL AUTO_INCREMENT,
-`Title` VARCHAR(50) NOT NULL,
-`Content` VARCHAR(500) ,
-`Alias` VARCHAR(50) NULL,
-PRIMARY KEY (`Id`))
-ENGINE = InnoDB;
+-- -----------------------------------------------------
+-- Table `Enviromap`.`News`
+-- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS `News` (
 `Id` INT NOT NULL AUTO_INCREMENT,
