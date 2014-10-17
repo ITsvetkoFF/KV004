@@ -1,90 +1,72 @@
 <style type="text/css">
-.axis {
-   font: 10px sans-serif;
- }
-
- .axis path,
- .axis line {
-   fill: none;
-   stroke: #000;
-   shape-rendering: crispEdges;
- }
-.tick
-{
-  stroke-dasharray: 1, 2;
-}
-.axis {
-   font: 18px WWF;
- }
- .axis text {
-  font: 10px sans-serif;
- }
-.chart > svg, h3, h4 {
-  font-family: WWF;
-}
-.chart {
-   margin: 10px 5px 15px 20px;
-  text-align: center;
-  float: left;
-}
-.instrument_panel {
-  margin: 5px 10px 20px 20px;
+.statistic > h3, h2, ul {
+  margin: 30px auto;
   text-align: center;
 }
-.instrument_panel input {
-  width: 100px;
+.statistic {
+   margin: 10px 5px 15px 5px;
 }
-table {
-  width: 200px;
-  margin-top: 5px;
-  position: absolute;
-  right: 40%;
+.statistic svg {
+  font-size: 0.8em; 
 }
-table td {
-  border: solid 4px #fff;
-  margin: 5px;
-  min-width: 24px;
+.main text {
+  font: 12px sans-serif;
+}
+.mini text {
+  font: 10px sans-serif;  
+}
+.month text {
+  text-anchor: start;
+}
+.todayLine {
+  stroke: blue;
+  stroke-width: 1.5;
+}
+.axis line, .axis path {
+  stroke: black;
+}
+.brush .extent {
+  stroke: gray;
+  fill: blue;
+  fill-opacity: .165;
+}
+.statistic > ul {
+list-style: none;
+}
+.statistic  li {
+padding: 0px 30px;
+display: inline-block;
+}
+.statistic  li span{
+font-size: 4em;
+}
+.statistic .legend {
+  text-align: left;
+  margin: 10px 10px 20px 10px;
+  padding: 5px 5px;
+  font-size: 0.6em;
 }
 </style>
 <close-button></close-button>
-<table  ng-init="color = ['#095B0F', '#231F20', '#98442B', '#1B9AD6', '#71BF44', '#FFAB09', '#50095B']">
-<tr ng-repeat="types in problemTypes">
-  <td style="background-color: {{color[$index]}}"></td>
-  <td> - {{types.name}}</td>
-</tr>
-</table>
-<div class="chart" ng-init="bar('D')">
-<div class="btn-group">
-<button class="btn btn-primary btn-small" type="button" ng-click="bar('D')">По днях</button>
-<button class="btn btn-primary btn-small" type="button" ng-click="bar('W')">По тижнях</button>
-<button class="btn btn-primary btn-small" type="button" ng-click="bar('M')">По місяцях</button>
-</div>
-<h3>Статистика додання проблем</h3>
-<svg id="el1"></svg>
-</div>
-<div class="chart" ng-init="pie('Y')">
-<div class="btn-group">
-<button class="btn btn-primary btn-small" type="button" ng-click="pie('W')">Цього тижня</button>
-<button class="btn btn-primary btn-small" type="button" ng-click="pie('M')">Цього місяця</button>
-<button class="btn btn-primary btn-small" type="button" ng-click="pie('Y')">Цього року</button>
-</div>
-<h3>Статистика по типу проблем</h3>
-<svg id="el2"></svg>
-</div>
-<div class="chart" ng-init="bar2('D')">
-<div class="btn-group">
-<button class="btn btn-primary btn-small" type="button" ng-click="bar2('D')">По днях</button>
-<button class="btn btn-primary btn-small" type="button" ng-click="bar2('W')">По тижнях</button>
-<button class="btn btn-primary btn-small" type="button" ng-click="bar2('M')">По місяцях</button>
-</div>
-<h3>Статистика додання голосів</h3>
-<svg id="el5"></svg>
-</div>
-<div class="chart">
-<h4>Статистика по статусу проблем</h4>
-<svg id="el3" ng-init="pie2()"></svg>
-</div>
-<div class="chart">
-<h4>Популярність проблем по типу</h4>
-<svg id="el4" ng-init="pie3()"></svg>
+<div class="statistic">
+<h2>Статистика за весь час</h2>
+<ul>
+  <li><span>{{problems}}</span><br>Проблем</li>
+  <li><span>{{votes}}</span><br>Голосів</li>
+  <li><span>{{comments}}</span><br>Коментарів</li>
+  <li><span>{{photos}}</span><br>Фотографій</li>
+</ul>
+<h3>Статистика проблем за останній <a href="" ng-click="pie('D')">День</a> | <a href="" ng-click="pie('W')">Тиждень</a> | <a href="" ng-click="pie('M')">Місяць</a> | <a href="" ng-click="pie('Y')">Рік</a> | <a href="" ng-click="pie('A')">За весь час</a><br>
+<svg id="el2" ng-init="pie('A')"></svg><h3>
+<ul class="legend" ng-init="color = ['#095B0F', '#231F20', '#98442B', '#1B9AD6', '#71BF44', '#FFAB09', '#50095B']">
+  <li ng-repeat="types in problemTypes">
+  <svg width="12" height="12"><rect width="12" height="12" style="fill:{{color[$index]}}"/></svg> - {{types.name}}
+   </li>
+</ul>
+<h3>Хронологія публікацій та голосів</h3>
+<ul class="legend">
+  <li><svg width="5" height="15"><rect width="5" height="15" style="fill:#f00; opacity: 0.5"/></svg> - Додано проблему</li>
+  <li><svg width="5" height="15"><rect width="5" height="15" style="fill:#00f; opacity: 0.5"/></svg> - Додано голос</li>
+</ul>
+<svg id="el1" ng-init="chart()"></svg>
 </div>

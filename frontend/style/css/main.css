@@ -117,8 +117,7 @@ html, body {
     width: 100%;
     min-width: 320px;
     background: #FFFFFF;
-    height: calc(100% - 52px);
-    height: -moz-calc(100% - 52px);
+    height: 100%;
     overflow: auto;
 }
 
@@ -888,10 +887,6 @@ td.b-details-body__title[colspan] {
     border-radius: 0;
 }
 
-.datepicker table {
-    margin: auto;
-}
-
 .datepicker input,
 .datepicker button {
     border-radius: 0;
@@ -1398,7 +1393,7 @@ form.dropzone {
   cursor: pointer;
 }
 /* add generic styling for the editor */
-.ta-scroll-window.form-control{max-height: 90%; min-height: 300px; overflow: auto; font-family: inherit; font-size: 100%; position: relative; padding: 0;} 
+.ta-scroll-window.form-control{min-height: 300px; overflow: auto; font-family: inherit; font-size: 100%; position: relative; padding: 0;} 
 .ta-root.focussed .ta-scroll-window.form-control{border-color: #66afe9; outline: 0; -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);}
 .ta-editor.ta-html{min-height: 300px; height: auto; overflow: auto; font-family: inherit; font-size: 100%;}
 .ta-scroll-window > .ta-bind{max-height: 600px; padding: 6px 12px;}
@@ -1419,8 +1414,6 @@ form.dropzone {
   display: inline-block;
   vertical-align: middle;
 }
-
-
 .btn-lg,
 .btn-group-lg > .btn {
   padding: 10px 16px;
@@ -1482,18 +1475,10 @@ form.dropzone {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.editproblemtitle span,
+    .editproblemtitle span,
 .editproblemcontent span{
     cursor: pointer;
-    white-space: pre-wrap;
 }
-
-.editproblemtitleNotAdmin span,
-.editproblemcontentNotAdmin span {
-    cursor: default;
-    white-space: pre;
-}
-
 .editproblemtitle  input,
 .editproblemcontent textarea{
     display: none;
@@ -1510,11 +1495,18 @@ form.dropzone {
 .editproblemcontent.active textarea{
     display: inline-block;
     margin: 0px 0px 0px 0px;
+    width: 525px;
+    height: 100px;
+    overflow-x: hidden;
 }
+    .resource {
+        padding: 0px 15px 10px 30px;
+        font-size: 0.7em;
+        }
     .editor {
-        height: 100%;
         padding: 30px 5px 5px 5px;
         overflow: auto;
+        font-size: 0.7em;
     }
     .editor label {
         font-weight: bold;
@@ -1585,8 +1577,8 @@ margin: 0;
     left: 300px;
     top: 150px;
     text-align: center;
-	padding-top: 2px;
-	
+    padding-top: 2px;
+    
 } 
 
 .slide {
@@ -1791,15 +1783,15 @@ add adaptive style to showProblem
         left:0px;
         width: 100%;
         height: auto;
-	    max-height: 400px;
+        max-height: 400px;
     }
     .container img{
 
         
     }
-	.b-problems{
-		margin-top: 30px;
-	}
+    .b-problems{
+        margin-top: 30px;
+    }
 
 
 
@@ -1848,35 +1840,35 @@ add adaptive style to showProblem
         margin-left: 5px;
         margin-right: 5px;
     }
-	.b-problems{
-		margin-top: 0px;
-	}
+    .b-problems{
+        margin-top: 0px;
+    }
 
 }
 .b-problem-tab{
     padding-bottom: 60px;
 }
 .carousel-1{
-	height: 100%;
-		
+    height: 100%;
+        
 }
 .rn-carousel-slide{
-	background-size: auto 100%;
-	background-position:center;
-	background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position:center;
+    background-repeat: no-repeat;
 
 }
 .rn-carousel-indicator{
-	background: none;
+    background: none;
 }
 .rn-carousel-control{
     color: #fff;
 }
 @media  screen and (max-width:560px){
-	.rn-carousel-slide{
-	background-size: 100% auto;
-	background-position:center;
-	background-repeat: no-repeat;
+    .rn-carousel-slide{
+    background-size: 100% auto;
+    background-position:center;
+    background-repeat: no-repeat;
 
 }
 }

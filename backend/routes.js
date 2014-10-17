@@ -1387,16 +1387,7 @@ exports.getStats1 = function (req, res) {
                 err:    err.code
             });
         } else {
-            var val
-                switch(req.params.val){
-        case "D": val = "%Y-%m-%d";
-            break;
-        case "W": val = "%Y-%v";
-            break;
-        case "M": val = "%Y-%m";
-            break;
-        };
-            connection.query('SELECT count(Id) as value, DATE_FORMAT(Date,'+ '"' + val + '"' +') as date FROM Activities where ActivityTypes_Id = 1 GROUP BY DATE_FORMAT(Date,'+ '"' + val + '"' +');', function(err, rows, fields) {
+            connection.query('SELECT Activities.Problems_Id as Id, Activities.Date as start, Activities.ActivityTypes_Id as act, Problems.ProblemTypes_Id as lane FROM Activities LEFT JOIN Problems ON Problems.Id = Activities.Problems_Id WHERE (ActivityTypes_Id = 1) OR (ActivityTypes_Id = 3);', function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -1422,14 +1413,18 @@ exports.getStats2 = function (req, res) {
         } else {
             var val
                 switch(req.params.val){
-        case "Y": val = "YEAR";
+        case "D": val = 'AND (DATE(Activities.Date) = DATE(NOW()))';
             break;
-        case "W": val = "WEEK";
+        case "W": val = 'AND (DATE_FORMAT(Activities.Date,"%u-%Y") = DATE_FORMAT(NOW(),"%u-%Y"))';
             break;
-        case "M": val = "MONTH";
+        case "M": val = 'AND (DATE_FORMAT(Activities.Date,"%m-%Y") = DATE_FORMAT(NOW(),"%m-%Y"))';
+            break;
+        case "Y": val = 'AND (YEAR(Activities.Date) = YEAR(NOW()))';
+            break;
+            case "A": val = "";
             break;
         };
-            connection.query('SELECT Problems.ProblemTypes_Id as id, count(Problems.Id) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE (Activities.ActivityTypes_Id = 1) AND (' + val + '(Activities.Date) = '+ val +'(NOW()) ) GROUP BY Problems.ProblemTypes_Id;', function(err, rows, fields) {
+            connection.query('SELECT Problems.ProblemTypes_Id as id, count(Problems.Id) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE (Activities.ActivityTypes_Id = 1) ' + val + ' GROUP BY Problems.ProblemTypes_Id;', function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -1453,7 +1448,7 @@ exports.getStats3 = function (req, res) {
                 err:    err.code
             });
         } else {
-            connection.query('SELECT Problems.Status as status, count(Problems.Id) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Activities.ActivityTypes_Id = 1 GROUP BY Problems.Status;', function(err, rows, fields) {
+            connection.query('SELECT count(Id) as problems, sum(votes) as votes FROM Problems;', function(err, rows1, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -1462,65 +1457,28 @@ exports.getStats3 = function (req, res) {
                         err:    err.code
                     });
                 }
-                res.send(rows);
+                connection.query('SELECT count(Id) as photos FROM Photos;', function(err, rows2, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                connection.query('SELECT count(Id) as comments FROM Activities WHERE ActivityTypes_Id=5;', function(err, rows3, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                res.send([rows1,rows2,rows3]);
+            });
+            });
             });
         }
     });
     }
-exports.getStats4 = function (req, res) {
-     req.getConnection(function(err, connection) {
-        if (err) {
-            console.error('CONNECTION error: ',err);
-            res.statusCode = 503;
-            res.send({
-                result: 'error',
-                err:    err.code
-            });
-        } else {
-            connection.query('SELECT Problems.ProblemTypes_Id as id, SUM(Problems.Votes) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Activities.ActivityTypes_Id = 1 GROUP BY Problems.ProblemTypes_Id;', function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send(rows);
-            });
-        }
-    });
-    }
-exports.getStats5 = function (req, res) {
-     req.getConnection(function(err, connection) {
-        if (err) {
-            console.error('CONNECTION error: ',err);
-            res.statusCode = 503;
-            res.send({
-                result: 'error',
-                err:    err.code
-            });
-        } else {
-            var val
-                switch(req.params.val){
-        case "D": val = "%Y-%m-%d";
-            break;
-        case "W": val = "%Y-%v";
-            break;
-        case "M": val = "%Y-%m";
-            break;
-        };
-            connection.query('SELECT count(Id) as value, DATE_FORMAT(Date,'+ '"' + val + '"' +') as date FROM Activities where ActivityTypes_Id = 3 GROUP BY DATE_FORMAT(Date,'+ '"' + val + '"' +');', function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send(rows);
-            });
-        }
-    });
-}

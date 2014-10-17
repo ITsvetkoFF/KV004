@@ -12,6 +12,7 @@ define(['./module'], function (controllers) {
             });
         };
         $rootScope.$broadcast('Update', '_full');
+        console.log($rootScope.data)
         $scope.sendResource = function(Alias, Content, Title, IsResource, Id) {
             if (Alias === undefined || Content === undefined  || IsResource === undefined) {
                 $scope.delPhotoErrorMsg = 'Всі поля обов\'язкові для заповнення';
