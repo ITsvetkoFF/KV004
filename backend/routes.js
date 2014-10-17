@@ -1276,10 +1276,12 @@ req.getConnection(function(err, connection) {
                             err:    err.code
                         });
                     }
-                    res.send({
-                        result: 'success',
-                        err:    ''
-                    });
+                    else {
+                        res.send({
+                            result: 'success',
+                            err:    ''
+                        });
+                    }
                     });
             });
         }
@@ -1325,10 +1327,13 @@ req.getConnection(function(err, connection) {
                             err:    err.code
                         });
                     }
-                    res.send({
-                        result: 'success',
-                        err:    ''
-                    });
+                    else 
+                    {
+                        res.send({
+                         result: 'success',
+                         err:    ''
+                         });
+                    }
                     });
             });
         }

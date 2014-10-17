@@ -158,8 +158,9 @@ function fillProblemsActivities() {
             connection.query("INSERT INTO Problems SET ?", data, function (err, rows, fields) {
                 if (err) throw err;
             });
+            console.log(new Date(probs[i].created * 1000).toISOString().slice(0, 19).replace('T', ' '));
             var data = {
-                Date: new Date(probs[i].created * 1000).toISOString(),
+                Date: new Date(probs[i].created * 1000).toISOString().slice(0, 19).replace('T', ' '),
                 ActivityTypes_Id: 1,
                 users_Id: 2,
                 Problems_Id: j,
