@@ -28,7 +28,30 @@ define(['./module','dropzone'], function(directives,Dropzone){
                      
                    
                     } else {
-                        myDropzone.uploadFile({name:"",length:0}); //send empty
+                        //for correct sending for in Firefox without files
+                        var fd  = new FormData(document.forms["my-awesome-dropzone"]);
+                        var xhr = new XMLHttpRequest();
+                        xhr.addEventListener("load", function(event) {
+                             if(scope.isLoggedIn())
+                             {
+                                scope.submitProblem();
+                                scope.swipeHide("dropzone");
+                                window.location.href="#/map";
+                              }
+                             else {
+                     
+                                scope.swipeHide("dropzone");
+                                window.location.href="#/map";
+                                alert('Ви не зареєстрований користувач, тому проблема спочатку пройде модерацію і потім буде додана на карту.');
+                              }
+                        });
+
+                        // We define what will happen in case of error
+                        xhr.addEventListener("error", function(event) {
+                          //alert on error
+                        });
+                        xhr.open('POST', 'api/problempost');
+                        xhr.send(fd); 
                                             
                      
                     }
