@@ -2,6 +2,14 @@ define(['./module'],function(controllers){
     'use strict';
     controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http' ,function($scope,$rootScope,$modal, $log, $http){
         $scope.showSlider=false;
+        //TODO: rename everthing in code swipHide() to hideRight()
+        $scope.swipeHideRight = function(){
+            if(window.innerWidth<=1000){
+                console.log(window.innerWidth);
+                $scope.swipeHide();
+            }
+
+        }
         
         $rootScope.$broadcast('Update',"");
         $scope.swipeHide = function(params){

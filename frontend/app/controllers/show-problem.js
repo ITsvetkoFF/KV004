@@ -109,6 +109,8 @@ define(['./module'], function(controllers){
                 parallelUploads:10,
                 thumbnailWidth:100,
                 thumbnailHeight:100,
+                acceptedFiles:'.jpg,.jpeg,.img',
+                dictInvalidFileType:"Невірний формат файлу. Допустимі формати : jpg,jpeg,img",
                 clickable:".previews,.b-details-body-problem-photo_add",
                 previewsContainer:".previews"
             }

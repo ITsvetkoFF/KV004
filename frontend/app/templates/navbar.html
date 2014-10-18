@@ -56,15 +56,17 @@
                 </div>
                 <button type="submit" value="Вхід" ng-click="postLogIn()" class="btn btn-default b-menu__button" id="login-button">Вхід</button>
                 <div class="divider"></div>
-                <button class="btn btn-default" id="loginfb" href="#" ng-click="logInFB()"><i class="fa fa-facebook-square fa-lg"></i> Вхід</button>
-                <button class="btn btn-default" id="register-button" href="#" ng-click="open('')">Реєстрація</button>
               </form>
+                <div  style="margin: 0 10px 0;padding-bottom: 5px;">
+                   <button class="btn btn-default" style="border-radius:0" id="loginfb" href="#" ng-click="logInFB()"><i class="fa fa-facebook-square fa-lg"></i> Вхід</button>
+                   <button class="btn btn-default" style="border-radius:0" id="register-button" href="#" ng-click="open('')">Реєстрація</button>
+                </div>
             </li>
           </ul>
         </li>
 
         <li ng-if="isAdministrator()">
-          <a class="b-menu__button" ng-href="#/chat" ng-click="swipeHide()"><i class="fa fa-weixin"></i> Чат</a>
+          <a class="b-menu__button" ng-href="#/chat" ng-click="swipeHide()"><i class="fa fa-weixin"></i> Новини</a>
         </li>
 
         <li>
