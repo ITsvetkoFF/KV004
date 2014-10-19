@@ -34,7 +34,7 @@ define(['./module'], function (controllers) {
         };
         $scope.getProblemsAndPlaceMarkers();
 
-        navigator.geolocation.getCurrentPosition(getUserPosition);
+        /*navigator.geolocation.getCurrentPosition(getUserPosition);
 
         function getUserPosition(position) {
             var mapCenter = [
@@ -42,7 +42,7 @@ define(['./module'], function (controllers) {
                 position.coords.longitude
             ];
             map.setView(mapCenter, 10);
-        }
+        }*/
 
         function onMarkerClick(marker){
             if (UserService.getSaveChangeStatus()){
