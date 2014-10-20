@@ -371,9 +371,10 @@ exports.addNewPhotos = function(req,res){
             console.log(req.body);
             var i=0;
             var rows=[];
-            console.log(req.body.solveProblemMark);
-            if(req.body.description==undefined){
-                req.body.description=[];
+            if(req.body.solveProblemMark=="on"){
+                req.body.solveProblemMark=1;
+            }else{
+                req.body.solveProblemMark=0;
             }
             if(!Array.isArray(req.body.description)){
                 console.log("!!!!");
