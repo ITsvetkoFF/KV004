@@ -104,7 +104,8 @@ define(['./module'],function (controllers){
                 acceptedFiles:'.jpg,.jpeg,.img',
                 dictInvalidFileType:"Невірний формат файлу. Допустимі формати : jpg,jpeg,img",
                 clickable:".previews",
-                previewsContainer:".previews"
+                previewsContainer:".previews",
+                dictFileTooBig: "Файл великого розміру ({{filesize}}MB). Максимальний розмір файлу: {{maxFilesize}}MB.", 
             }
         }
 

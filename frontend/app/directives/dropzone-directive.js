@@ -21,7 +21,16 @@ define(['./module','dropzone'], function(directives,Dropzone){
                        }
                       }
                    }
-                         
+                   if(document.submit_problem){
+                       for(var i=0;i<document.submit_problem.description.length;i++){
+
+                           if( document.submit_problem.description[i].value==""){
+                               document.submit_problem.description[i].value = " ";
+
+                           }
+                       }
+                   }
+
                         myDropzone.processQueue();
                                        
                     
@@ -57,13 +66,15 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     }
             });
             myDropzone.on("addedfile", function(file) {
+               
                 var arr = document.getElementsByClassName("dz-preview");
                 for (var i = counter; i < arr.length; i++){
                     arr[i].addEventListener('click', function(e) {
                         e.stopPropagation();
                         e.preventDefault();
                     });
-                }
+                  }
+                
                 counter++;
 
                 // Add the button to the file preview element.
@@ -81,7 +92,10 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     e.stopPropagation();
                 };
                 
-
+         if(file.type!="image/jpeg"){
+           myDropzone.removeFile(file);   
+                alert("Невірний формат файлу. Допустимі формати : jpg,jpeg"); 
+         }
                 
             });
 

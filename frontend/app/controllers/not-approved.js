@@ -29,6 +29,7 @@ define(['./module'],function (controllers) {
                         adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
                     } else {
                         adminToShowProblemService.redirectToMap();
+                        $scope.swipeHide();
                     }
                 })
             }
@@ -42,6 +43,7 @@ define(['./module'],function (controllers) {
                         adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
                     } else {
                         adminToShowProblemService.redirectToMap();
+                        $scope.swipeHide();
                     }
                 })
             }

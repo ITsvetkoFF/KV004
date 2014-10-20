@@ -46,6 +46,7 @@ define(['./module'], function (controllers) {
 
         function onMarkerClick(marker){
             if (UserService.getSaveChangeStatus()){
+                window.location.href="#/map";
                 window.location.href="#/problem/showProblem/"+ this._id;
                 map.panTo(marker.latlng);
             }

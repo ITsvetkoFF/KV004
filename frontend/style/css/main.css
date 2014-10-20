@@ -1564,12 +1564,12 @@ form.dropzone {
 
 .slider {
     width: 700px;
-    height: 380px;
+    height: 400px;
     overflow: hidden;
     position: relative;
      padding: 0;
-margin: 0;
-1background: #000;
+    margin: 0;
+    1background: #000;
     z-index: 5000;
      
     margin-top: 20px;
@@ -1860,6 +1860,7 @@ add adaptive style to showProblem
 }
 .rn-carousel-indicator{
     background: none;
+    margin-top: 15px;
 }
 .rn-carousel-control{
     color: #fff;

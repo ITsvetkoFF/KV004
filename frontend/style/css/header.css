@@ -159,6 +159,7 @@ div.navbar-collapse.collapse.in {
     color: #777;
     padding-right: 30px;
     line-height: 1;
+    height: 40px;
 }
 
 .chat-user-label i {

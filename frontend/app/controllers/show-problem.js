@@ -109,8 +109,11 @@ define(['./module'], function(controllers){
                 parallelUploads:10,
                 thumbnailWidth:100,
                 thumbnailHeight:100,
-                acceptedFiles:'.jpg,.jpeg,.img',
-                dictInvalidFileType:"Невірний формат файлу. Допустимі формати : jpg,jpeg,img",
+                acceptedFiles:'.jpg,.jpeg',
+                dictFileTooBig: "Файл великого розміру ({{filesize}}MB). Максимальний розмір файлу: {{maxFilesize}}MB.", 
+     
+  
+                dictInvalidFileType:"Невірний формат файлу. Допустимі формати : jpg,jpeg",
                 clickable:".previews,.b-details-body-problem-photo_add",
                 previewsContainer:".previews"
             }
@@ -135,7 +138,7 @@ define(['./module'], function(controllers){
 
             var responce = $http.post('/api/vote',{idProblem:$routeParams.problemID,userId:$scope.userId,userName:$scope.name});
             responce.success(function(data,status,headers,config){
-                $scope.data.Votes++;
+                $scope.problem.Votes++;
                 ipCookie('vote'+$routeParams.problemID,true);
                 $scope.disableVoteButton=true;
                 window.location.href="#/problem/showProblem/"+$routeParams.problemID;
@@ -270,6 +273,7 @@ define(['./module'], function(controllers){
                         if(problemModerationStatus) {
                             adminToShowProblemService.deleteNotApprovedProblemDB(problem).then(function() {
                                 window.location.href="#/map";
+                                $scope.swipeHide();
                                 $rootScope.getProblemsAndPlaceMarkers();
                             })
                         } else {
@@ -279,7 +283,9 @@ define(['./module'], function(controllers){
                                     if(adminToShowProblemService.getNotApprovedProblemListQty()){
                                         adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
                                     } else {
+
                                         adminToShowProblemService.redirectToMap();//window.location.href='#/map';
+
                                     }
                                 })
                             }
@@ -295,10 +301,11 @@ define(['./module'], function(controllers){
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
-        controllers.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
+        controllers.controller('ModalInstanceCtrl', function ($scope,$rootScope, $modalInstance) {
 
             $scope.ok = function () {
                 $modalInstance.close('ok');
+                $rootScope.$broadcast("Update","");
             };
 
             $scope.cancel = function () {

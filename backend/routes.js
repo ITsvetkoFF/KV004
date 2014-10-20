@@ -471,8 +471,13 @@ exports.postProblem = function(req,res){  //post new problem
                             err:    err.code
                         });
                     }
-                    if(req.body.description==undefined){
+
+                    if(!Array.isArray(req.body.description)){
+                        console.log("!!!!");
+                        var temp=req.body.description;
                         req.body.description=[];
+                        req.body.description.push(temp);
+
                     }
 
                     while (req.files['file[' + i + ']'] != undefined) {
