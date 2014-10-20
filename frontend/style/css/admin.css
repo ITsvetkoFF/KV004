@@ -190,6 +190,12 @@
     width: 90%;
     vertical-align:top;
 }
+.b-problem-deatiled-info-title__text h1 {
+    font-family: WWF;
+    font-size:1.1em;
+    margin: 0;
+    padding: 0;
+}
 .b-problem-deatiled-info-user{
     display: block;
     font-family: arial;
