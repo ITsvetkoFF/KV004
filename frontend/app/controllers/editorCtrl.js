@@ -29,17 +29,15 @@ define(['./module'], function (controllers) {
             $rootScope.getTitles();
             $location.path('resources/' + Alias);
            }).error(function(status, data) {
-                    console.log(status);
-                    console.log(data);
+                    console.log(data.err);
                 });
        }
        else {
             $http.post('api/addResource', { Alias: Alias, Content: Content, Title: Title, IsResource: IsResource}).success(function() {
             $rootScope.getTitles();
             $location.path('resources/' + Alias);
-           }).error(function(status, data) {
-                    console.log(status);
-                    console.log(data);
+           }).error(function(data, status, headers, config) {
+                    console.log(data.err);
                 });
        };
        };

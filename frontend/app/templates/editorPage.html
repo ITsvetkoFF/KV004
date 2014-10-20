@@ -1,14 +1,18 @@
 <a href="#/map" ng-click="swipeHide()"  class="close">×</a>
-<form class="editor" name="EditForm">
+<form class="editor" name="EditForm" ng-submit="submitForm(EditForm.$valid)" novalidate>
 <div class="editor_horizontal">
 	<div class="editor_left">
 		<label >Заголовок ресурсу: </label>
-		<input type="text" name="Title" ng-model="Title" required>
+		<input type="text" name="Title" ng-model="Title" ng-minlength="3" ng-maxlength="40" required>
+		<p ng-if="EditForm.Title.$error.required && !EditForm.Title.$pristine">Це поле обов'язкове для заповнення!</p>
+		<!--<p ng-if="EditForm.Title.$error.minlength">Це поле має містити не менше 3 символів!</p>
+		<p ng-if="EditForm.Title.$error.maxlength">Це поле має містити не більше 40 символів!</p>-->
 	</div>
-	<div class="editor_right">
+	<div class="editor_left">
 		<label>Alias для ресурсу: </label>
 		<input type="text" ng-model="Alias" name="Alias" required ng-pattern="/^[0-9a-zA-Z\-]+$/">
-		<span ng-if="EditForm.Alias.$error.pattern">Це поле може містити лише латинські літери, цифри та символ "-" !</span>
+		<p ng-if="EditForm.Alias.$error.pattern">Це поле може містити лише латинські літери, цифри та символ "-" !</p>
+		<p ng-if="EditForm.Alias.$error.required && !EditForm.Alias.$pristine">Це поле обов'язкове для заповнення!</p>
 	</div>
 </div>
 <div class="editor_horizontal">
@@ -21,9 +25,10 @@
 					<option value="0">У верхньому меню</option>
 					<option value="1">В розділі "Ресурси"</option>
 				</select>
+		<span ng-if="EditForm.IsResource.$error.required">Це поле обов'язкове для заповнення!</span>
 	</div>
-	<div class="editor_right">
-		<button type="submit" class="b-form__button editor_btn" type="submit" ng-click="sendResource(Alias, Content, Title, IsResource, Id)">Відправити</button>
+	<div class="editor_left">
+		<button type="submit" class="b-form__button editor_btn" type="submit" ng-click="sendResource(Alias, Content, Title, IsResource, Id)" width="150">Відправити</button>
 	</div>
 	<span ng-if="errorMsq">errorMsq</span>
 </div>

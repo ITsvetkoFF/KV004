@@ -119,6 +119,7 @@ CREATE TABLE IF NOT EXISTS `Resources` (
 `Content` VARCHAR(10000) NOT NULL,
 `IsResource` TINYINT(1) NOT NULL,
 UNIQUE (`Alias`),
+UNIQUE (`Title`),
 PRIMARY KEY (`Id`))
 ENGINE = InnoDB;
 
