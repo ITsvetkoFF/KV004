@@ -3,11 +3,30 @@
   margin: 30px auto;
   text-align: center;
 }
+.statistic h1, h2, h3 {
+    font-family: WWF;
+    line-height: 1em;
+    }
+.statistic h1 {
+    font-size: 2em;
+    text-align: center;
+    
+}
+.statistic h2 {
+    font-size: 2em;
+}
+.statistic h3 {
+    font-size: 2em;
+}
+.light {
+    font-weight: 300;
+}
+
 .statistic {
    margin: 10px 5px 15px 5px;
 }
 .statistic svg {
-  font-size: 0.8em; 
+  font-size: 0.6em; 
 }
 .main text {
   font: 12px sans-serif;
@@ -44,20 +63,33 @@ font-size: 4em;
   text-align: left;
   margin: 10px 10px 20px 10px;
   padding: 5px 5px;
-  font-size: 0.6em;
+  font-size: 0.65em;
+}
+.pie {
+    margin: 0 auto;
+    text-align: center;
 }
 </style>
 <close-button></close-button>
 <div class="statistic">
-<h2>Статистика за весь час</h2>
+<h1>Статистика за весь час</h1>
 <ul>
   <li><span>{{problems}}</span><br>Проблем</li>
   <li><span>{{votes}}</span><br>Голосів</li>
   <li><span>{{comments}}</span><br>Коментарів</li>
   <li><span>{{photos}}</span><br>Фотографій</li>
 </ul>
-<h3>Статистика проблем за останній <a href="" ng-click="pie('D')">День</a> | <a href="" ng-click="pie('W')">Тиждень</a> | <a href="" ng-click="pie('M')">Місяць</a> | <a href="" ng-click="pie('Y')">Рік</a> | <a href="" ng-click="pie('A')">За весь час</a><br>
-<svg id="el2" ng-init="pie('A')"></svg><h3>
+    <h3 class="light">Статистика проблем за останній</h3>
+    <div class="pie">    
+        <a href="" ng-click="pie('D')">День</a> | 
+        <a href="" ng-click="pie('W')">Тиждень</a> | 
+        <a href="" ng-click="pie('M')">Місяць</a> | 
+        <a href="" ng-click="pie('Y')">Рік</a> | 
+        <a href="" ng-click="pie('A')">За весь час</a><br>
+        <svg id="el2" ng-init="pie('A')"></svg>
+    </div>
+  
+    
 <ul class="legend" ng-init="color = ['#095B0F', '#231F20', '#98442B', '#1B9AD6', '#71BF44', '#FFAB09', '#50095B']">
   <li ng-repeat="types in problemTypes">
   <svg width="12" height="12"><rect width="12" height="12" style="fill:{{color[$index]}}"/></svg> - {{types.name}}
