@@ -144,9 +144,15 @@ function fillProblemsActivities() {
                 probs[i].content = probs[i].content.replace(/'/g, "\\'");
                 probs[i].title = probs[i].title.replace(/'/g, "\\'");
             }
+ 
+ var content = probs[i].content.split("\n\n")[0];
+ var proposal = probs[i].content.split("\n\n")[1];
+
+
  var data = {
                 Title: probs[i].title,
-                Content: probs[i].content,
+                Content: content,
+                Proposal: proposal,
                 Severity: probs[i].severity,
                 Moderation: 1,
                 Votes: probs[i].votes,

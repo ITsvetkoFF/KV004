@@ -14,6 +14,7 @@ define(['./module'],function(controllers){
     copiedDate.setHours(copiedDate.getHours()+h);
     return copiedDate;
 }
+
    $scope.chart = function(){
 var now = new Date();
 var items = [];
@@ -32,6 +33,7 @@ var color = ["#f00", "", "#00f"]
 var margin = {top: 20, right: 15, bottom: 15, left: 40}
   , width = window.innerWidth - 100 - margin.left - margin.right
   , height = 500 - margin.top - margin.bottom
+
   , miniHeight = lanes.length * 12 + 50
   , mainHeight = height - miniHeight - 50;
 

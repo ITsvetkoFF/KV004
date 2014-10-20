@@ -15,7 +15,8 @@ define([
     './problemFilters-directive',
     './notApproved-directive',
     './slider-directive',
-    './closeBut'
+    './closeBut',
+    './editProblemProposal'
 
 
 ], function () {});

@@ -85,6 +85,15 @@ define(['./module'], function(controllers){
                     $scope.$parent.editStatusClass =  adminToShowProblemService.getEditStatus(1);
                 }
             });
+            $scope.$watch('problem.Proposal', function(newValue, oldValue) {
+                if(newValue != oldValue && UserService.getSaveChangeStatus() == true) {
+                    $scope.$parent.problem.Proposal = newValue;
+                    UserService.setSaveChangeStatus(false);
+                    console.log('apply');
+                    $scope.$parent.editStatusClass =  adminToShowProblemService.getEditStatus(1);
+                }
+            });
+
 
             $scope.activities = data[2].reverse();
             for(var i=0;i<$scope.activities.length;i++){
@@ -222,7 +231,7 @@ define(['./module'], function(controllers){
 
         //save changes to db
         $scope.saveChangestoDb = function() {
-            adminToShowProblemService.saveChangestoDbProblemDescription(problem, $scope.problem.Severity, $scope.problem.Content,$scope.problem.Title, $scope.checked)
+            adminToShowProblemService.saveChangestoDbProblemDescription(problem, $scope.problem.Severity, $scope.problem.Content,$scope.problem.Proposal,$scope.problem.Title, $scope.checked)
                 .then(function() {
                     adminToShowProblemService.showScopeNotApprovedProblemFromList(problem);
                     $scope.editStatusClass = adminToShowProblemService.getEditStatus(3);

@@ -75,8 +75,8 @@ define(['./module'],function(services) {
                 return currentEditStatus[status];
             },
 
-             saveChangestoDbProblemDescription: function(problem,severity,content,title,problemDecided){
-                 return $http.put('/api/editProblem/' + problem.Id, {Title: title, Content: content, Severity: severity, ProblemStatus: problemDecided})
+             saveChangestoDbProblemDescription: function(problem,severity,content,proposal,title,problemDecided){
+                 return $http.put('/api/editProblem/' + problem.Id, {Title: title, Content: content,Proposal:proposal, Severity: severity, ProblemStatus: problemDecided})
              },
 
             redirectToMap: function(){

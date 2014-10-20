@@ -12,5 +12,6 @@ define([
     './slider-controller',
     './register',
     './stats',
-    './datepicker'
+    './datepicker',
+    './map-controller'
 ], function () {});
