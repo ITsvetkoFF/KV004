@@ -8,22 +8,29 @@ var jwt          = require('jsonwebtoken'),
 
     mc = new mcapi.Mailchimp('23740bea44a8cfd98fb228dd5691e2b5-us9');
 
-    var mailchimpListID;
+    var mailchimpListID, segments = {};
+
     mc.lists.list(function(data) {
         mailchimpListID = data.data[0].id;
     
-        //look for all existing segments in the list
-        mc.lists.segments({id:mailchimpListID}, function(data){
-            console.log(data.static);
-            for(var i=0;i<data.static.length;i++)
-            console.log(data.static[i].name + ': ' +data.static[i].id);
         
-        });
-
-        //adding 7 segment for each type of problems - in development
-        /*mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'newSegment1'}}, function(data){
+        //adding 7 segments for each type of problems - in development
+        //segment forest problems
+        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Forest problems'}}, function(data){
             console.log('Segment was created!');
 
+        }, 
+        function(error) {
+            if (error.error) {
+                console.log(error.code + ": " + error.error);
+                            
+            } else {
+                console.log('There was an error subscribing that user');
+            }
+        });
+        //segment garbage landfills
+        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Garbage landfills'}}, function(data){
+            console.log('Segment was created!');
         }, 
         function(error) {
             if (error.error) {
@@ -32,7 +39,101 @@ var jwt          = require('jsonwebtoken'),
             } else {
                 console.log('There was an error subscribing that user');
             }
-        });*/
+        });
+        //segment illegal construction
+        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Illegal construction'}}, function(data){
+            console.log('Segment was created!');
+        }, 
+        function(error) {
+            if (error.error) {
+                console.log(error.code + ": " + error.error);
+                
+            } else {
+                console.log('There was an error subscribing that user');
+            }
+        });
+        //segment waterbody problems
+        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Waterbody problems'}}, function(data){
+            console.log('Segment was created!');
+        }, 
+        function(error) {
+            if (error.error) {
+                console.log(error.code + ": " + error.error);
+                
+            } else {
+                console.log('There was an error subscribing that user');
+            }
+        });
+        //segment biodiversity threat
+        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Biodiversity threat'}}, function(data){
+            console.log('Segment was created!');
+        }, 
+        function(error) {
+            if (error.error) {
+                console.log(error.code + ": " + error.error);
+                
+            } else {
+                console.log('There was an error subscribing that user');
+            }
+        });
+        //segment illegal hunting
+        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Illegal hunting'}}, function(data){
+            console.log('Segment was created!');
+        }, 
+        function(error) {
+            if (error.error) {
+                console.log(error.code + ": " + error.error);
+                
+            } else {
+                console.log('There was an error subscribing that user');
+            }
+        });
+        //segment other problems
+        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Other problems'}}, function(data){
+            console.log('Segment was created!');
+        }, 
+        function(error) {
+            if (error.error) {
+                console.log(error.code + ": " + error.error);
+                
+            } else {
+                console.log('There was an error subscribing that user');
+            }
+        });
+
+        //look for all existing segments in the list
+        mc.lists.segments({id:mailchimpListID}, function(data){
+            console.log(data.static);
+            console.log(segments);
+            for(var i=0;i<data.static.length;i++){
+                switch(data.static[i].name){
+                    case 'Forest problems':
+                        segments['1'] = data.static[i].id;
+                        break;
+                    case 'Garbage landfills':
+                        segments['2'] = data.static[i].id;
+                        break;
+                    case 'Illegal construction':
+                        segments['3'] = data.static[i].id;
+                        break;
+                    case 'Waterbody problems':
+                        segments['4'] = data.static[i].id;
+                        break;
+                    case 'Biodiversity threat':
+                        segments['5'] = data.static[i].id;
+                        break;
+                    case 'Illegal hunting':
+                        segments['6'] = data.static[i].id;
+                        break;
+                    case 'Other problems':
+                        segments['7'] = data.static[i].id;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        console.log(segments);
+        });
     });
 
 exports.getProblems = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
@@ -403,6 +504,16 @@ exports.addComment = function(req,res) {
     });
 }
 exports.postProblem = function(req,res){  //post new problem
+
+    for (var prop in segments)
+        console.log("We have those segments"+prop);
+    
+    function addEmailToSegment(problemType, userEmail){
+        console.log(problemType, userEmail);
+        console.log('mailchimpID: ' + mailchimpListID+ '. Problem type: ' + segments[problemType] + '. Email: ' + userEmail);
+        mc.lists.staticSegmentMembersAdd({id:mailchimpListID, seg_id:segments[problemType],batch:[{email:userEmail}]});
+    };
+
     req.getConnection(function(err, connection) {
         if (err) {
             console.error('CONNECTION error: ',err);
@@ -428,6 +539,22 @@ exports.postProblem = function(req,res){  //post new problem
                         if(req.body.userId==undefined){
                 data.Moderation ='0';
             }
+            else {
+            var idUser = req.body.userId;
+                console.log(idUser);
+                connection.query('SELECT Users.Email FROM Users WHERE Users.Id = ?', [idUser], function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        
+                        }
+                    else { 
+                        console.log('no errors');
+                        console.log(rows[0].Email);
+                        addEmailToSegment(req.body.type, rows[0].Email);
+                    
+                    }
+                });
+            };
 
 
             connection.query('INSERT INTO Problems SET ?', [data], function(err, rows, fields) {
