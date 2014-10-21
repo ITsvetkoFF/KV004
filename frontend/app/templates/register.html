@@ -1,6 +1,6 @@
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 <div class="modal-header" ng-hide="formHide">
-    <h3 class="modal-title">Реєстрація нового користувача:</h3>
+    <h3 class="modal-title">Реєстрація:</h3>
 </div>
 <div class="modal-body" ng-hide="formHide">
     <form class="b-registration__form" name="registerForm" ng-submit="submitForm(registerForm.$valid)" novalidate>
@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
             <label for = "email">Пошта</label>
-            <input type="email" id = "email" class="form-control" name="email" ng-model="user.email" required>
+            <input ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" type="email" id = "email" class="form-control" name="email" ng-model="user.email" required>
             <p ng-show="registerForm.email.$error.required && !registerForm.email.$pristine" class="help-block">Це поле обов’язкове.</p>
             <p ng-show="registerForm.email.$invalid && !registerForm.email.$pristine" class="help-block">Введіть коректну пошту.</p>
             <span class="help-block" ng-bind="wrongEmail"></span>
@@ -37,8 +37,9 @@
             <p ng-show="registerForm.password_second.$error.required && !registerForm.password_second.$pristine" class="help-block">Це поле обов’язкове.</p>
             <p ng-show="user.password != user.password_second && !registerForm.password_second.$pristine" class="help-block">Паролі не співпадають.</p>
         </div>
+        <p ng-show="registerForm.last_name.$error.required || registerForm.last_name.$error.required || registerForm.email.$error.required || registerForm.password.$error.required || registerForm.password_second.$error.required" class="help-block">Заповніть, будь ласка, усі поля.</p>
         <div class="modal-footer">
-            <input type="submit" value="Зареєструватися!" class="b-form__button"/>
+            <input ng-disabled="!registerForm.$valid || (user.password != user.password_second)" type="submit" value="Зареєструватися!" class="b-form__button"/>
         </div>
     </form>
 </div>
