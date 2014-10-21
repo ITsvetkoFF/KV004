@@ -51,7 +51,7 @@ exports.getProblems = function(req,res){ // get all moderated problems in brief 
                     res.send({
                         err: err.code
                     });
-                    console.error('Can`t make query\n', err);
+                    console.error('Can`t make request to Problems db\n', err);
                 } else {
                     res.send(rows);
                     console.log("end to get information about all moderated problems \n");
@@ -74,7 +74,7 @@ exports.getProblemId = function(req,res){ //get detailed problem description (ev
             var id = req.params.id ;
                 connection.query('SELECT * FROM Problems WHERE Id=?', [id], function(err1, rows1) {
                     if (err1) {
-                        console.error('Can`t make query\n', err1);
+                        console.log('Can`t make SELECT request to Problems db with id=' + id +'\n' + err1);
                         res.statusCode = 500;
                         res.send({
                             err1: err1.code
@@ -611,11 +611,13 @@ exports.getNews = function(req,res) {
                 console.log('Can`t send information to client in getNews API' + err + '\n');
             }
         }
-        //===================================================
+
+        console.log(req.body);
+
         var data = {
             Content: req.body.news
         };
-        //===================================================
+
     });
 };
 
