@@ -1480,18 +1480,21 @@ form.dropzone {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-    .editproblemtitle span,
-.editproblemcontent span{
+
+.editproblemtitle pre,
+.editproblemcontent pre{
     cursor: pointer;
 }
 .editproblemtitle  input,
 .editproblemcontent textarea{
     display: none;
 }
-.editproblemtitle.active span,
-.editproblemcontent.active span{
+.editproblemtitle.active pre,
+.editproblemcontent.active pre{
     display: none;
 }
+
+
 .editproblemtitle.active input {
     display: inline-block;
     margin: 0px 0px 0px 0px;
