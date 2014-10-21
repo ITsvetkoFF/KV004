@@ -650,9 +650,13 @@ html, body {
     position: absolute;
     width: 30px;
     height: 30px;
-    background: url(../../images/icons/input-check.png) no-repeat;
+    color: #008000;
     top:0px;
-    left:80px;
+    right:0px;
+    font-size: 26px;
+}
+.show_photo_label_0{
+    display: none !important; ;
 }
 .show_photo_label_0{
     position: absolute;

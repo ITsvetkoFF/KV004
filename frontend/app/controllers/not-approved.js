@@ -14,6 +14,7 @@ define(['./module'],function (controllers) {
         }
 
         $scope.showProblem = function (problem) {
+
             adminToShowProblemService.showScopeNotApprovedProblemFromList(problem);
         };
 

@@ -59,14 +59,14 @@
                     </div>
                     <div class="b-problem-deatiled-info-description__content">
                         <label>Пропозиції щодо вирішення:</label><br>
-                        <editproblemproposal  value="problem.Proposal"></editproblemproposals>
+                        <editproblemproposal  value="problem.Proposal"></editproblemproposal>
                     </div>
                     <div class="b-problem-deatiled-info-description-photos">
 
                         <div class="show_photo" ng-repeat="photo in photos">
                             <img ng-click="showSliderFunc()" ng-src="photos/large/{{photo.Link}}" class="b-details-body-problem-photo"/>
 
-                            <div class="show_photo_label_{{photo.Status}}"></div>
+                             <i class="fa fa-check show_photo_label_{{photo.Status}}"></i>
                         </div>
 
                         <div class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div>
@@ -80,7 +80,7 @@
                                 <span class="b-conteiner__drop-title-2">(або натисніть)</span>
                             </div>
                             <div class="b-details-body__status">
-                            <label> Проблема вже вирішена? <input type="checkbox" name="solveProblemMark" ></label>
+                            <label style="cursor: pointer"> Проблема вже вирішена? <input style="cursor: pointer" type="checkbox" name="solveProblemMark" ></label>
 
                             </div>
                             <input id="btn-submit" type="button" class="b-add-problem-button btn-forward-step-3 b-public" value="Додати">

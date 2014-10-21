@@ -11,6 +11,7 @@ define(['./module','dropzone'], function(directives,Dropzone){
             var myDropzone = drop;
             var counter = 0;
             submitButton.addEventListener("click", function() {
+
                if (myDropzone.files.length > 0) {
                   if(document.upload_photo){
                     for(var i=0;i<document.upload_photo.description.length;i++){
@@ -66,7 +67,6 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     }
             });
             myDropzone.on("addedfile", function(file) {
-               
                 var arr = document.getElementsByClassName("dz-preview");
                 for (var i = counter; i < arr.length; i++){
                     arr[i].addEventListener('click', function(e) {
@@ -100,19 +100,22 @@ define(['./module','dropzone'], function(directives,Dropzone){
             });
 
             myDropzone.on('successmultiple', function() {
+                var currentLocation = window.location.href;
                 if(scope.isLoggedIn()){
-                    scope.submitProblem();
-                    scope.swipeHide("dropzone");
+                   // scope.submitProblem();
+                   // scope.swipeHide("dropzone");
                     window.location.href="#/map";
+                    window.location.href=currentLocation;
                 }
                 else {
                      
-                    scope.swipeHide("dropzone");
+                  //  scope.swipeHide("dropzone");
                     window.location.href="#/map";
- 
+                    window.location.href=currentLocation;
 
-                
-                      
+
+
+
                     alert('Ви не зареєстрований користувач, тому проблема спочатку пройде модерацію і потім буде додана на карту.');
                 }
             });

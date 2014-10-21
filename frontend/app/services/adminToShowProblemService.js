@@ -57,6 +57,7 @@ define(['./module'],function(services) {
             },
 
             showScopeNotApprovedProblemFromList: function(problem){
+
                 window.location.href='#/problem/showProblem/'+problem.Id;
             },
 

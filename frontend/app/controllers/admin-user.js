@@ -165,6 +165,7 @@ define(['./module'], function (controllers) {
         $scope.logOut = function logOut() {
             successLogOut();
             $rootScope.$broadcast('Update',"");
+            $window.location.href="/";
             FB.logout(function(response) {
                 console.log(response);
             });
