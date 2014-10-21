@@ -456,7 +456,7 @@ html, body {
     height: 200px;
     position: absolute;
     display: block;
-    top:284px;
+    top:291px;
     right: 17px;
     opacity: 0.1;
 
@@ -468,7 +468,7 @@ html, body {
     height: 200px;
     position: absolute;
     display: block;
-    top:284px;
+    top:291px;
     right: 17px;
 
 
@@ -1836,7 +1836,7 @@ add adaptive style to showProblem
         z-index: 1006;
         display: block;
         position: absolute;
-        top: 0;
+        top: 52px;
         right: 0;
         width: 100%;
         min-width: 320px;
