@@ -1618,6 +1618,6 @@ exports.getStats3 = function (req, res) {
             });
             });
             });
-        }
+         } 
     });
     }
