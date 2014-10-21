@@ -1,6 +1,6 @@
 define(['./module'],function(controllers){
     'use strict';
-    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http' ,function($scope,$rootScope,$modal, $log, $http){
+    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http' ,'UserService' ,function($scope,$rootScope,$modal, $log, $http,UserService){
         $scope.showSlider=false;
         //TODO: rename everthing in code swipHide() to hideRight()
         $scope.swipeHideRight = function(){
