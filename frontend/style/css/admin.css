@@ -554,10 +554,7 @@
                         cursor: pointer;
                     }
 .btn-warning{
-    position: fixed;
     display: inline-block;
-    bottom: 10px;
-    width: 31%;
     opacity: 1;
     -webkit-transition: all 0.5s ease-out;
     -moz-transition: all 0.5s ease-out;
@@ -568,8 +565,7 @@
 .btn-editStatus {
     opacity: 0;
     position: absolute;
-    bottom: 10px;
-    width: 31%;
+    visibility: hidden;
     -webkit-transition: all 0.5s ease-out;
     -moz-transition: all 0.5s ease-out;
     -ms-transition: all 0.5s ease-out;
@@ -578,8 +574,6 @@
 }
 .btn-danger{
     display: inline-block;
-    bottom: 10px;
-    width: 31%;
     opacity: 1;
     -webkit-transition: all 0.5s ease-out;
     -moz-transition: all 0.5s ease-out;
@@ -589,13 +583,27 @@
 }
 .btn-delete{
     opacity: 0;
-    transition: all 0.5s ease-out;
     visibility: hidden;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -ms-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
 }
 .btn-success{
     display: inline-block;
     bottom: 10px;
-    width: 31%;
     opacity: 1;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -ms-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
     transition: all 0.5s ease-out;
+}
+.b-commandButtons-group{
+    display: inline-block;
+    width: 100%;
+    position: fixed;
+    bottom:10px;
+    margin: 0 auto;
 }
