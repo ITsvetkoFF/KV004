@@ -69,18 +69,21 @@
                              <i class="fa fa-check show_photo_label_{{photo.Status}}"></i>
                         </div>
 
-                        <div class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div>
+                        <div class="dropFieldForShowProblem"><div ng-if="isLoggedIn()" class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div></div>
+                        <div ng-if="!isLoggedIn()" style="margin-top: 10px;"><a class="tn-join-us" style="cursor: pointer;" ng-click="showRegForm('')">Зареєструйтесь</a> щоб додати фото</div>
+
                         <form id="addPhotoDropzone" class="dropzone b-add-problem-form" name="upload_photo" drop="dropzoneConfig" ng-show="showDropField">
-                        <input type="text" style="display: none" ng-model="userId" name="userId"/>
+                        <input type="text" style="display: none" ng-model="userId" name="userIsd"/>
                         <input type="text" style="display: none" ng-model="name" name="userName"/>
                             <div class="previews previews_show" >
                                 <p>
-                                    <span class="b-conteiner__drop-title-1"><strong>+ Перемістить сюди фото </strong>для завантаження</span>
+                                    <span class="b-conteiner__drop-title-1"><strong>+ Перемістить сюди фото або натисніть </strong></span>
                                 </p>
-                                <span class="b-conteiner__drop-title-2">(або натисніть)</span>
+
                             </div>
+                            <div>Ще можна додати <b>{{fileCountLeft}}</b> фото, загальним розміром <b>{{fileSizeLeft}} МБ</b></div>
                             <div class="b-details-body__status">
-                            <label style="cursor: pointer"> Проблема вже вирішена? <input style="cursor: pointer" type="checkbox" name="solveProblemMark" ></label>
+                            <label style="cursor: pointer"><input style="cursor: pointer;margin-top: 2px;" type="checkbox" name="solveProblemMark" > Проблема вже вирішена?</label>
 
                             </div>
                             <input id="btn-submit" type="button" class="b-add-problem-button btn-forward-step-3 b-public" value="Додати">

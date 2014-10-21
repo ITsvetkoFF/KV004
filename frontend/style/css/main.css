@@ -1192,6 +1192,7 @@ form.dropzone {
 }
 .previews_show{
     margin: 5px auto 0px;
+    padding-top: 11px;
 }
 
 .previews:hover{
@@ -1219,7 +1220,7 @@ form.dropzone {
 }
 .b-details-body__status{
     width:240px;
-
+    margin-top: 7px;
     float:left;
 }
 
@@ -1956,5 +1957,8 @@ opacity: 0.6;
      
     
 }
-
+/* for dropzone*/
+.dz-error-message{
+    width:80% !important;
+}
 

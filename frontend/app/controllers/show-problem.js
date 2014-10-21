@@ -2,7 +2,8 @@ define(['./module'], function(controllers){
     'use strict';
     controllers.controller('showProblemCtrl',['$scope','$routeParams','$http','ipCookie','$rootScope','$modal','adminToShowProblemService','$window','UserService', function ($scope,$routeParams,$http,ipCookie,$rootScope,$modal,adminToShowProblemService,$window, UserService){
 
-
+        $scope.fileSizeLeft = 20;
+        $scope.fileCountLeft = 10;
         adminToShowProblemService.setEditStatus($scope.isAdministrator());
         $scope.editStatusClass = adminToShowProblemService.getEditStatus(3);
         $scope.delStatus = adminToShowProblemService.getEditStatus(0);
@@ -119,12 +120,14 @@ define(['./module'], function(controllers){
                 thumbnailWidth:100,
                 thumbnailHeight:100,
                 acceptedFiles:'.jpg,.jpeg',
-                dictFileTooBig: "Файл великого розміру ({{filesize}}MB). Максимальний розмір файлу: {{maxFilesize}}MB.", 
+               // dictFileTooBig: "Файл великого розміру ({{filesize}}MB). Максимальний розмір файлу: {{maxFilesize}}MB.",
      
   
-                dictInvalidFileType:"Невірний формат файлу. Допустимі формати : jpg,jpeg",
-                clickable:".previews,.b-details-body-problem-photo_add",
+                //dictInvalidFileType:"Невірний формат файлу. Допустимі формати : jpg,jpeg",
+                clickable:".previews,.dropFieldForShowProblem",
+
                 previewsContainer:".previews"
+
             }
         };
         $scope.showDrop = function(){

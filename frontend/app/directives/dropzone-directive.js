@@ -7,7 +7,7 @@ define(['./module','dropzone'], function(directives,Dropzone){
             //create a Dropzone for the element with the given options
             drop = new Dropzone(element[0], config.options);
             var submitButton = document.querySelector("#btn-submit");
-
+            var sizeOfAllPhotos = 0;
             var myDropzone = drop;
             var counter = 0;
             submitButton.addEventListener("click", function() {
@@ -67,6 +67,7 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     }
             });
             myDropzone.on("addedfile", function(file) {
+
                 var arr = document.getElementsByClassName("dz-preview");
                 for (var i = counter; i < arr.length; i++){
                     arr[i].addEventListener('click', function(e) {
@@ -87,16 +88,43 @@ define(['./module','dropzone'], function(directives,Dropzone){
                 removeButton.addEventListener("click", myFunction);
 
                 function myFunction(e) {
+                    sizeOfAllPhotos-=file.size;
+                    scope.fileSizeLeft=((20*1024*1024-sizeOfAllPhotos)/1024/1024).toFixed(2);
+                    scope.fileCountLeft++;
+
+
                     myDropzone.removeFile(file);
                     counter--;
                     e.stopPropagation();
                 };
-                
+                console.log(file);
          if(file.type!="image/jpeg"){
            myDropzone.removeFile(file);   
                 alert("Невірний формат файлу. Допустимі формати : jpg,jpeg"); 
+         }else
+         if(myDropzone.files.length==11){
+            myDropzone.removeFile(file);
+            alert("Максимальна кількість файлів не може перевищувати 10");
+         }else
+         if(file.size>=10*1024*1024){
+           myDropzone.removeFile(file);
+                alert("Розмір одного файлу не може перевищувати 10 МБ ");
+         }else {
+
+             sizeOfAllPhotos += file.size;
+             scope.fileCountLeft--;
+             scope.fileSizeLeft = ((20 * 1024 * 1024 - sizeOfAllPhotos) / 1024 / 1024).toFixed(2);
+             if (sizeOfAllPhotos >= 20 * 1024 * 1024) {
+                 sizeOfAllPhotos -= file.size;
+                 myDropzone.removeFile(file);
+                 scope.fileCountLeft++;
+                 alert("Максімальній розмір файлів не може перевищувати 20 МБ ");
+             }
          }
-                
+
+
+
+
             });
 
             myDropzone.on('successmultiple', function() {
@@ -119,7 +147,12 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     alert('Ви не зареєстрований користувач, тому проблема спочатку пройде модерацію і потім буде додана на карту.');
                 }
             });
-            
+
+
+
+
+
+
             //bind the given event handlers
             angular.forEach(config.eventHandlers,function (handler, event){
                drop.on(event, handler);
