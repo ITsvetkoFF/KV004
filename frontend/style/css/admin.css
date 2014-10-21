@@ -238,6 +238,9 @@
     font-family: FontAwesome;
 
 }
+.b-problem-deatiled-info__severity_true{
+    pointer-events:none;
+}
 
 .sr-only{
     display:none;

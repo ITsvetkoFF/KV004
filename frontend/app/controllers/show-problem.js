@@ -2,6 +2,7 @@ define(['./module'], function(controllers){
     'use strict';
     controllers.controller('showProblemCtrl',['$scope','$routeParams','$http','ipCookie','$rootScope','$modal','adminToShowProblemService','$window','UserService', function ($scope,$routeParams,$http,ipCookie,$rootScope,$modal,adminToShowProblemService,$window, UserService){
 
+
         $scope.fileSizeLeft = 20;
         $scope.fileCountLeft = 10;
         adminToShowProblemService.setEditStatus($scope.isAdministrator());

@@ -23,7 +23,7 @@
         <div class="b-problem-deatiled-info-general">
             <div class='b-problem-deatiled-info-severity'>
                 <div class="b-problem-deatiled-info__caption"> Важливість</div>
-                <div class="b-problem-deatiled-info__severity"  ng-init="problem.Severity">
+                <div class="b-problem-deatiled-info__severity b-problem-deatiled-info__severity_{{!isAdministrator()}}"  ng-init="problem.Severity">
                    <rating  ng-model="problem.Severity" readonly="!isAdministrator()" state-on="'fa-star'" state-off="'fa-star-o'"></rating>
                 </div>
             </div>
