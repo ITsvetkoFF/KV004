@@ -17,10 +17,12 @@ define(['./module'],function(controllers){
                         $rootScope.$broadcast('Update',"");
             
             }else{
-                window.location.href="#/map";
-                $rootScope.$broadcast('Update',"");
+                if (UserService.getSaveChangeStatus()) {
+                    window.location.href = "#/map";
+                    $rootScope.$broadcast('Update', "");
+                }
             }
-        }
+        };
         $scope.$on('$routeChangeStart', function(next, current) { 
             if ($rootScope.tempMarker)
                 $rootScope.geoJson.removeLayer($rootScope.tempMarker);
