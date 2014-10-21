@@ -1503,8 +1503,7 @@ form.dropzone {
 .editproblemcontent.active textarea{
     display: inline-block;
     margin: 0px 0px 0px 0px;
-    width: 525px;
-    height: 100px;
+    width: 100%;
     overflow-x: hidden;
 }
     .resource {
