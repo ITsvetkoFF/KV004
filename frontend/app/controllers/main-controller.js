@@ -1,6 +1,6 @@
 define(['./module'],function(controllers){
     'use strict';
-    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http' ,function($scope,$rootScope,$modal, $log, $http){
+    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http','UserService' ,function($scope,$rootScope,$modal, $log, $http,UserService){
         $scope.showSlider=false;
         //TODO: rename everthing in code swipHide() to hideRight()
         $scope.swipeHideRight = function(){
@@ -17,10 +17,13 @@ define(['./module'],function(controllers){
                         $rootScope.$broadcast('Update',"");
             
             }else{
-                window.location.href="#/map";
-                $rootScope.$broadcast('Update',"");
+                if (UserService.getSaveChangeStatus()) {
+                    window.location.href = "#/map";
+                    $rootScope.$broadcast('Update', "");
+                }
             }
-        }
+        };
+
         $scope.$on('$routeChangeStart', function(next, current) { 
             if ($rootScope.tempMarker)
                 $rootScope.geoJson.removeLayer($rootScope.tempMarker);

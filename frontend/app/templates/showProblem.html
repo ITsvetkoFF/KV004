@@ -37,7 +37,7 @@
                             <span class="onoffswitch-switch"></span>
                         </label>
                     </div>
-
+                </div>
             </div>
                 <div class="b-problem-deatiled-info-votes">
                     <!--<img class='b-problem-deatiled-info__votes' src='images/icons/heart.jpg'> -->
@@ -93,7 +93,7 @@
                  <activity></activity>
             </tab>
         </tabset>
-        <div>
+        <div class="b-commandButtons-group">
             <button type="button" class="btn btn-sm {{editStatusClass}}" ng-show="isAdministrator()" ng-click="saveChangestoDb(problem.Title,problem.Severity, problem.Status, problem.Content,problem.Proposal)" >Збережіть зміни</button>
             <button type="button" class="btn {{addStatus}} btn-sm" ng-show="isAdministrator()"ng-click="addProblemToDB()" >Додати проблему до бази</button>
             <button type="button" class="btn {{delStatus}} btn-sm" ng-show="isAdministrator()" ng-click="deleteProblemFromDb()" >Видалити проблему з бази</button>
