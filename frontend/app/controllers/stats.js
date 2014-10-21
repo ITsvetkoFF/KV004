@@ -3,7 +3,6 @@ define(['./module'],function(controllers){
     controllers.controller('statsCtrl',['$scope','$rootScope','$http', function($scope, $rootScope, $http){
        $rootScope.$broadcast('Update', '_full');
        $http.get('/api/getStats3').success(function(data) {
-          console.log(data)
             $scope.votes = data[0][0].votes;
             $scope.problems = data[0][0].problems;
             $scope.comments = data[2][0].comments;
@@ -25,7 +24,6 @@ var color = ["#f00", "", "#00f"]
     .get(function(error, data) {
       if (error) throw error;
       items = JSON.parse(data.response);
-      console.log(items);
     items.forEach(function(d) {
       d.start = new Date(d.start);
       d.class = "past";
@@ -92,48 +90,48 @@ main.selectAll('.laneText')
 mini.append('g').selectAll('.laneLines')
   .data(lanes)
   .enter().append('line')
-  .attr('x1', -10)
-  .attr('y1', function(d) { return d3.round(y2(d.id)) + 0.5; })
+  .attr('x1', 0)
+  .attr('y1', function(d) { return d3.round(y2(d.id)) + 10; })
   .attr('x2', width)
-  .attr('y2', function(d) { return d3.round(y2(d.id)) + 0.5; })
+  .attr('y2', function(d) { return d3.round(y2(d.id)) + 10; })
   .attr('stroke', function(d) { return d.label === '' ? 'white' : 'lightgray' });
 
   mini.append('g').selectAll('.laneText')
   .data(lanes)
   .enter().append("circle")
-  .attr("cx", function (d) { return -30; })
-  .attr("cy", function (d) { return d3.round(y1(d.id/2.1)) + 22; })
+  .attr("cx", function (d) { return -25; })
+  .attr("cy", function (d) { return d3.round(y1(d.id/2.1)) + 32; })
   .attr("r", function (d) { return 5; })
   .style("fill", function(d) { return colors[d.id-1]; });
 
 // draw the x axis
 var xDateAxis = d3.svg.axis()
-  .scale(x)
+  .scale(x1)
   .orient('bottom')
-  .ticks(d3.time.mondays, (x.domain()[1] - x.domain()[0]) > 15552e6 ? 2 : 1)
-  .tickFormat(d3.time.format('%d'))
-  .tickSize(6, 0, 0);
+  .ticks(d3.time.years, 1)
+  .tickFormat('')
+  .tickSize(0, 0, 0);
 
 var x1DateAxis = d3.svg.axis()
   .scale(x1)
   .orient('bottom')
-  .ticks(d3.time.days, 1)
-  .tickFormat(d3.time.format('%a %d'))
-  .tickSize(6, 0, 0);
+  .ticks(d3.time.years, 1)
+  .tickFormat('')
+  .tickSize(0, 0, 0);
 
 var xMonthAxis = d3.svg.axis()
   .scale(x)
   .orient('top')
   .ticks(d3.time.months, 1)
   .tickFormat(d3.time.format('%b %Y'))
-  .tickSize(15, 0, 0);
+  .tickSize(8, 0, 0);
 
 var x1MonthAxis = d3.svg.axis()
   .scale(x1)
   .orient('top')
   .ticks(d3.time.mondays, 1)
   .tickFormat(d3.time.format('%b - Week %W'))
-  .tickSize(15, 0, 0);
+  .tickSize(-8, 0, 0);
 
 main.append('g')
   .attr('transform', 'translate(0,' + mainHeight + ')')
@@ -146,7 +144,7 @@ main.append('g')
   .call(x1MonthAxis)
   .selectAll('text')
     .attr('dx', 5)
-    .attr('dy', 12);
+    .attr('dy', 0);
 
 mini.append('g')
   .attr('transform', 'translate(0,' + miniHeight + ')')
@@ -159,20 +157,7 @@ mini.append('g')
   .call(xMonthAxis)
   .selectAll('text')
     .attr('dx', 5)
-    .attr('dy', 12);
-// draw a line representing today's date
-main.append('line')
-  .attr('y1', 0)
-  .attr('y2', mainHeight)
-  .attr('class', 'main todayLine')
-  .attr('clip-path', 'url(#clip)');
-  
-mini.append('line')
-  .attr('x1', x(now) + 0.5)
-  .attr('y1', 0)
-  .attr('x2', x(now) + 0.5)
-  .attr('y2', miniHeight)
-  .attr('class', 'todayLine');
+    .attr('dy', 0);
 
 // draw the items
 var itemRects = main.append('g')
@@ -214,45 +199,19 @@ function display () {
     , minExtent = d3.time.day(brush.extent()[0])
     , maxExtent = d3.time.day(brush.extent()[1])
     , visItems = items.filter(function (d) { return d.start < maxExtent && d.start.addHours(5) > minExtent});
-   // maxExtent.setDate(maxExtent.getDate()+7)
-  //  console.log(minExtent, maxExtent);
   mini.select('.brush').call(brush.extent([minExtent, maxExtent]));   
 
   x1.domain([minExtent, maxExtent]);
- // console.log(maxExtent - minExtent);
-  if ((maxExtent - minExtent) > 20041400000) {
-  //  console.log('if-1')
-    x1DateAxis.ticks(d3.time.years, 1).tickFormat(d3.time.format('%M'))
-    x1MonthAxis.ticks(d3.time.months, 1).tickFormat(d3.time.format('Year %Y'))
+  if ((maxExtent - minExtent) > 100000000000) {
+    x1MonthAxis.ticks(d3.time.years, 1).tickFormat(d3.time.format('%b %Y'))
   }
-  else if ((maxExtent - minExtent) > 11919600000 ) {
-   // console.log('if-2')
-    x1DateAxis.ticks(d3.time.weeks, 1).tickFormat(d3.time.format('Week %W'))
-    x1MonthAxis.ticks(d3.time.months, 1).tickFormat(d3.time.format('%B - Year%Y'))
+  else if ((maxExtent - minExtent) > 6822000000) {
+    x1MonthAxis.ticks(d3.time.months, 1).tickFormat(d3.time.format('%B %Y'))
   }
-  else if ((maxExtent - minExtent) > 6217200000  ) {
-  //  console.log('if-3')
-    x1DateAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%a %d'))
-    x1MonthAxis.ticks(d3.time.months, 1).tickFormat(d3.time.format('%B - Year%Y'))
-  }
-  else if ((maxExtent - minExtent) > 1468800000) {
-   // console.log('if-4')
-    x1DateAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%a %d'))
-    x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%b - Week %W'))    
-  }
-  else if ((maxExtent - minExtent) > 345600000) {
-  //  console.log('if-5')
-    x1DateAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%a %d'))
-    x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%b - Week %W'))
-  }
-  else if ((maxExtent - minExtent) > 172800000) {
-  //  console.log('if-6')
-    x1DateAxis.ticks(d3.time.days, 1).tickFormat(d3.time.format('%a %d'))
-    x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%b - Week %W'))
+  else if ((maxExtent - minExtent) > 1382400000) {
+    x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('Week %W'))
   } 
   else {
-  //  console.log('else')
-    x1DateAxis.ticks(d3.time.hours, 4).tickFormat(d3.time.format('%I %p'))
     x1MonthAxis.ticks(d3.time.days, 1).tickFormat(d3.time.format('%b %e'))
   }
 
@@ -269,7 +228,7 @@ function display () {
   main.select('.main.axis.month').call(x1MonthAxis)
     .selectAll('text')
       .attr('dx', 5)
-      .attr('dy', 12);
+      .attr('dy', 0);
 
   // upate the item rects
   rects = itemRects.selectAll('rect')
@@ -317,7 +276,7 @@ function moveBrush () {
 // ugly - but draws mini 2x faster than append lines or line generator
 // is there a better way to do a bunch of lines as a single path with d3?
 function getPaths(items) {
-  var paths = {}, d, offset = .5 * y2(1) + 0.5, result = [];
+  var paths = {}, d, offset = .5 * y2(1) + 10, result = [];
   for (var i = 0; i < items.length; i++) {
     d = items[i];
     if (!paths[d.class]) paths[d.class] = ''; 
@@ -332,6 +291,8 @@ function getPaths(items) {
 };
 
   $scope.pie = function(val){
+    $scope.style = {};
+    $scope.style[val] = 'active';
    d3.selectAll("#el2 > *").remove();
    var width = 300,
     height = 300,

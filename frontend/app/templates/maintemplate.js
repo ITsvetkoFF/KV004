@@ -8,7 +8,7 @@ angular.module('app.templates', []).run(['$templateCache', function($templateCac
   $templateCache.put("app/templates/chat.html",
     "<div class=b-chat__container><a ng-href=#/map ng-click=swipeHide() class=close>×</a><div class=b-chat__currentNews><h3 style=\"text-align: center\">Новини що відображаються зараз на сайті:</h3><ul class=b-chat__newsItem ng-repeat=\"news in messageLogs\"><li class=b-chat__newsItem-li>{{news.Content}}</li><i class=\"fa fa-close b-chat__newsItem-li-i\" ng-click=sendMessage($index+1)></i></ul></div><form role=form novalidate name=form><div class=form-group><span class=b-chat-comment__title>Додати повідомлення</span><textarea class=b-chat-comment__field ng-model=message placeholder=\"Напишіть тут текст повідомлення...\"></textarea><input type=button class=b-chat-comment__btn ng-enable=form.$valid ng-click=sendMessage(message) value=\"Додати\"></div></form></div>");
   $templateCache.put("app/templates/editorPage.html",
-    "<a href=#/map ng-click=swipeHide() class=close>×</a><form class=editor name=EditForm ng-submit=submitForm(EditForm.$valid) novalidate><div class=editor_horizontal><div class=editor_left><label>Заголовок ресурсу:</label><input name=Title ng-model=Title ng-minlength=3 ng-maxlength=40 required><p ng-if=\"EditForm.Title.$error.required && !EditForm.Title.$pristine\">Це поле обов'язкове для заповнення!</p></div><div class=editor_left><label>Alias для ресурсу:</label><input ng-model=Alias name=Alias required ng-pattern=\"/^[0-9a-zA-Z\\-]+$/\"><p ng-if=EditForm.Alias.$error.pattern>Це поле може містити лише латинські літери, цифри та символ \"-\" !</p><p ng-if=\"EditForm.Alias.$error.required && !EditForm.Alias.$pristine\">Це поле обов'язкове для заповнення!</p></div></div><div class=editor_horizontal><div text-angular=text-angular ta-toolbar=\"[['h2', 'h3', 'h4', 'p', 'pre', 'quote'],['bold', 'italics', 'underline', 'ul', 'ol', 'clear'],['justifyLeft','justifyCenter','justifyRight'],	['html', 'insertImage', 'insertLink', 'insertVideo']]\" name=htmlontent ng-model=Content class=editor_ta></div></div><div class=editor_horizontal><div class=editor_left><label>Де розмістити цей ресурс:</label><select ng-model=IsResource name=IsResource required><option value=0>У верхньому меню</option><option value=1>В розділі \"Ресурси\"</option></select><span ng-if=EditForm.IsResource.$error.required>Це поле обов'язкове для заповнення!</span></div><div class=editor_left><button type=submit class=\"b-form__button editor_button\" type=submit ng-click=\"sendResource(Alias, Content, Title, IsResource, Id)\">Відправити</button></div><span ng-if=errorMsq>errorMsq</span></div></form>");
+    "<a href=#/map ng-click=swipeHide() class=close>×</a><form class=editor name=EditForm ng-submit=submitForm(EditForm.$valid) novalidate><div class=editor_left><label>Заголовок ресурсу:</label><input name=Title ng-model=Title ng-minlength=3 ng-maxlength=40 required><p ng-if=\"EditForm.Title.$error.required && !EditForm.Title.$pristine\">Це поле обов'язкове для заповнення!</p></div><div class=editor_left><label>Alias для ресурсу:</label><input ng-model=Alias name=Alias required ng-pattern=\"/^[0-9a-zA-Z\\-]+$/\"><p ng-if=EditForm.Alias.$error.pattern>Це поле може містити лише латинські літери, цифри та символ \"-\" !</p><p ng-if=\"EditForm.Alias.$error.required && !EditForm.Alias.$pristine\">Це поле обов'язкове для заповнення!</p></div><div class=editor_horizontal><div text-angular=text-angular ta-toolbar=\"[['h2', 'h3', 'h4', 'p', 'pre', 'quote'],['bold', 'italics', 'underline', 'ul', 'ol', 'clear'],['justifyLeft','justifyCenter','justifyRight'],	['html', 'insertImage', 'insertLink', 'insertVideo']]\" name=htmlontent ng-model=Content class=editor_ta></div></div><div class=editor_left><label>Де розмістити цей ресурс:</label><select ng-model=IsResource name=IsResource required><option value=0>У верхньому меню</option><option value=1>В розділі \"Ресурси\"</option></select><span ng-if=EditForm.IsResource.$error.required>Це поле обов'язкове для заповнення!</span></div><div class=editor_left><button type=submit class=\"b-form__button editor_button\" type=submit ng-click=\"sendResource(Alias, Content, Title, IsResource, Id)\">Відправити</button></div><span ng-if=errorMsq>errorMsq</span></form>");
   $templateCache.put("app/templates/filters.html",
     "<div class=b-container-filters-left><div class=info-problem-filters ng-controller=datePicker><div class=problem><p class=title>ФИЛЬТРАЦІЯ ЗА ДАТОЮ</p></div><div class=\"datepicker input-group\"><span class=input-group-btn><button type=button class=\"btn btn-default\" ng-click=\"open($event,'dt')\"><i class=\"fa fa-calendar\"></i> Показати з:</button></span> <input class=form-control datepicker-popup={{format}} ng-model=todayTime.formDataDt is-open=datepickers.dt min-date=minDate max-date=todayTime.formDataDtSecond datepicker-options=dateOptions ng-required=true close-text={{texts.close}} current-text={{texts.today}} clear-text={{texts.clear}} ng-change=\"toggleSelection()\"></div><div class=\"datepicker input-group\"><span class=input-group-btn><button type=button class=\"btn btn-default\" ng-click=\"open($event, 'dtSecond')\"><i class=\"fa fa-calendar\"></i> Показати до:</button></span> <input class=form-control datepicker-popup={{format}} ng-model=todayTime.formDataDtSecond is-open=datepickers.dtSecond min-date=todayTime.formDataDt max-date=formDataToday datepicker-options=dateOptions ng-required=true close-text={{texts.close}} current-text={{texts.today}} clear-text={{texts.clear}} ng-change=\"toggleSelection()\"></div><div class=problem><p class=title>ТИП ПРОБЛЕМ</p><input ng-repeat-start=\"problemType in problemTypes\" id=\"{{'type' + problemType.id}}\" type=checkbox ng-model=problemType.selected ng-change=toggleSelection()><label ng-repeat-end for=\"{{'type' + problemType.id}}\">{{problemType.name}}</label></div><div class=problem><p class=title>СТАТУС ПРОБЛЕМ</p><input ng-repeat-start=\"problemStatus in problemStatuses\" id=\"{{'status' + problemStatus.id}}\" type=checkbox ng-model=problemStatus.selected ng-change=toggleSelection()><label ng-repeat-end for=\"{{'status' + problemStatus.id}}\">{{problemStatus.name}}</label></div><div class=\"problem controls\" ng-show=isLoggedIn()><input id=userProblems type=checkbox ng-model=placeUserProblemsChecker ng-change=toggleSelection()><label for=userProblems>Відобразити мої</label></div></div></div><script id=template/datepicker/day.html type=text/ng-template><table role=\"grid\" aria-labelledby=\"{{uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" +
     "    <thead>\n" +
@@ -87,76 +87,17 @@ angular.module('app.templates', []).run(['$templateCache', function($templateCac
   $templateCache.put("app/templates/slider.html",
     "<div ng-if=showSlider><div class=slider-fon ng-show=showSlider></div><div class=\"container slider\" ng-show=showSlider><i class=\"fa fa-close close\" style=\"top:0px; right:0px;z-index: 5;color:#fff;opacity:1\" ng-click=hideSlider()></i><ul style=height:360px rn-carousel rn-carousel-control rn-carousel-indicator class=image><li style=height:360px ng-repeat=\"slide in slides\" ng-style=\"{ backgroundImage: 'url(' + slide.image + ')' }\"><div style=color:#fff;margin-top:360px class=layer>{{ slide.text }}</div></li></ul></div></div>");
   $templateCache.put("app/templates/statistic.html",
-    "<style>.statistic > h3, h2, ul {\n" +
-    "  margin: 30px auto;\n" +
-    "  text-align: center;\n" +
-    "}\n" +
-    ".statistic h1, h2, h3 {\n" +
-    "    font-family: WWF;\n" +
-    "    line-height: 1em;\n" +
-    "    }\n" +
-    ".statistic h1 {\n" +
-    "    font-size: 2em;\n" +
-    "    text-align: center;\n" +
-    "    \n" +
-    "}\n" +
-    ".statistic h2 {\n" +
-    "    font-size: 2em;\n" +
-    "}\n" +
-    ".statistic h3 {\n" +
-    "    font-size: 2em;\n" +
-    "}\n" +
-    ".light {\n" +
-    "    font-weight: 300;\n" +
-    "}\n" +
-    "\n" +
-    ".statistic {\n" +
-    "   margin: 10px 5px 15px 5px;\n" +
-    "}\n" +
-    ".statistic svg {\n" +
-    "  font-size: 0.6em; \n" +
-    "}\n" +
-    ".main text {\n" +
-    "  font: 12px sans-serif;\n" +
-    "}\n" +
-    ".mini text {\n" +
-    "  font: 10px sans-serif;  \n" +
-    "}\n" +
-    ".month text {\n" +
-    "  text-anchor: start;\n" +
-    "}\n" +
-    ".todayLine {\n" +
-    "  stroke: blue;\n" +
-    "  stroke-width: 1.5;\n" +
-    "}\n" +
-    ".axis line, .axis path {\n" +
-    "  stroke: black;\n" +
-    "}\n" +
-    ".brush .extent {\n" +
-    "  stroke: gray;\n" +
-    "  fill: blue;\n" +
-    "  fill-opacity: .165;\n" +
-    "}\n" +
-    ".statistic > ul {\n" +
-    "list-style: none;\n" +
-    "}\n" +
-    ".statistic  li {\n" +
-    "padding: 0px 30px;\n" +
-    "display: inline-block;\n" +
-    "}\n" +
-    ".statistic  li span{\n" +
-    "font-size: 4em;\n" +
-    "}\n" +
-    ".statistic .legend {\n" +
-    "  text-align: left;\n" +
-    "  margin: 10px 10px 20px 10px;\n" +
-    "  padding: 5px 5px;\n" +
-    "  font-size: 0.65em;\n" +
-    "}\n" +
-    ".pie {\n" +
-    "    margin: 0 auto;\n" +
-    "    text-align: center;\n" +
-    "}</style><close-button></close-button><div class=statistic><h1>Статистика за весь час</h1><ul><li><span>{{problems}}</span><br>Проблем</li><li><span>{{votes}}</span><br>Голосів</li><li><span>{{comments}}</span><br>Коментарів</li><li><span>{{photos}}</span><br>Фотографій</li></ul><h3 class=light>Статистика проблем за останній</h3><div class=pie><a href=\"\" ng-click=\"pie('D')\">День</a> | <a href=\"\" ng-click=\"pie('W')\">Тиждень</a> | <a href=\"\" ng-click=\"pie('M')\">Місяць</a> | <a href=\"\" ng-click=\"pie('Y')\">Рік</a> | <a href=\"\" ng-click=\"pie('A')\">За весь час</a><br><svg id=el2 ng-init=\"pie('A')\"></svg></div><ul class=legend ng-init=\"color = ['#095B0F', '#231F20', '#98442B', '#1B9AD6', '#71BF44', '#FFAB09', '#50095B']\"><li ng-repeat=\"types in problemTypes\"><svg width=12 height=12><rect width=12 height=12 style=\"fill:{{color[$index]}}\"></svg> - {{types.name}}</li></ul><h3>Хронологія публікацій та голосів</h3><ul class=legend><li><svg width=5 height=15><rect width=5 height=15 style=\"fill:#f00; opacity: 0.5\"></svg> - Додано проблему</li><li><svg width=5 height=15><rect width=5 height=15 style=\"fill:#00f; opacity: 0.5\"></svg> - Додано голос</li></ul><svg id=el1 ng-init=chart()></svg></div>");
+    "<style>.pie > span {\n" +
+    "    color: #428bca;\n" +
+    "    cursor: pointer;\n" +
+    "  }\n" +
+    "  .pie > span:hover {\n" +
+    "    color: #2a6496;\n" +
+    "    text-decoration: underline;\n" +
+    "  }\n" +
+    "  .active {\n" +
+    "    text-decoration: underline;\n" +
+    "  }</style><close-button></close-button><div class=statistic><h1>Статистика за весь час</h1><ul><li><span>{{problems}}</span><br>Проблем</li><li><span>{{votes}}</span><br>Голосів</li><li><span>{{comments}}</span><br>Коментарів</li><li><span>{{photos}}</span><br>Фотографій</li></ul><h3 class=light>Кількість доданих проблем за останній</h3><div class=pie><span ng-class=style.D ng-click=\"pie('D')\">День</span> | <span ng-class=style.W ng-click=\"pie('W')\">Тиждень</span> | <span ng-class=style.M ng-click=\"pie('M')\">Місяць</span> | <span ng-class=style.Y ng-click=\"pie('Y')\">Рік</span> | <span ng-class=style.A ng-click=\"pie('A')\">За весь час</span><br><svg id=el2 ng-init=\"pie('A')\"></svg></div><ul class=legend ng-init=\"color = ['#095B0F', '#231F20', '#98442B', '#1B9AD6', '#71BF44', '#FFAB09', '#50095B']\"><li ng-repeat=\"types in problemTypes\"><svg width=12 height=12><rect width=12 height=12 style=\"fill:{{color[$index]}}\"></svg> - {{types.name}}</li></ul><h3>Хронологія публікацій та голосів</h3><ul class=legend><li><svg width=5 height=15><rect width=5 height=15 style=\"fill:#f00; opacity: 0.5\"></svg> - Додано проблему</li><li><svg width=5 height=15><rect width=5 height=15 style=\"fill:#00f; opacity: 0.5\"></svg> - Додано голос</li></ul><svg id=el1 ng-init=chart()></svg></div>");
   $templateCache.put("app/templates/userChatLine.html",
     "<div ng-show=showNewsContainer class=chat-user-label><div ng-repeat=\"messageLog in messageLogs\" ng-style={display:messageLog.show} class=chat-user-label{{messageLogHide}}>{{messageLog.Content}}</div><i class=\"fa fa-close close\" ng-click=\"showNewsContainer=false\"></i></div>");
 }]);
