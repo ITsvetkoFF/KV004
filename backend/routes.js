@@ -1543,178 +1543,107 @@ exports.deleteResource = function(req, res) {
     });
 };
 exports.getStats1 = function (req, res) {
-     console.log('start getStats1 API function');
      req.getConnection(function(err, connection) {
         if (err) {
+            console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
+                result: 'error',
                 err:    err.code
             });
-            console.log('Can`t connect to db in getStats1 API call\n' + err +"\n");
         } else {
-            try{
-                var val
-                switch(req.params.val){
-                    case "D": val = "%Y-%m-%d";
-                        break;
-                    case "W": val = "%Y-%v";
-                        break;
-                    case "M": val = "%Y-%m";
-                        break;
-                };
-                connection.query('SELECT count(Id) as value, DATE_FORMAT(Date,'+ '"' + val + '"' +') as date FROM Activities where ActivityTypes_Id = 1 GROUP BY DATE_FORMAT(Date,'+ '"' + val + '"' +');',
-                    function(err, rows) {
-                        if (err) {
-                            res.statusCode = 500;
-                            res.send({
-                                err:    err.code
-                            });
-                            console.log('Can`t make query for statistic GROUP BY DATE_FORMAT\n' + err +"\n");
-                        }
-                        res.send(rows);
-                        console.log('end getStats1 API function');
+            connection.query('SELECT Activities.Problems_Id as Id, Activities.Date as start, Activities.ActivityTypes_Id as act, Problems.ProblemTypes_Id as lane FROM Activities LEFT JOIN Problems ON Problems.Id = Activities.Problems_Id WHERE (ActivityTypes_Id = 1) OR (ActivityTypes_Id = 3);', function(err, rows, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
                     });
-            }
-            catch(err){
-                console.log('Can`t execute getStats1 API');
-            }
+                }
+                res.send(rows);
+            });
         }
     });
-};
-
+}
 exports.getStats2 = function (req, res) {
-    console.log('start getStats2 API function');
      req.getConnection(function(err, connection) {
         if (err) {
+            console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
+                result: 'error',
                 err:    err.code
             });
-            console.log('Can`t connect to db in getStats2 API call\n' + err +"\n");
         } else {
-            try{
-                var val;
+            var val
                 switch(req.params.val){
-                    case "Y": val = "YEAR";
-                        break;
-                    case "W": val = "WEEK";
-                        break;
-                    case "M": val = "MONTH";
-                        break;
+        case "D": val = 'AND (DATE(Activities.Date) = DATE(NOW()))';
+            break;
+        case "W": val = 'AND (DATE_FORMAT(Activities.Date,"%u-%Y") = DATE_FORMAT(NOW(),"%u-%Y"))';
+            break;
+        case "M": val = 'AND (DATE_FORMAT(Activities.Date,"%m-%Y") = DATE_FORMAT(NOW(),"%m-%Y"))';
+            break;
+        case "Y": val = 'AND (YEAR(Activities.Date) = YEAR(NOW()))';
+            break;
+            case "A": val = "";
+            break;
+        };
+            connection.query('SELECT Problems.ProblemTypes_Id as id, count(Problems.Id) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE (Activities.ActivityTypes_Id = 1) ' + val + ' GROUP BY Problems.ProblemTypes_Id;', function(err, rows, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
                 }
-                connection.query('SELECT Problems.ProblemTypes_Id as id, count(Problems.Id) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE (Activities.ActivityTypes_Id = 1) AND (' + val + '(Activities.Date) = '+ val +'(NOW()) ) GROUP BY Problems.ProblemTypes_Id;', function(err, rows) {
-                    if (err) {
-                        res.statusCode = 500;
-                        res.send({
-                            err:    err.code
-                        });
-                        console.log('Can`t make query for statistic  GROUP BY Problems.ProblemTypes_Id\n' + err +"\n");
-                    }
-                    res.send(rows);
-                    console.log('end getStats2 API function');
-                });
-            }
-            catch(err){
-                console.log('Can`t execute getStats2 API');
-            }
+                res.send(rows);
+            });
         }
     });
-};
-
+}
 exports.getStats3 = function (req, res) {
-    console.log('start getStats3 API function');
      req.getConnection(function(err, connection) {
         if (err) {
+            console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
+                result: 'error',
                 err:    err.code
             });
-            console.log('Can`t connect to db in getStats3 API call\n' + err +"\n");
         } else {
-            try{
-                connection.query('SELECT Problems.Status as status, count(Problems.Id) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Activities.ActivityTypes_Id = 1 GROUP BY Problems.Status;', function(err, rows, fields) {
-                    if (err) {
-                        res.statusCode = 500;
-                        res.send({
-                            err:    err.code
-                        });
-                        console.log('Can`t make query for statistic  GROUP BY Problems.Status\n' + err +"\n");
-                    }
-                    res.send(rows);
-                    console.log('end getStats3 API function');
-                });
-            }
-            catch(err){
-                console.log('Can`t execute getStats3 API');
-            }
-        }
-    });
-};
-exports.getStats4 = function (req, res) {
-    console.log('start getStats4 API function');
-     req.getConnection(function(err, connection) {
-        if (err) {
-            res.statusCode = 503;
-            res.send({
-                err:    err.code
-            });
-            console.log('Can`t connect to db in getStats4 API call\n' + err +"\n");
-        } else {
-            try{
-                connection.query('SELECT Problems.ProblemTypes_Id as id, SUM(Problems.Votes) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Activities.ActivityTypes_Id = 1 GROUP BY Problems.ProblemTypes_Id;', function(err, rows, fields) {
-                    if (err) {
-                        res.statusCode = 500;
-                        res.send({
-                            err:    err.code
-                        });
-                        console.log('Can`t make query for statistic  GROUP BY Problems.ProblemTypes_Id\n' + err +"\n");
-                    }
-                    res.send(rows);
-                    console.log('end getStats4 API function');
-                });
-            }
-            catch(err){
-                console.log('Can`t execute getStats4 API');
-            }
-        }
-    });
-};
-
-exports.getStats5 = function (req, res) {
-    console.log('start getStats5 API function');
-    req.getConnection(function(err, connection) {
-        if (err) {
-            res.statusCode = 503;
-            res.send({
-                err:    err.code
-            });
-            console.log('Can`t connect to db in getStats5 API call\n' + err +"\n");
-        } else {
-            try{
-                var val;
-                switch(req.params.val){
-                    case "D": val = "%Y-%m-%d";
-                        break;
-                    case "W": val = "%Y-%v";
-                        break;
-                    case "M": val = "%Y-%m";
-                        break;
+            connection.query('SELECT count(Id) as problems, sum(votes) as votes FROM Problems;', function(err, rows1, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
                 }
-                connection.query('SELECT count(Id) as value, DATE_FORMAT(Date,'+ '"' + val + '"' +') as date FROM Activities where ActivityTypes_Id = 3 GROUP BY DATE_FORMAT(Date,'+ '"' + val + '"' +');', function(err, rows) {
-                    if (err) {
-                        res.statusCode = 500;
-                        res.send({
-                            err:    err.code
-                        });
-                        console.log('Can`t make query for statistic  GROUP BY DATE_FORMAT\n' + err +"\n");
-                    }
-                    res.send(rows);
-                    console.log('end getStats5 API function');
-                });
-            }
-            catch(err){
-                console.log('Can`t execute getStats5 API');
-            }
+                connection.query('SELECT count(Id) as photos FROM Photos;', function(err, rows2, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                connection.query('SELECT count(Id) as comments FROM Activities WHERE ActivityTypes_Id=5;', function(err, rows3, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                res.send([rows1,rows2,rows3]);
+            });
+            });
+            });
         }
     });
-};
+    }
