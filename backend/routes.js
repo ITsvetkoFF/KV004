@@ -339,7 +339,7 @@ exports.getUserProblemsById = function(req,res){ //get all user's problems in br
             console.log('Can`t connect to db in getUserProblemsById API call\n' + err +"\n");
         } else {
             var idUser = req.params.idUser;
-            connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Problems.ProblemTypes_Id, Problems.Status FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Activities.Users_Id = ?', [idUser], function(err, rows) {
+            connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Problems.ProblemTypes_Id, Problems.Status, Activities.Date FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Activities.Users_Id = ?', [idUser], function(err, rows) {
                 if (err) {
                     res.statusCode = 500;
                     res.send({

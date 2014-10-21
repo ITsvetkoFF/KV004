@@ -1,22 +1,25 @@
 <div class="b-container-filters-left">
-    <div class="info-problem-filters" ng-controller="datePicker">
-        <div class="problem">
-            <p class="title">ФИЛЬТРАЦІЯ ЗА ДАТОЮ</p>
-        </div>
-        <div class="datepicker input-group">
+    <div class="info-problem-filters">
+        <div class = "date-picker" ng-controller="datePicker">
+            <div class="problem">
+                <p class="title">ФИЛЬТРАЦІЯ ЗА ДАТОЮ</p>
+            </div>
+            <div class="datepicker input-group">
             <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open($event,'dt')"><i class="fa fa-calendar"></i> Показати з: </button>
             </span>
-            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="todayTime.formDataDt" is-open="datepickers.dt" min-date="minDate" max-date="todayTime.formDataDtSecond" datepicker-options="dateOptions" ng-required="true" close-text="{{texts.close}}" current-text="{{texts.today}}" clear-text="{{texts.clear}}" ng-change="toggleSelection()"/>
-            
-        </div>
+                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="todayTime.formDataDt" is-open="datepickers.dt" min-date="minDate" max-date="todayTime.formDataDtSecond" datepicker-options="dateOptions" ng-required="true" close-text="{{texts.close}}" current-text="{{texts.today}}" clear-text="{{texts.clear}}" ng-change="toggleSelection()"/>
 
-        <div class="datepicker input-group">
+            </div>
+
+            <div class="datepicker input-group">
             <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open($event, 'dtSecond')"><i class="fa fa-calendar"></i> Показати до: </button>
             </span>
-            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="todayTime.formDataDtSecond" is-open="datepickers.dtSecond" min-date="todayTime.formDataDt" max-date="formDataToday" datepicker-options="dateOptions" ng-required="true" close-text="{{texts.close}}" current-text="{{texts.today}}" clear-text="{{texts.clear}}" ng-change="toggleSelection()"/>
-            
+                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="todayTime.formDataDtSecond" is-open="datepickers.dtSecond" min-date="todayTime.formDataDt" max-date="formDataToday" datepicker-options="dateOptions" ng-required="true" close-text="{{texts.close}}" current-text="{{texts.today}}" clear-text="{{texts.clear}}" ng-change="toggleSelection()"/>
+
+            </div>
+
         </div>
 
         <!-- <button class="btn" ng-click="toggleSelection()"></button> -->
