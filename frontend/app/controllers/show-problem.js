@@ -54,6 +54,7 @@ define(['./module'], function(controllers){
             $scope.problem.Votes = data[0][0].Votes;
             var tempUser = JSON.parse(data[2][0].Content);
             $scope.problem.userName = tempUser.userName;
+            $scope.problem.Proposal = data[0][0].Proposal;
 
             $scope.$watch('problem.Status', function(newValue, oldValue) {
                 if(newValue != oldValue ) {

@@ -1480,17 +1480,22 @@ form.dropzone {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.editproblemtitle pre,
-.editproblemcontent pre{
+.editproblemtitle span,
+.editproblemcontent span,
+.editproblemproposal span{
     cursor: pointer;
+    white-space:pre-wrap;
 }
 .editproblemtitle  input,
-.editproblemcontent textarea{
+.editproblemcontent textarea,
+.editproblemproposal span{
     display: none;
 }
-.editproblemtitle.active pre,
-.editproblemcontent.active pre{
+.editproblemtitle.active span,
+.editproblemcontent.active span,
+.editproblemproposal span{
     display: none;
+    white-space:pre-wrap;
 }
 
 .editproblemtitle.active input {
@@ -1498,11 +1503,13 @@ form.dropzone {
     margin: 0px 0px 0px 0px;
     width: 520px;
 }
-.editproblemcontent.active textarea{
+.editproblemcontent.active textarea,
+.editproblemproposal.active textarea{
     display: inline-block;
     margin: 0px 0px 0px 0px;
     width: 100%;
     overflow-x: hidden;
+    white-space:pre-wrap;
 }
     .resource {
         padding: 0px 15px 10px 30px;
