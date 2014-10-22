@@ -1,9 +1,0 @@
-{
-    "jscodehints.detectedExclusions": [
-        "D:/KV004-4/frontend/app/js/settingsDropzone.js",
-        "D:/KV004-4/frontend/bower_components/socket.io/lib/stores/memory.js",
-        "D:/KV004-4/backend/routes.js",
-        "D:/KV004-4/frontend/bower_components/socket.io/lib/stores/redis.js",
-        "D:/KV004-4/frontend/app/templates/maintemplate.js"
-    ]
-}
