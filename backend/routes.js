@@ -553,6 +553,14 @@ exports.addComment = function(req,res) {
 
 exports.postProblem = function(req,res){  //post new problem
     console.log("start postProblem  API function");
+    for (var prop in segments)
+        console.log("We have those segments"+prop);
+    
+    function addEmailToSegment(problemType, userEmail){
+        console.log(problemType, userEmail);
+        console.log('mailchimpID: ' + mailchimpListID+ '. Problem type: ' + segments[problemType] + '. Email: ' + userEmail);
+        mc.lists.staticSegmentMembersAdd({id:mailchimpListID, seg_id:segments[problemType],batch:[{email:userEmail}]});
+    };
     req.getConnection(function(err, connection) {
         if (err) {
             res.statusCode = 503;
@@ -575,6 +583,21 @@ exports.postProblem = function(req,res){  //post new problem
                 if(req.body.userId==undefined){
                     data.Moderation ='0';
                 }
+                else {
+                    var idUser = req.body.userId;
+                    console.log(idUser);
+                    connection.query('SELECT Users.Email FROM Users WHERE Users.Id = ?', [idUser], function(err, rows, fields) {
+                        if (err) {
+                            console.error(err);
+                        }
+                        else { 
+                            console.log('no errors');
+                            console.log(rows[0].Email);
+                            addEmailToSegment(req.body.type, rows[0].Email);
+                        }
+                    });
+                };
+                
                 connection.query('INSERT INTO Problems SET ?', [data], function(err, rows) {
                     if (err) {
                         res.statusCode = 500;
