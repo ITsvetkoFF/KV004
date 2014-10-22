@@ -1452,6 +1452,11 @@ exports.addResource = function(req, res) {
                             });
                             console.log('end addResource API function');
                         }
+                        res.send({
+                            result: 'success',
+                            err:    ''
+                        });
+                        console.log('end addResource API function');
                     });
                 });
             }

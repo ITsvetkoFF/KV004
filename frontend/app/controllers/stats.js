@@ -17,7 +17,7 @@ define(['./module'],function(controllers){
    $scope.chart = function(){
 var now = new Date();
 var items = [];
-var lanes = [{"id":1,"label":"Проблеми лісів"},{"id":2,"label":"Сміттєзвалища"},{"id":3,"label":"Незаконна забудова"},{"id":4,"label":"Проблеми водойм"},{"id":5,"label":"Загрози біорізноманіттю"},{"id":6,"label":"Браконьєрство"},{"id":7,"label":"Інші проблеми"}];
+var lanes = [{"id":1},{"id":2},{"id":3},{"id":4},{"id":5},{"id":6},{"id":7}];
 var colors = ["#095B0F", "#231F20", "#98442B", "#1B9AD6", "#71BF44", "#FFAB09", "#50095B"];
 var color = ["#f00", "", "#00f"]
  d3.xhr('api/getStats1')
@@ -76,7 +76,7 @@ main.append('g').selectAll('.laneLines')
   .attr('y1', function(d) { return d3.round(y1(d.id)) + 0.5; })
   .attr('x2', width)
   .attr('y2', function(d) { return d3.round(y1(d.id)) + 0.5; })
-  .attr('stroke', function(d) { return d.label === '' ? 'white' : 'lightgray' });
+  .attr('stroke', function(d) { return 'lightgray' });
 
 main.selectAll('.laneText')
   .data(lanes)
@@ -94,7 +94,7 @@ mini.append('g').selectAll('.laneLines')
   .attr('y1', function(d) { return d3.round(y2(d.id)) + 10; })
   .attr('x2', width)
   .attr('y2', function(d) { return d3.round(y2(d.id)) + 10; })
-  .attr('stroke', function(d) { return d.label === '' ? 'white' : 'lightgray' });
+  .attr('stroke', function(d) { return 'lightgray' });
 
   mini.append('g').selectAll('.laneText')
   .data(lanes)
@@ -209,7 +209,7 @@ function display () {
     x1MonthAxis.ticks(d3.time.months, 1).tickFormat(d3.time.format('%B %Y'))
   }
   else if ((maxExtent - minExtent) > 1382400000) {
-    x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('Week %W'))
+    x1MonthAxis.ticks(d3.time.mondays, 1).tickFormat(d3.time.format('%b %d'))
   } 
   else {
     x1MonthAxis.ticks(d3.time.days, 1).tickFormat(d3.time.format('%b %e'))

@@ -1555,6 +1555,9 @@ form.dropzone {
         min-width: 280px;
         border-radius: 0;
     }
+     .editor_button {
+    width: 150px !important;
+    }
     .editor_left > p {
         color: #800000;
         padding: 5px 0px 5px 10px;
