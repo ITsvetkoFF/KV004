@@ -2,7 +2,7 @@
 photos/
 node_modules/
 bower_components/
-frontend/app/templates/maintemplate.js
+maintemplate.js
 dist/
 tmp/
 .tmp/
