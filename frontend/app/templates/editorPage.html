@@ -18,14 +18,13 @@
 </div>
 	<div class="editor_left">
 		<label>Де розмістити цей ресурс: </label>
-				<select ng-model="IsResource" name="IsResource" required>
+				<select ng-model="IsResource" name="IsResource">
 					<option value="0">У верхньому меню</option>
 					<option value="1">В розділі "Ресурси"</option>
 				</select>
-		<span ng-if="EditForm.IsResource.$error.required">Це поле обов'язкове для заповнення!</span>
+		<p ng-if="errorMsq">{{errorMsq}}</p>
 	</div>
 	<div class="editor_left">
 		<button type="submit" class="b-form__button editor_button" type="submit" ng-click="sendResource(Alias, Content, Title, IsResource, Id)">Відправити</button>
 	</div>
-	<span ng-if="errorMsq">errorMsq</span>
 </form>

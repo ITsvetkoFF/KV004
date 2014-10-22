@@ -19,8 +19,8 @@ define(['./module'], function (controllers) {
             /*$rootScope.data.forEach( function(d) {
                    if (d.Alias == Alias) Id = d.Id
                 });*/
-            if (Alias === undefined || Content === undefined  || IsResource === undefined) {
-                $scope.errorMsq = "Всі поля обов'язкові для заповнення";
+            if (Alias === undefined || Content === '' || Content === undefined || IsResource === undefined) {
+                $scope.errorMsq = "Всі поля обов'язкові для заповнення!";
                 return;
             }
             else {
@@ -29,15 +29,14 @@ define(['./module'], function (controllers) {
             $rootScope.getTitles();
             $location.path('resources/' + Alias);
            }).error(function(status, data) {
-                    console.log(data.err);
                 });
        }
        else {
             $http.post('api/addResource', { Alias: Alias, Content: Content, Title: Title, IsResource: IsResource}).success(function() {
             $rootScope.getTitles();
             $location.path('resources/' + Alias);
-           }).error(function(data, status, headers, config) {
-                    console.log(data.err);
+           }).error(function(data, status) {
+                    if (status === 500)  $scope.errorMsq = "Вже існує ресурс з таким заголовком або alias!";
                 });
        };
        };

@@ -1428,10 +1428,12 @@ exports.addResource = function(req, res) {
                             });
                             console.log('Can`t make query for data='+data+'\n' + err +"\n");
                         }
-                        res.send({
+                        else {
+                            res.send({
                             result: 'success',
-                            err:    ''
-                        });
+                                err:    ''
+                            });
+                        }
                         console.log('end addResource API function');
                     });
                 });
@@ -1481,10 +1483,12 @@ exports.editResource = function(req, res) {
                             });
                             console.log('Can`t make query for id='+id+'\n' + err +"\n");
                         }
-                        res.send({
+                        else {
+                                res.send({
                             result: 'success',
-                            err:    ''
-                        });
+                                err:    ''
+                            });
+                        }
                         console.log('end editResource API function');
                     });
                 });
@@ -1528,10 +1532,12 @@ exports.deleteResource = function(req, res) {
                             });
                             console.log('Can`t make query for id='+id+'\n' + err +"\n");
                         }
-                        res.send({
+                        else {
+                                res.send({
                             result: 'success',
-                            err:    ''
-                        });
+                                err:    ''
+                            });
+                        }
                         console.log('end deleteResource API function');
                     });
                 });
@@ -1561,7 +1567,7 @@ exports.getStats1 = function (req, res) {
                         err:    err.code
                     });
                 }
-                res.send(rows);
+                else  res.send(rows);
             });
         }
     });
@@ -1598,7 +1604,7 @@ exports.getStats2 = function (req, res) {
                         err:    err.code
                     });
                 }
-                res.send(rows);
+                else res.send(rows);
             });
         }
     });
@@ -1622,27 +1628,30 @@ exports.getStats3 = function (req, res) {
                         err:    err.code
                     });
                 }
-                connection.query('SELECT count(Id) as photos FROM Photos;', function(err, rows2, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
+                else { connection.query('SELECT count(Id) as photos FROM Photos;', function(err, rows2, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    else {
+                    connection.query('SELECT count(Id) as comments FROM Activities WHERE ActivityTypes_Id=5;', function(err, rows3, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                    else res.send([rows1,rows2,rows3]);
+                });
                 }
-                connection.query('SELECT count(Id) as comments FROM Activities WHERE ActivityTypes_Id=5;', function(err, rows3, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send([rows1,rows2,rows3]);
-            });
-            });
+                });
+            }
             });
         }
     });
