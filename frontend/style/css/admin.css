@@ -605,8 +605,8 @@
     margin: 0 auto;
 }
 .b-label-overRating{
-    display: block;
     position: relative;
     top: -10px;
     left: -20px;
+    font-size: 0.6em;
 }

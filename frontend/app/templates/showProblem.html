@@ -23,8 +23,8 @@
         <div class="b-problem-deatiled-info-general">
             <div class='b-problem-deatiled-info-severity'>
                 <div class="b-problem-deatiled-info__severity"ng-init="problem.Severity">
-                   <rating ng-model="problem.Severity" on-hover="showMessageOverRating(value)" on-leave="showStatus = false" readonly="true" state-on="'fa-star'" state-off="'fa-star-o'" ></rating>
-                   <span class="b-label-overRating" ng-class="{'label-warning': value<3, 'label-info': value>3 && value<5, 'label-success': value>=5}" ng-show="showStatus">{{severityMessage}}</span>
+                   <rating ng-model="problem.Severity" on-hover="showMessageOverRating(value)" on-leave="showStatus = false" readonly="isReadonly" state-on="'fa-star'" state-off="'fa-star-o'" ></rating>
+                   <span class="label b-label-overRating" ng-class="{'label-warning': value<2, 'label-info': value>2 && value<4, 'label-success': value>=4}" ng-show="showStatus">{{severityMessage}}</span>
                 </div>
             </div>
             <div class="btn-group b-problem-deatiled-info__status">

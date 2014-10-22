@@ -240,6 +240,7 @@ define(['./module'], function(controllers){
         $scope.showMessageOverRating = function(rate){
             $scope.severityMessage = severityMessage[rate];
             $scope.showStatus = true;
+            $scope.value = rate;
         };
 
         //if user did not submit changes
