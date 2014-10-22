@@ -8,13 +8,10 @@ define(['./module'],function(controllers){
         $rootScope.$broadcast('Update',"_problem");
         $rootScope.$emit('showSlider','false');
         $scope.deleteItem="clear";
-
         $scope.currentItemNews=-1;
         $scope.messageLogHide="_hide";
         $scope.nickName = $scope.name;
         var i = 0;
-
-
         $scope.messageLogs = [];
         var responce = $http.post('/api/getNews',{});
         responce.success(function(data,status,headers,config){
@@ -81,11 +78,11 @@ define(['./module'],function(controllers){
 
                         $scope.messageLogs = [];
                         var responce = $http.post('/api/clearNews', {});
-                        responce.success(function (data, status, headers, config) {
+                            responce.success(function (data, status, headers, config) {
 
 
                         });
-                        responce.error(function (data, status, headers, config) {
+                            responce.error(function (data, status, headers, config) {
                             throw error;
                         });
 
@@ -98,15 +95,7 @@ define(['./module'],function(controllers){
 
                     }
                 }
-
-
-
             });
         });
     });
-
-    ///////////
-
-
-
 });
