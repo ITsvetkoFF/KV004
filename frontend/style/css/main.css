@@ -931,7 +931,6 @@ td.b-details-body__title[colspan] {
 }
 #addPhotoDropzone{
     padding: 0 !important;
-    border-bottom: none;
 }
 
 .b-add-problem-form {
@@ -1235,7 +1234,6 @@ form.dropzone {
     font-size: 12px;
     line-height: 12px;
     min-height: initial;
-    border-color: #ccc;
 }
 
 .comment_field:hover {
@@ -1248,14 +1246,9 @@ form.dropzone {
     top: -30px;
     background: #fff;
     padding: 5px;
-    content: 'Видалити фото';
+    content: 'Remove photo';
     border: 2px dashed #dadada;
     font-size: 12px;
-}
-.remove_btn-fa-close:hover{
-    color: red;
-    font-size: 1.2em;
-
 }
 .b-details-body-problem-photo_add{
     width: 100px;
@@ -1328,14 +1321,10 @@ form.dropzone {
     width: 16px;
     height: 16px;
     border: none;
-
+    background: url('../../images/delete.png') no-repeat center center;
 }
 #btn-reload{
     margin-right: 2px;
-    margin-top: 8px;
-}
-#btn-submit{
-    margin-top: 8px;
 }
 
     .remove_btn:hover {
