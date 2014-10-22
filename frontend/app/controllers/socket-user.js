@@ -85,7 +85,28 @@ define(['./module'],function(controllers){
                             // $rootScope.messageLog=$scope.messageLogs;
                             // $rootScope.$broadcast('Update');
                             //$scope.messageLogHide = "";
+                            var i = 0;
 
+                            //$scope.messageLogHide = "";
+                            var repeat = function () {
+                                console.log(i);
+                                for (var j = 0; j < $scope.messageLogs.length; j++) {
+                                    if ($scope.messageLogs[j]) {
+                                        $scope.messageLogs[j].show = "none";
+                                    }
+                                }
+                                console.log($scope.messageLogs);
+                                if ($scope.messageLogs[i]) {
+                                    $scope.messageLogs[i].show = "block";
+
+                                    i++;
+                                    if (i >= $scope.messageLogs.length) {
+                                        i = 0;
+                                        console.log("reverse");
+                                    }
+                                }
+
+                            }
                             $interval.cancel($scope.interval);
                             $scope.interval = $interval(repeat, 5000);
 
@@ -96,7 +117,7 @@ define(['./module'],function(controllers){
                             $scope.messageChat.push({problemID:data.payload.id,userName:data.payload.user,Content:data.payload.Content,date:timeOfComment});
                             console.log($scope.messageChat);
                             $scope.trigger = false;
-                            $scope.interval = $interval(repeat, 200);
+                            $scope.interval = $interval(repeat, 5000);
 
 
                         }

@@ -168,6 +168,10 @@ define(['./module'], function(controllers){
         };
 
         $scope.addComment = function(comment) {
+            if(comment==""|| comment == undefined){
+                alert("Неможливо відправити пусте повідомлення");
+                return;
+            }
             var data = {data: {userId: $scope.userId, userName: $scope.name, Content: comment}};
             var responce = $http.post('/api/comment/' + $routeParams.problemID, JSON.stringify(data));
             responce.success(function (data, status, headers, config) {
