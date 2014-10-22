@@ -1622,7 +1622,6 @@ exports.getStats1 = function (req, res) {
         }
     });
 };
-
 exports.getStats2 = function (req, res) {
     console.log('start getStats2 API function');
      req.getConnection(function(err, connection) {
