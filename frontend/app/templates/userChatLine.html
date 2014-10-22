@@ -1,5 +1,7 @@
 <div ng-show="showNewsContainer" class="chat-user-label">
-<div ng-repeat="messageLog in messageLogs" ng-style={display:messageLog.show} class="chat-user-label{{messageLogHide}}">{{messageLog.Content}}</div>
-	<!--<marquee>{{allNews}}</marquee>-->
-	<i class="fa fa-close close" ng-click="showNewsContainer=false"></i>
+    <div ng-if="!trigger" ng-repeat="messageLog in messageChat" ng-style={display:block} class="chat-user-label" style="text-align: left;margin: 6px 0 0 20px"><span style="font-size: 0.6em">{{messageLog.date}}</span><br><span><b>{{messageLog.userName}}</b> залишив коментар до&nbsp;</span><a href="#/problem/showProblem/{{messageLog.problemID}}">проблеми</a></div>
+
+    <div ng-if="trigger" ng-repeat="messageLog in messageLogs" ng-style={display:messageLog.show} style="text-align: left;margin:0 0 0 20px" class="chat-user-label{{messageLogHide}}"><span style="font-size: 0.6em">Термінове повідомлення:</span><br><b>{{messageLog.Content}}</b></div>
+    <!--<marquee>{{allNews}}</marquee>-->
+    <!--<i class="fa fa-close close" ng-click="showNewsContainer=false"></i>-->
 </div>

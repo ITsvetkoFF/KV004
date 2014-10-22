@@ -90,7 +90,7 @@ define(['./module'],function(controllers){
                         });
 
 
-                    } else {
+                    } else if(data.payload.trigger!=true) {
                         news.show = "none";
                         news.Content = data.payload;
 
