@@ -75,11 +75,19 @@ define(['./module','dropzone'], function(directives,Dropzone){
                         e.preventDefault();
                     });
                   }
+                var arr = document.getElementsByClassName("dropFieldForShowProblem");
+                for (var i = counter; i < arr.length; i++){
+                    arr[i].addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    });
+                }
+
                 
                 counter++;
 
                 // Add the button to the file preview element.
-                var removeButton = Dropzone.createElement("<div class='remove_btn'></div>");
+                var removeButton = Dropzone.createElement("<div class='remove_btn'><i class='fa fa-close remove_btn-fa-close'></i></div>");
                 var commentField = Dropzone.createElement("<textarea type='text' name='description" + "' class='comment_field' placeholder='Додайте  опіс до фото...' maxlength='200'></textarea>");
 
                 file.previewElement.appendChild(removeButton);
