@@ -78,8 +78,7 @@ html, body {
     width: 600px;
     min-width: 320px;
     background: #FFFFFF;
-    height: calc(100% - 52px);
-    height: -moz-calc(100% - 52px);
+    height: 100%;
     overflow: auto;
     font-size:16pt;
     -webkit-transition-duration: 0.3s;
@@ -88,6 +87,7 @@ html, body {
     transition-duration: 0.3s;
 
 }
+
 .b-container__right-side_problem  {
     right: 0;
 
@@ -904,19 +904,21 @@ td.b-details-body__title[colspan] {
 
 /*Taras ///////////////////////////////////////////*/
 .b-add-problem {
-    width: calc(100% - 30px);
+    width: 100%;
     background-color: #FFF;
-    padding: 0 15px;
+    padding: 0 10px;
     height: 100%;
     overflow: auto;
 }
 
 .b-add-problem-header {
-    border-bottom: 1px dashed #dadada;
-    padding: 10px 0;
-    text-transform: uppercase;
+    padding: 20px 0;
     text-align: center;
     font-size: 24px;
+    font-family: WWF;
+    letter-spacing: 2px;
+    font-weight: lighter;
+    text-transform: uppercase;
 }
 
 .b-view{
@@ -992,7 +994,7 @@ div.b-add-problem__step-1_hide {
 }
 
 .b-addproblem-navbar__title{
-    font-size: 26px;
+    font-size: 16px;
     line-height: 52px;
     vertical-align: top;
     margin: 0 0 0 5px;
@@ -1172,12 +1174,76 @@ input[type=button]:disabled, button:disabled {
     margin: 0 0 10px 0;
 }
 
+/*NEW ADD PROBLEM BLOCK///////////////////////////////////////////////////////////*/
+
+.b-addProblem {
+    width: 100%;
+    background-color: #FFF;
+    padding: 0 10px;
+    height: 100%;
+    overflow: auto;
+}
+
+.b-addProblem-header {
+    padding: 15px 0 20px 0;
+    text-align: center;
+    font-size: 24px;
+    font-family: WWF;
+    letter-spacing: 1px;
+    font-weight: lighter;
+    text-transform: uppercase;
+}
+
+.b-addProblem .markerHeader {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+.b-addProblem .form-group .help-block {
+    float: right;
+    font-size: 12px;
+    color:#A7A7A7;
+}
+
+.b-addProblem .tab-content {
+    padding-top: 10px;
+}
+
+.b-addProblem label {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.b-addProblem .nav-tabs li a {
+    color: #777;
+    font-size: 18px;
+}
+
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li > a:hover {
+    color: #333;
+}
+
+.b-add-problem .nav-tabs li:hover {
+    cursor: pointer;
+}
+
+.b-addProblem input,
+.b-addProblem button,
+.b-addProblem select,
+.b-addProblem textarea,
+.b-addProblem .nav-tabs > li > a {
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+
 /* DROPZONE STYLES */
 form.dropzone {
     background: none;
     border: none;
-    border-bottom: 1px dashed #dadada;
-    padding: 10px 25px;
 }
 
 .dz-message {
@@ -1202,12 +1268,12 @@ form.dropzone {
 
 
 .b-conteiner__drop-title-1{
-    font-size: 22px;
+    font-size: 16px;
     font-style: italic;
 }
 
 .b-conteiner__drop-title-2{
-    font-size: 16px;
+    font-size: 14px;
     font-style: italic;
 }
 
@@ -1856,8 +1922,7 @@ add adaptive style to showProblem
         width: 100%;
         min-width: 320px;
         background: #FFFFFF;
-        height: calc(100% - 52px);
-        height: -moz-calc(100% - 52px);
+        height: 100%;
         overflow: auto;
         font-size:16pt;
 

@@ -1,0 +1,33 @@
+<form>
+	<div class="form-group">
+		<label for="problemName">Назва проблеми:</label>
+		<input type="text" class="form-control" id="problemName" ng-model="problemData.title" ng-trim="false" maxlength="70" ng-required="true">
+		<span class="help-block">(залишилось {{70 - problemData.title.length}} символів)</span>
+		<p class="help-block" ng-show="problemData.title == ''">Це поле обов’язкове.&nbsp;</p>
+	</div>
+	<div class="form-group">
+		<label for="select-field">Тип проблеми:</label>
+		<select id="select-field" class="form-control" required ng-model="problemData.type">
+			<option value="" selected disabled>Виберіть тип</option>
+	        <option value="1">Проблеми лісів</option>
+	        <option value="2">Сміттєзвалища</option>
+	        <option value="3">Незаконна забудова</option>
+	        <option value="4">Проблеми водойм</option>
+	        <option value="5">Загрози біорізноманіттю</option>
+	        <option value="6">Браконьєрство</option>
+	        <option value="7">Інші проблеми</option>
+		</select>
+		<p class="help-block" ng-show="problemData.type == ''">Це поле обов’язкове.</p>
+	</div>
+	<div class="form-group">
+		<label for="description-field">Опис проблеми:</label>
+		<textarea class="form-control" id="description-field" rows="6" ng-model="problemData.content" ng-trim="false" maxlength="1000" ng-required="true"></textarea>
+		<span class="help-block">(залишилось {{1000 - problemData.content.length}} символів)</span>
+	</div>
+	<div class="form-group">
+		<label for="proposal-field">Пропозиції щодо вирішення проблеми:</label>
+		<textarea class="form-control" id="proposal-field" rows="6" ng-model="problemData.proposal" ng-trim="false" maxlength="1000" ng-required="true"></textarea>
+		<span class="help-block">(залишилось {{1000 - problemData.proposal.length}} символів)</span>
+	</div>
+	<button class="btn btn-default btn-sm" ng-click="tabs[2].active = true">Далі</button>
+</form>

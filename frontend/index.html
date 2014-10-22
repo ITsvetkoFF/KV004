@@ -47,9 +47,8 @@
                 <div class="b-left-side__pointer" ng-click="showFilters()" ng-class = "{left_pointer_reverse : showFiltersVar}"></div>
             </div>
 
-
-<div class=" b-view b-container__right-side b-view b-container__right-side{{showRigthSide}}" ng-swipe-right="swipeHideRight()">
-    <div style="transition-duration: 0.1s !important;" ng-view >
+<div class=" b-view b-container__right-side b-view b-container__right-side{{showRigthSide}}" ng-swipe-right="swipeHideRight()" ng-style="style()">
+    <div style="transition-duration: 0.1s !important;" ng-view ng-style="style()">
     </div>
 </div>
         </div>
