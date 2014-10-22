@@ -221,7 +221,7 @@ grunt.initConfig({
                     ]);
     
     grunt.registerTask('dev', [
-                      //'bower',
+                      'bower',
                       'html2js',
                       'copy:html',
                       'copy:dist',
