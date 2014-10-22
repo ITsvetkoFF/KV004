@@ -1719,7 +1719,6 @@ exports.getStats3 = function (req, res) {
     });
 };
 exports.changePassword = function (req, res) {
-    console.log("start change password API function");
     req.getConnection(function(err, connection) {
         if (err) {
             res.statusCode = 503;
@@ -1728,7 +1727,7 @@ exports.changePassword = function (req, res) {
             });
             console.log('Can`t connect to db in register API call\n' + err +"\n");
         } else {
-            console.log('success');
+            
             try{
                 var userData = {};
                 userData.userId = req.body.userId||'';
@@ -1751,12 +1750,9 @@ exports.changePassword = function (req, res) {
                         });
 
                     } else {
-                        console.log('hash of old password is: '+result[0].Password);
-                        console.log('hash of old entered password is: '+ userData.old_password_hashed);
-                        console.log('new password is: ' + userData.new_password);
-                        console.log('hash of new password is: ' + crypto.createHmac("sha1", secret.secretToken).update(userData.new_password).digest("hex"));
+                        
                         if (result[0].Password == userData.old_password_hashed) {
-                            console.log('you have eneterd right password, changing it');
+                            console.log('you have enetered right password, changing it');
                             connection.query('UPDATE Users SET Password = ? WHERE Id = ?', [userData.new_password_hashed,userData.userId], function(err, rows) {
                                 if (err) {
                                     res.statusCode = 500;
