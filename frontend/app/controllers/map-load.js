@@ -17,8 +17,11 @@ define(['./module'], function (controllers) {
         });
         var latlng  = L.latLng(50.00, 32.00);
         var map     = L.map('map-content', {
+
             center: latlng,
             zoom: 7,
+            minZoom: 6,
+            maxBounds: L.latLngBounds( L.latLng(43.23, 21.56), L.latLng(52.83, 40.46) ),
             layers:[tiles, geoJson] //disabling geoJson because of blocking ukraine-zone on the map
         });
         $rootScope.geoJson = geoJson; //forwarding geoJson object to $rooTscope
