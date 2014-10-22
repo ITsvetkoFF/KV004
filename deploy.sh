@@ -8,6 +8,7 @@ git clone https://github.com/ITsvetkoFF/KV004.git
 cd KV004/frontend/ 
 bower install --allow-root
 npm install
+grunt distOn
 grunt
 grunt zip
 cd ../backend 
