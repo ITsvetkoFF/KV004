@@ -94,7 +94,7 @@ html, body {
 }
 
 .b-container__right-side_hide {
-    display: none;
+    display: none !important;
 }
 
 .b-container__right-side_full {
@@ -1561,19 +1561,16 @@ form.dropzone {
     }
     .statistic > h3, h2, ul {
   margin: 30px auto;
-  text-align: center;
 }
 .statistic h1, h2, h3 {
     font-family: WWF;
     line-height: 1em;
     }
 .statistic h1 {
-    font-size: 2em;
-    text-align: center;
-    
+    font-size: 3em;    
 }
 .statistic h2 {
-    font-size: 2em;
+    font-size: 2.5em;
 }
 .statistic h3 {
     font-size: 2em;
@@ -1584,6 +1581,7 @@ form.dropzone {
 
 .statistic {
    margin: 10px 5px 15px 5px;
+   text-align: center;
 }
 .statistic svg {
   font-size: 0.6em; 
