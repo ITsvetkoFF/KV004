@@ -21,14 +21,17 @@
             </div>
         </div>
         <div class="b-problem-deatiled-info-general">
+            <div class="b-problem-deatiled-info-container">
             <div class='b-problem-deatiled-info-severity'>
+
                 <div class="b-problem-deatiled-info__severity"ng-init="problem.Severity">
                    <rating ng-model="problem.Severity" on-hover="showMessageOverRating(value)" on-leave="showStatus = false" readonly="isReadonly" state-on="'fa-star'" state-off="'fa-star-o'" ></rating>
                    <span class="label b-label-overRating" ng-class="{'label-warning': value<2, 'label-info': value>2 && value<4, 'label-success': value>=4}" ng-show="showStatus">{{severityMessage}}</span>
+
                 </div>
             </div>
-            <div class="btn-group b-problem-deatiled-info__status">
-                <div class="b-problem-deatiled-info-status__text" >{{problem.Status}}
+            
+                <div class="b-problem-deatiled-info-status__text" >
                     <div class="onoffswitch">
                         <input type="checkbox"   name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="problem.Status" ng-true-value="Вирішина" ng-false-value="Актуальна" ng-change="checked = !checked"  ng-disabled="!isAdministrator()" >
                         <label class="onoffswitch-label" for="myonoffswitch">

@@ -745,7 +745,7 @@ td.b-details-body__title[colspan] {
     display: inline-block;
     margin: 0 5px;
     border:0;
-    background:#fff;
+    background:#f5f5f5;
 }
 
     .simple_like_img:hover:after {
