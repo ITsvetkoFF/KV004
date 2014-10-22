@@ -54,13 +54,13 @@
             <tab heading="Детально" class="b-problem-notAdmin_false" >
                 <div class="b-problem-deatiled-info-description">
                     <div class="b-problem-deatiled-info-description__title"></div>
-                    <div class="b-problem-deatiled-info-description__content">
+                    <div class="b-problem-deatiled-info-description__content b-problem-notAdmin_{{!isAdministrator()}}">
                         <label>Опис проблеми:</label><br>
-                        <editproblemcontent  value="problem.Content" class="b-problem-notAdmin_{{!isAdministrator()}}"></editproblemcontent>
+                        <editproblemcontent  value="problem.Content" ></editproblemcontent>
                     </div>
-                    <div class="b-problem-deatiled-info-description__content">
+                    <div class="b-problem-deatiled-info-description__content b-problem-notAdmin_{{!isAdministrator()}}">
                         <label>Пропозиції щодо вирішення:</label><br>
-                        <editproblemproposal  value="problem.Proposal" class="b-problem-notAdmin_{{!isAdministrator()}}"></editproblemproposal>
+                        <editproblemproposal  value="problem.Proposal" ></editproblemproposal>
                     </div>
                     <div class="b-problem-deatiled-info-description-photos">
 
