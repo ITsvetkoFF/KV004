@@ -423,6 +423,11 @@ exports.addNewPhotos = function(req,res){
             try{
                 var i=0;
                 var rows=[];
+                 if(req.body.solveProblemMark=="on"){
+                    req.body.solveProblemMark=1;
+                }else{
+                    req.body.solveProblemMark=0;
+                }
                 if(req.body.description==undefined){
                     req.body.description=[];
                 }
