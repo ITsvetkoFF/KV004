@@ -1741,7 +1741,6 @@ exports.changePassword = function (req, res) {
                     return res.send(401);
                 }
 
-                console.log('user ID: ' + userData.userId +'. old: ' + userData.old_password + '. new1: ' + userData.new_password + '. new2: ' + userData.new_password_second);
                 connection.query("select Email, Password from Users where Id like ?", userData.userId, function(err, result) {
                     if (err) {
                         res.statusCode = 500;
@@ -1752,7 +1751,7 @@ exports.changePassword = function (req, res) {
                     } else {
                         
                         if (result[0].Password == userData.old_password_hashed) {
-                            console.log('you have enetered right password, changing it');
+                            
                             connection.query('UPDATE Users SET Password = ? WHERE Id = ?', [userData.new_password_hashed,userData.userId], function(err, rows) {
                                 if (err) {
                                     res.statusCode = 500;
@@ -1769,7 +1768,6 @@ exports.changePassword = function (req, res) {
                             });
                         }
                         else {
-                            console.log('you have entered wrong password');
                             return res.send(400);
                         }
                     }
