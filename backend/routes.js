@@ -1527,7 +1527,7 @@ exports.editResource = function(req, res) {
                             res.send({
                                 err:    err.code
                             });
-                            console.log('Can`t make query for id='+id+'\n' + err +"\n");
+                            console.log('Can`t make query for id='+Id+'\n' + err +"\n");
                         }else{
                             res.send({
                                 result: 'success',
@@ -1575,7 +1575,7 @@ exports.deleteResource = function(req, res) {
                             res.send({
                                 err:    err.code
                             });
-                            console.log('Can`t make query for id='+id+'\n' + err +"\n");
+                            console.log('Can`t make query for id='+Id+'\n' + err +"\n");
                         }else{
                             res.send({
                                 result: 'success',
