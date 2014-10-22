@@ -1473,17 +1473,13 @@ exports.addResource = function(req, res) {
                                 err:    err.code
                             });
                             console.log('Can`t make query for data='+data+'\n' + err +"\n");
-                        }else{
+                        }
+                        else {
                             res.send({
-                                result: 'success',
+                            result: 'success',
                                 err:    ''
                             });
-                            console.log('end addResource API function');
                         }
-                        res.send({
-                            result: 'success',
-                            err:    ''
-                        });
                         console.log('end addResource API function');
                     });
                 });

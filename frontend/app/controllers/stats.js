@@ -16,14 +16,13 @@ define(['./module'],function(controllers){
 
    $scope.chart = function(){
 var now = new Date();
-var items = [];
 var lanes = [{"id":1},{"id":2},{"id":3},{"id":4},{"id":5},{"id":6},{"id":7}];
 var colors = ["#095B0F", "#231F20", "#98442B", "#1B9AD6", "#71BF44", "#FFAB09", "#50095B"];
 var color = ["#f00", "", "#00f"]
  d3.xhr('api/getStats1')
     .get(function(error, data) {
       if (error) throw error;
-      items = JSON.parse(data.response);
+     var items = JSON.parse(data.response);
     items.forEach(function(d) {
       d.start = new Date(d.start);
       d.class = "past";
@@ -315,7 +314,7 @@ var svg = d3.select('#el2')
      d3.xhr('api/getStats2/'+val)
     .get(function(error, data) {
       if (error) throw error;
-      data = JSON.parse(data.response);
+     var data = JSON.parse(data.response);
   data.forEach(function(d) {
     d.value = +d.value;
   });
