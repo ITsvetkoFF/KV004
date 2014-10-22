@@ -931,6 +931,7 @@ td.b-details-body__title[colspan] {
 }
 #addPhotoDropzone{
     padding: 0 !important;
+    border-bottom: none;
 }
 
 .b-add-problem-form {
@@ -1234,6 +1235,7 @@ form.dropzone {
     font-size: 12px;
     line-height: 12px;
     min-height: initial;
+    border-color: #ccc;
 }
 
 .comment_field:hover {
@@ -1246,9 +1248,14 @@ form.dropzone {
     top: -30px;
     background: #fff;
     padding: 5px;
-    content: 'Remove photo';
+    content: 'Видалити фото';
     border: 2px dashed #dadada;
     font-size: 12px;
+}
+.remove_btn-fa-close:hover{
+    color: red;
+    font-size: 1.2em;
+
 }
 .b-details-body-problem-photo_add{
     width: 100px;
@@ -1321,10 +1328,14 @@ form.dropzone {
     width: 16px;
     height: 16px;
     border: none;
-    background: url('../../images/delete.png') no-repeat center center;
+
 }
 #btn-reload{
     margin-right: 2px;
+    margin-top: 8px;
+}
+#btn-submit{
+    margin-top: 8px;
 }
 
     .remove_btn:hover {
@@ -1470,31 +1481,36 @@ form.dropzone {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-.editproblemtitle pre,
-.editproblemcontent pre{
+.editproblemtitle span,
+.editproblemcontent span,
+.editproblemproposal span{
     cursor: pointer;
+    white-space:pre-wrap;
 }
 .editproblemtitle  input,
-.editproblemcontent textarea{
+.editproblemcontent textarea,
+.editproblemproposal span{
     display: none;
 }
-.editproblemtitle.active pre,
-.editproblemcontent.active pre{
+.editproblemtitle.active span,
+.editproblemcontent.active span,
+.editproblemproposal span{
     display: none;
+    white-space:pre-wrap;
 }
-
 
 .editproblemtitle.active input {
     display: inline-block;
     margin: 0px 0px 0px 0px;
     width: 520px;
 }
-.editproblemcontent.active textarea{
+.editproblemcontent.active textarea,
+.editproblemproposal.active textarea{
     display: inline-block;
     margin: 0px 0px 0px 0px;
     width: 100%;
     overflow-x: hidden;
+    white-space:pre-wrap;
 }
     .resource {
         padding: 0px 15px 10px 30px;
@@ -1541,12 +1557,10 @@ form.dropzone {
     }
      .editor_button {
     width: 150px !important;
-    margin: 5px 0px 5px 10px;
     }
-    .validErr {
+    .editor_left > p {
         color: #800000;
         padding: 5px 0px 5px 10px;
-        font-weight: bold;
     }
     .resource h1{
         font-family: WWF;
@@ -1780,15 +1794,20 @@ NAV
 .alert {
     margin-bottom: 0;
 }
-
+.modal-dialog {
+    width:400px;
+}
 .modal-content {
     border-radius: 0;
 }
 .b-registration__form .form-control {
+    display: inline-block;
     border-radius: 0;
+    width: 62%;
 }
 .b-registration__form .form-group label {
-    font-weight:normal;
+    width:36%;
+    text-align: right;
 }
 .b-form__button {
     width: 100%;
@@ -1803,12 +1822,6 @@ NAV
     font-weight: lighter;
     text-transform: uppercase;
 }
-
-.b-form__button[disabled], .b-form__button[disabled]:hover {
-    background-color: #b7b7b7;
-    color: #fff;
-}
-
 
 .b-form__button:hover {
     background-color: #367dbb;

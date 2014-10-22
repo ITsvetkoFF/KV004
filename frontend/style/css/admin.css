@@ -246,9 +246,6 @@
     display:none;
 }
 
-.b-problem-deatiled-info__severity span i{
-    font-style:none;
-}
 
 .b-problem-deatiled-info-votes{
     display: inline-block;
@@ -609,4 +606,10 @@
     position: fixed;
     bottom:10px;
     margin: 0 auto;
+}
+.b-label-overRating{
+    position: relative;
+    top: -10px;
+    left: -20px;
+    font-size: 0.6em;
 }
