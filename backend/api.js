@@ -115,6 +115,7 @@ app.post('/api/comment/:id',routes.addComment);
 app.post('/api/login', routes.logIn);
 app.get('/api/logout', routes.logOut);
 app.post('/api/register', routes.register);
+app.post('/api/changePassword', routes.changePassword);
 //admin
 app.get('/api/not_approved', routes.notApprovedProblems);
 app.delete('/api/problem/:id', routes.deleteProblem);

@@ -2,7 +2,7 @@ define(['./module'], function (controllers) {
 
     'use strict';
 
-    controllers.controller('AdminUserCtrl', ['$scope', '$rootScope', '$http', '$location', '$window', 'ipCookie', 'UserService', function ($scope,$rootScope, $http, $location, $window, ipCookie, UserService) {
+    controllers.controller('AdminUserCtrl', ['$scope', '$rootScope', '$http', '$location', '$window', 'ipCookie', 'UserService', '$modal', '$log', function ($scope,$rootScope, $http, $location, $window, ipCookie, UserService, $modal, $log) {
 
         $scope.isLoggedIn = UserService.isLoggedIn;
         $scope.isAdministrator = UserService.isAdministrator;
@@ -170,6 +170,26 @@ define(['./module'], function (controllers) {
                 console.log(response);
             });
             
+        }
+
+        $scope.changePassword = function() {
+            console.log('change password called');
+            var modalInstance = $modal.open({
+                templateUrl: 'app/templates/changePassword.html',
+                controller: 'changePasswordCtrl',
+                size: 'sm',
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
         }
     }]);
 });
