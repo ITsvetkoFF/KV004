@@ -1550,7 +1550,6 @@ form.dropzone {
 .editproblemtitle span,
 .editproblemcontent span,
 .editproblemproposal span{
-    cursor: pointer;
     white-space:pre-wrap;
 }
 .editproblemtitle  input,

@@ -190,6 +190,13 @@
     width: 90%;
     vertical-align:top;
 }
+.b-problem-notAdmin_false{
+    cursor: pointer;
+}
+.b-problem-notAdmin_true{
+    cursor: default;
+}
+
 .b-problem-deatiled-info-title__text h1 {
     font-family: WWF;
     font-size:1.1em;
@@ -214,7 +221,7 @@
     margin: 0 2px 0 10px;
 }
 .b-problem-deatiled-info-general{
-    margin: 15px 0 15px;
+    margin: 30px 0 15px;
     
 }
 .b-problem-deatiled-info-container {
@@ -406,12 +413,15 @@
 .onoffswitch-checkbox {
     display: none;
 }
-.onoffswitch-label {
-    
-    
-    cursor: pointer;
+.onoffswitch-label{
     display: block;
     overflow: hidden;
+}
+.onoffswitch-label-notAdmin_false {
+    cursor: pointer;
+}
+.onoffswitch-label-notAdmin_true{
+    cursor: default;
 }
 .onoffswitch-inner {
     display: block;
@@ -614,8 +624,10 @@
     margin: 0 auto;
 }
 .b-label-overRating{
-    position: relative;
-    top: -10px;
-    left: -20px;
+    position: absolute;
+    top: 75px;
+    left: 15px;
     font-size: 0.6em;
+    width: 95%;
+    font-weight: normal;
 }

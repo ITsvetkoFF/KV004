@@ -54,15 +54,14 @@ define(['./module'], function(controllers){
             $scope.problem.CreatedDate =activity.Date;
             $scope.photos = data[1];
             $rootScope.photos = $scope.photos;
-            $scope.problem.Status = problem.Status?"Вирішина":"Актуальна";
-            $scope.checked = problem.Status?1:0;
+            $scope.checkedbox = problem.Status?1:0;
             problemModerationStatus = problem.Moderation ;
             $scope.problem.Votes = problem.Votes;
             var tempUser = JSON.parse(activity.Content);
             $scope.problem.userName = tempUser.userName;
             $scope.problem.Proposal = problem.Proposal;
 
-            $scope.$watch('problem.Status', function(newValue, oldValue) {
+            $scope.$watch('checkedbox', function(newValue, oldValue) {
                 if(newValue != oldValue ) {
                     $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
                     $scope.problem.Status = newValue;
@@ -231,7 +230,7 @@ define(['./module'], function(controllers){
         };
 
         //show message over the Severity rating
-        $scope.isReadonly = $scope.isAdministrator()?false:true;
+        $scope.$parent.isReadonly = $scope.isAdministrator()?false:true;
         $scope.showStatus = false;
         var severityMessage = {
             1:'Локальна проблема (стосується будинку/двору)',
@@ -255,7 +254,7 @@ define(['./module'], function(controllers){
 
         //save changes to db
         $scope.saveChangestoDb = function() {
-            adminToShowProblemService.saveChangestoDbProblemDescription(problem, $scope.problem.Severity, $scope.problem.Content,$scope.problem.Proposal,$scope.problem.Title, $scope.checked)
+            adminToShowProblemService.saveChangestoDbProblemDescription(problem, $scope.problem.Severity, $scope.problem.Content,$scope.problem.Proposal,$scope.problem.Title, $scope.checkedbox)
                 .then(function() {
                     adminToShowProblemService.showScopeNotApprovedProblemFromList(problem);
                     $scope.editStatusClass = adminToShowProblemService.getEditStatus(3);

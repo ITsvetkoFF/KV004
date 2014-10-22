@@ -7,7 +7,7 @@
 
         <div class="b-problem-deatiled-info-title">
             <img ng-src="images/markers/{{problem.ProblemTypes_Id}}.png" class="b-problem-deatiled-info-title__icon">
-            <div  class="b-problem-deatiled-info-title__text">
+            <div  class="b-problem-deatiled-info-title__text b-problem-notAdmin_{{!isAdministrator()}}">
                 <editproblemtitle  value="problem.Title"></editproblemtitle>
             </div>
 
@@ -23,24 +23,21 @@
         <div class="b-problem-deatiled-info-general">
             <div class="b-problem-deatiled-info-container">
             <div class='b-problem-deatiled-info-severity'>
-
-                <div class="b-problem-deatiled-info__severity"ng-init="problem.Severity">
+                <span class="label b-label-overRating" ng-class="{'label-warning': value<3, 'label-info': value>=3 && value<4, 'label-success': value>=4}" ng-show="showStatus">{{severityMessage}}</span>
+                <div class="b-problem-deatiled-info__severity b-problem-notAdmin_{{!isAdministrator()}}" ng-init="problem.Severity">
                    <rating ng-model="problem.Severity" on-hover="showMessageOverRating(value)" on-leave="showStatus = false" readonly="isReadonly" state-on="'fa-star'" state-off="'fa-star-o'" ></rating>
-                   <span class="label b-label-overRating" ng-class="{'label-warning': value<2, 'label-info': value>2 && value<4, 'label-success': value>=4}" ng-show="showStatus">{{severityMessage}}</span>
-
                 </div>
             </div>
             
                 <div class="b-problem-deatiled-info-status__text" >
                     <div class="onoffswitch">
-                        <input type="checkbox"   name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="problem.Status" ng-true-value="Вирішина" ng-false-value="Актуальна" ng-change="checked = !checked"  ng-disabled="!isAdministrator()" >
-                        <label class="onoffswitch-label" for="myonoffswitch">
+                        <input type="checkbox"   name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="checkedbox"   ng-checked="checkedbox" ng-disabled="!isAdministrator()" >
+                        <label class="onoffswitch-label onoffswitch-label-notAdmin_{{!isAdministrator()}}" for="myonoffswitch">
                             <span class="onoffswitch-inner"></span>
                             <span class="onoffswitch-switch"></span>
                         </label>
                     </div>
                 </div>
-            </div>
                 <div class="b-problem-deatiled-info-votes">
                     <!--<img class='b-problem-deatiled-info__votes' src='images/icons/heart.jpg'> -->
                     <button class="simple_like_img" ng-click="addOneVote()" ng-disabled="disableVoteButton">
@@ -48,20 +45,22 @@
                     </button>
                     {{problem.Votes}}
                 </div>
+            </div>
+
         </div>
 
 
         <tabset justified="true" class="b-problem-tab">
-            <tab heading="Детально" >
+            <tab heading="Детально" class="b-problem-notAdmin_false" >
                 <div class="b-problem-deatiled-info-description">
                     <div class="b-problem-deatiled-info-description__title"></div>
                     <div class="b-problem-deatiled-info-description__content">
                         <label>Опис проблеми:</label><br>
-                        <editproblemcontent  value="problem.Content"></editproblemcontent>
+                        <editproblemcontent  value="problem.Content" class="b-problem-notAdmin_{{!isAdministrator()}}"></editproblemcontent>
                     </div>
                     <div class="b-problem-deatiled-info-description__content">
                         <label>Пропозиції щодо вирішення:</label><br>
-                        <editproblemproposal  value="problem.Proposal"></editproblemproposal>
+                        <editproblemproposal  value="problem.Proposal" class="b-problem-notAdmin_{{!isAdministrator()}}"></editproblemproposal>
                     </div>
                     <div class="b-problem-deatiled-info-description-photos">
 
@@ -94,7 +93,7 @@
                     </div>
                 </div>
             </tab>
-            <tab heading="Коментарі користувачів">
+            <tab heading="Коментарі користувачів" class="b-problem-notAdmin_false">
                  <activity></activity>
             </tab>
         </tabset>
