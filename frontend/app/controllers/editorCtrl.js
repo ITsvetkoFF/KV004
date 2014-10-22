@@ -16,19 +16,13 @@ define(['./module'], function (controllers) {
         }
         $rootScope.$broadcast('Update', '_full');
         $scope.sendResource = function(Alias, Content, Title, IsResource, Id) {
-            /*$rootScope.data.forEach( function(d) {
-                   if (d.Alias == Alias) Id = d.Id
-                });*/
-            if (Alias === undefined || Content === '' || Content === undefined || IsResource === undefined) {
-                $scope.errorMsq = "Всі поля обов'язкові для заповнення!";
-                return;
-            }
-            else {
                 if (Id){
             $http.put('api/editResource/' + Id, {Alias: Alias, Content: Content, Title: Title, IsResource : IsResource}).success(function() {
             $rootScope.getTitles();
             $location.path('resources/' + Alias);
            }).error(function(status, data) {
+            consoe.log(data);
+            console.log(status);
                 });
        }
        else {
@@ -36,9 +30,20 @@ define(['./module'], function (controllers) {
             $rootScope.getTitles();
             $location.path('resources/' + Alias);
            }).error(function(data, status) {
-                    if (status === 500)  $scope.errorMsq = "Вже існує ресурс з таким заголовком або alias!";
+                switch (data.err) {
+                    case "ER_BAD_NULL_ERROR":
+                    $scope.errorMsq = "Заповніть всі поля!";
+                    break;
+                    case "ER_DUP_ENTRY":
+                    $scope.errorMsq = "Вже існує ресурс з таким заголовком або alias!";
+                    break;
+                    default:
+                    $scope.errorMsq = "Перевірте правильність заповнення усіх полів!";
+                }
+                if (data == "Unauthorized") $scope.errorMsq = "У вас немає прав на додавання ресурсів!";
+                    console.log(data)
+                    console.log(status)
                 });
-       };
        };
         };
     }]);
