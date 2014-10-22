@@ -5,7 +5,7 @@ define(['./module'],function(directives){
             scope: {
                value: '='
             },
-            template: '<pre ng-click="edit()" ng-bind-html = "tempValue"></pre><textarea  ng-model="tempValue" wrap="hard"  rows="20"></textarea>',
+            template: '<span ng-click="edit()" ng-bind-html = "tempValue"></span><textarea  ng-model="tempValue" wrap="hard"  rows="20"></textarea>',
             controller: function($scope,UserService){
                 $scope.isAdministrator = UserService.isAdministrator;
             },
