@@ -1,74 +1,15 @@
 <style type="text/css">
-.statistic > h3, h2, ul {
-  margin: 30px auto;
-  text-align: center;
-}
-.statistic h1, h2, h3 {
-    font-family: WWF;
-    line-height: 1em;
-    }
-.statistic h1 {
-    font-size: 2em;
-    text-align: center;
-    
-}
-.statistic h2 {
-    font-size: 2em;
-}
-.statistic h3 {
-    font-size: 2em;
-}
-.light {
-    font-weight: 300;
-}
-
-.statistic {
-   margin: 10px 5px 15px 5px;
-}
-.statistic svg {
-  font-size: 0.6em; 
-}
-.main text {
-  font: 12px sans-serif;
-}
-.mini text {
-  font: 10px sans-serif;  
-}
-.month text {
-  text-anchor: start;
-}
-.todayLine {
-  stroke: blue;
-  stroke-width: 1.5;
-}
-.axis line, .axis path {
-  stroke: black;
-}
-.brush .extent {
-  stroke: gray;
-  fill: blue;
-  fill-opacity: .165;
-}
-.statistic > ul {
-list-style: none;
-}
-.statistic  li {
-padding: 0px 30px;
-display: inline-block;
-}
-.statistic  li span{
-font-size: 4em;
-}
-.statistic .legend {
-  text-align: left;
-  margin: 10px 10px 20px 10px;
-  padding: 5px 5px;
-  font-size: 0.65em;
-}
-.pie {
-    margin: 0 auto;
-    text-align: center;
-}
+  .pie > span {
+    color: #428bca;
+    cursor: pointer;
+  }
+  .pie > span:hover {
+    color: #2a6496;
+    text-decoration: underline;
+  }
+  .active {
+    text-decoration: underline;
+  }
 </style>
 <close-button></close-button>
 <div class="statistic">
@@ -79,13 +20,13 @@ font-size: 4em;
   <li><span>{{comments}}</span><br>Коментарів</li>
   <li><span>{{photos}}</span><br>Фотографій</li>
 </ul>
-    <h3 class="light">Статистика проблем за останній</h3>
+    <h3 class="light">Кількість доданих проблем за останній</h3>
     <div class="pie">    
-        <a href="" ng-click="pie('D')">День</a> | 
-        <a href="" ng-click="pie('W')">Тиждень</a> | 
-        <a href="" ng-click="pie('M')">Місяць</a> | 
-        <a href="" ng-click="pie('Y')">Рік</a> | 
-        <a href="" ng-click="pie('A')">За весь час</a><br>
+        <span ng-class="style.D" ng-click="pie('D')">День</span> | 
+        <span ng-class="style.W" ng-click="pie('W')">Тиждень</span> | 
+        <span ng-class="style.M" ng-click="pie('M')">Місяць</span> | 
+        <span ng-class="style.Y" ng-click="pie('Y')">Рік</span> | 
+        <span ng-class="style.A" ng-click="pie('A')">За весь час</span><br>
         <svg id="el2" ng-init="pie('A')"></svg>
     </div>
   

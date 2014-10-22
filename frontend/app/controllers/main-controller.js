@@ -73,6 +73,7 @@ define(['./module'],function(controllers){
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
+        $scope.showRegForm = $scope.open;
 
     }]);
 });
