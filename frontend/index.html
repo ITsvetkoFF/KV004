@@ -47,12 +47,9 @@
                 <div class="b-left-side" problem-filters></div>
                 <div class="b-left-side__pointer" ng-click="showFilters()" ng-class = "{left_pointer_reverse : showFiltersVar}"></div>
             </div>
-
-
-<div class=" b-view b-container__right-side b-view b-container__right-side{{showRigthSide}}" ng-swipe-right="swipeHide()">
-    <div style="transition-duration: 0.1s !important;" class="b-view b-container__right-side b-view b-container__right-side{{showRigthSide}}" ng-view >
-    </div>
-</div>
+            <div class=" b-view b-container__right-side b-container__right-side{{showRigthSide}}" ng-swipe-right="swipeHide()" ng-style="style()">
+                <div style="transition-duration: 0.1s !important;" class="b-view b-container__right-side b-container__right-side{{showRigthSide}}" ng-view ng-style="style()"></div>
+            </div>
         </div>
     </div>
     <script src="bower_components/requirejs/require.js" data-main="app/main.js"></script>

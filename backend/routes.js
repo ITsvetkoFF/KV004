@@ -373,6 +373,7 @@ exports.postProblem = function(req,res){  //post new problem
             var data = {
                 Title: req.body.title,
                 Content: req.body.content,
+                Proposal: req.body.proposal,
                 Latitude: req.body.latitude,
                 Longtitude: req.body.longitude,
                 Moderation:'1',

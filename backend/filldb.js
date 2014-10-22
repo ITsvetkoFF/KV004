@@ -144,9 +144,15 @@ function fillProblemsActivities() {
                 probs[i].content = probs[i].content.replace(/'/g, "\\'");
                 probs[i].title = probs[i].title.replace(/'/g, "\\'");
             }
+ 
+ var content = probs[i].content.split("\n\n")[0];
+ var proposal = probs[i].content.split("\n\n")[1];
+
+
  var data = {
                 Title: probs[i].title,
-                Content: probs[i].content,
+                Content: content,
+                Proposal: proposal,
                 Severity: probs[i].severity,
                 Moderation: 1,
                 Votes: probs[i].votes,
@@ -158,8 +164,9 @@ function fillProblemsActivities() {
             connection.query("INSERT INTO Problems SET ?", data, function (err, rows, fields) {
                 if (err) throw err;
             });
+            console.log(new Date(probs[i].created * 1000).toISOString().slice(0, 19).replace('T', ' '));
             var data = {
-                Date: new Date(probs[i].created * 1000).toISOString().slice(0,10),
+                Date: new Date(probs[i].created * 1000).toISOString().slice(0, 19).replace('T', ' '),
                 ActivityTypes_Id: 1,
                 users_Id: 2,
                 Problems_Id: j,
