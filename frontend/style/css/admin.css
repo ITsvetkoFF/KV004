@@ -599,7 +599,6 @@
 }
 .btn-success{
     display: inline-block;
-    bottom: 10px;
     opacity: 1;
     -webkit-transition: all 0.5s ease-out;
     -moz-transition: all 0.5s ease-out;
