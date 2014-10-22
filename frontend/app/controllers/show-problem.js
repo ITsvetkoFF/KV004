@@ -1,6 +1,7 @@
 define(['./module'], function(controllers){
     'use strict';
     controllers.controller('showProblemCtrl',['$scope','$routeParams','$http','ipCookie','$rootScope','$modal','adminToShowProblemService','$window','UserService', function ($scope,$routeParams,$http,ipCookie,$rootScope,$modal,adminToShowProblemService,$window, UserService){
+        $scope.isAdministrator = UserService.isAdministrator;
 
 
         adminToShowProblemService.setEditStatus($scope.isAdministrator());
@@ -18,7 +19,8 @@ define(['./module'], function(controllers){
         $scope.showSliderFunc = function(){
             $rootScope.$emit('showSlider','true');
             $rootScope.$emit('get');
-        }
+        };
+
         if(ipCookie('vote'+$routeParams.problemID)==true){
           
           $scope.disableVoteButton=true;
@@ -30,6 +32,7 @@ define(['./module'], function(controllers){
         var userID ='';
         var problemID = '';
         var problem ='';
+        var activity = '';
         var problemModerationStatus = '';
         var tempContent = '';
         //get problem info
@@ -37,24 +40,26 @@ define(['./module'], function(controllers){
 
 
 
-        res.success(function (data, status, headers, config) {
-            $scope.problem = data[0][0];
+        res.success(function (data) {
+
             problem = data[0][0];
-            userID = data[2][0].Users_Id;
-            problemID = parseInt(data[0][0].Id);
-            $scope.problem.Severity = parseInt(data[0][0].Severity) || 1;
-            $scope.problem.Content = data[0][0].Content || 'опис відсутній';
-            $scope.problem.Title = data[0][0].Title || 'назва відсутня';
-            $scope.problem.CreatedDate = data[2][0].Date;
+            $scope.problem =  problem;
+            activity = data[2][0];
+            userID =activity.Users_Id;
+            problemID = parseInt(problem.Id);
+            $scope.problem.Severity = parseInt(problem.Severity) || 1;
+            $scope.problem.Content = problem.Content || 'опис відсутній';
+            $scope.problem.Title = problem.Title || 'назва відсутня';
+            $scope.problem.CreatedDate =activity.Date;
             $scope.photos = data[1];
             $rootScope.photos = $scope.photos;
-            $scope.problem.Status = data[0][0].Status?"Вирішина":"Актуальна";
-            $scope.checked = data[0][0].Status?1:0;
-            problemModerationStatus = data[0][0].Moderation ;
-            $scope.problem.Votes = data[0][0].Votes;
-            var tempUser = JSON.parse(data[2][0].Content);
+            $scope.problem.Status = problem.Status?"Вирішина":"Актуальна";
+            $scope.checked = problem.Status?1:0;
+            problemModerationStatus = problem.Moderation ;
+            $scope.problem.Votes = problem.Votes;
+            var tempUser = JSON.parse(activity.Content);
             $scope.problem.userName = tempUser.userName;
-            $scope.problem.Proposal = data[0][0].Proposal;
+            $scope.problem.Proposal = problem.Proposal;
 
             $scope.$watch('problem.Status', function(newValue, oldValue) {
                 if(newValue != oldValue ) {
@@ -94,7 +99,6 @@ define(['./module'], function(controllers){
                     $scope.$parent.editStatusClass =  adminToShowProblemService.getEditStatus(1);
                 }
             });
-
 
             $scope.activities = data[2].reverse();
             for(var i=0;i<$scope.activities.length;i++){
@@ -142,7 +146,7 @@ define(['./module'], function(controllers){
             $scope.showDropField = false;
             $scope.showAddPhotoButton = true;
             //window.location.href="#/problem/showProblem/"+$routeParams.problemID;
-        }
+        };
         //activity
         $scope.addOneVote = function(){
 
@@ -159,7 +163,7 @@ define(['./module'], function(controllers){
                 throw error;
             });
             window.location.href="#/problem/showProblem/"+$routeParams.problemID;
-        }
+        };
 
         $scope.addComment = function(comment) {
             var data = {data: {userId: $scope.userId, userName: $scope.name, Content: comment}};
@@ -180,7 +184,7 @@ define(['./module'], function(controllers){
                 throw error;
             });
 
-        }
+        };
         $scope.deleteComment = function(id) {
             var responce = $http.delete('/api/activity/' + id);
             responce.success(function (data, status, headers, config) {
@@ -196,7 +200,7 @@ define(['./module'], function(controllers){
                 throw error;
             });
 
-        }
+        };
         $scope.icons=[];
         $scope.icons[1]="fa-map-marker";
         $scope.icons[2]="fa-pencil";
@@ -221,7 +225,22 @@ define(['./module'], function(controllers){
 
             }
 
-        }
+        };
+
+        //show message over the Severity rating
+        $scope.isReadonly = $scope.isAdministrator()?false:true;
+        $scope.showStatus = false;
+        var severityMessage = {
+            1:'Локальна проблема (стосується будинку/двору)',
+            2:'Середня проблема (стосується кількох будинків/дворів)',
+            3:'Велика проблема (охоплює цілий район або місто / впливає на екологію)',
+            4:'Дуже велика проблема (охоплює область або велике місто / значно впливає на екологію)',
+            5:'Всеукраїнська проблема (може вплинути на всю країну / глобальна проблема)'
+        };
+        $scope.showMessageOverRating = function(rate){
+            $scope.severityMessage = severityMessage[rate];
+            $scope.showStatus = true;
+        };
 
         //if user did not submit changes
         $rootScope.$on('$locationChangeStart', function(event) {

@@ -3,105 +3,106 @@ var jwt          = require('jsonwebtoken'),
     bodyParser   = require('body-parser'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
-    secret = require('./config/secret'),
+    secret = require('./config/secret')/*,
     mcapi = require('mailchimp-api');
 
     mc = new mcapi.Mailchimp('23740bea44a8cfd98fb228dd5691e2b5-us9');
 
     var mailchimpListID, segments = {};
 
-    mc.lists.list(function(data) {
-        mailchimpListID = data.data[0].id;
-    
-        
-        //adding 7 segments for each type of problems - in development
-        //segment forest problems
-        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Forest problems'}}, function(data){
+mc.lists.list(function(data) {
+    mailchimpListID = data.data[0].id;
+
+
+    //adding 7 segments for each type of problems - in development
+    //segment forest problems
+    mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Forest problems'}}, function(data){
             console.log('Segment was created!');
 
-        }, 
+        },
         function(error) {
             if (error.error) {
                 console.log(error.code + ": " + error.error);
-                            
+
             } else {
                 console.log('There was an error subscribing that user');
             }
         });
-        //segment garbage landfills
-        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Garbage landfills'}}, function(data){
+    //segment garbage landfills
+    mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Garbage landfills'}}, function(data){
             console.log('Segment was created!');
-        }, 
+        },
         function(error) {
             if (error.error) {
                 console.log(error.code + ": " + error.error);
-                
+
             } else {
                 console.log('There was an error subscribing that user');
             }
         });
-        //segment illegal construction
-        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Illegal construction'}}, function(data){
+    //segment illegal construction
+    mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Illegal construction'}}, function(data){
             console.log('Segment was created!');
-        }, 
+        },
         function(error) {
             if (error.error) {
                 console.log(error.code + ": " + error.error);
-                
+
             } else {
                 console.log('There was an error subscribing that user');
             }
         });
-        //segment waterbody problems
-        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Waterbody problems'}}, function(data){
+    //segment waterbody problems
+    mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Waterbody problems'}}, function(data){
             console.log('Segment was created!');
-        }, 
+        },
         function(error) {
             if (error.error) {
                 console.log(error.code + ": " + error.error);
-                
+
             } else {
                 console.log('There was an error subscribing that user');
             }
         });
-        //segment biodiversity threat
-        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Biodiversity threat'}}, function(data){
+    //segment biodiversity threat
+    mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Biodiversity threat'}}, function(data){
             console.log('Segment was created!');
-        }, 
+        },
         function(error) {
             if (error.error) {
                 console.log(error.code + ": " + error.error);
-                
+
             } else {
                 console.log('There was an error subscribing that user');
             }
         });
-        //segment illegal hunting
-        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Illegal hunting'}}, function(data){
+    //segment illegal hunting
+    mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Illegal hunting'}}, function(data){
             console.log('Segment was created!');
-        }, 
+        },
         function(error) {
             if (error.error) {
                 console.log(error.code + ": " + error.error);
-                
+
             } else {
                 console.log('There was an error subscribing that user');
             }
         });
-        //segment other problems
-        mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Other problems'}}, function(data){
+    //segment other problems
+    mc.lists.segmentAdd({id: mailchimpListID, opts:{type:'static',name:'Other problems'}}, function(data){
             console.log('Segment was created!');
-        }, 
+        },
         function(error) {
             if (error.error) {
                 console.log(error.code + ": " + error.error);
-                
+
             } else {
                 console.log('There was an error subscribing that user');
             }
         });
 
-        //look for all existing segments in the list
+    //look for all existing segments in the list
+    try{
         mc.lists.segments({id:mailchimpListID}, function(data){
             console.log(data.static);
             console.log(segments);
@@ -132,9 +133,14 @@ var jwt          = require('jsonwebtoken'),
                         break;
                 }
             }
-        console.log(segments);
+            console.log(segments);
         });
-    });
+    }
+    catch(err){
+        console.log("Can`t make query for " + segments[i] + "\n");
+    }
+
+});*/
 
 exports.getProblems = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
     console.log("start to get information about all moderated problems");
@@ -146,18 +152,23 @@ exports.getProblems = function(req,res){ // get all moderated problems in brief 
             });
             console.log('Can`t connect to db in getProblems API call\n' + err +"\n");
         } else {
-            connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Problems.ProblemTypes_Id, Problems.Status, Activities.Date FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Moderation=1 AND ActivityTypes_Id=1', function(err, rows, fields) {
-                if (err) {
-                    res.statusCode = 500;
-                    res.send({
-                        err: err.code
-                    });
-                    console.error('Can`t make request to Problems db\n', err);
-                } else {
-                    res.send(rows);
-                    console.log("end to get information about all moderated problems \n");
-                }
-            });
+            try{
+                connection.query('SELECT Problems.Id, Problems.Title, Problems.Latitude, Problems.Longtitude, Problems.ProblemTypes_Id, Problems.Status, Activities.Date FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE Moderation=1 AND ActivityTypes_Id=1', function(err, rows, fields) {
+                    if (err) {
+                        res.statusCode = 500;
+                        res.send({
+                            err: err.code
+                        });
+                        console.error('Can`t make request to Problems db\n', err);
+                    } else {
+                        res.send(rows);
+                        console.log("end to get information about all moderated problems \n");
+                    }
+                });
+            }
+            catch(err){
+                console.log("Can`t make query for getProblems \n");
+            }
         }
     });
 };
@@ -234,25 +245,29 @@ exports.getTitles = function(req,res){ //get titles of resources
             });
             console.log('Can`t connect to db in getTitles API call\n' + err +"\n");
         } else {
-            connection.query('SELECT Title, Alias, Id, IsResource FROM Resources', function(err, rows) {
-                if (err) {
-                    res.statusCode = 500;
-                    res.send({
-                        err:err.code
-                    });
-                    console.error('Can`t make query\n', err);
-                }
-                if (rows.length == 0) {
-                    console.log("Title, Alias, Id, IsResource are empty");
-                }
-                try {
-                    res.send(rows);
-                    console.log("end getTitles API function");
-                }
-                catch(err) {
-                    console.log('Can`t send information to client' + err + '\n');
-                }
-            });
+            try {
+                connection.query('SELECT Title, Alias, Id, IsResource FROM Resources', function(err, rows) {
+                    if (err) {
+                        res.statusCode = 500;
+                        res.send({
+                            err:err.code
+                        });
+                        console.error('Can`t make query\n', err);
+                    }else{
+                        if (rows.length == 0) {
+                            res.statusCode = 404;
+                            console.log("Title, Alias, Id, IsResource are empty");
+                        }else{
+                            res.statusCode = 200;
+                            res.send(rows);
+                            console.log("end getTitles API function");
+                        }
+                    }
+                });
+            }
+            catch(err) {
+                console.log('Can`t send information to client' + err + '\n');
+            }
         }
     });
 };
@@ -267,26 +282,28 @@ exports.getResource = function(req,res){ //get resourse
             });
             console.log('Can`t connect to db in getResource API call\n' + err +"\n");
         } else {
-            var name = req.params.name
-            connection.query('SELECT * FROM Resources WHERE Alias = ?', name, function(err, rows) {
-                if (err) {
-                    res.statusCode = 500;
-                    res.send({
-                        err: err.code
-                    });
-                    console.error('Can`t make query for Alias name= '+ name +'\n' + err +"\n");
-                }
-                if (rows.length == 0){
-                    console.log("there are no any resources for Alias = " + name + '\n');
-                }
-                try{
-                    res.send(rows);
-                    console.log("end getResource API function");
-                }
-                catch(err){
-                    console.log('Can`t send information to client getResource API' + err + '\n');
-                }
-            });
+            try{
+                var name = req.params.name;
+                connection.query('SELECT * FROM Resources WHERE Alias = ?', name, function(err, rows) {
+                    if (err) {
+                        res.statusCode = 500;
+                        res.send({
+                            err: err.code
+                        });
+                        console.error('Can`t make query for Alias name= '+ name +'\n' + err +"\n");
+                    } else {
+                        if (rows.length == 0){
+                            console.log("there are no any resources for Alias = " + name + '\n');
+                        } else {
+                            res.send(rows);
+                            console.log("end getResource API function");
+                        }
+                    }
+                });
+            }
+            catch(err){
+                console.log('Can`t send information to client getResource API' + err + '\n');
+            }
         }
     });
 };
@@ -570,62 +587,64 @@ exports.postProblem = function(req,res){  //post new problem
                         res.send({
                             err:    err.code
                         });
-                        console.error('Can`t make query for data = '+ data +'\n' + err +"\n");
-                    }
-                    var i = 0;
-                    var content ={
-                        Content:"додав проблему",
-                        userName:req.body.userName
-                    };
-                    if(req.body.userId==undefined) {
-                        content.Content="Проблему створено анонімно";
-                        req.body.userId = 2;
-                        content.userName="(Анонім)";
-                    }
-                    var activityData = {
-                        Content:JSON.stringify(content),
-                        Date:new Date(),
-                        ActivityTypes_Id:1,
-                        Users_Id:req.body.userId,
-                        Problems_Id:rows.insertId
-                    };
-                    connection.query('INSERT INTO Activities SET ?',[activityData],function(err){
+                        console.error('Can`t make query for  data  = '+ JSON.stringify(data) +'\n' + err +"\n");
+                    }else{
+                        var i = 0;
+                        var content ={
+                            Content:"додав проблему",
+                            userName:req.body.userName
+                        };
+                        if(req.body.userId==undefined) {
+                            content.Content="Проблему створено анонімно";
+                            req.body.userId = 2;
+                            content.userName="(Анонім)";
+                        }
+                        var activityData = {
+                            Content:JSON.stringify(content),
+                            Date:new Date(),
+                            ActivityTypes_Id:1,
+                            Users_Id:req.body.userId,
+                            Problems_Id:rows.insertId
+                        };
+                        connection.query('INSERT INTO Activities SET ?',[activityData],function(err){
 
-                        if (err) {
-                            res.statusCode = 500;
-                            res.send({
-                                err:    err.code
-                            });
-                            console.error('Can`t make query for activityData = '+ activityData +'\n' + err +"\n");
-                        }
-                        if(req.body.description==undefined){
-                            req.body.description=[];
-                        }
-                        while (req.files['file[' + i + ']'] != undefined) {
-                            var photo_data = {
-                                Link: req.files['file[' + i + ']'].name,
-                                Status: 0,
-                                Description: req.body.description[i],
-                                Problems_Id: rows.insertId
-                            };
-                            connection.query('INSERT INTO Photos SET ?', [photo_data], function (err) {
-                                if (err) {
-                                    res.statusCode = 500;
-                                    res.send({
-                                        err: err.code
-                                    });
-                                    console.error('Can`t make query for photo_data = '+ photo_data +'\n' + err +"\n");
-                                }
-                            });
-                            i++;
-                        }
-                    });
+                            if (err) {
+                                res.statusCode = 500;
+                                res.send({
+                                    err:    err.code
+                                });
+                                console.error('Can`t make query for activityData = '+ activityData +'\n' + err +"\n");
+                            }
+                            if(req.body.description==undefined){
+                                req.body.description=[];
+                            }
+                            while (req.files['file[' + i + ']'] != undefined) {
+                                var photo_data = {
+                                    Link: req.files['file[' + i + ']'].name,
+                                    Status: 0,
+                                    Description: req.body.description[i],
+                                    Problems_Id: rows.insertId
+                                };
+                                connection.query('INSERT INTO Photos SET ?', [photo_data], function (err) {
+                                    if (err) {
+                                        res.statusCode = 500;
+                                        res.send({
+                                            err: err.code
+                                        });
+                                        console.error('Can`t make query for photo_data = '+ photo_data +'\n' + err +"\n");
+                                    }
+                                });
+                                i++;
+                            }
+                        });
 
-                    res.send({
-                        json:   rows,
-                        length: rows.length
-                    });
-                    console.log("end postProblem  API function");
+                        res.send({
+                            json:   rows,
+                            length: rows.length
+                        });
+                        console.log("end postProblem  API function");
+                    }
+
                 });
             }
             catch(err){
@@ -1130,7 +1149,7 @@ exports.deleteProblem = function(req, res) {
         }
     });
 };
-
+//=================================================================================================
 exports.approveProblem = function(req, res) {
     console.log('start approveProblem API function');
     req.getConnection(function(err, connection) {
@@ -1163,14 +1182,15 @@ exports.approveProblem = function(req, res) {
                                 err:    err.code
                             });
                             console.log('Can`t make query for id =  '+ id +'\n' + err +"\n");
+                        }else{
+                            res.send({
+                                result: 'success',
+                                err:    '',
+                                json:   rows,
+                                length: rows.length
+                            });
+                            console.log('end approveProblem API function');
                         }
-                        res.send({
-                            result: 'success',
-                            err:    '',
-                            json:   rows,
-                            length: rows.length
-                        });
-                        console.log('end approveProblem API function');
                     });
                 });
             }
@@ -1213,14 +1233,15 @@ exports.deleteUser = function(req, res) {
                                 err:    err.code
                             });
                             console.log('Can`t make query for id =  '+ id +'\n' + err +"\n");
+                        }else{
+                            res.send({
+                                result: 'success',
+                                err:    '',
+                                json:   rows,
+                                length: rows.length
+                            });
+                            console.log('end deleteUser API function');
                         }
-                        res.send({
-                            result: 'success',
-                            err:    '',
-                            json:   rows,
-                            length: rows.length
-                        });
-                        console.log('end deleteUser API function');
                     });
                 });
             }
@@ -1257,7 +1278,6 @@ exports.deleteComment = function(req, res) {
                     if (decoded.role != 'administrator') {
                         return res.send(401);
                     }else {
-
                         connection.query('DELETE FROM Activities WHERE Id = ?', req.params.id, function (err) {
                             if (err) {
                                 res.statusCode = 500;
@@ -1265,12 +1285,14 @@ exports.deleteComment = function(req, res) {
                                     err: err.code
                                 });
                                 console.log('Can`t make query for id =  '+ id +'\n' + err +"\n");
+                            }else{
+                                res.send({
+                                    result: 'success'
+                                });
+                                console.log('end deleteComment API function');
                             }
-                            res.send({
-                                result: 'success'
-                            });
-                            console.log('end deleteComment API function');
                         });
+
                     }
                 });
             }
@@ -1313,14 +1335,15 @@ exports.deletePhoto = function(req, res) {
                                 err:    err.code
                             });
                             console.log('Can`t make query for id =  '+ id +'\n' + err +"\n");
+                        }else{
+                            res.send({
+                                result: 'success',
+                                err:    '',
+                                json:   rows,
+                                length: rows.length
+                            });
+                            console.log('end deletePhoto API function');
                         }
-                        res.send({
-                            result: 'success',
-                            err:    '',
-                            json:   rows,
-                            length: rows.length
-                        });
-                        console.log('end deletePhoto API function');
                     });
                 });
             }
@@ -1373,14 +1396,15 @@ exports.editProblem = function(req, res) {
                                 err:    err.code
                             });
                             console.log('Can`t make query for data='+data+' for id = '+ id +'\n' + err +"\n");
+                        }else{
+                            res.send({
+                                result: 'success',
+                                err:    '',
+                                json:   rows,
+                                length: rows.length
+                            });
+                            console.log('end editProblem API function');
                         }
-                        res.send({
-                            result: 'success',
-                            err:    '',
-                            json:   rows,
-                            length: rows.length
-                        });
-                        console.log('end editProblem API function');
                     });
                 });
             }
@@ -1427,12 +1451,13 @@ exports.addResource = function(req, res) {
                                 err:    err.code
                             });
                             console.log('Can`t make query for data='+data+'\n' + err +"\n");
+                        }else{
+                            res.send({
+                                result: 'success',
+                                err:    ''
+                            });
+                            console.log('end addResource API function');
                         }
-                        res.send({
-                            result: 'success',
-                            err:    ''
-                        });
-                        console.log('end addResource API function');
                     });
                 });
             }
@@ -1480,12 +1505,13 @@ exports.editResource = function(req, res) {
                                 err:    err.code
                             });
                             console.log('Can`t make query for id='+id+'\n' + err +"\n");
+                        }else{
+                            res.send({
+                                result: 'success',
+                                err:    ''
+                            });
+                            console.log('end editResource API function');
                         }
-                        res.send({
-                            result: 'success',
-                            err:    ''
-                        });
-                        console.log('end editResource API function');
                     });
                 });
             }
@@ -1527,12 +1553,13 @@ exports.deleteResource = function(req, res) {
                                 err:    err.code
                             });
                             console.log('Can`t make query for id='+id+'\n' + err +"\n");
+                        }else{
+                            res.send({
+                                result: 'success',
+                                err:    ''
+                            });
+                            console.log('end deleteResource API function');
                         }
-                        res.send({
-                            result: 'success',
-                            err:    ''
-                        });
-                        console.log('end deleteResource API function');
                     });
                 });
             }
@@ -1543,107 +1570,128 @@ exports.deleteResource = function(req, res) {
     });
 };
 exports.getStats1 = function (req, res) {
+    console.log('start getStats1 API function');
      req.getConnection(function(err, connection) {
         if (err) {
-            console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
-                result: 'error',
                 err:    err.code
             });
+            console.log('Can`t connect to db in getStats1 API call\n' + err +"\n");
         } else {
-            connection.query('SELECT Activities.Problems_Id as Id, Activities.Date as start, Activities.ActivityTypes_Id as act, Problems.ProblemTypes_Id as lane FROM Activities LEFT JOIN Problems ON Problems.Id = Activities.Problems_Id WHERE (ActivityTypes_Id = 1) OR (ActivityTypes_Id = 3);', function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send(rows);
-            });
+            try{
+                connection.query('SELECT Activities.Problems_Id as Id, Activities.Date as start, Activities.ActivityTypes_Id as act, Problems.ProblemTypes_Id as lane FROM Activities LEFT JOIN Problems ON Problems.Id = Activities.Problems_Id WHERE (ActivityTypes_Id = 1) OR (ActivityTypes_Id = 3);', function(err, rows) {
+                    if (err) {
+                        res.statusCode = 500;
+                        res.send({
+                            err:    err.code
+                        });
+                        console.log('Can`t make query for (ActivityTypes_Id = 1) OR (ActivityTypes_Id = 3)\n' + err +"\n");
+                    }else{
+                        res.send(rows);
+                        console.log('end getStats1 API function');
+                    }
+                });
+            }
+            catch(err){
+                console.log('Can`t execute getStats1 API');
+            }
         }
     });
-}
+};
+
 exports.getStats2 = function (req, res) {
+    console.log('start getStats2 API function');
      req.getConnection(function(err, connection) {
         if (err) {
-            console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
-                result: 'error',
                 err:    err.code
             });
+            console.log('Can`t connect to db in getStats1 API call\n' + err +"\n");
         } else {
-            var val
+            try{
+
+                var val;
                 switch(req.params.val){
-        case "D": val = 'AND (DATE(Activities.Date) = DATE(NOW()))';
-            break;
-        case "W": val = 'AND (DATE_FORMAT(Activities.Date,"%u-%Y") = DATE_FORMAT(NOW(),"%u-%Y"))';
-            break;
-        case "M": val = 'AND (DATE_FORMAT(Activities.Date,"%m-%Y") = DATE_FORMAT(NOW(),"%m-%Y"))';
-            break;
-        case "Y": val = 'AND (YEAR(Activities.Date) = YEAR(NOW()))';
-            break;
-            case "A": val = "";
-            break;
-        };
-            connection.query('SELECT Problems.ProblemTypes_Id as id, count(Problems.Id) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE (Activities.ActivityTypes_Id = 1) ' + val + ' GROUP BY Problems.ProblemTypes_Id;', function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send(rows);
-            });
+                    case "D": val = 'AND (DATE(Activities.Date) = DATE(NOW()))';
+                        break;
+                    case "W": val = 'AND (DATE_FORMAT(Activities.Date,"%u-%Y") = DATE_FORMAT(NOW(),"%u-%Y"))';
+                        break;
+                    case "M": val = 'AND (DATE_FORMAT(Activities.Date,"%m-%Y") = DATE_FORMAT(NOW(),"%m-%Y"))';
+                        break;
+                    case "Y": val = 'AND (YEAR(Activities.Date) = YEAR(NOW()))';
+                        break;
+                    case "A": val = "";
+                        break;
+                };
+                connection.query('SELECT Problems.ProblemTypes_Id as id, count(Problems.Id) as value FROM Problems LEFT JOIN Activities ON Problems.Id=Activities.Problems_Id WHERE (Activities.ActivityTypes_Id = 1) ' + val + ' GROUP BY Problems.ProblemTypes_Id;', function(err, rows, fields) {
+                    if (err) {
+                        res.statusCode = 500;
+                        res.send({
+                            err:    err.code
+                        });
+                        console.log('Can`t make query for getStats2\n' + err +"\n");
+                    }else{
+                        res.send(rows);
+                        console.log('end getStats2 API function');
+                    }
+                });
+            }
+            catch(err){
+                console.log('Can`t execute getStats2 API');
+            }
         }
     });
 }
 exports.getStats3 = function (req, res) {
+    console.log('start getStats3 API function');
      req.getConnection(function(err, connection) {
         if (err) {
-            console.error('CONNECTION error: ',err);
             res.statusCode = 503;
             res.send({
-                result: 'error',
                 err:    err.code
             });
+            console.log('Can`t connect to db in getStats1 API call\n' + err +"\n");
         } else {
-            connection.query('SELECT count(Id) as problems, sum(votes) as votes FROM Problems;', function(err, rows1, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                connection.query('SELECT count(Id) as photos FROM Photos;', function(err, rows2, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                connection.query('SELECT count(Id) as comments FROM Activities WHERE ActivityTypes_Id=5;', function(err, rows3, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send([rows1,rows2,rows3]);
-            });
-            });
-            });
+            try{
+                connection.query('SELECT count(Id) as problems, sum(votes) as votes FROM Problems;', function(err, rows1) {
+                    if (err) {
+                        res.statusCode = 500;
+                        res.send({
+                            err:    err.code
+                        });
+                        console.log('Can`t make query for getStats3 first SELECT\n' + err +"\n");
+                    } else{
+                        connection.query('SELECT count(Id) as photos FROM Photos;', function(err, rows2) {
+                            if (err) {
+                                res.statusCode = 500;
+                                res.send({
+                                    err:    err.code
+                                });
+                                console.log('Can`t make query for getStats3 second SELECT\n' + err +"\n");
+                            } else {
+                                connection.query('SELECT count(Id) as comments FROM Activities WHERE ActivityTypes_Id=5;', function(err, rows3, fields) {
+                                    if (err) {
+                                        res.statusCode = 500;
+                                        res.send({
+                                            err:    err.code
+                                        });
+                                        console.log('Can`t make query for getStats3 third SELECT\n' + err +"\n");
+                                    } else {
+                                        res.send([rows1,rows2,rows3]);
+                                        console.log('end getStats3 API function');
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+            catch(err){
+                console.log('Can`t execute getStats3 API');
+            }
+
         }
     });
-    }
+    };
