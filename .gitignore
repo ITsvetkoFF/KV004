@@ -10,4 +10,4 @@ tmp/
 # Files #
 *.DS_Store
 *.log
-/maintemplate.js
+frontend/app/templates/maintemplate.js
