@@ -6,7 +6,8 @@ define(['./module'],function (controllers){
             {heading: "Опис", icon: "fa fa-info-circle", content: "app/templates/addInfo.html", active: false},
             {heading: "Фото", icon: "fa fa-file-photo-o", content: "app/templates/addPhotos.html", active: false}
         ]
-
+        $scope.fileSizeLeft = 20;
+        $scope.fileCountLeft = 10;
         $scope.active = function() {
             return $scope.tabs.filter(function(tab){
                 return tab.active;
