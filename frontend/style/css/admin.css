@@ -500,20 +500,21 @@
     width: 100%;
     overflow-y: auto;
     border: none;
-    padding: 0 610px 10px 110px;
+    padding: 0 610px 10px 135px;
     background-color: rgba(0, 0, 0, .2);
+    margin-top: 50px;
 }
 
     .b-new-problem-list__caption {
         display: block;
         box-sizing: border-box;
-        width: 600px;
+        width: 500px;
         text-align: left;
         font-family: WWF;
         font-size: 1.1em;
         font-weight: lighter;
         letter-spacing: 2px;
-        padding: 40px 0 20px 100px;
+        padding: 40px 0 20px 10px;
         background-color: #FFF;
         border: 2px solid #FFF;
         box-shadow: 0 0 10px RGBA(0, 0, 0, .3);
@@ -523,7 +524,7 @@
         display: block;
         font-weight: 400;
         list-style: none outside none;
-        width: 600px;
+        width: 500px;
     }
 
         .b-new-items__item {
