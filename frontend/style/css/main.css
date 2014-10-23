@@ -111,6 +111,7 @@ html, body {
     height: calc(100% - 52px);
     height: -moz-calc(100% - 52px);
     overflow: auto;
+    padding-bottom: 30px;
 }
 
 .b-right-side {
@@ -1650,20 +1651,13 @@ form.dropzone {
     .resource ul {
         padding-left: 40px;
     }
-    .statistic > h3, h2, ul {
-  margin: 30px auto;
+    .statistic > h1, h3 {
+      font-family: WWF;
 }
-.statistic h1, h2, h3 {
-    font-family: WWF;
-    line-height: 1em;
-    }
-.statistic h1 {
+.statistic > h1 {
     font-size: 3em;    
 }
-.statistic h2 {
-    font-size: 2.5em;
-}
-.statistic h3 {
+.statistic > h3 {
     font-size: 2em;
 }
 .light {
@@ -1677,7 +1671,7 @@ form.dropzone {
     color: #2a6496;
     text-decoration: underline;
   }
-  .active {
+  .currentPeriod {
     text-decoration: underline;
   }
 .statistic {

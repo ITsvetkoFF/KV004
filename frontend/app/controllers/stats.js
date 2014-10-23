@@ -291,9 +291,9 @@ function getPaths(items) {
 
   $scope.pie = function(val){
     for (var styles in $scope.style) {
-if ($scope.style[styles] == 'active') $scope.style[styles] = undefined;
+if ($scope.style[styles] == 'currentPeriod') $scope.style[styles] = undefined;
 }
-    $scope.style[val] = 'active';
+    $scope.style[val] = 'currentPeriod';
    d3.selectAll("#el2 > *").remove();
    var width = 300,
     height = 300,

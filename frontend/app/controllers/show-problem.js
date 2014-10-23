@@ -42,7 +42,11 @@ define(['./module'], function(controllers){
 
 
         res.success(function (data) {
-
+        if(data.error) {
+                $rootScope.$broadcast('Update',"_hide");
+                window.location.href="#/map";
+            }
+            else {
             problem = data[0][0];
             $scope.problem =  problem;
             activity = data[2][0];
@@ -106,7 +110,7 @@ define(['./module'], function(controllers){
                     $scope.activities[i].Content = JSON.parse($scope.activities[i].Content);
                 }
             }
-
+        }
         });
         res.error(function(err){
             throw err;
