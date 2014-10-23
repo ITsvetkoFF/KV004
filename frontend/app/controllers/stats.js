@@ -290,7 +290,9 @@ function getPaths(items) {
 };
 
   $scope.pie = function(val){
-    $scope.style = {};
+    for (var styles in $scope.style) {
+if ($scope.style[styles] == 'active') $scope.style[styles] = undefined;
+}
     $scope.style[val] = 'active';
    d3.selectAll("#el2 > *").remove();
    var width = 300,
@@ -314,7 +316,7 @@ var svg = d3.select('#el2')
      d3.xhr('api/getStats2/'+val)
     .get(function(error, data) {
       if (error) throw error;
-     var data = JSON.parse(data.response);
+      data = JSON.parse(data.response);
   data.forEach(function(d) {
     d.value = +d.value;
   });
