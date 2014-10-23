@@ -1669,7 +1669,17 @@ form.dropzone {
 .light {
     font-weight: 300;
 }
-
+  .pie > span {
+    color: #428bca;
+    cursor: pointer;
+  }
+  .pie > span:hover {
+    color: #2a6496;
+    text-decoration: underline;
+  }
+  .active {
+    text-decoration: underline;
+  }
 .statistic {
    margin: 10px 5px 15px 5px;
    text-align: center;
