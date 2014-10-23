@@ -13,6 +13,5 @@ define([
     './register',
     './stats',
     './datepicker',
-    './map-controller',
     './change-password'
 ], function () {});
