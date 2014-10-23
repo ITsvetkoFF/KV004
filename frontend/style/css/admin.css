@@ -225,6 +225,7 @@
 }
 .b-problem-deatiled-info-container{
     background:#f5f5f5;
+    text-align:center;
 }
 .b-problem-deatiled-info-severity{
     display:inline-block;
