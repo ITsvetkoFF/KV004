@@ -1717,4 +1717,65 @@ exports.getStats3 = function (req, res) {
 
         }
     });
-    };
+};
+exports.changePassword = function (req, res) {
+    req.getConnection(function(err, connection) {
+        if (err) {
+            res.statusCode = 503;
+            res.send({
+                err:    err.code
+            });
+            console.log('Can`t connect to db in register API call\n' + err +"\n");
+        } else {
+            
+            try{
+                var userData = {};
+                userData.userId = req.body.userId||'';
+                userData.old_password = req.body.old_password||'';
+                userData.old_password_hashed = crypto.createHmac("sha1", secret.secretToken).update(userData.old_password).digest("hex");
+                userData.new_password = req.body.new_password||'';
+                userData.new_password_second = req.body.new_password_second||'';
+                userData.new_password_hashed =  crypto.createHmac("sha1", secret.secretToken).update(userData.new_password).digest("hex");
+
+                if (userData.old_password === '' || userData.new_password === '' || userData.new_password_second === '') {
+                    return res.send(401);
+                }
+
+                connection.query("select Email, Password from Users where Id like ?", userData.userId, function(err, result) {
+                    if (err) {
+                        res.statusCode = 500;
+                        res.send({
+                            err: err.code
+                        });
+
+                    } else {
+                        
+                        if (result[0].Password == userData.old_password_hashed) {
+                            
+                            connection.query('UPDATE Users SET Password = ? WHERE Id = ?', [userData.new_password_hashed,userData.userId], function(err, rows) {
+                                if (err) {
+                                    res.statusCode = 500;
+                                    res.send({
+                                        err:    err.code
+                                    });
+                                }else{
+                                    res.statusCode = 200;
+                                    res.send({
+                                        result: 'success'
+                                    });
+                                    
+                                }
+                            });
+                        }
+                        else {
+                            return res.send(400);
+                        }
+                    }
+                });
+            }
+            catch(err){
+                console.log('Can`t execute change password API');
+            }
+        }
+    })
+};

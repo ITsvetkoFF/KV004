@@ -456,7 +456,7 @@ html, body {
     height: 200px;
     position: absolute;
     display: block;
-    top:291px;
+    top:305px;
     right: 17px;
     opacity: 0.1;
 
@@ -468,7 +468,7 @@ html, body {
     height: 200px;
     position: absolute;
     display: block;
-    top:291px;
+    top:305px;
     right: 17px;
 
 
@@ -1557,7 +1557,6 @@ form.dropzone {
 .editproblemtitle span,
 .editproblemcontent span,
 .editproblemproposal span{
-    cursor: pointer;
     white-space:pre-wrap;
 }
 .editproblemtitle  input,
