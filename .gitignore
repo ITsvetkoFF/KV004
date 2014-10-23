@@ -2,10 +2,12 @@
 photos/
 node_modules/
 bower_components/
-frontend/app/templates/maintemplate.js
 dist/
 tmp/
 .tmp/
 .idea/
+
+# Files #
 *.DS_Store
 *.log
+*/frontend/app/templates/maintemplate.js
