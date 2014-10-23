@@ -85,11 +85,13 @@ html, body {
     -moz-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
+    padding-bottom: 30px;
 
 }
 
 .b-container__right-side_problem  {
     right: 0;
+    padding-bottom: 30px;
 
 }
 
