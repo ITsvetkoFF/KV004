@@ -2,6 +2,9 @@
     <div class="b-editproblemctr" >
         <a href="" ng-click="swipeHide()" class="close">×</a>
     </div>
+    <div class="b-problem-deatiled-info__severity b-problem-notAdmin_{{!isAdministrator()}}"  ng-init="problem.Severity">
+    </div>
+
     <div class="b-problems" >
 <!-- Часть для вставки / начало -->
 
@@ -24,8 +27,10 @@
             <div class="b-problem-deatiled-info-container">
             <div class='b-problem-deatiled-info-severity'>
                 <span class="label b-label-overRating" ng-class="{'label-warning': value<3, 'label-info': value>=3 && value<4, 'label-success': value>=4}" ng-show="showStatus">{{severityMessage}}</span>
+                <div class="b-myclass">
                 <div class="b-problem-deatiled-info__severity b-problem-notAdmin_{{!isAdministrator()}}" ng-init="problem.Severity">
-                   <rating ng-model="problem.Severity" on-hover="showMessageOverRating(value)" on-leave="showStatus = false" readonly="isReadonly" state-on="'fa-star'" state-off="'fa-star-o'" ></rating>
+                   <rating ng-model="problem.Severity" on-hover="showMessageOverRating(value)" on-leave="resetRating(value)"  state-on="'fa-star'" state-off="'fa-star-o'" readonly="true"></rating>
+                </div>
                 </div>
             </div>
             
@@ -60,7 +65,7 @@
                     </div>
                     <div class="b-problem-deatiled-info-description__content b-problem-notAdmin_{{!isAdministrator()}}">
                         <label>Пропозиції щодо вирішення:</label><br>
-                        <editproblemproposal  value="problem.Proposal" ></editproblemproposal>
+                        <editproblemcontent  value="problem.Proposal" ></editproblemcontent>
                     </div>
                     <div class="b-problem-deatiled-info-description-photos">
 

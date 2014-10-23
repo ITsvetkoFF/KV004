@@ -1405,10 +1405,12 @@ exports.editProblem = function(req, res) {
                         Title : req.body.Title,
                         Content : req.body.Content,
                         Severity : req.body.Severity,
+                        Proposal : req.body.Proposal,
                         //ProblemTypes_Id : req.body.problemTypes_Id,
                         //Moderation : req.body.moderation,
                         Status : req.body.ProblemStatus
                     };
+                    console.log(data.Proposal);
                     var id = req.params.id;
                     //console.log("id="+id);
                     //console.log('data=' + data);

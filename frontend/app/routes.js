@@ -36,20 +36,13 @@ define(['./app'], function (app) {
               templateUrl:'app/templates/chat.html',
               controller:'SocketCtrl'
           })
-          .when('/problem/editProblem/:problemID', {
-              templateUrl: 'app/templates/showProblem.html',
-              controller: 'showProblemCtrl'
-          })
           .when('/stats',{
               templateUrl:'app/templates/statistic.html',
               controller:'statsCtrl'
           })
  
           .otherwise({
-            redirectTo: '/map',
- 
-             
-        
+            redirectTo: '/map'
         });
   }]);
 });

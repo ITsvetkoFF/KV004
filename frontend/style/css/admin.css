@@ -631,3 +631,7 @@
     width: 95%;
     font-weight: normal;
 }
+.b-myclass:hover{
+    background-color: yellow;
+    border: 2px #343443 solid;
+}

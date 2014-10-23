@@ -2,7 +2,7 @@ define(['./module'],function(services) {
     'use strict';
 
 
-    services.factory('adminToShowProblemService', function($http) {
+    services.factory('adminToShowProblemService', function($http, $modal, $rootScope) {
         var notApproved = undefined;
         var notApprovedProblemListQty = 0;
         var adminMode = false;
@@ -61,7 +61,7 @@ define(['./module'],function(services) {
                 window.location.href='#/problem/showProblem/'+problem.Id;
             },
 
-            getNotApprovedProblemListQty: function (){ //checkScopeNotApprovedProblemList
+            getNotApprovedProblemListQty: function (){
                 if (notApprovedProblemListQty != 0) {
                     return true;
                 }else {
@@ -82,6 +82,38 @@ define(['./module'],function(services) {
 
             redirectToMap: function(){
                 window.location.href='#/map';
+            },
+
+            showModalMessage: function(text, size,approveCaption, cancelCaption){
+                var modalWindowScope = $rootScope.$new(),
+                    modalInstance;
+
+                modalWindowScope.text = text;
+                modalWindowScope.approveCaption = approveCaption;
+                modalWindowScope.cancelCaption = cancelCaption;
+
+                modalWindowScope.ok = function () {
+                    modalInstance.close('ok');
+                };
+
+                modalWindowScope.cancel = function () {
+                    modalInstance.dismiss('cancel');
+                };
+
+                modalInstance = $modal.open({
+                    template: '<div class="modal-header">' +
+                        '<h3 class="modal-title">Увага</h3>' +
+                        '</div>' +
+                        '<div class="modal-body">{{ text }}</div>' +
+                        ' <div class="modal-footer">' +
+                        '<button class="btn btn-danger"  ng-click="ok()">{{approveCaption}}</button>' +
+                        '<button class="btn btn-warning" ng-click="cancel()">{{cancelCaption}}</button>' +
+                        '</div>',
+                    size: size,
+                    scope: modalWindowScope
+                });
+
+                return modalInstance.result;
             }
         }
     });

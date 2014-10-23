@@ -1,6 +1,6 @@
 define(['./module'], function(controllers){
     'use strict';
-    controllers.controller('showProblemCtrl',['$scope','$routeParams','$http','ipCookie','$rootScope','$modal','adminToShowProblemService','$window','UserService', function ($scope,$routeParams,$http,ipCookie,$rootScope,$modal,adminToShowProblemService,$window, UserService){
+    controllers.controller('showProblemCtrl',['$scope','$routeParams','$http','ipCookie','$rootScope','$modal','adminToShowProblemService','UserService', function ($scope,$routeParams,$http,ipCookie,$rootScope,$modal,adminToShowProblemService, UserService){
         $scope.isAdministrator = UserService.isAdministrator;
 
 
@@ -23,26 +23,23 @@ define(['./module'], function(controllers){
             $rootScope.$emit('get');
         }
         if(ipCookie('vote'+$routeParams.problemID)==true){
-          
+
           $scope.disableVoteButton=true;
       }else{
           $scope.disableVoteButton=false;
-      }  
+      }
         $scope.showDropField = false;
         $scope.showAddPhotoButton = true;
-        var userID ='';
-        var problemID = '';
-        var problem ='';
-        var activity = '';
-        var problemModerationStatus = '';
+        var userID;
+        var problemID;
+        var problem;
+        var activity;
+        var tempStatus;
+        var problemModerationStatus;
         var tempContent = '';
         //get problem info
-            var res=$http.get("api/problems/"+$routeParams.problemID);
-
-
-
-        res.success(function (data) {
-
+        var res=$http.get("api/problems/"+$routeParams.problemID).success(function (data) {
+            console.log('hi');
             problem = data[0][0];
             $scope.problem =  problem;
             activity = data[2][0];
@@ -60,7 +57,12 @@ define(['./module'], function(controllers){
             var tempUser = JSON.parse(activity.Content);
             $scope.problem.userName = tempUser.userName;
             $scope.problem.Proposal = problem.Proposal;
-
+            $scope.activities = data[2].reverse();
+            for(var i=0;i<$scope.activities.length;i++){
+                if($scope.activities[i].userId!=1) {
+                    $scope.activities[i].Content = JSON.parse($scope.activities[i].Content);
+                }
+            }
             $scope.$watch('checkedbox', function(newValue, oldValue) {
                 if(newValue != oldValue ) {
                     $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
@@ -85,32 +87,24 @@ define(['./module'], function(controllers){
             });
             $scope.$watch('problem.Content', function(newValue, oldValue) {
                 if(newValue != oldValue && UserService.getSaveChangeStatus() == true) {
-                    $scope.$parent.problem.Content = newValue;
+                    $scope.problem.Content = newValue;
                     UserService.setSaveChangeStatus(false);
-                    console.log('apply');
-                    $scope.$parent.editStatusClass =  adminToShowProblemService.getEditStatus(1);
+                    $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
                 }
             });
             $scope.$watch('problem.Proposal', function(newValue, oldValue) {
                 if(newValue != oldValue && UserService.getSaveChangeStatus() == true) {
-                    $scope.$parent.problem.Proposal = newValue;
+                    $scope.problem.Proposal = newValue;
                     UserService.setSaveChangeStatus(false);
-                    console.log('apply');
-                    $scope.$parent.editStatusClass =  adminToShowProblemService.getEditStatus(1);
+                    $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
                 }
             });
 
-            $scope.activities = data[2].reverse();
-            for(var i=0;i<$scope.activities.length;i++){
-                if($scope.activities[i].userId!=1) {
-                    $scope.activities[i].Content = JSON.parse($scope.activities[i].Content);
-                }
-            }
+        });
 
-        });
-        res.error(function(err){
-            throw err;
-        });
+
+
+
         //end get problem request info
 
 
@@ -125,8 +119,8 @@ define(['./module'], function(controllers){
                 thumbnailHeight:100,
                 acceptedFiles:'.jpg,.jpeg',
                // dictFileTooBig: "Файл великого розміру ({{filesize}}MB). Максимальний розмір файлу: {{maxFilesize}}MB.",
-     
-  
+
+
                 //dictInvalidFileType:"Невірний формат файлу. Допустимі формати : jpg,jpeg",
                 clickable:".previews,.dropFieldForShowProblem",
 
@@ -234,8 +228,9 @@ define(['./module'], function(controllers){
         };
 
         //show message over the Severity rating
-        $scope.$parent.isReadonly = $scope.isAdministrator()?false:true;
+        $rootScope.isReadonly = $scope.isAdministrator()?false:true;
         $scope.showStatus = false;
+
         var severityMessage = {
             1:'Локальна проблема (стосується будинку/двору)',
             2:'Середня проблема (стосується кількох будинків/дворів)',
@@ -243,16 +238,39 @@ define(['./module'], function(controllers){
             4:'Дуже велика проблема (охоплює область або велике місто / значно впливає на екологію)',
             5:'Всеукраїнська проблема (може вплинути на всю країну / глобальна проблема)'
         };
+
         $scope.showMessageOverRating = function(rate){
             $scope.severityMessage = severityMessage[rate];
             $scope.showStatus = true;
             $scope.value = rate;
         };
+        $scope.resetRating = function (rate){
+            $scope.showStatus = false;
+            $scope.value = problem.Severity;
+        }
 
         //if user did not submit changes
-        $rootScope.$on('$locationChangeStart', function(event) {
+        $scope.$on('$locationChangeStart', function(event) {
             if (!UserService.getSaveChangeStatus()) {
                 event.preventDefault();
+                var text = 'Будь ласка, підтвердіть зміни';
+                var approveCaption = 'Зберігти зміни';
+                var cancelCaption = 'Скасувати';
+                adminToShowProblemService.showModalMessage(text, 'sm', approveCaption, cancelCaption).then(
+                    function () {
+                        adminToShowProblemService.saveChangestoDbProblemDescription(problem, $scope.problem.Severity, $scope.problem.Content, $scope.problem.Proposal, $scope.problem.Title, $scope.checkedbox)
+                            .then(function () {
+                                adminToShowProblemService.showScopeNotApprovedProblemFromList(problem);
+                                $scope.editStatusClass = adminToShowProblemService.getEditStatus(3);
+                                UserService.setSaveChangeStatus(true);
+                            });
+
+                       // alert('good');
+
+                    },
+                    function () {
+                    }
+                )
             }
         });
 
@@ -280,73 +298,44 @@ define(['./module'], function(controllers){
             }
         }
 
+
+        //adminToShowProblemService.deleteNotApprovedProblemDB(problem);
+
         //delete problem from DB
         $scope.deleteProblemFromDb = function(){
-            $scope.open('sm') ;
-        };
-
         //modal window
-        $scope.open = function (size) {
-
-            var modalInstance = $modal.open({
-                template:'<div class="modal-header">'+
-                    '<h3 class="modal-title">Увага</h3>'+
-                    '</div>'+
-                    '<div class="modal-body">'+
-                    'Будь ласка, підтвердіть видалення проблеми'+
-                    '</div>' +
-                    ' <div class="modal-footer">'+
-                    '<button class="btn btn-primary" ng-click="ok()">OK</button>'+
-                    '<button class="btn btn-warning1" ng-click="cancel()">Cancel</button>'+
-                    '</div>',
-                controller: 'ModalInstanceCtrl',
-                size: size
-            });
-
-            modalInstance.result.then(
-                function () {
-                    if($scope.isAdministrator()){
-                        if(problemModerationStatus) {
-                            adminToShowProblemService.deleteNotApprovedProblemDB(problem).then(function() {
-                                window.location.href="#/map";
-                                $scope.swipeHide();
-                                $rootScope.getProblemsAndPlaceMarkers();
-                            })
-                        } else {
-                            if(UserService.getSaveChangeStatus()){
-                                $scope.notApproved = adminToShowProblemService.deleteNotApprovedProblemFromList(problem);
-                                adminToShowProblemService.deleteNotApprovedProblemDB(problem).then(function() {
-                                    if(adminToShowProblemService.getNotApprovedProblemListQty()){
-                                        adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
-                                    } else {
-
-                                        adminToShowProblemService.redirectToMap();//window.location.href='#/map';
-
-                                    }
+                var text = 'Будь ласка, підтвердіть видалення проблеми';
+                var approveCaption = 'Видалити проблему';
+                var cancelCaption = 'Скасувати';
+                adminToShowProblemService.showModalMessage(text, 'sm',approveCaption, cancelCaption).then(
+                    function () {
+                        if ($scope.isAdministrator()) {
+                            if (problemModerationStatus) {
+                                adminToShowProblemService.deleteNotApprovedProblemDB(problem).then(function () {
+                                    window.location.href = "#/map";
+                                    $scope.swipeHide();
+                                    $rootScope.getProblemsAndPlaceMarkers();
                                 })
+                            } else {
+                                if (UserService.getSaveChangeStatus()) {
+                                    $scope.notApproved = adminToShowProblemService.deleteNotApprovedProblemFromList(problem);
+                                    adminToShowProblemService.deleteNotApprovedProblemDB(problem).then(function () {
+                                        if (adminToShowProblemService.getNotApprovedProblemListQty()) {
+                                            adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
+                                        } else {
+                                            adminToShowProblemService.redirectToMap();
+
+                                        }
+                                    })
+                                }
                             }
                         }
+                    },
+                    function () {
+                        return true;
                     }
-                },
-                function(){
-                    return true;
-                }
-            );
+                );
         };
     }]);
-
-// Please note that $modalInstance represents a modal window (instance) dependency.
-// It is not the same as the $modal service used above.
-        controllers.controller('ModalInstanceCtrl', function ($scope,$rootScope, $modalInstance) {
-
-            $scope.ok = function () {
-                $modalInstance.close('ok');
-                $rootScope.$broadcast("Update","");
-            };
-
-            $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
-            };
-        });
 
 });
