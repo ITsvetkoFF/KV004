@@ -654,6 +654,12 @@ exports.postProblem = function(req,res){  //post new problem
                             if(req.body.description==undefined){
                                 req.body.description=[];
                             }
+                            if(!Array.isArray(req.body.description)){
+                                var temp=req.body.description;
+                                req.body.description=[];
+                                req.body.description.push(temp);
+
+                            }
                             while (req.files['file[' + i + ']'] != undefined) {
                                 var photo_data = {
                                     Link: req.files['file[' + i + ']'].name,
