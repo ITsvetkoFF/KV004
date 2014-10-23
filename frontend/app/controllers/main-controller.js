@@ -1,6 +1,6 @@
 define(['./module'],function(controllers){
     'use strict';
-    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http','UserService', '$location',function($scope,$rootScope,$modal, $log, $http,UserService,$location){
+    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http','UserService', 'adminToShowProblemService' '$location',function($scope,$rootScope,$modal, $log, $http,UserService, adminToShowProblemService, $location){
         $scope.showSlider=false;
         //TODO: rename everthing in code swipHide() to hideRight()
         $scope.swipeHideRight = function(){
@@ -34,9 +34,16 @@ define(['./module'],function(controllers){
                 $rootScope.data = data;
             });
             $scope.deleteResource = function(Id) {
-                $http.delete('/api/deleteResource/' + Id).success(function() {
+                var text = "";
+                var approveCaption = "";
+                var cancelCaption = "";
+                adminToShowProblemService.showModalMessage(text,"sm",approveCaption,cancelCaption).then(function() {
+                    $http.delete('/api/deleteResource/' + Id).success(function() {
                 $rootScope.getTitles();
                 })
+                },function() {
+                    return
+                });
             };
             $scope.editResource = function(Alias) {
                 window.location.href="#/editResource/"+ Alias;
@@ -83,7 +90,7 @@ define(['./module'],function(controllers){
             if (newValue != "/problem/addProblem") {
                 $rootScope.style = function () {
                     return { 
-                        'height': 100 + '%'
+                        'height': 'calc (100% - 52px);'
                     };
                 };
             };

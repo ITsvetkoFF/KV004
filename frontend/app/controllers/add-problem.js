@@ -24,13 +24,13 @@ define(['./module'],function (controllers){
             if (newValue > 1000) {
                 $rootScope.style = function () {
                     return { 
-                        'height': 100 + '%'
+                        'height': 'calc (100% - 52px);'
                     };
                 };
             } else {
                 $rootScope.style = function () {
                     return { 
-                        'height': 220 + 'px'
+                        'height': 'auto'
                     };
                 };
             }
@@ -42,20 +42,20 @@ define(['./module'],function (controllers){
                 if (newValue == "Точка") {
                     $rootScope.style = function () {
                         return { 
-                            'height': 220 + 'px'
+                            'height': 'auto'
                         };
                     };
                 } else {
                     $rootScope.style = function () {
                         return { 
-                            'height': 100 + '%'
+                            'height': 'calc (100% - 52px);'
                         };
                     };
                 }
             } else {
                 $rootScope.style = function () {
                     return { 
-                        'height': 100 + '%'
+                        'height': 'calc (100% - 52px);'
                     };
                 };
             }

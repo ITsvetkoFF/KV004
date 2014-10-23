@@ -85,13 +85,11 @@ html, body {
     -moz-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
-    padding-bottom: 30px;
 
 }
 
 .b-container__right-side_problem  {
     right: 0;
-    padding-bottom: 30px;
 
 }
 
@@ -111,7 +109,6 @@ html, body {
     height: calc(100% - 52px);
     height: -moz-calc(100% - 52px);
     overflow: auto;
-    padding-bottom: 30px;
 }
 
 .b-right-side {
@@ -1651,14 +1648,13 @@ form.dropzone {
     .resource ul {
         padding-left: 40px;
     }
-    .statistic > h1, h3 {
-      font-family: WWF;
-}
 .statistic > h1 {
-    font-size: 3em;    
+    font-size: 3em;
+    font-family: WWF;   
 }
 .statistic > h3 {
     font-size: 2em;
+    font-family: WWF;
 }
 .light {
     font-weight: 300;
@@ -1675,7 +1671,7 @@ form.dropzone {
     text-decoration: underline;
   }
 .statistic {
-   margin: 10px 5px 15px 5px;
+   margin: 10px 0px;
    text-align: center;
 }
 .statistic svg {

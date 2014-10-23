@@ -54,7 +54,7 @@ define(['./module'], function (controllers) {
 
         function statusChangeCallback(response) {
 
-            console.log(response);
+           // console.log(response);
 
             if (response.status === 'connected') {
                 FB.api('/me', function(response) {
@@ -81,8 +81,6 @@ define(['./module'], function (controllers) {
 
             } else if (response.status === 'not_authorized') {
                 document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
-            } else {
-                document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
             }
         }
 

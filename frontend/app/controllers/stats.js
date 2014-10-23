@@ -27,7 +27,7 @@ var color = ["#f00", "", "#00f"]
       d.start = new Date(d.start);
       d.class = "past";
     });
-var margin = {top: 20, right: 15, bottom: 15, left: 40}
+var margin = {top: 20, right: 0, bottom: 15, left: 40}
   , width = window.innerWidth - 100 - margin.left - margin.right
   , height = 500 - margin.top - margin.bottom
 
@@ -167,6 +167,7 @@ mini.append('g').selectAll('miniItems')
   .enter().append('path')
   .attr('stroke', function(d) { return "#000"; })
   .attr('d', function(d) { return d.path; })
+  .attr('opacity', function() { return  0.5; })
   .attr('stroke-width', function(d) { return 8; });
 
 // invisible hit area to move around the selection window
