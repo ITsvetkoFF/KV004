@@ -1,5 +1,6 @@
 var mysql = require('mysql'),
     express = require('express'),
+    compress = require('compression'),
     multer = require('multer'),
     jwt = require('jsonwebtoken'),
     crypto = require('crypto'),
@@ -134,7 +135,7 @@ var addComment = function(req,res) {
 };
 //////////////////
 
-    
+app.use(compress());    
 app.use(bodyParser());
 app.use(cookieParser());
 app.use(bodyParser());
