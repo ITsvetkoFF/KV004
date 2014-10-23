@@ -2,12 +2,13 @@
     <div class="b-activity__filters">
          <i ng-repeat="i in [1,2,3,4,5]" ng-style="myStyle" ng-click="filterActivity(i);myStyle={opacity:x}" class="fa {{icons[i]}} b-activity__comments-item-image" style="margin-left:5px;display: inline-block;float:left;font-size: 24px;margin:0;line-height: 30px"></i>
     </div>
-    <div class="b-activity__input">
+    <div ng-show="isLoggedIn()" class="b-activity__input">
         <div class="b-activity__input-field">
             <textarea  ng-model="commentContent" class="b-activity__input-field-area" rows="10" cols="90" placeholder="Тут можна залишити свій коментарій..."></textarea>
         </div>
         <button class="b-activity-comment__btn" ng-click="addComment(commentContent)">Додати</button>
     </div>
+    <div ng-show="!isLoggedIn()" style="margin-top: 15px;margin-bottom: 15px;"><a class="tn-join-us" style="cursor: pointer;" ng-click="showRegForm('')">Зареєструйтесь</a> щоб залишити коментар</div>
     <div class="b-activity__comments">
         <div class="b-activity__comments-item" ng-repeat="activity in activities" ng-show="checkpoint[activity.ActivityTypes_Id]">
             <i class="fa {{icons[activity.ActivityTypes_Id]}} b-activity__comments-item-image" style="margin-left:5px;margin:0;padding:1px;display: inline-block;float:left;font-size: 24px;margin:0;line-height: 40px"></i>

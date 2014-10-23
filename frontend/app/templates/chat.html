@@ -1,5 +1,6 @@
 <div  class='b-chat__container'>
 <a ng-href="#/map" ng-click="swipeHide()" class="close">×</a>
+
      <div class="b-chat__currentNews">
          <h3 style="text-align: center">Новини що відображаються зараз на сайті: </h3>
          <ul class="b-chat__newsItem" ng-repeat="news in messageLogs">
@@ -8,11 +9,16 @@
          </ul>
      </div>
     <form role='form' novalidate name='form'>
-      <div style='width: 100%;cursor: pointer; height: 400px; font-size:20px ' class="chatField"  ng-model='messageLog'>{{messageLog}}</div>-->
+       <!-- <input type="text" ng-model="userId" name="userId" style="display:none">
+        <input type="text" ng-model="id" name="problemId" style="display:none">
+        <div style='width: 100%;cursor: pointer; height: 400px; font-size:20px ' class="chatField"  ng-model='messageLog'>{{messageLog}}</div>-->
         <div class='form-group'>
             <span class="b-chat-comment__title">Додати повідомлення</span>
             <textarea class="b-chat-comment__field" ng-model="message"  placeholder="Напишіть тут текст повідомлення..."></textarea>
-            <input type="button" class="b-chat-comment__btn" ng-enable='form.$valid' ng-click="sendMessage(message)" value="Додати"/>
+
+            <input type="button" class="b-chat-comment__btn"
+                   ng-enable='form.$valid'
+                   ng-click="sendMessage(message)" value="Додати"/>
         </div>
     </form>
 </div>
