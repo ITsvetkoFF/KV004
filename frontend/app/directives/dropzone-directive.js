@@ -9,6 +9,26 @@ define(['./module','dropzone'], function(directives,Dropzone){
             var submitButton = document.querySelector("#btn-submit");
             var sizeOfAllPhotos = 0;
             var myDropzone = drop;
+            myDropzone.filesize = function(size) {
+                var string;
+                if (size >= 1024 * 1024 * 1024 * 1024 / 10) {
+                    size = size / (1024 * 1024 * 1024 * 1024 / 10);
+                    string = "ТБ";
+                } else if (size >= 1024 * 1024 * 1024 / 10) {
+                    size = size / (1024 * 1024 * 1024 / 10);
+                    string = "ГБ";
+                } else if (size >= 1024 * 1024 / 10) {
+                    size = size / (1024 * 1024 / 10);
+                    string = "MБ";
+                } else if (size >= 1024 / 10) {
+                    size = size / (1024 / 10);
+                    string = "KБ";
+                } else {
+                    size = size * 10;
+                    string = "байт";
+                }
+                return "<strong>" + (Math.round(size) / 10) + "</strong> " + string;
+            };
             var counter = 0;
             submitButton.addEventListener("click", function() {
 
