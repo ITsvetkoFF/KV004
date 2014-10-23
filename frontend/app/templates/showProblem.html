@@ -2,11 +2,8 @@
     <div class="b-editproblemctr" >
         <a href="" ng-click="swipeHide()" class="close">×</a>
     </div>
-    <div class="b-problem-deatiled-info__severity b-problem-notAdmin_{{!isAdministrator()}}"  ng-init="problem.Severity">
-    </div>
-
     <div class="b-problems" >
-<!-- Часть для вставки / начало -->
+        <!-- Часть для вставки / начало -->
 
         <div class="b-problem-deatiled-info-title">
             <img ng-src="images/markers/{{problem.ProblemTypes_Id}}.png" class="b-problem-deatiled-info-title__icon">
@@ -25,15 +22,13 @@
         </div>
         <div class="b-problem-deatiled-info-general">
             <div class="b-problem-deatiled-info-container">
-            <div class='b-problem-deatiled-info-severity'>
-                <span class="label b-label-overRating" ng-class="{'label-warning': value<3, 'label-info': value>=3 && value<4, 'label-success': value>=4}" ng-show="showStatus">{{severityMessage}}</span>
-                <div class="b-myclass">
-                <div class="b-problem-deatiled-info__severity b-problem-notAdmin_{{!isAdministrator()}}" ng-init="problem.Severity">
-                   <rating ng-model="problem.Severity" on-hover="showMessageOverRating(value)" on-leave="resetRating(value)"  state-on="'fa-star'" state-off="'fa-star-o'" readonly="true"></rating>
+                <div class='b-problem-deatiled-info-severity'>
+                    <span class="label b-label-overRating" ng-class="{'label-warning': value<3, 'label-info': value>=3 && value<4, 'label-success': value>=4}" ng-show="showStatus">{{severityMessage}}</span>
+                    <div class="b-problem-deatiled-info__severity b-problem-notAdmin_{{!isAdministrator()}}" ng-init="problem.Severity">
+                        <rating ng-model="problem.Severity" on-hover="showMessageOverRating(value)" on-leave="showStatus = false" readonly="isReadonly" state-on="'fa-star'" state-off="'fa-star-o'" ></rating>
+                    </div>
                 </div>
-                </div>
-            </div>
-            
+
                 <div class="b-problem-deatiled-info-status__text" >
                     <div class="onoffswitch">
                         <input type="checkbox"   name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="checkedbox"   ng-checked="checkedbox" ng-disabled="!isAdministrator()" >
@@ -72,15 +67,15 @@
                         <div class="show_photo" ng-repeat="photo in photos">
                             <img ng-click="showSliderFunc()" ng-src="photos/large/{{photo.Link}}" class="b-details-body-problem-photo"/>
 
-                             <i class="fa fa-check show_photo_label_{{photo.Status}}"></i>
+                            <i class="fa fa-check show_photo_label_{{photo.Status}}"></i>
                         </div>
 
                         <div class="dropFieldForShowProblem"><div ng-if="isLoggedIn()" class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div></div>
                         <div ng-if="!isLoggedIn()" style="margin-top: 10px;"><a class="tn-join-us" style="cursor: pointer;" ng-click="showRegForm('')">Зареєструйтесь</a> щоб додати фото</div>
 
                         <form id="addPhotoDropzone" class="dropzone b-add-problem-form" name="upload_photo" drop="dropzoneConfig" ng-show="showDropField">
-                        <input type="text" style="display: none" ng-model="userId" name="userIsd"/>
-                        <input type="text" style="display: none" ng-model="name" name="userName"/>
+                            <input type="text" style="display: none" ng-model="userId" name="userIsd"/>
+                            <input type="text" style="display: none" ng-model="name" name="userName"/>
                             <div class="previews previews_show" >
                                 <p>
                                     <span class="b-conteiner__drop-title-1"><strong>+ Перемістить сюди фото або натисніть </strong></span>
@@ -89,7 +84,7 @@
                             </div>
                             <div style="font-size: 0.8em;">Ще можна додати <b>{{fileCountLeft}}</b> фото, загальним розміром <b>{{fileSizeLeft}} МБ</b></div>
                             <div class="b-details-body__status">
-                            <label style="cursor: pointer"><input style="cursor: pointer;margin-top: 2px;" type="checkbox" name="solveProblemMark" > Проблема вже вирішена?</label>
+                                <label style="cursor: pointer"><input style="cursor: pointer;margin-top: 2px;" type="checkbox" name="solveProblemMark" > Проблема вже вирішена?</label>
 
                             </div>
                             <input id="btn-submit" type="button" class="b-add-problem-button btn-forward-step-3 b-public" value="Додати">
@@ -99,7 +94,7 @@
                 </div>
             </tab>
             <tab heading="Коментарі користувачів" class="b-problem-notAdmin_false">
-                 <activity></activity>
+                <activity></activity>
             </tab>
         </tabset>
         <div class="b-commandButtons-group">
