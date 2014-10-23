@@ -4,13 +4,28 @@ var jwt          = require('jsonwebtoken'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
     secret = require('./config/secret'),
-    mcapi = require('mailchimp-api');
+    mcapi = require('mailchimp-api'),
+    mandrill = require('mandrill-api/mandrill'),
+    generatePassword = require('password-generator');
 
     mc = new mcapi.Mailchimp('23740bea44a8cfd98fb228dd5691e2b5-us9');
+    var mandrill_client = new mandrill.Mandrill('e3gxPVdlFAJZGnYdhBhzuw');
 
     var mailchimpListID, segments = {};
 
-    mc.lists.list(function(data) {
+    //server's call about who is connected through mandrill
+    mandrill_client.users.info({}, function(result) {
+        console.log('Mandrill account connected to user: '+result.username);
+
+    }, function(e) {
+        // Mandrill returns the error as an object with name and message keys
+        console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+        // A mandrill error occurred: Invalid_Key - Invalid API key
+    });
+
+
+
+    mc.lists.list({filters:{list_name: 'All list'}}, function(data) {
         mailchimpListID = data.data[0].id;
     
         
@@ -103,8 +118,7 @@ var jwt          = require('jsonwebtoken'),
 
         //look for all existing segments in the list
         mc.lists.segments({id:mailchimpListID}, function(data){
-            console.log(data.static);
-            console.log(segments);
+            
             for(var i=0;i<data.static.length;i++){
                 switch(data.static[i].name){
                     case 'Forest problems':
@@ -132,7 +146,6 @@ var jwt          = require('jsonwebtoken'),
                         break;
                 }
             }
-        console.log(segments);
         });
     });
 
@@ -1782,4 +1795,89 @@ exports.changePassword = function (req, res) {
             }
         }
     })
+};
+
+exports.resetPassword = function (req, res) {
+    console.log('reset password called');
+    req.getConnection(function (err, connection) {
+        if (err) {
+            res.statusCode = 503;
+            res.send({
+                err: err.code
+            });
+            console.log('Can`t connect to db in reset password API call\n' + err + "\n");
+        }
+        else {
+            try {
+                var userData = {};
+                userData.email = req.body.email || '';
+                userData.surname = req.body.surname || '';
+
+
+                connection.query("select Surname from Users where Email like ?", userData.email, function (err, result) {
+                    if (err) {
+                        res.statusCode = 500;
+                        res.send({
+                            err: err.code
+                        });
+
+                    } else {
+
+                        if (result[0] && (result[0].Surname == userData.surname)) {
+                            userData.newPassword = generatePassword(6);
+
+                            userData.newPasswordHashed = crypto.createHmac("sha1", secret.secretToken).update(userData.newPassword).digest("hex");
+
+                            var message = {
+                                "html": "<p>Ваш новий пароль </p>" + userData.newPassword + "<br><p>При наступному вході на сайт, наполегливо радимо змінити пароль через відповідну функцію!</p>",
+                                "subject": "Ваш новий пароль на сайті ecomap.org",
+                                "from_email": "robot@ecomap.org",
+                                "from_name": "Поштовий робот ecomap.org",
+                                "to": [{
+                                    "email": userData.email,
+                                    "type": "to"
+                                }]
+                            };
+                            var async = true;
+                            
+                            mandrill_client.messages.send({"message": message, "async": async}, function(result) {
+                                console.log(result);
+
+                            }, function(e) {
+                                // Mandrill returns the error as an object with name and message keys
+                                console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+                                // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+                            });
+
+                            connection.query('UPDATE Users SET Password = ? WHERE Email = ?', [userData.newPasswordHashed, userData.email], function (err, rows) {
+                                if (err) {
+                                    res.statusCode = 500;
+                                    res.send({
+                                        err: err.code
+                                    });
+                                }
+                                else {
+                                    res.statusCode = 200;
+                                    res.send({
+                                        result: 'success'
+                                    });
+                                }
+                            });
+
+                            console.log(result);
+                            console.log('your new password is ' + userData.newPassword);
+                        }
+                        else {
+                            return res.send(400);
+                        }
+
+
+                    }
+                });
+            }
+            catch (err) {
+                console.log('Can`t execute change password API');
+            }
+        }
+    });
 };

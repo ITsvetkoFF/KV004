@@ -190,5 +190,25 @@ define(['./module'], function (controllers) {
                 $log.info('Modal dismissed at: ' + new Date());
             });
         }
+
+        $scope.resetPassword = function() {
+            console.log('reset password called');
+            var modalInstance = $modal.open({
+                templateUrl: 'app/templates/resetPassword.html',
+                controller: 'resetPasswordCtrl',
+                size: 'sm',
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
     }]);
 });
