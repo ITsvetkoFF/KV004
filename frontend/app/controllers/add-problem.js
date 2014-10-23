@@ -2,11 +2,12 @@ define(['./module'],function (controllers){
     'use strict';
     controllers.controller('addProblemCtrl', function ($scope,$rootScope,$window){
         $scope.tabs = [
-            {heading: "Координати", icon: "fa fa-map-marker", content: "app/templates/addMarker.html", active: true},
+            {heading: "Точка", icon: "fa fa-map-marker", content: "app/templates/addMarker.html", active: true},
             {heading: "Опис", icon: "fa fa-info-circle", content: "app/templates/addInfo.html", active: false},
             {heading: "Фото", icon: "fa fa-file-photo-o", content: "app/templates/addPhotos.html", active: false}
         ]
-
+        $scope.fileSizeLeft = 20;
+        $scope.fileCountLeft = 10;
         $scope.active = function() {
             return $scope.tabs.filter(function(tab){
                 return tab.active;
@@ -23,13 +24,13 @@ define(['./module'],function (controllers){
             if (newValue > 1000) {
                 $rootScope.style = function () {
                     return { 
-                        'height': 100 + '%'
+                        'height': 'calc (100% - 52px);'
                     };
                 };
             } else {
                 $rootScope.style = function () {
                     return { 
-                        'height': 220 + 'px'
+                        'height': 'auto'
                     };
                 };
             }
@@ -38,23 +39,23 @@ define(['./module'],function (controllers){
         $scope.$watch($scope.active, function (newValue, oldValue) {
             width = $scope.getWindowDimensions();
             if (width <= 1000) {
-                if (newValue == "Координати") {
+                if (newValue == "Точка") {
                     $rootScope.style = function () {
                         return { 
-                            'height': 220 + 'px'
+                            'height': 'auto'
                         };
                     };
                 } else {
                     $rootScope.style = function () {
                         return { 
-                            'height': 100 + '%'
+                            'height': 'calc (100% - 52px);'
                         };
                     };
                 }
             } else {
                 $rootScope.style = function () {
                     return { 
-                        'height': 100 + '%'
+                        'height': 'calc (100% - 52px);'
                     };
                 };
             }

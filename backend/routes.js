@@ -906,11 +906,13 @@ exports.postVote = function(req,res){  //+1 vote for a problem
                             });
                             console.error('Can`t make query for activityData= '+ activityData +'\n' + err +"\n");
                         }
-                    });
-                    res.send({
+                        else {
+                            res.send({
                         json:   rows,
                         length: rows.length,
                         fields:fields
+                    });
+                        }
                     });
                     console.log("end postVote API function");
                 });

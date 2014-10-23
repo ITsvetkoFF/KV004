@@ -32,6 +32,7 @@ define(['./module'], function (controllers) {
             UserService.logIn(data.email, data.password).success(function (userData) {
                 $scope.successLogIn(userData);
                 $scope.getUserProblems($scope.userId);
+                $window.location.href="/";
             }).error(function (status, data) {
                 console.log(status);
                 console.log(data);
@@ -53,7 +54,7 @@ define(['./module'], function (controllers) {
 
         function statusChangeCallback(response) {
 
-            console.log(response);
+           // console.log(response);
 
             if (response.status === 'connected') {
                 FB.api('/me', function(response) {
@@ -80,8 +81,6 @@ define(['./module'], function (controllers) {
 
             } else if (response.status === 'not_authorized') {
                 document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
-            } else {
-                document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
             }
         }
 

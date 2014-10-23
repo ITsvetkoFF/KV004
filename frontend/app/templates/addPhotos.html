@@ -2,6 +2,8 @@
     <div class="previews">
     	<span><strong>Клікніть</strong> або перенесіть фото, щоб завантажити</span>
     </div>
+    <div style="font-size: 0.8em;">Ще можна додати <b>{{fileCountLeft}}</b> фото, загальним розміром <b>{{fileSizeLeft}} МБ</b></div>
+
     <button id="btn-submit" class="btn btn-success btn-sm" ng-disabled="requiredData()">Опублікувати</button>
     <input type="hidden" name="title" ng-value="problemData.title">
     <input type="hidden" name="content" ng-value="problemData.content">

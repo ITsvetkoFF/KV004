@@ -456,7 +456,7 @@ html, body {
     height: 200px;
     position: absolute;
     display: block;
-    top:291px;
+    top:305px;
     right: 17px;
     opacity: 0.1;
 
@@ -468,7 +468,7 @@ html, body {
     height: 200px;
     position: absolute;
     display: block;
-    top:291px;
+    top:305px;
     right: 17px;
 
 
@@ -1200,6 +1200,16 @@ input[type=button]:disabled, button:disabled {
     padding: 10px 0;
 }
 
+@media (max-width: 1000px) {
+    .b-addProblem .markerHeader {
+        padding-bottom: 0;
+    }
+}
+
+.b-addProblem button {
+    margin-bottom: 10px;
+}
+
 .b-addProblem .form-group .help-block {
     float: right;
     font-size: 12px;
@@ -1227,7 +1237,8 @@ input[type=button]:disabled, button:disabled {
     color: #333;
 }
 
-.b-add-problem .nav-tabs li:hover {
+.b-addProblem .nav-tabs li:hover,
+.b-addProblem .nav-tabs a:hover {
     cursor: pointer;
 }
 
@@ -1238,6 +1249,12 @@ input[type=button]:disabled, button:disabled {
 .b-addProblem .nav-tabs > li > a {
     border-radius: 0;
     -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.b-addProblem select {
+    text-indent: 0.01px;
+    text-overflow: '';
 }
 
 /* DROPZONE STYLES */
@@ -1641,28 +1658,30 @@ form.dropzone {
     .resource ul {
         padding-left: 40px;
     }
-    .statistic > h3, h2, ul {
-  margin: 30px auto;
+.statistic > h1 {
+    font-size: 3em;
+    font-family: WWF;   
 }
-.statistic h1, h2, h3 {
-    font-family: WWF;
-    line-height: 1em;
-    }
-.statistic h1 {
-    font-size: 3em;    
-}
-.statistic h2 {
-    font-size: 2.5em;
-}
-.statistic h3 {
+.statistic > h3 {
     font-size: 2em;
+    font-family: WWF;
 }
 .light {
     font-weight: 300;
 }
-
+  .pie > span {
+    color: #428bca;
+    cursor: pointer;
+  }
+  .pie > span:hover {
+    color: #2a6496;
+    text-decoration: underline;
+  }
+  .currentPeriod {
+    text-decoration: underline;
+  }
 .statistic {
-   margin: 10px 5px 15px 5px;
+   margin: 10px 0px;
    text-align: center;
 }
 .statistic svg {

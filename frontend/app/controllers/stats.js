@@ -27,7 +27,7 @@ var color = ["#f00", "", "#00f"]
       d.start = new Date(d.start);
       d.class = "past";
     });
-var margin = {top: 20, right: 15, bottom: 15, left: 40}
+var margin = {top: 20, right: 0, bottom: 15, left: 40}
   , width = window.innerWidth - 100 - margin.left - margin.right
   , height = 500 - margin.top - margin.bottom
 
@@ -167,6 +167,7 @@ mini.append('g').selectAll('miniItems')
   .enter().append('path')
   .attr('stroke', function(d) { return "#000"; })
   .attr('d', function(d) { return d.path; })
+  .attr('opacity', function() { return  0.5; })
   .attr('stroke-width', function(d) { return 8; });
 
 // invisible hit area to move around the selection window
@@ -290,8 +291,10 @@ function getPaths(items) {
 };
 
   $scope.pie = function(val){
-    $scope.style = {};
-    $scope.style[val] = 'active';
+    for (var styles in $scope.style) {
+if ($scope.style[styles] == 'currentPeriod') $scope.style[styles] = undefined;
+}
+    $scope.style[val] = 'currentPeriod';
    d3.selectAll("#el2 > *").remove();
    var width = 300,
     height = 300,
@@ -314,7 +317,7 @@ var svg = d3.select('#el2')
      d3.xhr('api/getStats2/'+val)
     .get(function(error, data) {
       if (error) throw error;
-     var data = JSON.parse(data.response);
+      data = JSON.parse(data.response);
   data.forEach(function(d) {
     d.value = +d.value;
   });

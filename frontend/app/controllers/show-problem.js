@@ -1,6 +1,6 @@
 define(['./module'], function(controllers){
     'use strict';
-    controllers.controller('showProblemCtrl',['$scope','$routeParams','$http','ipCookie','$rootScope','$modal','adminToShowProblemService','UserService', function ($scope,$routeParams,$http,ipCookie,$rootScope,$modal,adminToShowProblemService, UserService){
+    controllers.controller('showProblemCtrl',['$scope','$routeParams','$http','ipCookie','$rootScope','$modal','adminToShowProblemService','$window','UserService', function ($scope,$routeParams,$http,ipCookie,$rootScope,$modal,adminToShowProblemService,$window, UserService){
         $scope.isAdministrator = UserService.isAdministrator;
 
 
@@ -23,11 +23,11 @@ define(['./module'], function(controllers){
             $rootScope.$emit('get');
         }
         if(ipCookie('vote'+$routeParams.problemID)==true){
-
+          
           $scope.disableVoteButton=true;
       }else{
           $scope.disableVoteButton=false;
-      }
+      }  
         $scope.showDropField = false;
         $scope.showAddPhotoButton = true;
         var userID;
@@ -39,7 +39,6 @@ define(['./module'], function(controllers){
         var tempContent = '';
         //get problem info
         var res=$http.get("api/problems/"+$routeParams.problemID).success(function (data) {
-            console.log('hi');
             problem = data[0][0];
             $scope.problem =  problem;
             activity = data[2][0];
@@ -57,6 +56,7 @@ define(['./module'], function(controllers){
             var tempUser = JSON.parse(activity.Content);
             $scope.problem.userName = tempUser.userName;
             $scope.problem.Proposal = problem.Proposal;
+            
             $scope.activities = data[2].reverse();
             for(var i=0;i<$scope.activities.length;i++){
                 if($scope.activities[i].userId!=1) {
@@ -161,46 +161,8 @@ define(['./module'], function(controllers){
             window.location.href="#/problem/showProblem/"+$routeParams.problemID;
         };
 
-        $scope.addComment = function(comment) {
-            if(comment==""|| comment == undefined){
-                alert("Неможливо відправити пусте повідомлення");
-                return;
-            }
-            var data = {data: {userId: $scope.userId, userName: $scope.name, Content: comment}};
-            var responce = $http.post('/api/comment/' + $routeParams.problemID, JSON.stringify(data));
-            responce.success(function (data, status, headers, config) {
-                $scope.activities = data[0].reverse();
-                for(var i=0;i<$scope.activities.length;i++){
-                    if($scope.activities[i].userId!=1) {
-                        $scope.activities[i].Content = JSON.parse($scope.activities[i].Content);
-                    }
-                }
+       
 
-                $scope.commentContent="";
-
-
-            });
-            responce.error(function (data, status, headers, config) {
-                throw error;
-            });
-
-        };
-        $scope.deleteComment = function(id) {
-            var responce = $http.delete('/api/activity/' + id);
-            responce.success(function (data, status, headers, config) {
-                for(var i=0;i<$scope.activities.length;i++){
-                    if($scope.activities[i].Id==id) {
-                        $scope.activities.splice(i,1);
-                    }
-                }
-
-                $scope.commentContent="";
-            });
-            responce.error(function (data, status, headers, config) {
-                throw error;
-            });
-
-        };
         $scope.icons=[];
         $scope.icons[1]="fa-map-marker";
         $scope.icons[2]="fa-pencil";
@@ -297,9 +259,6 @@ define(['./module'], function(controllers){
                 })
             }
         }
-
-
-        //adminToShowProblemService.deleteNotApprovedProblemDB(problem);
 
         //delete problem from DB
         $scope.deleteProblemFromDb = function(){

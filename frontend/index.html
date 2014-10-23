@@ -3,19 +3,19 @@
 <head>
     <title>Ecomap - Project</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <!-- build:css  style/css/main.css -->
-    <link rel="stylesheet" href="style/css/bootstrap.css"/>
+    <link rel="stylesheet" href="style/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css"> 
     <link rel="stylesheet" type="text/css" href="bower_components/angular-carousel/dist/angular-carousel.css">
-    <link rel="stylesheet" href="style/css/dropzone.css" />
-    <link rel="stylesheet" href="style/css/admin.css" />
-    <link rel="stylesheet" href="style/css/MarkerCluster.css"/>
-    <link rel="stylesheet" href="style/css/MarkerCluster.Default.css"/>
+    <link rel="stylesheet" href="style/css/dropzone.css">
+    <link rel="stylesheet" href="style/css/admin.css">
+    <link rel="stylesheet" href="style/css/MarkerCluster.css">
+    <link rel="stylesheet" href="style/css/MarkerCluster.Default.css">
    <!--<script type="text/javascript" src="/bower_components/dropzone.js"></script>-->
-    <link rel="stylesheet" href="style/css/header.css"/>
-    <link rel="stylesheet" href="style/css/main.css" />
-    <link rel="stylesheet" href="style/css/leaflet.css" />
+    <link rel="stylesheet" href="style/css/header.css">
+    <link rel="stylesheet" href="style/css/main.css">
+    <link rel="stylesheet" href="style/css/leaflet.css">
     <!-- endbuild -->
     <link rel="icon" type="image/icon" href="images/icons/favicon.ico">
     <!-- build:js  app/leaflet.js -->
@@ -48,12 +48,11 @@
             </div>
 
 <div class=" b-view b-container__right-side b-view b-container__right-side{{showRigthSide}}" ng-swipe-right="swipeHideRight()" ng-style="style()">
-    <div style="transition-duration: 0.1s !important;" ng-view ng-style="style()">
+    <div style="transition-duration: 0.1s !important;" ng-view>
     </div>
 </div>
         </div>
     </div>
     <script src="bower_components/requirejs/require.js" data-main="app/main.js"></script>
-
 </body>
 </html>

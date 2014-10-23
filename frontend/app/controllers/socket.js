@@ -8,13 +8,12 @@ define(['./module'],function(controllers){
         $rootScope.$broadcast('Update',"_problem");
         $rootScope.$emit('showSlider','false');
         $scope.deleteItem="clear";
-
+        $scope.placeHolder = "Напишіть тут текст повідомлення...";
+        $scope.message="";
         $scope.currentItemNews=-1;
         $scope.messageLogHide="_hide";
         $scope.nickName = $scope.name;
         var i = 0;
-
-
         $scope.messageLogs = [];
         var responce = $http.post('/api/getNews',{});
         responce.success(function(data,status,headers,config){
@@ -33,24 +32,30 @@ define(['./module'],function(controllers){
 
 
         $scope.sendMessage = function(message) {
+            console.log(message);
 
-            $log.debug('sending message', message);
-            chatSocket.emit('message', ipCookie('token'), message);
-            if(isNaN(message)) {
+            console.log($scope.message);
+            if($scope.message==""&& message<0||  message==$scope.message&& !isNaN(message)|| $scope.message==undefined && message<0) {
+                alert("Повідомлення не може состояти ліше із ціфр або бути пустим!");
+                $scope.placeHolder = "Напишіть тут текст повідомлення...";
 
-                var responce = $http.post('/api/postNews', {news: message});
-                responce.success(function (data, status, headers, config) {
-
-
-                });
-                responce.error(function (data, status, headers, config) {
-                    throw error;
-                });
             }
+            else{
+                $log.debug('sending message', message);
+                chatSocket.emit('message', ipCookie('token'), message);
+                if (isNaN(message)) {
+
+                    var responce = $http.post('/api/postNews', {news: message});
+                    responce.success(function (data, status, headers, config) {
 
 
-
-            $scope.message = '';
+                    });
+                    responce.error(function (data, status, headers, config) {
+                        throw error;
+                    });
+                }
+                $scope.message = '';
+            }
         };
 
         $scope.$on('socket:broadcast', function(event, data) {
@@ -81,11 +86,11 @@ define(['./module'],function(controllers){
 
                         $scope.messageLogs = [];
                         var responce = $http.post('/api/clearNews', {});
-                        responce.success(function (data, status, headers, config) {
+                            responce.success(function (data, status, headers, config) {
 
 
                         });
-                        responce.error(function (data, status, headers, config) {
+                            responce.error(function (data, status, headers, config) {
                             throw error;
                         });
 
@@ -98,15 +103,7 @@ define(['./module'],function(controllers){
 
                     }
                 }
-
-
-
             });
         });
     });
-
-    ///////////
-
-
-
 });
