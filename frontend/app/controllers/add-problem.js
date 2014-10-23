@@ -2,7 +2,7 @@ define(['./module'],function (controllers){
     'use strict';
     controllers.controller('addProblemCtrl', function ($scope,$rootScope,$window){
         $scope.tabs = [
-            {heading: "Координати", icon: "fa fa-map-marker", content: "app/templates/addMarker.html", active: true},
+            {heading: "Точка", icon: "fa fa-map-marker", content: "app/templates/addMarker.html", active: true},
             {heading: "Опис", icon: "fa fa-info-circle", content: "app/templates/addInfo.html", active: false},
             {heading: "Фото", icon: "fa fa-file-photo-o", content: "app/templates/addPhotos.html", active: false}
         ]
