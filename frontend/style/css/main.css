@@ -1227,7 +1227,8 @@ input[type=button]:disabled, button:disabled {
     color: #333;
 }
 
-.b-add-problem .nav-tabs li:hover {
+.b-addProblem .nav-tabs li:hover,
+.b-addProblem .nav-tabs a:hover {
     cursor: pointer;
 }
 
@@ -1238,6 +1239,12 @@ input[type=button]:disabled, button:disabled {
 .b-addProblem .nav-tabs > li > a {
     border-radius: 0;
     -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.b-addProblem select {
+    text-indent: 0.01px;
+    text-overflow: '';
 }
 
 /* DROPZONE STYLES */

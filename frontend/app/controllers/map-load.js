@@ -1,6 +1,6 @@
 define(['./module'], function (controllers) {
     'use strict';
-    controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location','todayTime', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location, todayTime) {
+    controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location','todayTime', '$timeout', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location, todayTime, $timeout) {
         $scope.isAdministrator = UserService.isAdministrator;
                 $rootScope.$broadcast('Update',"");
 
@@ -24,6 +24,7 @@ define(['./module'], function (controllers) {
             maxBounds: L.latLngBounds( L.latLng(43, 19), L.latLng(53, 46) ),
             layers:[tiles, geoJson] //disabling geoJson because of blocking ukraine-zone on the map
         });
+        $timeout(map.invalidateSize.bind(map),200);
         $rootScope.geoJson = geoJson; //forwarding geoJson object to $rooTscope
         var markers = L.markerClusterGroup();
         $scope.data = {};

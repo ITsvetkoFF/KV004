@@ -1,6 +1,6 @@
 define(['./module'],function(controllers){
     'use strict';
-    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http','UserService' ,function($scope,$rootScope,$modal, $log, $http,UserService){
+    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http','UserService', '$location',function($scope,$rootScope,$modal, $log, $http,UserService,$location){
         $scope.showSlider=false;
         //TODO: rename everthing in code swipHide() to hideRight()
         $scope.swipeHideRight = function(){
@@ -74,6 +74,20 @@ define(['./module'],function(controllers){
             });
         };
         $scope.showRegForm = $scope.open;
+
+        $scope.$location = function () {
+            return $location.path();
+        }
+
+        $scope.$watch($scope.$location, function (newValue, oldValue){
+            if (newValue != "/problem/addProblem") {
+                $rootScope.style = function () {
+                    return { 
+                        'height': 100 + '%'
+                    };
+                };
+            };
+        });
 
     }]);
 });

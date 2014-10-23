@@ -32,6 +32,7 @@ define(['./module'], function (controllers) {
             UserService.logIn(data.email, data.password).success(function (userData) {
                 $scope.successLogIn(userData);
                 $scope.getUserProblems($scope.userId);
+                $window.location.href="/";
             }).error(function (status, data) {
                 console.log(status);
                 console.log(data);

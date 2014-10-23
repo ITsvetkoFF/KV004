@@ -16,7 +16,8 @@ define([
     './notApproved-directive',
     './slider-directive',
     './closeBut',
-    './editProblemProposal'
+    './editProblemProposal',
+    './goClick'
 
 
 ], function () {});
