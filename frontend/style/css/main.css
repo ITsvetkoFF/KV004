@@ -1200,6 +1200,16 @@ input[type=button]:disabled, button:disabled {
     padding: 10px 0;
 }
 
+@media (max-width: 1000px) {
+    .b-addProblem .markerHeader {
+        padding-bottom: 0;
+    }
+}
+
+.b-addProblem button {
+    margin-bottom: 10px;
+}
+
 .b-addProblem .form-group .help-block {
     float: right;
     font-size: 12px;
