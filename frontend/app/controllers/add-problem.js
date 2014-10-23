@@ -39,7 +39,7 @@ define(['./module'],function (controllers){
         $scope.$watch($scope.active, function (newValue, oldValue) {
             width = $scope.getWindowDimensions();
             if (width <= 1000) {
-                if (newValue == "Координати") {
+                if (newValue == "Точка") {
                     $rootScope.style = function () {
                         return { 
                             'height': 220 + 'px'
