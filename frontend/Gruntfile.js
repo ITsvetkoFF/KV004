@@ -18,13 +18,7 @@ grunt.initConfig({
                         'images/**/*',
                         'style/fonts/*',
                     ]
-                },
-                {
-                    expand: true,
-                    cwd: '.',
-                    dest: 'dist',
-                    src: ['bower_components/requirejs/*.js','bower_components/requirejs-domready/*.js']
-                }]
+                }],
         },
         leaflet: {
             src: '.tmp/concat/app/leaflet.js',
@@ -46,6 +40,20 @@ grunt.initConfig({
                     
     },
     
+    uglify: {
+    	options: {
+        	mangle: false
+    },
+        requirejs: {
+        	files: [{
+	            expand: true,
+	            cwd: '.',
+	            dest: 'dist',
+	            src: ['bower_components/requirejs/*.js','bower_components/requirejs-domready/*.js']
+	        }]
+        }
+   },
+   
    useminPrepare: {
 	      html: 'index.html',
 	      options: {
@@ -206,9 +214,9 @@ grunt.initConfig({
     grunt.registerTask('default', [
                       'bower',
                       'html2js',
-                      //'copy:templates',
                       'copy:html',
                       'copy:dist',
+                      'uglify:requirejs',
                       'useminPrepare',
                       'concat:generated',
                       'cssmin:generated',
@@ -225,6 +233,7 @@ grunt.initConfig({
                       'html2js',
                       'copy:html',
                       'copy:dist',
+                      'uglify:requirejs',
                       'useminPrepare',
                       'concat:generated',
                       'cssmin:generated',
