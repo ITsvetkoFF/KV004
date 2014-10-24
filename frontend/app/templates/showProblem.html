@@ -21,14 +21,16 @@
             </div>
         </div>
         <div class="b-problem-deatiled-info-general">
+            <div class=" b-label-overRating" ng-class="{'label-default': value<2,'label-info':value>=2&&value<3, 'label-warning': value>=3 && value<4, 'label-danger': value>=4}" ng-show="showStatus">{{severityMessage}}</div>
             <div class="b-problem-deatiled-info-container">
+
                 <div class='b-problem-deatiled-info-severity'>
-                    <span class="label b-label-overRating" ng-class="{'label-warning': value<3, 'label-info': value>=3 && value<4, 'label-success': value>=4}" ng-show="showStatus">{{severityMessage}}</span>
-                    <div class="b-problem-deatiled-info__severity b-problem-notAdmin_{{!isAdministrator()}}" ng-init="problem.Severity">
-                        <rating ng-model="problem.Severity" on-hover="showMessageOverRating(value)" on-leave="showStatus = false" readonly="isReadonly" state-on="'fa-star'" state-off="'fa-star-o'" ></rating>
+
+                    <div  ng-class="{'b-hide-stars':!isAdministrator()}"> </div>
+                    <div class="b-problem-deatiled-info__severity b-problem-notAdmin_{{!isAdministrator()}}" ng-init="problem.Severity"><rating ng-model="problem.Severity" on-hover="showMessageOverRating(value)" on-leave="showStatus = false" readonly="isReadonly" state-on="'fa-star'" state-off="'fa-star-o'" ></rating>
                     </div>
                 </div>
-
+                <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
                 <div class="b-problem-deatiled-info-status__text" >
                     <div class="onoffswitch">
                         <input type="checkbox"   name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="checkedbox"   ng-checked="checkedbox" ng-disabled="!isAdministrator()" >
@@ -39,11 +41,12 @@
                     </div>
                 </div>
                 <div class="b-problem-deatiled-info-votes">
-                    <!--<img class='b-problem-deatiled-info__votes' src='images/icons/heart.jpg'> -->
-                    <button class="simple_like_img" ng-click="addOneVote()" ng-disabled="disableVoteButton">
-                        <span ><i class="fa fa-fw"></i></span>
+                    <button class="simple_like_img"  ng-init="myvalue = false" ng-mousemove="myvalue= true" ng-mouseleave="myvalue= false" ng-click="addOneVote()" ng-disabled="disableVoteButton">
+                        <div class="b-hintVote" ng-class="{' label-success': myvalue}" ng-hide="!myvalue||disableVoteButton" >Голосувати</div>
+                        <span ><i class="fa fa-fw" ng-class="{'simple_like_img-disable':disableVoteButton}"></i></span>
                     </button>
                     {{problem.Votes}}
+
                 </div>
             </div>
 
@@ -98,9 +101,9 @@
             </tab>
         </tabset>
         <div class="b-commandButtons-group">
-            <button type="button" class="btn btn-sm {{editStatusClass}}" ng-show="isAdministrator()" ng-click="saveChangestoDb(problem.Title,problem.Severity, problem.Status, problem.Content,problem.Proposal)" >Збережіть зміни</button>
-            <button type="button" class="btn {{addStatus}} btn-sm" ng-show="isAdministrator()"ng-click="addProblemToDB()" >Додати проблему до бази</button>
-            <button type="button" class="btn {{delStatus}} btn-sm" ng-show="isAdministrator()" ng-click="deleteProblemFromDb()" >Видалити проблему з бази</button>
+            <button type="button" class="btn btn-sm {{editStatusClass}}"  ng-click="saveChangestoDb(problem.Title,problem.Severity, problem.Status, problem.Content,problem.Proposal)" >Збережіть зміни</button>
+            <button type="button" class="btn {{addStatus}} btn-sm" ng-click="addProblemToDB()" >Додати проблему до бази</button>
+            <button type="button" class="btn {{delStatus}} btn-sm"  ng-click="deleteProblemFromDb()" >Видалити проблему з бази</button>
         </div>
 
 

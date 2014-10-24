@@ -80,8 +80,8 @@ define(['./module'],function(services) {
                  return $http.put('/api/editProblem/' + problem.Id, {Title: title, Content: content,Proposal:proposal, Severity: severity, ProblemStatus: problemDecided})
              },
 
-            redirectToMap: function(){
-                window.location.href='#/map';
+           redirectToMap: function(location){
+                window.location.href=location;
             },
 
             showModalMessage: function(text, size,approveCaption, cancelCaption){
@@ -106,8 +106,8 @@ define(['./module'],function(services) {
                         '</div>' +
                         '<div class="modal-body">{{ text }}</div>' +
                         ' <div class="modal-footer">' +
-                        '<button class="btn btn-danger"  ng-click="ok()">{{approveCaption}}</button>' +
-                        '<button class="btn btn-warning" ng-click="cancel()">{{cancelCaption}}</button>' +
+                        '<button class="btn btn-warning"  ng-click="ok()">{{approveCaption}} </button>' +
+                        '<button class="btn btn-danger" ng-click="cancel()">{{cancelCaption}}</button>' +
                         '</div>',
                     size: size,
                     scope: modalWindowScope
