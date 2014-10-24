@@ -24,7 +24,7 @@ define(['./module'],function(controllers){
             }
         };
 
-        $scope.$on('$routeChangeStart', function(next, current) { 
+        $scope.$on('$routeChangeStart', function(event, next) { 
             if ($rootScope.tempMarker)
                 $rootScope.geoJson.removeLayer($rootScope.tempMarker);
         });
