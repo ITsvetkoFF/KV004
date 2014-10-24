@@ -29,8 +29,9 @@ define(['./module'],function (controllers) {
                     if (adminToShowProblemService.getNotApprovedProblemListQty()) {
                         adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
                     } else {
-                        adminToShowProblemService.redirectToMap();
                         $scope.swipeHide();
+                        adminToShowProblemService.redirectToMap('#/map');
+                        
                     }
                 })
             }
@@ -43,8 +44,9 @@ define(['./module'],function (controllers) {
                     if (adminToShowProblemService.getNotApprovedProblemListQty()) {
                         adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
                     } else {
-                        adminToShowProblemService.redirectToMap();
-                        $scope.swipeHide();
+                         $scope.swipeHide();
+                        adminToShowProblemService.redirectToMap('#/map');
+                       
                     }
                 })
             }
