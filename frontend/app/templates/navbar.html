@@ -33,7 +33,7 @@
             <li ng-repeat="title in data" ng-if="title.IsResource">
               <a id="link" href="#/resources/{{title.Alias}}">{{title.Title}}</a>
               <i class="fa fa-pencil" ng-if="isAdministrator()" ng-click="editResource(title.Alias)"></i>
-              <i class="fa fa-trash" ng-if="isAdministrator()" ng-click="deleteResource(title.Id)"></i>
+              <i class="fa fa-trash" ng-if="isAdministrator()" ng-click="deleteResource(title.Id,title.Title)"></i>
             </li>
             <li ng-if="isAdministrator()">
                 <a href="#/addResource" class="b-menu__button"><i class="fa fa-plus"></i>  Додати новий ресурс</a>

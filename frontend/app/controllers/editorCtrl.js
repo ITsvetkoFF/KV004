@@ -20,9 +20,20 @@ define(['./module'], function (controllers) {
             $http.put('api/editResource/' + Id, {Alias: Alias, Content: Content, Title: Title, IsResource : IsResource}).success(function() {
             $rootScope.getTitles();
             $location.path('resources/' + Alias);
-           }).error(function(status, data) {
-            consoe.log(data);
-            console.log(status);
+           }).error(function(data, status) {
+                switch (data.err) {
+                    case "ER_BAD_NULL_ERROR":
+                    $scope.errorMsq = "Заповніть всі поля!";
+                    break;
+                    case "ER_DUP_ENTRY":
+                    $scope.errorMsq = "Вже існує ресурс з таким заголовком або alias!";
+                    break;
+                    default:
+                    $scope.errorMsq = "Перевірте правильність заповнення усіх полів!";
+                }
+                if (data == "Unauthorized") $scope.errorMsq = "У вас немає прав на додавання ресурсів!";
+                    console.log(data)
+                    console.log(status)
                 });
        }
        else {

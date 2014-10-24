@@ -33,10 +33,13 @@ define(['./module'],function(controllers){
             $http({ method: 'GET', url: 'api/getTitles' }).success(function (data) {
                 $rootScope.data = data;
             });
-            $scope.deleteResource = function(Id) {
-                $http.delete('/api/deleteResource/' + Id).success(function() {
-                $rootScope.getTitles();
-                })
+            $scope.deleteResource = function(Id,Title) {
+                var conf = confirm("Ви впевнені, що хочете видалити ресурс?\n" + Title);
+                if (conf == true) {
+                    $http.delete('/api/deleteResource/' + Id).success(function() {
+                     $rootScope.getTitles();
+                    });
+                }
             };
             $scope.editResource = function(Alias) {
                 window.location.href="#/editResource/"+ Alias;
