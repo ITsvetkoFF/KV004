@@ -166,30 +166,24 @@ html, body {
     font-size: 16px;
 }
 
-.simple_like_img:hover:after {
+.b-hintVote{
     position: absolute;
-    top: 32px;
-    right: 0;
-    content: 'Голосувати!';
-    background: #CFCFCF;
+    top: -25px;
+    right: 0px;
     font-size: 12px;
-    font-family: 'Arial';
-    text-transform: none;
-    padding: 5px;
-    z-index: 2;
-    border: 1px solid #AFAFAF;
-}
-.simple_like_img:disabled{
-    background-color: #fff;
-    1background: url("../../images/icons/like_icon_hover.png") no-repeat center center;
-
+    padding: 3px 10px;
+    color: #ffffff;
 }
 
-.simple_like_img:hover {
-    cursor: pointer;
-    1background: url("../../images/icons/like_icon_hover.png") no-repeat center center;
-    background-size: cover;
-    border: 0;
+
+.simple_like_img :hover {
+cursor: pointer;
+background-size: cover;
+border: 0;
+}
+.simple_like_img-disable{
+    1background: #f5f5f5;
+    cursor: default;
 }
 .b-problems__rightPanel {
     min-width: 350px;
@@ -748,23 +742,16 @@ td.b-details-body__title[colspan] {
     background:#f5f5f5;
 }
 
-.simple_like_img:hover:after {
-    position: absolute;
-    top: 40px;
-    right: 10px;
-    content: 'Голосувати!';
-    background: #CFCFCF;
-    text-transform: none;
-    1padding: 5px;
-    z-index: 2;
-    border: 1px solid #AFAFAF;
-}
 
-.simple_like_img:hover {
-    cursor: pointer;
-    1background: url("../../images/icons/like_icon_hover.png") no-repeat center center;
-    background-size: cover;
-    border: 0;
+.simple_like_img {
+    display: inline-block;
+    margin: 0 5px;
+    border:0;
+    background:#f5f5f5 !important;
+}
+.simple_like_img-disable{
+    background: #f5f5f5 !important;
+    cursor: default !important;
 }
 
 .b-details__likes-count {
@@ -1574,7 +1561,9 @@ form.dropzone {
 .editproblemproposal span{
     display: none;
 }
-.editproblemtitle.active span,
+.editproblemtitle.active span{
+    display: none;
+}
 .editproblemcontent.active span,
 .editproblemproposal span{
     display: none;
@@ -1583,8 +1572,13 @@ form.dropzone {
 
 .editproblemtitle.active input {
     display: inline-block;
-    margin: 0px 0px 0px 0px;
-    width: 520px;
+    width: 90%;
+    position: absolute;
+    top:10px;
+    margin: 0;
+    padding: 0;
+    font-family: WWF;
+    font-size: 1.1em;
 }
 .editproblemcontent.active textarea,
 .editproblemproposal.active textarea{
