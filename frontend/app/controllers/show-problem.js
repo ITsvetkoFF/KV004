@@ -212,7 +212,7 @@ define(['./module'], function(controllers){
         }
 
         //if user did not submit changes
-        $scope.$on('$locationChangeStart', function(event) {
+        $scope.$on('$locationChangeStart', function(event,next) {
             if (!UserService.getSaveChangeStatus()) {
                 event.preventDefault();
                 var text = 'Будь ласка, підтвердіть зміни';
@@ -225,10 +225,8 @@ define(['./module'], function(controllers){
                                 adminToShowProblemService.showScopeNotApprovedProblemFromList(problem);
                                 $scope.editStatusClass = adminToShowProblemService.getEditStatus(3);
                                 UserService.setSaveChangeStatus(true);
+                                adminToShowProblemService.redirectToMap(next);
                             });
-
-                       // alert('good');
-
                     },
                     function () {
                     }
@@ -254,7 +252,8 @@ define(['./module'], function(controllers){
                     if(adminToShowProblemService.getNotApprovedProblemListQty()){
                         adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
                     } else {
-                        adminToShowProblemService.redirectToMap();
+                        adminToShowProblemService.redirectToMap('#/map');
+                        $scope.swipeHide();
                     }
                 })
             }
@@ -282,7 +281,8 @@ define(['./module'], function(controllers){
                                         if (adminToShowProblemService.getNotApprovedProblemListQty()) {
                                             adminToShowProblemService.showScopeNotApprovedProblemFromList($scope.notApproved[0]);
                                         } else {
-                                            adminToShowProblemService.redirectToMap();
+                                            adminToShowProblemService.redirectToMap('#/map');
+                                            $scope.swipeHide();
 
                                         }
                                     })
