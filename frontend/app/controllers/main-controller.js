@@ -34,7 +34,7 @@ define(['./module'],function(controllers){
                 $rootScope.data = data;
             });
             $scope.deleteResource = function(Id,Title) {
-                var conf = confirm("Ви впевнені, що хочете видалити ресурс?\n" + Title);
+                var conf = confirm("Ви впевнені, що хочете видалити ресурс\n" + '"' + Title + '" ?');
                 if (conf == true) {
                     $http.delete('/api/deleteResource/' + Id).success(function() {
                      $rootScope.getTitles();

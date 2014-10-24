@@ -39,6 +39,10 @@ define(['./module'], function(controllers){
         var tempContent = '';
         //get problem info
         var res=$http.get("api/problems/"+$routeParams.problemID).success(function (data) {
+            if(data.error) {
+                $rootScope.$broadcast('Update',"_hide");
+                window.location.href="#/map";
+            } else {
             var problem = data[0][0];
             $scope.problem =  problem;
             activity = data[2][0];
@@ -99,7 +103,7 @@ define(['./module'], function(controllers){
                     $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
                 }
             });
-
+        }
         });
 
 
