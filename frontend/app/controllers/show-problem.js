@@ -32,7 +32,7 @@ define(['./module'], function(controllers){
         $scope.showAddPhotoButton = true;
         var userID;
         var problemID;
-        //var problem;
+        var problem;
         var activity;
         var tempStatus;
         var problemModerationStatus;
@@ -43,7 +43,7 @@ define(['./module'], function(controllers){
                 $rootScope.$broadcast('Update',"_hide");
                 window.location.href="#/map";
             } else {
-            var problem = data[0][0];
+            problem = data[0][0];
             $scope.problem =  problem;
             activity = data[2][0];
             userID =activity.Users_Id;
