@@ -44,6 +44,7 @@ div.navbar-collapse.collapse.in {
     background-color: #23527B;
     margin-left: 120px;
     border: none;
+    outline: none;
 }
 
 @media (max-width: 768px) {
