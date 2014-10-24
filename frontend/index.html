@@ -44,7 +44,9 @@
 
             <div class="b-container__left-side" ng-class = "{left_filter_show : showFiltersVar}" ng-swipe-left="showFilters()">
                 <div class="b-left-side" problem-filters></div>
-                <div class="b-left-side__pointer" ng-click="showFilters()" ng-class = "{left_pointer_reverse : showFiltersVar}"></div>
+                <div class="b-left-side__pointer" ng-click="showFilters()" ng-class = "{left_pointer_reverse : showFiltersVar}">
+                    <p>Фільтрація</p>
+                </div>
             </div>
 
 <div class=" b-view b-container__right-side b-view b-container__right-side{{showRigthSide}}" ng-swipe-right="swipeHideRight()" ng-style="style()">
