@@ -1741,6 +1741,57 @@ exports.getStats3 = function (req, res) {
         }
     });
 };
+exports.getStats4 = function (req, res) {
+    console.log('start getStats3 API function');
+     req.getConnection(function(err, connection) {
+        if (err) {
+            res.statusCode = 503;
+            res.send({
+                err:    err.code
+            });
+            console.log('Can`t connect to db in getStats4 API call\n' + err +"\n");
+        } else {
+            try{
+                connection.query('SELECT Id, Title, Votes FROM Problems ORDER BY Votes DESC LIMIT 10;', function(err, rows1) {
+                    if (err) {
+                        res.statusCode = 500;
+                        res.send({
+                            err:    err.code
+                        });
+                        console.log('Can`t make query for getStats3 first SELECT\n' + err +"\n");
+                    } else{
+                        connection.query('SELECT Id, Title, Severity FROM Problems ORDER BY Severity DESC LIMIT 10;', function(err, rows2) {
+                            if (err) {
+                                res.statusCode = 500;
+                                res.send({
+                                    err:    err.code
+                                });
+                                console.log('Can`t make query for getStats4 second SELECT\n' + err +"\n");
+                            } else {
+                                connection.query('SELECT DISTINCT Activities.Problems_Id as Id, Problems.Title, count(*) as value FROM Activities LEFT JOIN Problems ON Problems.Id = Activities.Problems_Id WHERE ActivityTypes_Id = 5 GROUP BY Activities.Problems_Id ORDER BY value DESC LIMIT 10;', function(err, rows3, fields) {
+                                    if (err) {
+                                        res.statusCode = 500;
+                                        res.send({
+                                            err:    err.code
+                                        });
+                                        console.log('Can`t make query for getStats4 third SELECT\n' + err +"\n");
+                                    } else {
+                                        res.send([rows1,rows2,rows3]);
+                                        console.log('end getStats4 API function');
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+            catch(err){
+                console.log('Can`t execute getStats4 API');
+            }
+
+        }
+    });
+};
 exports.changePassword = function (req, res) {
     req.getConnection(function(err, connection) {
         if (err) {

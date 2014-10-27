@@ -2,6 +2,15 @@ define(['./module'],function(controllers){
     'use strict';
     controllers.controller('statsCtrl',['$scope','$rootScope','$http', function($scope, $rootScope, $http){
        $rootScope.$broadcast('Update', '_full');
+       $http.get('/api/getStats4').success(function(data) {
+            $scope.mostPopular = data[0];
+            $scope.mostImportant = data[1];
+            $scope.mostComment = data[2];
+            console.log($scope.mostPopular);
+            console.log($scope.mostImportant);
+            console.log($scope.mostComment);
+
+            });
        $http.get('/api/getStats3').success(function(data) {
             $scope.votes = data[0][0].votes;
             $scope.problems = data[0][0].problems;
