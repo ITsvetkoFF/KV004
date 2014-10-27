@@ -198,6 +198,7 @@ app.post('/api/clearOneNews',routes.clearOneNews);
 app.get('/api/getStats1', routes.getStats1);
 app.get('/api/getStats2/:val', routes.getStats2);
 app.get('/api/getStats3', routes.getStats3);
+app.get('/api/getStats4', routes.getStats4);
 
 
 

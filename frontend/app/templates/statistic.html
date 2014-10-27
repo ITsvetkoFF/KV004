@@ -1,3 +1,12 @@
+<style type="text/css">
+  .topProblems {
+  height: 600px;
+  }
+  .topItem {
+    float: left;
+    width: 32%;
+  }
+</style>
 <close-button></close-button>
 <div class="statistic">
 <h1>Статистика за весь час</h1>
@@ -7,6 +16,17 @@
   <li><span>{{comments}}</span><br>Коментарів</li>
   <li><span>{{photos}}</span><br>Фотографій</li>
 </ul>
+<div class="topProblems">
+        <ol class="topItem">
+          <li ng-repeat="popular in mostPopular"><a href="/#/problem/showProblem/{{popular.Id}}">{{popular.Title}}</a></li>
+        </ol>
+        <ol class="topItem">
+          <li ng-repeat="important in mostImportant"><a href="/#/problem/showProblem/{{important.Id}}">{{important.Title}}</a></li>
+        </ol>
+        <ol class="topItem">
+          <li ng-repeat="comment in mostComment"><a href="/#/problem/showProblem/{{comment.Id}}">{{comment.Title}}</a></li>
+        </ol>
+</div>
     <h3 class="light">Кількість доданих проблем за останній</h3>
     <div class="pie">    
         <span ng-class="style.D" ng-click="pie('D')">День</span> | 
@@ -15,6 +35,7 @@
         <span ng-class="style.Y" ng-click="pie('Y')">Рік</span> | 
         <span ng-class="style.A" ng-click="pie('A')">За весь час</span><br>
         <svg id="el2" ng-init="pie('A')"></svg>
+        
     </div>
   
     
