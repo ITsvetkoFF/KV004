@@ -11,3 +11,5 @@ tmp/
 *.DS_Store
 *.log
 frontend/app/templates/maintemplate.js
+frontend/app/templates/adminPage.html
+frontend/index_admin.html
