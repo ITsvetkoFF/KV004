@@ -8,7 +8,6 @@ define(['./module'],function(controllers){
         $rootScope.$broadcast('Update',"_problem");
         $rootScope.$emit('showSlider','false');
         $scope.deleteItem="clear";
-        $scope.placeHolder = "Напишіть тут текст повідомлення...";
         $scope.message="";
         $scope.currentItemNews=-1;
         $scope.messageLogHide="_hide";

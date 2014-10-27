@@ -8,10 +8,6 @@ define(['./app'], function (app) {
     'use strict';
     return app.config(['$routeProvider', function ($routeProvider) {
       $routeProvider
-          .when('/adminPage', {
-              templateUrl: 'app/templates/adminPage.html',
-              controller: 'showAdminPageCtrl'
-          })
           .when('/problem/showProblem/:problemID', {
               templateUrl: 'app/templates/showProblem.html',
               controller: 'showProblemCtrl'

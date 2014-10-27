@@ -1,10 +1,6 @@
 <div class="b-right-side__show-problem">
-    <div class="b-editproblemctr" >
-        <a href="" ng-click="swipeHide()" class="close">×</a>
-    </div>
+    <a href="" ng-click="swipeHide()" class="close">×</a>
     <div class="b-problems" >
-        <!-- Часть для вставки / начало -->
-
         <div class="b-problem-deatiled-info-title">
             <img ng-src="images/markers/{{problem.ProblemTypes_Id}}.png" class="b-problem-deatiled-info-title__icon">
             <div  class="b-problem-deatiled-info-title__text b-problem-notAdmin_{{!isAdministrator()}}">
@@ -96,7 +92,7 @@
                     </div>
                 </div>
             </tab>
-            <tab heading="Коментарі користувачів" class="b-problem-notAdmin_false">
+            <tab heading="Коментарі" class="b-problem-notAdmin_false">
                 <activity></activity>
             </tab>
         </tabset>

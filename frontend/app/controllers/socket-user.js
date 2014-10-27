@@ -89,20 +89,17 @@ define(['./module'],function(controllers){
 
                             //$scope.messageLogHide = "";
                             var repeat = function () {
-                                console.log(i);
                                 for (var j = 0; j < $scope.messageLogs.length; j++) {
                                     if ($scope.messageLogs[j]) {
                                         $scope.messageLogs[j].show = "none";
                                     }
                                 }
-                                console.log($scope.messageLogs);
                                 if ($scope.messageLogs[i]) {
                                     $scope.messageLogs[i].show = "block";
 
                                     i++;
                                     if (i >= $scope.messageLogs.length) {
                                         i = 0;
-                                        console.log("reverse");
                                     }
                                 }
 
@@ -112,10 +109,8 @@ define(['./module'],function(controllers){
 
                         }else if($scope.messageLogs.length<1){
                             $scope.messageChat = [];
-                            console.log("dkjfksjdfksjfksdjkj");
                             var timeOfComment = data.payload.date.substring(0,10)+" "+data.payload.date.substring(11,19);
                             $scope.messageChat.push({problemID:data.payload.id,userName:data.payload.user,Content:data.payload.Content,date:timeOfComment});
-                            console.log($scope.messageChat);
                             $scope.trigger = false;
                             $scope.interval = $interval(repeat, 5000);
 
