@@ -1,12 +1,3 @@
-<style type="text/css">
-  .topProblems {
-  height: 600px;
-  }
-  .topItem {
-    float: left;
-    width: 32%;
-  }
-</style>
 <close-button></close-button>
 <div class="statistic">
 <h1>Статистика за весь час</h1>
@@ -17,15 +8,21 @@
   <li><span>{{photos}}</span><br>Фотографій</li>
 </ul>
 <div class="topProblems">
+      <div> <h4>Топ найбільш популярних проблем</h4>
         <ol class="topItem">
           <li ng-repeat="popular in mostPopular"><a href="/#/problem/showProblem/{{popular.Id}}">{{popular.Title}}</a></li>
         </ol>
+        </div>
+        <div> <h4>Топ найбільш важливих проблем</h4>
         <ol class="topItem">
           <li ng-repeat="important in mostImportant"><a href="/#/problem/showProblem/{{important.Id}}">{{important.Title}}</a></li>
         </ol>
+        </div>
+        <div> <h4>Топ найбільш обговорюваних проблем</h4>
         <ol class="topItem">
           <li ng-repeat="comment in mostComment"><a href="/#/problem/showProblem/{{comment.Id}}">{{comment.Title}}</a></li>
         </ol>
+        </div>
 </div>
     <h3 class="light">Кількість доданих проблем за останній</h3>
     <div class="pie">    

@@ -1247,6 +1247,30 @@ form.dropzone {
 .statistic svg {
     font-size: 0.6em;
 }
+  .topProblems {
+  display: inline-block;
+  margin-top: 10px;
+  }
+  .topProblems > div {
+  display: inline-block;
+  width: 32%;
+  float: left;
+  }
+  .topProblems > div > h4 {
+    font-size: 1.5em;
+    font-family: WWF;
+  text-align: left;
+  display: inline-block;
+  }
+  .topItem {
+    display: inline-block;
+  }
+  .topItem > li {
+    font-family: sans-serif;
+    line-height: 17px;
+    font-size: 0.7em;
+    text-align: left;
+  }
 .main text {
     font: 12px sans-serif;
 }
