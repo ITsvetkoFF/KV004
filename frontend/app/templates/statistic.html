@@ -1,36 +1,36 @@
 <close-button></close-button>
 <div class="statistic">
-<h1>Статистика за весь час</h1>
-<ul>
+<div class="topProblems">
+      <div class="col-md-4"> <h2>ТОП 10 найбільш популярних проблем</h2><br>
+        <ol class="topItem">
+          <a ng-repeat="popular in mostPopular" ng-href="/#/problem/showProblem/{{popular.Id}}"><li>{{popular.Title}}<p><i class="fa fa-fw"></i>{{popular.Votes}}</p></li></a>
+        </ol>
+        </div>
+        <div class="col-md-4"> <h2>ТОП 10 найбільш важливих проблем</h2><br>
+        <ol class="topItem">
+          <a ng-repeat="important in mostImportant" ng-href="/#/problem/showProblem/{{important.Id}}"><li>{{important.Title}}<p><i class="fa fa-star"><span class="sr-only">(*)</span></i> {{important.Severity}}</p></li></a>
+        </ol>
+        </div>
+        <div class="col-md-4"> <h2>ТОП 10 найбільш обговорюваних проблем</h2><br>
+        <ol class="topItem">
+          <a ng-repeat="comment in mostComment" ng-href="/#/problem/showProblem/{{comment.Id}}"><li>{{comment.Title}}<p><i class="fa fa-pencil"></i> {{comment.value}}</p></li></a>
+        </ol>
+        </div>
+</div>
+<h2>Статистика за весь час</h2>
+<ul class="mainStats">
   <li><span>{{problems}}</span><br>Проблем</li>
   <li><span>{{votes}}</span><br>Голосів</li>
   <li><span>{{comments}}</span><br>Коментарів</li>
   <li><span>{{photos}}</span><br>Фотографій</li>
 </ul>
-<div class="topProblems">
-      <div> <h4>Топ найбільш популярних проблем</h4>
-        <ol class="topItem">
-          <li ng-repeat="popular in mostPopular"><a href="/#/problem/showProblem/{{popular.Id}}">{{popular.Title}}</a></li>
-        </ol>
-        </div>
-        <div> <h4>Топ найбільш важливих проблем</h4>
-        <ol class="topItem">
-          <li ng-repeat="important in mostImportant"><a href="/#/problem/showProblem/{{important.Id}}">{{important.Title}}</a></li>
-        </ol>
-        </div>
-        <div> <h4>Топ найбільш обговорюваних проблем</h4>
-        <ol class="topItem">
-          <li ng-repeat="comment in mostComment"><a href="/#/problem/showProblem/{{comment.Id}}">{{comment.Title}}</a></li>
-        </ol>
-        </div>
-</div>
-    <h3 class="light">Кількість доданих проблем за останній</h3>
+    <h2 class="light">Кількість доданих проблем за останній <span class="periodItem" ng-class="style.D" ng-click="pie('D')">день</span> | 
+        <span class="periodItem" ng-class="style.W" ng-click="pie('W')">тиждень</span>  |
+        <span class="periodItem" ng-class="style.M" ng-click="pie('M')">місяць</span>  |
+        <span class="periodItem" ng-class="style.Y" ng-click="pie('Y')">рік</span><br>
+        <span class="periodItem" ng-class="style.A" ng-click="pie('A')">за весь час</span><br>
+        </h2>
     <div class="pie">    
-        <span ng-class="style.D" ng-click="pie('D')">День</span> | 
-        <span ng-class="style.W" ng-click="pie('W')">Тиждень</span> | 
-        <span ng-class="style.M" ng-click="pie('M')">Місяць</span> | 
-        <span ng-class="style.Y" ng-click="pie('Y')">Рік</span> | 
-        <span ng-class="style.A" ng-click="pie('A')">За весь час</span><br>
         <svg id="el2" ng-init="pie('A')"></svg>
         
     </div>
@@ -41,7 +41,7 @@
   <svg width="12" height="12"><rect width="12" height="12" style="fill:{{color[$index]}}"/></svg> - {{types.name}}
    </li>
 </ul>
-<h3>Хронологія публікацій та голосів</h3>
+<h2>Хронологія публікацій та голосів</h2>
 <ul class="legend">
   <li><svg width="5" height="15"><rect width="5" height="15" style="fill:#f00; opacity: 0.5"/></svg> - Додано проблему</li>
   <li><svg width="5" height="15"><rect width="5" height="15" style="fill:#00f; opacity: 0.5"/></svg> - Додано голос</li>

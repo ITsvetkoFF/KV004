@@ -7,9 +7,6 @@ define(['./module'],function(controllers){
                $scope.mostPopular = data[0];
                $scope.mostImportant = data[1];
                $scope.mostComment = data[2];
-               console.log($scope.mostPopular);
-               console.log($scope.mostImportant);
-               console.log($scope.mostComment);
 
        })
            .error(function (data, status, headers, config) {

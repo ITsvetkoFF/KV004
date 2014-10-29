@@ -1275,23 +1275,19 @@ form.dropzone {
 .resource ul {
     padding-left: 40px;
 }
-.statistic > h1 {
-    font-size: 3em;
-    font-family: WWF;
-}
-.statistic > h3 {
+.statistic h2 {
     margin: 0;
-    font-size: 2em;
+    font-size: 1.7em;
     font-family: WWF;
 }
 .light {
     font-weight: 300;
 }
-.pie > span {
+.periodItem {
     color: #428bca;
     cursor: pointer;
 }
-.pie > span:hover {
+.periodItem:hover {
     color: #2a6496;
     text-decoration: underline;
 }
@@ -1305,28 +1301,44 @@ form.dropzone {
 .statistic svg {
     font-size: 0.6em;
 }
-  .topProblems {
-    margin: 5px 10px;
-  display: inline-block;
-  font-family: WWF;
-  text-align: left;
-  }
-  .topProblems > div {
-  display: inline-block;
-  width: 32%;
-  float: left;
-  }
-  .topProblems > div > h4 {
-    font-size: 1.5em;
-  display: inline-block;
-  }
-  .topItem {
+.topProblems {
     display: inline-block;
-    padding-left: 20px;
+    margin: 15px 5px;
+}
+  .topItem {
+    padding-left: 25px;
   }
-  .topItem > li {
-    line-height: 17px;
-    font-size: 0.7em;
+  .topItem > a {
+    padding: 5px;
+    outline: rgba(0,0,0,0.1) 1px solid;
+    margin: 5px;
+    display: inline-block;
+    width: 100%;
+  }
+  .topItem > a:hover {
+    text-decoration: none;
+    background: #E4E2D1;
+    background: -webkit-linear-gradient( top, rgb(236, 235, 225) 10%, rgb(230, 227, 208)); /*Safari 5.1-6*/
+    background: -o-linear-gradient(top, rgb(236, 235, 225) 10%, rgb(230, 227, 208)); /*Opera 11.1-12*/
+    background: -moz-linear-gradient( top, rgb(236, 235, 225) 10%, rgb(230, 227, 208)); /*Fx 3.6-15*/
+    background: linear-gradient(to bottom, rgb(236, 235, 225) 10%, rgb(230, 227, 208));
+    box-shadow: 0 0 10px RGBA(0, 0, 0, .3);
+  }
+  .topItem > a >li {
+    font-size: 0.8em;
+    color: black;
+    line-height: 1;
+    position: relative;
+    margin-left: 30px;
+    text-align: left;
+    height: 5em;
+  }
+
+  .topItem > a > li > p {
+    color: #7B7B7C;
+    position: absolute;
+    right: 5px;
+    bottom: -5px;
   }
 .main text {
     font: 12px sans-serif;
@@ -1349,24 +1361,30 @@ form.dropzone {
     fill: blue;
     fill-opacity: .165;
 }
-.statistic > ul {
+.mainStats {
     list-style: none;
+    margin-bottom: 20px;
 }
-.statistic > ul > li {
+.mainStats > li {
     line-height: 1;
     padding: 0 3%;
     display: inline-block;
 }
-.statistic  li>span{
+.mainStats  li > span{
     color: #33374E;
     font-family: WWF;
     font-size: 5em;
 }
-.statistic .legend {
+.legend {
     text-align: left;
-    margin: 0px 10px;
+    margin-bottom: 10px;
     padding: 5px 5px;
     font-size: 0.65em;
+}
+.legend > li {
+    line-height: 1;
+    padding: 0 2%;
+    display: inline-block;
 }
 .pie {
     margin: 0 auto;
