@@ -45,7 +45,8 @@ define(['./module'],function(controllers){
                 var cancelCaption = 'Скасувати';
                 adminToShowProblemService.showModalMessage(text, 'sm',approveCaption, cancelCaption).then(
                     function () {
-                    $http.delete('/api/deleteResource/' + Id).success(function() {
+                    ResourceService.deleteResource(Id)
+                           .success(function() {
                     $rootScope.getTitles();
                     });
                     },
