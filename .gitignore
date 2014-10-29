@@ -13,3 +13,4 @@ tmp/
 frontend/app/templates/maintemplate.js
 frontend/app/templates/adminPage.html
 frontend/index_admin.html
+frontend/app/templates/map.html
