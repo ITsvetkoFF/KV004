@@ -64,6 +64,13 @@
     width: 90%;
     vertical-align:top;
 }
+
+@media  screen and (max-width:768px){
+    .b-problem-deatiled-info-title__text {
+        width: 89%;
+    }
+}
+
 .b-problem-notAdmin_false{
     cursor: pointer;
 }
@@ -102,6 +109,13 @@
     background:#f5f5f5;
     text-align:center;
 }
+
+@media  screen and (max-width:340px){
+    .b-problem-deatiled-info-container {
+        text-align:left;
+    }
+}
+
 .b-problem-deatiled-info-severity{
     display:inline-block;
     text-align: center;
@@ -135,6 +149,12 @@
     display: inline-block;
     vertical-align: top;
     padding:3px 0 0 0 ;
+}
+
+@media  screen and (max-width:768px){
+    .b-problem-deatiled-info-status__text{
+        width: 110px;
+    }
 }
 
 .b-problem-deatiled-info-description {
@@ -179,6 +199,7 @@
 
     margin-top:-2px;
 }
+
 .onoffswitch-checkbox {
     display: none;
 }

@@ -307,7 +307,7 @@ html, body {
     width: 100px;
     margin: 3px 5px 3px 8px;
     font-size: 0.6em;
-    color: #428bca;
+    color: #A7A7A7;
 }
 
 .b-activity__comments-item-date span{
@@ -369,7 +369,7 @@ html, body {
     position: absolute;
     display: block;
     top:370px;
-    right: 17px;
+    right: 5px;
     opacity: 0.1;
 }
 
@@ -583,7 +583,7 @@ td.b-details-body__title[colspan] {
 
 .simple_like_img {
     display: inline-block;
-    margin: 0 5px;
+    padding: 0;
     border:0;
     background:#f5f5f5;
     height: 25px;
@@ -1655,8 +1655,8 @@ add adaptive style to showProblem
         margin: 5px 0 5px 0;
     }
     .b-problem-deatiled-info-severity{
-        margin-left: 5px;
-        margin-right: 5px;
+        margin-left: 1px;
+        margin-right: 0;
     }
     .b-problem-deatiled-info-votes{
         margin-left: 5px;
