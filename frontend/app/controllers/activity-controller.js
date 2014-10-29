@@ -5,11 +5,7 @@ define(['./module'], function (controllers) {
     controllers.controller('ActivityCtrl', ['$scope', '$rootScope', '$routeParams','ActivityService', function ($scope,$rootScope, $routeParams,ActivityService) {
 
         $scope.addComment = function(comment) {
-            ActivityService.addCommentToDB($scope.userId,$scope.name,$scope.surname,$routeParams.problemID,comment,updateScope).then(function(){
-
-            });
-            function updateScope(data){
-                $scope.activities = data[0].reverse();
+            ActivityService.addCommentToDB($scope.userId,$scope.name,$scope.surname,$routeParams.problemID,comment,updateScope);
                 for(var i=0;i<$scope.activities.length;i++){
                     if($scope.activities[i].userId!=1) {
                         $scope.activities[i].Content = JSON.parse($scope.activities[i].Content);
