@@ -85,7 +85,9 @@ var addComment = function(req,res) {
             try{
                 var content ={
                     Content:req.body.data.Content,
-                    userName:req.body.data.userName
+                    userName:req.body.data.userName,
+                    userSurname:req.body.data.userSurname
+
                 };
                 if(req.body.data.userId==undefined) {
                     content.userName="(Анонім)";

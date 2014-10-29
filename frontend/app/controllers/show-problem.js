@@ -1,8 +1,11 @@
 define(['./module'], function(controllers){
     'use strict';
-    controllers.controller('showProblemCtrl',['$scope','$routeParams','ProblemService','ipCookie','$rootScope','$modal','adminToShowProblemService','$window','UserService','ActivityService', function ($scope,$routeParams,ProblemService,ipCookie,$rootScope,$modal,adminToShowProblemService,$window, UserService,ActivityService){
+    controllers.controller('showProblemCtrl',['$scope','$routeParams','ProblemService','ipCookie','$rootScope','$modal','adminToShowProblemService','$window','UserService','ActivityService','$route', function ($scope,$routeParams,ProblemService,ipCookie,$rootScope,$modal,adminToShowProblemService,$window, UserService,ActivityService,$route){
         $scope.isAdministrator = UserService.isAdministrator;
 
+        if($scope.uploadRightSide){
+            $route.reload();
+        }
 
         $scope.fileSizeLeft = 20;
         $scope.fileCountLeft = 10;
@@ -149,7 +152,7 @@ define(['./module'], function(controllers){
         };
 
         $scope.addOneVote = function(){
-            ActivityService.addVoteToDbAndToCookie($routeParams.problemID,$scope.userId,$scope.name).then(function(){
+            ActivityService.addVoteToDbAndToCookie($routeParams.problemID,$scope.userId,$scope.name,$scope.surname).then(function(){
               $scope.problem.Votes++;
               $scope.disableVoteButton=true;
             });

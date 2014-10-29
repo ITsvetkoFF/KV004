@@ -1,7 +1,10 @@
 define(['./module'],function(controllers){
     'use strict';
-    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http','UserService', 'adminToShowProblemService', '$location', 'ResourceService' ,function($scope,$rootScope,$modal, $log, $http,UserService, adminToShowProblemService, $location, ResourceService){
-        $scope.showSlider=false;
+
+    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log','UserService', '$location','ResourceService',function($scope,$rootScope,$modal, $log,UserService,$location,ResourceService){
+         $scope.showSlider=false;
+        $scope.uploadRightSide = false;
+
         //TODO: rename everthing in code swipHide() to hideRight()
         $scope.swipeHideRight = function(){
             if(window.innerWidth<=1000){

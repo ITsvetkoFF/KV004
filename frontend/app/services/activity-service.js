@@ -12,9 +12,9 @@ define(['./module'], function (services) {
 
     services.factory('ActivityService', function ($http, ipCookie) {
         return{
-            addVoteToDbAndToCookie: function (problemID,userID,userName) {
+            addVoteToDbAndToCookie: function (problemID,userID,userName,userSurname) {
 
-                return $http.post('/api/vote', {idProblem: problemID, userId: userID, userName: userName})
+                return $http.post('/api/vote', {idProblem: problemID, userId: userID, userName: userName,userSurname:userSurname})
                 .success(function (data, status, headers, config) {
                     ipCookie('vote' + problemID, true);
                 })
@@ -22,12 +22,12 @@ define(['./module'], function (services) {
                     throw error;
                 });
              },
-            addCommentToDB:function(userID,userName,problemID,comment,updateScope) {
+            addCommentToDB:function(userID,userName,userSurname,problemID,comment,updateScope) {
                 if(comment==""|| comment == undefined){
                     alert("Неможливо відправити пусте повідомлення");
                     return;
                 }
-                var data = {data: {userId: userID, userName: userName, Content: comment}};
+                var data = {data: {userId: userID, userName: userName,userSurname:userSurname, Content: comment}};
                 return $http.post('/api/comment/' + problemID, JSON.stringify(data))
                 .success(function (data, status, headers, config) {
 

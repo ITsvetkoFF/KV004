@@ -5,7 +5,7 @@ define(['./module'], function (controllers) {
     controllers.controller('ActivityCtrl', ['$scope', '$rootScope', '$routeParams','ActivityService', function ($scope,$rootScope, $routeParams,ActivityService) {
 
         $scope.addComment = function(comment) {
-            ActivityService.addCommentToDB($scope.userId,$scope.name,$routeParams.problemID,comment,updateScope).then(function(){
+            ActivityService.addCommentToDB($scope.userId,$scope.name,$scope.surname,$routeParams.problemID,comment,updateScope).then(function(){
 
             });
             function updateScope(data){

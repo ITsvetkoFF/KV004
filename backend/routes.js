@@ -471,7 +471,8 @@ exports.addNewPhotos = function(req,res){
                         rows.push(row);
                         var content ={
                             Content:"додав фото",
-                            userName:req.body.userName
+                            userName:req.body.userName,
+                            userSurname:req.body.userSurname
                         };
                         if(req.body.userId==undefined) {
                             content.Content="Фото додано анонімно";
@@ -499,7 +500,7 @@ exports.addNewPhotos = function(req,res){
                 }
             }
             catch (err) {
-                console.log('Error in addNewPhotos API call\n' + err +"\n");
+                console.log('Error in Photos API call\n' + err +"\n");
             }
             try{
                 res.send({
@@ -516,7 +517,8 @@ exports.addNewPhotos = function(req,res){
 };
 
 exports.addComment = function(req,res) {
-    console.log("start addComment API function");
+    console.log("start addComment API function"+req.body.data);
+
     req.getConnection(function (err, connection) {
         if (err) {
             res.statusCode = 503;
@@ -528,7 +530,9 @@ exports.addComment = function(req,res) {
             try{
                 var content ={
                     Content:req.body.data.Content,
-                    userName:req.body.data.userName
+                    userName:req.body.data.userName,
+                    userSurname:req.body.data.userSurname
+
                 };
                 if(req.body.data.userId==undefined) {
                     content.userName="(Анонім)";
@@ -542,7 +546,7 @@ exports.addComment = function(req,res) {
                     Users_Id: req.body.data.userId,
                     Problems_Id: req.params.id
                 };
-                connection.query('INSERT INTO Activities SET ?', [activityData], function (err) {
+                 connection.query('INSERT INTO Activities SET ?', [activityData], function (err) {
 
                     if (err) {
                         res.statusCode = 500;
@@ -630,7 +634,9 @@ exports.postProblem = function(req,res){  //post new problem
                         var i = 0;
                         var content ={
                             Content:"додав проблему",
-                            userName:req.body.userName
+                            userName:req.body.userName,
+                            userSurname:req.body.userSurname
+
                         };
                         if(req.body.userId==undefined) {
                             content.Content="Проблему створено анонімно";
@@ -905,7 +911,9 @@ exports.postVote = function(req,res){  //+1 vote for a problem
                     }
                     var content ={
                         Content:"додав голос",
-                        userName:req.body.userName
+                        userName:req.body.userName,
+                        userSurname:req.body.userSurname
+
                     };
                     if(req.body.userId==undefined) {
                         content.Content="Голос додано анонімно";
