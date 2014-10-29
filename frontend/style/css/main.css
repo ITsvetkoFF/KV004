@@ -1223,6 +1223,7 @@ form.dropzone {
     font-family: WWF;
 }
 .statistic > h3 {
+    margin: 0;
     font-size: 2em;
     font-family: WWF;
 }
@@ -1248,8 +1249,10 @@ form.dropzone {
     font-size: 0.6em;
 }
   .topProblems {
+    margin: 5px 10px;
   display: inline-block;
-  margin-top: 10px;
+  font-family: WWF;
+  text-align: left;
   }
   .topProblems > div {
   display: inline-block;
@@ -1258,18 +1261,15 @@ form.dropzone {
   }
   .topProblems > div > h4 {
     font-size: 1.5em;
-    font-family: WWF;
-  text-align: left;
   display: inline-block;
   }
   .topItem {
     display: inline-block;
+    padding-left: 20px;
   }
   .topItem > li {
-    font-family: sans-serif;
     line-height: 17px;
     font-size: 0.7em;
-    text-align: left;
   }
 .main text {
     font: 12px sans-serif;
@@ -1307,13 +1307,14 @@ form.dropzone {
 }
 .statistic .legend {
     text-align: left;
-    margin: 10px 10px 20px 10px;
+    margin: 0px 10px;
     padding: 5px 5px;
     font-size: 0.65em;
 }
 .pie {
     margin: 0 auto;
     text-align: center;
+    padding: 5px;
 }
 
 .slider {
