@@ -1,5 +1,5 @@
 define(['./module','dropzone'], function(directives,Dropzone){
-    directives.directive('drop', function(){
+    directives.directive('drop', function(adminToShowProblemService){
         return {
 
             link: function (scope, element, attrs) {
@@ -74,7 +74,7 @@ define(['./module','dropzone'], function(directives,Dropzone){
 
                                     scope.swipeHide("dropzone");
                                     window.location.href = "#/map";
-                                    alert('Ви не зареєстрований користувач, тому проблема спочатку пройде модерацію і потім буде додана на карту.');
+                                    adminToShowProblemService.alertAddProblemSuccessAnonim();
                                 }
                             });
 

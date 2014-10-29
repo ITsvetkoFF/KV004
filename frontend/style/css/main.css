@@ -1581,6 +1581,10 @@ NAV
     border-radius:0;
 }
 
+.alert-danger {
+    border-radius:0;
+}
+
 .modal-header h3 {
     font-family: WWF;
     letter-spacing: 2px;
