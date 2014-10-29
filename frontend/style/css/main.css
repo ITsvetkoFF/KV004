@@ -1309,7 +1309,7 @@ form.dropzone {
   }
   .topItem > a {
     padding: 5px;
-    outline: rgba(0,0,0,0.1) 1px solid;
+    border: rgba(0,0,0,0.1) 1px solid;
     margin: 5px;
     display: inline-block;
     width: 100%;

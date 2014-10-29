@@ -40,7 +40,7 @@ define(['./module'],function(controllers){
             });
                     $scope.deleteResource = function(Id,Title){
         //modal window
-                var text = 'Будь ласка, підтвердіть видалення ресурсу\n' + Title;
+                var text = 'Будь ласка, підтвердіть видалення ресурсу\n "' + Title+ '"';
                 var approveCaption = 'Видалити ресурс';
                 var cancelCaption = 'Скасувати';
                 adminToShowProblemService.showModalMessage(text, 'sm',approveCaption, cancelCaption).then(
