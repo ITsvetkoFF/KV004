@@ -1,17 +1,17 @@
 <close-button></close-button>
 <div class="statistic">
 <div class="topProblems">
-      <div class="col-md-4"> <h2>ТОП 10 найбільш популярних проблем</h2><br>
+      <div class="col-md-4"> <h2>ТОП 10 популярних проблем</h2><br>
         <ul class="topItem">
           <a ng-repeat="popular in mostPopular" ng-href="/#/problem/showProblem/{{popular.Id}}"><li>{{$index+1}}. {{popular.Title}}<p><i class="fa fa-fw"></i>{{popular.Votes}}</p></li></a>
         </ul>
         </div>
-        <div class="col-md-4"> <h2>ТОП 10 найбільш важливих проблем</h2><br>
+        <div class="col-md-4"> <h2>ТОП 10 важливих проблем</h2><br>
         <ul class="topItem">
           <a ng-repeat="important in mostImportant" ng-href="/#/problem/showProblem/{{important.Id}}"><li>{{$index+1}}. {{important.Title}}<p><i class="fa fa-star"><span class="sr-only">(*)</span></i> {{important.Severity}}</p></li></a>
         </ul>
         </div>
-        <div class="col-md-4"> <h2>ТОП 10 найбільш обговорюваних проблем</h2><br>
+        <div class="col-md-4"> <h2>ТОП 10 обговорюваних проблем</h2><br>
         <ul class="topItem">
           <a ng-repeat="comment in mostComment" ng-href="/#/problem/showProblem/{{comment.Id}}"><li>{{$index+1}}. {{comment.Title}}<p><i class="fa fa-pencil"></i> {{comment.value}}</p></li></a>
         </ul>
