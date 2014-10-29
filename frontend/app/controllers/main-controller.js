@@ -28,13 +28,8 @@ define(['./module'],function(controllers){
         $scope.$on('$routeChangeSuccess', function(event, next) { 
             if ($rootScope.tempMarker)
                 $rootScope.geoJson.removeLayer($rootScope.tempMarker);
-            console.log('add problem route change success');
         });
 
-        /*$scope.$on('$routeChangeStart', function(event, next) { 
-            if ($rootScope.tempMarker)
-                $rootScope.geoJson.removeLayer($rootScope.tempMarker);
-        });*/
        // $scope.showRigthSide = "_hide";
         $rootScope.getTitles = function() {
             ResourceService.getTitlesFromDb()

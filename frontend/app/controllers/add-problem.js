@@ -133,13 +133,7 @@ define(['./module'],function (controllers){
             $scope.getUserProblems($scope.userId);
         }
 
-        
-
         $scope.$on('$routeChangeStart', function(event, next) { 
-            /*if ($rootScope.tempMarker)
-                $rootScope.geoJson.removeLayer($rootScope.tempMarker);*/
-
-            console.log('add problem route change starts');
             $scope.clearGetCoordinatesListener();
         });
 
