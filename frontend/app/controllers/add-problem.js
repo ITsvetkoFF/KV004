@@ -30,7 +30,8 @@ define(['./module'],function (controllers){
             } else {
                 $rootScope.style = function () {
                     return { 
-                        'height': 'auto'
+                        'height': 'auto',
+                        'padding-bottom' : '0'
                     };
                 };
             }
@@ -42,7 +43,8 @@ define(['./module'],function (controllers){
                 if (newValue == "Точка") {
                     $rootScope.style = function () {
                         return { 
-                            'height': 'auto'
+                            'height': 'auto',
+                            'padding-bottom' : '0'
                         };
                     };
                 } else {

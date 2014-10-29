@@ -2,7 +2,7 @@ define(['./module'], function (controllers) {
     'use strict';
     controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location','todayTime', '$timeout', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location, todayTime, $timeout) {
         $scope.isAdministrator = UserService.isAdministrator;
-                $rootScope.$broadcast('Update',"");
+        $rootScope.$broadcast('Update',"");
 
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             minZoom: 2,
@@ -16,8 +16,15 @@ define(['./module'], function (controllers) {
             }
         });
         var latlng  = L.latLng(50.00, 32.00);
-        var map     = L.map('map-content', {
 
+        L.Map.prototype.panToOffset = function (latlng, offset, options) {
+            var x = this.latLngToContainerPoint(latlng).x - offset[0];
+            var y = this.latLngToContainerPoint(latlng).y - offset[1];
+            var point = this.containerPointToLatLng([x, y]);
+            return this.setView(point, this._zoom, { pan: options });
+        };
+
+        var map     = L.map('map-content', {
             center: latlng,
             zoom: 7,
             minZoom: 6,
@@ -52,7 +59,7 @@ define(['./module'], function (controllers) {
             if (UserService.getSaveChangeStatus()){
                 window.location.href="#/map";
                 window.location.href="#/problem/showProblem/"+ this._id;
-                map.panTo(marker.latlng);
+                map.panToOffset(marker.latlng, [-300,0]);
             }
 
         };
