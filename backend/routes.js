@@ -6,13 +6,12 @@ var jwt          = require('jsonwebtoken'),
     secret = require('./config/secret'),
     fs = require('fs'),
     location = require('./config.js'),
-
-mcapi = require('mailchimp-api'),
+    mcapi = require('mailchimp-api'),
     mandrill = require('mandrill-api/mandrill'),
     generatePassword = require('password-generator');
 
-    mc = new mcapi.Mailchimp('23740bea44a8cfd98fb228dd5691e2b5-us9');
-    var mandrill_client = new mandrill.Mandrill('e3gxPVdlFAJZGnYdhBhzuw');
+    mc = new mcapi.Mailchimp('fab6a7e5f260ad7ad45c7fb946b91a05-us9');
+    var mandrill_client = new mandrill.Mandrill('hYvb1HMFtPmIV0zeX_z1fg');
 
     var mailchimpListID, segments = {};
 
@@ -1926,7 +1925,6 @@ exports.resetPassword = function (req, res) {
                             });
 
                             console.log(result);
-                            console.log('your new password is ' + userData.newPassword);
                         }
                         else {
                             return res.send(400);
