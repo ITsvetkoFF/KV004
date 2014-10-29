@@ -728,6 +728,9 @@ td.b-details-body__title[colspan] {
     width: 127px;
 }
 
+#userProblems + label{
+    margin-top:30px;
+}
 /*////////////////ADD PROBLEM //////////////////////*/
 
 #my-awesome-dropzone {
