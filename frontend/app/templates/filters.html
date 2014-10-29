@@ -23,6 +23,11 @@
         </div>
 
         <!-- <button class="btn" ng-click="toggleSelection()"></button> -->
+        <br>
+        <div class="problem controls" ng-show='isLoggedIn()'>
+            <input id = "userProblems" type = "checkbox" ng-model="placeUserProblemsChecker" ng-change="toggleSelection()">
+            <label for= "userProblems">Відобразити мої</label>
+        </div>
 
         <div class="problem">
             <p class="title">ТИП ПРОБЛЕМ</p>
@@ -39,12 +44,7 @@
             <label ng-repeat-end for="{{'status' + problemStatus.id}}">{{problemStatus.name}}</label>
             
         </div>
-        <div class="problem controls" ng-show='isLoggedIn()'>
-            <input id = "userProblems" type = "checkbox" ng-model="placeUserProblemsChecker" ng-change="toggleSelection()">
-            <label for= "userProblems">Відобразити мої</label>
-        </div>
-
-
+        
     </div>
 </div>
 <script id="template/datepicker/day.html" type="text/ng-template">
