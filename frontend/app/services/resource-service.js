@@ -4,6 +4,8 @@ define(['./module'], function (services) {
      * - getResourceFromDb
      * - editResourceAndSaveToDb
      * - addResourceToDb
+     * - getTitlesFromDb
+     * - deleteResource
      *
      */
 
@@ -18,7 +20,16 @@ define(['./module'], function (services) {
             },
             addResourceToDb:function(data){
                 return $http.post('api/addResource', data);
+            },
+            getTitlesFromDb:function() {
+                return $http({ method: 'GET', url: 'api/getTitles' })
+            },
+            deleteResource:function(id){
+                return $http.delete('/api/deleteResource/' + id);
             }
+
+
+
 
         }
 

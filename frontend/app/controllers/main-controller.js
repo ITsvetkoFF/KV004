@@ -1,6 +1,6 @@
 define(['./module'],function(controllers){
     'use strict';
-    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http','UserService', '$location',function($scope,$rootScope,$modal, $log, $http,UserService,$location){
+    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log','UserService', '$location','ResourceService',function($scope,$rootScope,$modal, $log,UserService,$location,ResourceService){
 
         $scope.showSlider=false;
         //TODO: rename everthing in code swipHide() to hideRight()
@@ -31,13 +31,14 @@ define(['./module'],function(controllers){
         });
        // $scope.showRigthSide = "_hide";
         $rootScope.getTitles = function() {
-            $http({ method: 'GET', url: 'api/getTitles' }).success(function (data) {
+            ResourceService.getTitlesFromDb()
+            .success(function (data) {
                 $rootScope.data = data;
             });
             $scope.deleteResource = function(Id,Title) {
                 var conf = confirm("Ви впевнені, що хочете видалити ресурс\n" + '"' + Title + '" ?');
                 if (conf == true) {
-                    $http.delete('/api/deleteResource/' + Id).success(function() {
+                    ResourceService.deleteResource(Id).success(function() {
                      $rootScope.getTitles();
                     });
                 }
