@@ -81,7 +81,6 @@ html, body {
     height: 100%;
     overflow: auto;
     font-size:16pt;
-    padding-bottom: 52px;
 
 
 }
@@ -124,7 +123,6 @@ html, body {
     height: calc(100% - 52px);
     height: -moz-calc(100% - 52px);
     overflow: auto;
-    padding-bottom: 52px;
 }
 
 .b-container__right-side_full  {
@@ -1307,6 +1305,7 @@ form.dropzone {
 }
   .topItem {
     padding-left: 25px;
+    list-style: none;
   }
   .topItem > a {
     padding: 5px;
@@ -1329,7 +1328,6 @@ form.dropzone {
     color: black;
     line-height: 1;
     position: relative;
-    margin-left: 30px;
     text-align: left;
     height: 5em;
   }

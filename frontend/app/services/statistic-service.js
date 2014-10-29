@@ -30,45 +30,46 @@ define(['./module'], function (services) {
                             d.start = new Date(d.start);
                             d.class = "past";
                         });
-                        var margin = {top: 20, right: 0, bottom: 15, left: 40}
-                            , width = window.innerWidth - 100 - margin.left - margin.right
-                            , height = 500 - margin.top - margin.bottom
+var margin = {top: 20, right: 0, bottom: 15, left: 0}
+var padding = {left: 40}
+  , width = window.innerWidth - 100 - margin.right
+  , height = 500 - margin.top - margin.bottom
 
-                            , miniHeight = lanes.length * 12 + 50
-                            , mainHeight = height - miniHeight - 50;
+  , miniHeight = lanes.length * 12 + 50
+  , mainHeight = height - miniHeight - 50;
 
-                        var x = d3.time.scale()
-                            .domain([d3.time.sunday(d3.min(items, function(d) { return d.start; })),
-                                d3.max(items, function(d) { return d.start.addHours(10); })])
-                            .range([0, width]);
-                        var x1 = d3.time.scale().range([0, width]);
+var x = d3.time.scale()
+  .domain([d3.time.sunday(d3.min(items, function(d) { return d.start; })),
+       d3.max(items, function(d) { return d.start.addHours(10); })])
+  .range([0, width]);
+var x1 = d3.time.scale().range([0, width]);
 
-                        var ext = d3.extent(lanes, function(d) { return d.id; });
-                        var y1 = d3.scale.linear().domain([ext[0], ext[1] + 1]).range([0, mainHeight]);
-                        var y2 = d3.scale.linear().domain([ext[0], ext[1] + 1]).range([0, miniHeight]);
+var ext = d3.extent(lanes, function(d) { return d.id; });
+var y1 = d3.scale.linear().domain([ext[0], ext[1] + 1]).range([0, mainHeight]);
+var y2 = d3.scale.linear().domain([ext[0], ext[1] + 1]).range([0, miniHeight]);
 
-                        var chart = d3.select('#el1')
-                            .attr('width', width + margin.right + margin.left)
-                            .attr('height', height + margin.top + margin.bottom)
-                            .attr('class', 'chart');
+var chart = d3.select('#el1')
+  .attr('width', width + margin.right + padding.left)
+  .attr('height', height + margin.top + margin.bottom)
+  .attr('class', 'chart');
 
-                        chart.append('defs').append('clipPath')
-                            .attr('id', 'clip')
-                            .append('rect')
-                            .attr('width', width)
-                            .attr('height', mainHeight);
+chart.append('defs').append('clipPath')
+  .attr('id', 'clip')
+  .append('rect')
+    .attr('width', width)
+    .attr('height', mainHeight);
 
-                        var main = chart.append('g')
-                            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-                            .attr('width', width)
-                            .attr('height', mainHeight)
-                            .attr('class', 'main');
+var main = chart.append('g')
+  .attr('transform', 'translate(' + padding.left + ',' + margin.top + ')')
+  .attr('width', width)
+  .attr('height', mainHeight)
+  .attr('class', 'main');
 
-                        var mini = chart.append('g')
-                            .attr('transform', 'translate(' + margin.left + ',' + (mainHeight + 60) + ')')
-                            .attr('width', width)
-                            .attr('height', miniHeight)
-                            .attr('class', 'mini');
+var mini = chart.append('g')
+  .attr('transform', 'translate(' + padding.left + ',' + (mainHeight + 60) + ')')
+  .attr('width', width)
+  .attr('height', miniHeight)
+  .attr('class', 'mini');
 
 // draw the lanes for the main chart
                         main.append('g').selectAll('.laneLines')

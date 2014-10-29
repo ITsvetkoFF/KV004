@@ -1,7 +1,7 @@
 define(['./module'],function(controllers){
     'use strict';
 
-    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log','UserService', '$location','ResourceService',function($scope,$rootScope,$modal, $log,UserService,$location,ResourceService){
+    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log','UserService', '$location','ResourceService', 'adminToShowProblemService' ,function($scope,$rootScope,$modal, $log,UserService,$location,ResourceService, adminToShowProblemService){
          $scope.showSlider=false;
         $scope.uploadRightSide = false;
 
