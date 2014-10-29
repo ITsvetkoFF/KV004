@@ -4,12 +4,14 @@ var jwt          = require('jsonwebtoken'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
     secret = require('./config/secret'),
+    fs = require('fs'),
+    location = require('./config.js'),
     mcapi = require('mailchimp-api'),
     mandrill = require('mandrill-api/mandrill'),
     generatePassword = require('password-generator');
 
-    mc = new mcapi.Mailchimp('23740bea44a8cfd98fb228dd5691e2b5-us9');
-    var mandrill_client = new mandrill.Mandrill('e3gxPVdlFAJZGnYdhBhzuw');
+    mc = new mcapi.Mailchimp('fab6a7e5f260ad7ad45c7fb946b91a05-us9');
+    var mandrill_client = new mandrill.Mandrill('hYvb1HMFtPmIV0zeX_z1fg');
 
     var mailchimpListID, segments = {};
 
@@ -469,7 +471,8 @@ exports.addNewPhotos = function(req,res){
                         rows.push(row);
                         var content ={
                             Content:"додав фото",
-                            userName:req.body.userName
+                            userName:req.body.userName,
+                            userSurname:req.body.userSurname
                         };
                         if(req.body.userId==undefined) {
                             content.Content="Фото додано анонімно";
@@ -497,7 +500,7 @@ exports.addNewPhotos = function(req,res){
                 }
             }
             catch (err) {
-                console.log('Error in addNewPhotos API call\n' + err +"\n");
+                console.log('Error in Photos API call\n' + err +"\n");
             }
             try{
                 res.send({
@@ -514,7 +517,8 @@ exports.addNewPhotos = function(req,res){
 };
 
 exports.addComment = function(req,res) {
-    console.log("start addComment API function");
+    console.log("start addComment API function"+req.body.data);
+
     req.getConnection(function (err, connection) {
         if (err) {
             res.statusCode = 503;
@@ -526,7 +530,9 @@ exports.addComment = function(req,res) {
             try{
                 var content ={
                     Content:req.body.data.Content,
-                    userName:req.body.data.userName
+                    userName:req.body.data.userName,
+                    userSurname:req.body.data.userSurname
+
                 };
                 if(req.body.data.userId==undefined) {
                     content.userName="(Анонім)";
@@ -540,7 +546,7 @@ exports.addComment = function(req,res) {
                     Users_Id: req.body.data.userId,
                     Problems_Id: req.params.id
                 };
-                connection.query('INSERT INTO Activities SET ?', [activityData], function (err) {
+                 connection.query('INSERT INTO Activities SET ?', [activityData], function (err) {
 
                     if (err) {
                         res.statusCode = 500;
@@ -628,7 +634,9 @@ exports.postProblem = function(req,res){  //post new problem
                         var i = 0;
                         var content ={
                             Content:"додав проблему",
-                            userName:req.body.userName
+                            userName:req.body.userName,
+                            userSurname:req.body.userSurname
+
                         };
                         if(req.body.userId==undefined) {
                             content.Content="Проблему створено анонімно";
@@ -903,7 +911,9 @@ exports.postVote = function(req,res){  //+1 vote for a problem
                     }
                     var content ={
                         Content:"додав голос",
-                        userName:req.body.userName
+                        userName:req.body.userName,
+                        userSurname:req.body.userSurname
+
                     };
                     if(req.body.userId==undefined) {
                         content.Content="Голос додано анонімно";
@@ -1372,7 +1382,7 @@ exports.deletePhoto = function(req, res) {
                         return res.send(401);
                     }
                     var id=req.params.id;
-                    connection.query('DELETE FROM Photos WHERE Id = ?', id, function(err, rows) {
+                    connection.query('DELETE FROM Photos WHERE Link = ?', req.params.link, function(err, rows) {
                         if (err) {
                             res.statusCode = 500;
                             res.send({
@@ -1387,6 +1397,7 @@ exports.deletePhoto = function(req, res) {
                                 length: rows.length
                             });
                             console.log('end deletePhoto API function');
+                            fs.unlink(location+"photos/large/"+req.params.link, function(){});
                         }
                     });
                 });
@@ -1922,7 +1933,6 @@ exports.resetPassword = function (req, res) {
                             });
 
                             console.log(result);
-                            console.log('your new password is ' + userData.newPassword);
                         }
                         else {
                             return res.send(400);

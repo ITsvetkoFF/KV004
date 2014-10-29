@@ -1,8 +1,11 @@
 define(['./module'], function(controllers){
     'use strict';
-    controllers.controller('showProblemCtrl',['$scope','$routeParams','$http','ipCookie','$rootScope','$modal','adminToShowProblemService','$window','UserService', function ($scope,$routeParams,$http,ipCookie,$rootScope,$modal,adminToShowProblemService,$window, UserService){
+    controllers.controller('showProblemCtrl',['$scope','$routeParams','ProblemService','ipCookie','$rootScope','$modal','adminToShowProblemService','$window','UserService','ActivityService','$route', function ($scope,$routeParams,ProblemService,ipCookie,$rootScope,$modal,adminToShowProblemService,$window, UserService,ActivityService,$route){
         $scope.isAdministrator = UserService.isAdministrator;
 
+        if($scope.uploadRightSide){
+            $route.reload();
+        }
 
         $scope.fileSizeLeft = 20;
         $scope.fileCountLeft = 10;
@@ -38,76 +41,76 @@ define(['./module'], function(controllers){
         var problemModerationStatus;
         var tempContent = '';
         //get problem info
-        var res=$http.get("api/problems/"+$routeParams.problemID).success(function (data) {
+        ProblemService.getProblemByIdFromDb($routeParams.problemID).success(function (data) {
             if(data.error) {
                 $rootScope.$broadcast('Update',"_hide");
                 window.location.href="#/map";
             } else {
-            problem = data[0][0];
-            $scope.problem =  problem;
-            activity = data[2][0];
-            userID =activity.Users_Id;
-            problemID = parseInt(problem.Id);
-            $scope.problem.Severity = parseInt(problem.Severity) || 1;
-            $scope.problem.Content = problem.Content || 'опис відсутній';
-            $scope.problem.Title = problem.Title || 'назва відсутня';
-            $scope.problem.CreatedDate =activity.Date;
-            $scope.photos = data[1];
-            $rootScope.photos = $scope.photos;
-            $scope.checkedbox = problem.Status?1:0;
-            problemModerationStatus = problem.Moderation ;
-            $scope.problem.Votes = problem.Votes;
-            var tempUser = JSON.parse(activity.Content);
-            $scope.problem.userName = tempUser.userName;
-            $scope.problem.Proposal = problem.Proposal;
-            
-            $scope.activities = data[2].reverse();
-            for(var i=0;i<$scope.activities.length;i++){
-                if($scope.activities[i].userId!=1) {
-                    $scope.activities[i].Content = JSON.parse($scope.activities[i].Content);
+                problem = data[0][0];
+                $scope.problem =  problem;
+                activity = data[2][0];
+                userID =activity.Users_Id;
+                problemID = parseInt(problem.Id);
+                $scope.problem.Severity = parseInt(problem.Severity) || 1;
+                $scope.problem.Content = problem.Content || 'опис відсутній';
+                $scope.problem.Title = problem.Title || 'назва відсутня';
+                $scope.problem.CreatedDate =activity.Date;
+                $scope.photos = data[1];
+                $rootScope.photos = $scope.photos;
+                $scope.checkedbox = problem.Status?1:0;
+                problemModerationStatus = problem.Moderation ;
+                $scope.problem.Votes = problem.Votes;
+                var tempUser = JSON.parse(activity.Content);
+                $scope.problem.userName = tempUser.userName;
+                $scope.problem.Proposal = problem.Proposal;
+
+                $scope.activities = data[2].reverse();
+                for(var i=0;i<$scope.activities.length;i++){
+                    if($scope.activities[i].userId!=1) {
+                        $scope.activities[i].Content = JSON.parse($scope.activities[i].Content);
+                    }
                 }
+                $scope.$watch('checkedbox', function(newValue, oldValue) {
+                    if(newValue != oldValue ) {
+                        $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
+                        $scope.problem.Status = newValue;
+                        UserService.setSaveChangeStatus(false);
+                    }
+                });
+                $scope.$watch('problem.Title', function(newValue, oldValue) {
+                    if(newValue != oldValue ){
+                        $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
+                        $scope.problem.Title = newValue;
+                        UserService.setSaveChangeStatus(false);
+                    }
+                });
+                $scope.$watch('problem.Severity', function(newValue, oldValue) {
+                    if(newValue != oldValue ) {
+                        $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
+                        $scope.problem.Severity = newValue;
+                        UserService.setSaveChangeStatus(false);
+
+                    }
+                });
+                $scope.$watch('problem.Content', function(newValue, oldValue) {
+                    if(newValue != oldValue && UserService.getSaveChangeStatus() == true) {
+                        $scope.problem.Content = newValue;
+                        UserService.setSaveChangeStatus(false);
+                        $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
+                    }
+                });
+                $scope.$watch('problem.Proposal', function(newValue, oldValue) {
+                    if(newValue != oldValue && UserService.getSaveChangeStatus() == true) {
+                        $scope.problem.Proposal = newValue;
+                        UserService.setSaveChangeStatus(false);
+                        $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
+                    }
+                });
             }
-            $scope.$watch('checkedbox', function(newValue, oldValue) {
-                if(newValue != oldValue ) {
-                    $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
-                    $scope.problem.Status = newValue;
-                    UserService.setSaveChangeStatus(false);
-                }
+        })
+            .error(function (data, status, headers, config) {
+                throw error;
             });
-            $scope.$watch('problem.Title', function(newValue, oldValue) {
-                if(newValue != oldValue ){
-                    $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
-                    $scope.problem.Title = newValue;
-                    UserService.setSaveChangeStatus(false);
-                }
-            });
-            $scope.$watch('problem.Severity', function(newValue, oldValue) {
-                if(newValue != oldValue ) {
-                    $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
-                    $scope.problem.Severity = newValue;
-                    UserService.setSaveChangeStatus(false);
-
-                }
-            });
-            $scope.$watch('problem.Content', function(newValue, oldValue) {
-                if(newValue != oldValue && UserService.getSaveChangeStatus() == true) {
-                    $scope.problem.Content = newValue;
-                    UserService.setSaveChangeStatus(false);
-                    $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
-                }
-            });
-            $scope.$watch('problem.Proposal', function(newValue, oldValue) {
-                if(newValue != oldValue && UserService.getSaveChangeStatus() == true) {
-                    $scope.problem.Proposal = newValue;
-                    UserService.setSaveChangeStatus(false);
-                    $scope.editStatusClass =  adminToShowProblemService.getEditStatus(1);
-                }
-            });
-        }
-        });
-
-
-
 
         //end get problem request info
 
@@ -147,23 +150,31 @@ define(['./module'], function(controllers){
             $scope.showAddPhotoButton = true;
             //window.location.href="#/problem/showProblem/"+$routeParams.problemID;
         };
-        //activity
+
         $scope.addOneVote = function(){
-
-            var responce = $http.post('/api/vote',{idProblem:$routeParams.problemID,userId:$scope.userId,userName:$scope.name});
-            responce.success(function(data,status,headers,config){
-                $scope.problem.Votes++;
-                ipCookie('vote'+$routeParams.problemID,true);
-                $scope.disableVoteButton=true;
-                window.location.href="#/problem/showProblem/"+$routeParams.problemID;
-
-
+            ActivityService.addVoteToDbAndToCookie($routeParams.problemID,$scope.userId,$scope.name,$scope.surname).then(function(){
+              $scope.problem.Votes++;
+              $scope.disableVoteButton=true;
             });
-            responce.error(function(data,status,headers,config){
-                throw error;
-            });
-            window.location.href="#/problem/showProblem/"+$routeParams.problemID;
         };
+        $scope.deletePhoto = function(index){
+            ProblemService.deletePhotoFromdb($scope.photos[index].Link)
+                .success(function (data, status, headers, config) {
+                    var tempArray=[];
+                   for(var i =0;i<$scope.photos.length;i++)
+                   {
+                       if(i!=index){
+                           tempArray.push($scope.photos[i]);
+
+                       }
+                   }
+                    $scope.photos = tempArray;
+                    console.log($scope.photos);
+                })
+                .error(function (data, status, headers, config) {
+                    throw error;
+                });
+        }
 
        
 

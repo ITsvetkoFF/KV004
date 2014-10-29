@@ -2,7 +2,7 @@ define(['./module'], function (controllers) {
 
     'use strict';
 
-    controllers.controller('AdminUserCtrl', ['$scope', '$rootScope', '$http', '$location', '$window', 'ipCookie', 'UserService', '$modal', '$log', function ($scope,$rootScope, $http, $location, $window, ipCookie, UserService, $modal, $log) {
+    controllers.controller('AdminUserCtrl', ['$scope', '$rootScope', 'ProblemService', '$location', '$window', 'ipCookie', 'UserService', '$modal', '$log', function ($scope,$rootScope, ProblemService, $location, $window, ipCookie, UserService, $modal, $log) {
 
         $scope.isLoggedIn = UserService.isLoggedIn;
         $scope.isAdministrator = UserService.isAdministrator;
@@ -12,11 +12,18 @@ define(['./module'], function (controllers) {
         
 
         /**--- Getting reg usr problems ---*/
-        $scope.getUserProblems = function(userId){
-            $http({ method: 'GET', url: "api/usersProblem/" + userId }).success(function (data) {
-                $scope.dataUserProblems = data;
-            });
-        };
+        $scope.getUserProblems = function(userId) {
+            ProblemService.getUserProblemsFromDb(userId)
+                .success(function (data) {
+                    $scope.dataUserProblems = data;
+
+            })
+                .error(function (data, status, headers, config) {
+                    throw error;
+                });
+
+
+        }
 
         if($scope.userId) {
             $scope.getUserProblems($scope.userId);

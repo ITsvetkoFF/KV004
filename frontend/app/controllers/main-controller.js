@@ -1,7 +1,10 @@
 define(['./module'],function(controllers){
     'use strict';
-    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log', '$http','UserService', '$location',function($scope,$rootScope,$modal, $log, $http,UserService,$location){
-        $scope.showSlider=false;
+
+    controllers.controller('mainCtrl',['$scope','$rootScope','$modal', '$log','UserService', '$location','ResourceService',function($scope,$rootScope,$modal, $log,UserService,$location,ResourceService){
+         $scope.showSlider=false;
+        $scope.uploadRightSide = false;
+
         //TODO: rename everthing in code swipHide() to hideRight()
         $scope.swipeHideRight = function(){
             if(window.innerWidth<=1000){
@@ -24,23 +27,32 @@ define(['./module'],function(controllers){
             }
         };
 
-        $scope.$on('$routeChangeStart', function(event, next) { 
+        $scope.$on('$routeChangeSuccess', function(event, next) { 
             if ($rootScope.tempMarker)
                 $rootScope.geoJson.removeLayer($rootScope.tempMarker);
         });
+
        // $scope.showRigthSide = "_hide";
         $rootScope.getTitles = function() {
-            $http({ method: 'GET', url: 'api/getTitles' }).success(function (data) {
+            ResourceService.getTitlesFromDb()
+            .success(function (data) {
                 $rootScope.data = data;
             });
-            $scope.deleteResource = function(Id,Title) {
-                var conf = confirm("Ви впевнені, що хочете видалити ресурс\n" + '"' + Title + '" ?');
-                if (conf == true) {
+                    $scope.deleteResource = function(Id,Title){
+        //modal window
+                var text = 'Будь ласка, підтвердіть видалення ресурсу\n' + Title;
+                var approveCaption = 'Видалити ресурс';
+                var cancelCaption = 'Скасувати';
+                adminToShowProblemService.showModalMessage(text, 'sm',approveCaption, cancelCaption).then(
+                    function () {
                     $http.delete('/api/deleteResource/' + Id).success(function() {
-                     $rootScope.getTitles();
+                    $rootScope.getTitles();
                     });
-                }
-            };
+                    },
+                    function () {
+                        return true;
+                    });
+        };
             $scope.editResource = function(Alias) {
                 window.location.href="#/editResource/"+ Alias;
             }

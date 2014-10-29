@@ -12,8 +12,8 @@
         <div class="b-activity__comments-item" ng-repeat="activity in activities" ng-show="checkpoint[activity.ActivityTypes_Id]">
             <i class="fa {{icons[activity.ActivityTypes_Id]}} b-activity__comments-item-image" style="margin-left:5px;margin:0;padding:1px;display: inline-block;float:left;font-size: 24px;margin:0;line-height: 40px"></i>
             <div class="b-activity__comments-item-date">
-                <span><b>{{activity.Content.userName}}</b></span>
-                <span><b>{{activity.Date.substring(0,10)}}</b></span>
+                <span><b>{{activity.Content.userName}} {{activity.Content.userSurname}}</b></span>
+                <span><b>{{activity.Date.substring(0,10)}}<br>{{activity.Date.substring(11,16)}}</b></span>
             </div>
             <div class="b-activity__comments-item-content">
                 <span ng-show="activity.ActivityTypes_Id!=5">{{activity.Content.Content}}</span>

@@ -1,6 +1,6 @@
 define(['./module'], function (controllers) {
     'use strict';
-    controllers.controller('mapLoadCtrl', ['$scope','$http', '$rootScope','UserService', '$routeParams','$route','$location','todayTime', '$timeout', function ($scope, $http, $rootScope, UserService,  $routeParams, $route,$location, todayTime, $timeout) {
+    controllers.controller('mapLoadCtrl', ['$scope','ProblemService', '$rootScope','UserService', '$routeParams','$route','$location','todayTime', '$timeout', function ($scope, ProblemService, $rootScope, UserService,  $routeParams, $route,$location, todayTime, $timeout) {
         $scope.isAdministrator = UserService.isAdministrator;
         $rootScope.$broadcast('Update',"");
 
@@ -38,10 +38,15 @@ define(['./module'], function (controllers) {
         var markerIcon;
 
         $rootScope.getProblemsAndPlaceMarkers = function(){
-            $http({ method: 'GET', url: '/api/problems' }).success(function (data) {
-                $scope.data = data;
-                placeMarkers($scope.data);
-            });
+            ProblemService.getAllProblemsFromDb()
+                .success(function (data) {
+                    $scope.data = data;
+                    placeMarkers($scope.data);
+            })
+                .error(function (data, status, headers, config) {
+                    throw error;
+                });
+
         };
         $scope.getProblemsAndPlaceMarkers();
 
@@ -57,7 +62,8 @@ define(['./module'], function (controllers) {
 
         function onMarkerClick(marker){
             if (UserService.getSaveChangeStatus()){
-                window.location.href="#/map";
+                $scope.uploadRightSide = false;
+
                 window.location.href="#/problem/showProblem/"+ this._id;
                 map.panToOffset(marker.latlng, [-300,0]);
             }

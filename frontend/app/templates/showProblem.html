@@ -1,4 +1,4 @@
-<div class="b-right-side__show-problem">
+<div  class="b-right-side__show-problem">
     <a href="" ng-click="swipeHide()" class="close">×</a>
     <div class="b-problems" >
         <div class="b-problem-deatiled-info-title">
@@ -67,15 +67,18 @@
                             <img ng-click="showSliderFunc()" ng-src="photos/large/{{photo.Link}}" class="b-details-body-problem-photo"/>
 
                             <i class="fa fa-check show_photo_label_{{photo.Status}}"></i>
+                            <i ng-if="isAdministrator()" class="fa fa-close show_photo_delete_lavel_{{isAdministrator()}}" ng-click="deletePhoto($index)"></i>
                         </div>
 
-                        <div class="dropFieldForShowProblem"><div ng-if="isLoggedIn()" class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div></div>
+                        <div class="dropFieldForShowProblem" style="width: 100px"><div ng-if="isLoggedIn()" class="b-details-body-problem-photo_add" ng-click="showDrop()" ng-show="showAddPhotoButton">+ Додати фото</div></div>
                         <div ng-if="!isLoggedIn()" style="margin-top: 10px;"><a class="tn-join-us" style="cursor: pointer;" ng-click="showRegForm('')">Зареєструйтесь</a> щоб додати фото</div>
 
-                        <form id="addPhotoDropzone" class="dropzone b-add-problem-form" name="upload_photo" drop="dropzoneConfig" ng-show="showDropField">
-                            <input type="text" style="display: none" ng-model="userId" name="userIsd"/>
+                        <form  id="addPhotoDropzone" class="dropzone b-add-problem-form" name="upload_photo" drop="dropzoneConfig" ng-show="showDropField">
+                            <input type="text" style="display: none" ng-model="userId" name="userId"/>
                             <input type="text" style="display: none" ng-model="name" name="userName"/>
-                            <div class="previews previews_show" >
+                            <input type="text" style="display: none" ng-model="surname" name="userSurname"/>
+
+                            <div  class="previews previews_show" >
                                 <p>
                                     <span class="b-conteiner__drop-title-1"><strong>+ Перемістить сюди фото або натисніть </strong></span>
                                 </p>

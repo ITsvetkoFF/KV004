@@ -135,5 +135,9 @@ define(['./module'],function (controllers){
             $scope.getUserProblems($scope.userId);
         }
 
+        $scope.$on('$routeChangeStart', function(event, next) { 
+            $scope.clearGetCoordinatesListener();
+        });
+
     });
 });

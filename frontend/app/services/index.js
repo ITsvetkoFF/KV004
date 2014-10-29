@@ -5,4 +5,4 @@
  * below, you can see we bring in our services and constants modules
  * which avails each service of, for example, the `config` constants object.
  **/
-define(['./user-service','./socket','./messageFormatter','./today-time','./adminToShowProblemService'], function () {});
+define(['./user-service','./socket-service','./today-time','./adminToShowProblemService','./activity-service','./problem-service','./statistic-service','./resource-service'], function () {});

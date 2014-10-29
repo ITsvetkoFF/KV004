@@ -11,7 +11,7 @@ define(['./app'], function (app) {
           .when('/problem/showProblem/:problemID', {
               templateUrl: 'app/templates/showProblem.html',
               controller: 'showProblemCtrl'
-          })
+    })
           .when('/problem/addProblem', {
               templateUrl: 'app/templates/addProblem.html',
               controller: 'addProblemCtrl'
