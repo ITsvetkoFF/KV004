@@ -4,7 +4,10 @@ var jwt          = require('jsonwebtoken'),
     cookieParser = require('cookie-parser'),
     myConnection = require('express-myconnection'),
     secret = require('./config/secret'),
-    mcapi = require('mailchimp-api'),
+    fs = require('fs'),
+    location = require('./config.js'),
+
+mcapi = require('mailchimp-api'),
     mandrill = require('mandrill-api/mandrill'),
     generatePassword = require('password-generator');
 
@@ -1372,7 +1375,7 @@ exports.deletePhoto = function(req, res) {
                         return res.send(401);
                     }
                     var id=req.params.id;
-                    connection.query('DELETE FROM Photos WHERE Id = ?', id, function(err, rows) {
+                    connection.query('DELETE FROM Photos WHERE Link = ?', req.params.link, function(err, rows) {
                         if (err) {
                             res.statusCode = 500;
                             res.send({
@@ -1387,6 +1390,7 @@ exports.deletePhoto = function(req, res) {
                                 length: rows.length
                             });
                             console.log('end deletePhoto API function');
+                            fs.unlink(location+"photos/large/"+req.params.link, function(){});
                         }
                     });
                 });

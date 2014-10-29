@@ -1,14 +1,15 @@
 define(['./module'], function (controllers) {
    'use strict';
-    controllers.controller('editorCtrl',['$scope', '$rootScope', '$http', '$routeParams', '$location', function ($scope, $rootScope, $http, $routeParams, $location) {
+    controllers.controller('editorCtrl',['$scope', '$rootScope', '$routeParams', '$location','ResourceService', function ($scope, $rootScope, $routeParams, $location,ResourceService) {
         if ($routeParams.Alias) {
-        $http.get('api/resources/' + $routeParams.Alias).success(function(data) {
-            $scope.resource = data[0];
-            $scope.Alias = $scope.resource.Alias;
-            $scope.Content = $scope.resource.Content;
-            $scope.Title = $scope.resource.Title;
-            $scope.IsResource = $scope.resource.IsResource
-            $scope.Id = $scope.resource.Id;
+            ResourceService.getResourceFromDb($routeParams.Alias)
+                .success(function(data) {
+                    $scope.resource = data[0];
+                    $scope.Alias = $scope.resource.Alias;
+                    $scope.Content = $scope.resource.Content;
+                    $scope.Title = $scope.resource.Title;
+                    $scope.IsResource = $scope.resource.IsResource;
+                    $scope.Id = $scope.resource.Id;
             });
         }
         else {
@@ -17,10 +18,11 @@ define(['./module'], function (controllers) {
         $rootScope.$broadcast('Update', '_full');
         $scope.sendResource = function(Alias, Content, Title, IsResource, Id) {
                 if (Id){
-            $http.put('api/editResource/' + Id, {Alias: Alias, Content: Content, Title: Title, IsResource : IsResource}).success(function() {
-            $rootScope.getTitles();
-            $location.path('resources/' + Alias);
-           }).error(function(data, status) {
+            ResourceService.editResourceAndSaveToDb(Id,{Alias: Alias, Content: Content, Title: Title, IsResource : IsResource})
+                .success(function() {
+                    $rootScope.getTitles();
+                    $location.path('resources/' + Alias);
+              }).error(function(data, status) {
                 switch (data.err) {
                     case "ER_BAD_NULL_ERROR":
                     $scope.errorMsq = "Заповніть всі поля!";
@@ -37,10 +39,11 @@ define(['./module'], function (controllers) {
                 });
        }
        else {
-            $http.post('api/addResource', { Alias: Alias, Content: Content, Title: Title, IsResource: IsResource}).success(function() {
-            $rootScope.getTitles();
-            $location.path('resources/' + Alias);
-           }).error(function(data, status) {
+                    ResourceService.addResourceToDb({ Alias: Alias, Content: Content, Title: Title, IsResource: IsResource})
+                      .success(function() {
+                            $rootScope.getTitles();
+                            $location.path('resources/' + Alias);
+                    }).error(function(data, status) {
                 switch (data.err) {
                     case "ER_BAD_NULL_ERROR":
                     $scope.errorMsq = "Заповніть всі поля!";

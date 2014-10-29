@@ -9,7 +9,7 @@ define(['./module'], function (services) {
                 return $http.post('/api/login', {email: email, password: password});
             },
 
-            logOut: function() {
+            logOut: function () {
                 if (saveChangeStatus) {
                     return $http.get('/api/logout');
                 }
@@ -19,29 +19,39 @@ define(['./module'], function (services) {
                 return $http.post('/api/register', { first_name: username, last_name: surname, email: email, password: password });
             },
 
-            isLoggedIn: function() {
-                if(ipCookie('token')) {
+            isLoggedIn: function () {
+                if (ipCookie('token')) {
                     return true;
                 } else {
                     return false;
                 }
             },
 
-            isAdministrator: function() {
-                if(ipCookie('userRole')=='administrator') {
+            isAdministrator: function () {
+                if (ipCookie('userRole') == 'administrator') {
                     return true;
                 } else {
                     return false;
                 }
             },
-            setSaveChangeStatus:function(status){
+            setSaveChangeStatus: function (status) {
                 saveChangeStatus = status;
             },
-            getSaveChangeStatus:function(){
+            getSaveChangeStatus: function () {
                 return saveChangeStatus;
+            },
+            changePassword: function (dataPassword) {
+                return $http.post('api/changePassword',dataPassword);
+
+            },
+            resetPassword: function (data) {
+                return  $http.post('api/resetPassword', data);
+
+
             }
         }
-    });
+
+        });
 
 
 });

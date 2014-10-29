@@ -14,8 +14,8 @@ define(['./module'],function(controllers){
             newUser.password = data.password;
             // check to make sure the form is completely valid
             if (isValid  && ($scope.user.password == $scope.user.password_second)) {
-
-                 $http.post('api/register', data).success(function(data, status, headers, config) {
+                UserService.register(data.first_name,data.last_name,data.email,data.password)
+                .success(function(data, status, headers, config) {
 
                      UserService.logIn(newUser.email, newUser.password).success(function (userData) {
                          $rootScope.successLogIn(userData);

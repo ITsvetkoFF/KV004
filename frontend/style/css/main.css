@@ -74,44 +74,82 @@ html, body {
     display: block;
     position: absolute;
     top: 52px;
-    right: -600px;
+    right: -100%;
     width: 600px;
     min-width: 320px;
     background: #FFFFFF;
     height: 100%;
     overflow: auto;
     font-size:16pt;
-    -webkit-transition-duration: 0.3s;
-    -moz-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
-    transition-duration: 0.3s;
+    padding-bottom: 52px;
+
 
 }
 
 .b-container__right-side_problem  {
-    right: 0;
-    padding-bottom: 52px;
+    right: 0px;
+
+}
+.b-container__right-side_problem.ng-enter{
+    transition: all 0.3s;
+    right: -100%;
+
+}
+.b-container__right-side_problem.ng-leave{
+    transition: all 0.3s;
+    right: 0px;
+}
+.b-container__right-side_problem.ng-enter.ng-enter-active{
+
+    right: 0px;
+
+}
+.b-container__right-side_problem.ng-leave.ng-leave-active{
+
+    right: -100%;
 
 }
 
-.b-container__right-side_hide {
-    display: none !important;
-}
+
 
 .b-container__right-side_full {
     z-index: 1006;
     display: block;
     position: absolute;
     top: 52px;
-    right: 0;
+
     width: 100%;
     min-width: 320px;
     background: #FFFFFF;
     height: calc(100% - 52px);
     height: -moz-calc(100% - 52px);
     overflow: auto;
+    padding-bottom: 52px;
 }
 
+.b-container__right-side_full  {
+    right: 0;
+
+}
+.b-container__right-side_full.ng-enter{
+    transition: all 0.3s;
+    right: -100%;
+
+}
+.b-container__right-side_full.ng-leave{
+    transition: all 0.3s;
+    right: 0px;
+}
+.b-container__right-side_full.ng-enter.ng-enter-active{
+
+    right: 0px;
+
+}
+.b-container__right-side_full.ng-leave.ng-leave-active{
+
+    right: -100%;
+
+}
 .b-right-side {
     height: 100%;
     width: 100%;
@@ -426,6 +464,25 @@ html, body {
     top:0;
     right:0;
     font-size: 26px;
+}
+.show_photo_delete_lavel_false{
+    display: none;
+}
+.show_photo_delete_lavel_true{
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #f00;
+    font-size: 1em;
+
+}
+.show_photo_delete_lavel_true:hover{
+
+    color: #f00;
+    font-size: 1.5em;
+    cursor: pointer;
+
 }
 
 .show_photo_label_0{
