@@ -81,8 +81,7 @@ html, body {
     height: 100%;
     overflow: auto;
     font-size:16pt;
-
-
+    padding-bottom: 52px;
 }
 
 .b-container__right-side_problem  {
