@@ -36,6 +36,7 @@ define(['./module'],function(controllers){
     for (var styles in $scope.style) {
       if ($scope.style[styles] == 'currentPeriod') $scope.style[styles] = undefined;
         }
+        $scope.style[val] = 'currentPeriod';
       StatisticService.getPie(val);
 
   };

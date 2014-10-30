@@ -114,6 +114,25 @@ define(['./module'],function(services) {
                 });
 
                 return modalInstance.result;
+            },
+
+            alertAddProblemSuccessAnonim: function (size){
+                var modalWindowScope = $rootScope.$new(),
+                                        modalInstance;
+
+                $rootScope.closeAlert = function() {
+                    modalInstance.close(console.log('alert closed'));
+                };
+
+                $rootScope.alerts = [{ type: 'success', msg: 'Ви не зареєстрований користувач, тому проблема спочатку пройде модерацію і потім буде додана на карту.' }];
+
+                modalInstance = $modal.open({
+                    template: '<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>',
+                    size: size,
+                    scope: modalWindowScope
+                });
+
+                return modalInstance.result;
             }
         }
     });
