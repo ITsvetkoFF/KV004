@@ -154,20 +154,21 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     });
 
                     myDropzone.on('successmultiple', function () {
-                        var currentLocation = window.location.href;
+                                               var currentLocation = window.location.href;
                         if (scope.isLoggedIn()) {
-                            scope.submitProblem();
                             // scope.swipeHide("dropzone");
                             window.location.href = "#/map";
-                            if(!currentLocation=="http://localhost:8090/#/problem/addProblem") {
+                            if(!(currentLocation=="http://localhost:8090/#/problem/addProblem")) {
                                 window.location.href = currentLocation;
                             }
-                            
+                             scope.submitProblem();
+
+
                         }
                         else {
                             //  scope.swipeHide("dropzone");
                             window.location.href = "#/map";
-                            if(!currentLocation=="http://localhost:8090/#/problem/addProblem") {
+                            if(!(currentLocation=="http://localhost:8090/#/problem/addProblem")) {
                                 window.location.href = currentLocation;
                             }
                             adminToShowProblemService.alertAddProblemSuccessAnonim();
