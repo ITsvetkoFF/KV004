@@ -146,7 +146,7 @@ define(['./module','dropzone'], function(directives,Dropzone){
                                 sizeOfAllPhotos -= file.size;
                                 myDropzone.removeFile(file);
                                 scope.fileCountLeft++;
-                                alert("Максімальній розмір файлів не може перевищувати 20 МБ ");
+                                alert("Максимальний розмір файлів не може перевищувати 20 МБ ");
                             }
                         }
 
@@ -154,15 +154,23 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     });
 
                     myDropzone.on('successmultiple', function () {
-                        var currentLocation = window.location.href;
+                                               var currentLocation = window.location.href;
                         if (scope.isLoggedIn()) {
-                            scope.swipeHide("dropzone");
+                            // scope.swipeHide("dropzone");
                             window.location.href = "#/map";
-                            
+                            if(!(currentLocation=="http://localhost:8090/#/problem/addProblem")) {
+                                window.location.href = currentLocation;
+                            }
+                             scope.submitProblem();
+
+
                         }
                         else {
-                            scope.swipeHide("dropzone");
+                            //  scope.swipeHide("dropzone");
                             window.location.href = "#/map";
+                            if(!(currentLocation=="http://localhost:8090/#/problem/addProblem")) {
+                                window.location.href = currentLocation;
+                            }
                             adminToShowProblemService.alertAddProblemSuccessAnonim();
                         }
                     });

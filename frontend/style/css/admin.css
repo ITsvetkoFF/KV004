@@ -47,6 +47,7 @@
     margin: 10px 0 0 0;
 }
 .b-problem-deatiled-info-title__icon {
+    cursor: pointer;
     display: inline-block;
     padding: 10px 0 0 0;
     width: 25px;

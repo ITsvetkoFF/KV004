@@ -21,7 +21,7 @@
         
         <li ng-repeat="title in data" ng-if="!title.IsResource" class="b-menu__button">
             <a id="link" href="#/resources/{{title.Alias}}">{{title.Title}} </a>
-            <i class="fa fa-pencil fa-xs" ng-if="isAdministrator()" ng-click="editResource(title.Alias)"></i>
+            <i class="fa fa-pencil fa-xs " ng-if="isAdministrator()" ng-click="editResource(title.Alias)"></i>
             <i class="fa fa-trash fa-xs" ng-if="isAdministrator()" ng-click="deleteResource(title.Id)"></i>
         </li>
 
@@ -40,7 +40,7 @@
             </li>
           </ul>
         </li>
-        <li class="b-menu__button"> <a ng-href="#/stats"><i class="fa fa-pie-chart"></i> Статистика</a></li>
+        <li class="b-menu__button"> <a ng-href="#/statistic"><i class="fa fa-pie-chart"></i> Статистика</a></li>
         <li class="dropdown" ng-hide="isLoggedIn()">
           <a class="dropdown-toggle b-menu__button" href="#">Вхід 
             <span class="fa fa-caret-down"></span>
@@ -66,8 +66,8 @@
           </ul>
         </li>
 
-        <li ng-if="isAdministrator()">
-          <a class="b-menu__button" ng-href="#/chat" ng-click="swipeHide()"><i class="fa fa-weixin"></i> Новини</a>
+        <li class="b-menu__button" ng-if="isAdministrator()">
+          <a ng-href="#/chat" ng-click="swipeHide()"><i class="fa fa-weixin"></i> Новини</a>
         </li>
 
         <li>
