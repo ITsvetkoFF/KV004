@@ -71,6 +71,7 @@ define(['./module'], function (controllers) {
         function onMarkerClick(marker){
             if (UserService.getSaveChangeStatus()){
                 $scope.uploadRightSide = false;
+                window.location.href = "#/map";
                 window.location.href="#/problem/showProblem/"+ this._id;
                 var width = $scope.getWindowDimensions();
                 if (width < 1000) {
