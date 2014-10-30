@@ -1400,8 +1400,8 @@ form.dropzone {
 }
 
 .slider {
-    width: 700px;
-    height: 400px;
+    width: 800px;
+    height: 540px;
     overflow: hidden;
     position: relative;
     padding: 0;
@@ -1422,7 +1422,7 @@ form.dropzone {
     left: 0;
     width: auto;
     height: auto;
-    max-height: 400px;
+    max-height: 540px;
     max-width: 1600px;
 }
 
@@ -1624,7 +1624,7 @@ add adaptive style to showProblem
         left: 0;
         width: 100%;
         height: auto;
-        max-height: 400px;
+        1max-height: 400px;
     }
 
     .b-problems{

@@ -2,7 +2,7 @@
     <a href="" ng-click="swipeHide()" class="close">×</a>
     <div class="b-problems" >
         <div class="b-problem-deatiled-info-title">
-            <a ng-click="map.panToOffset([problem.Latitude, problem.Longtitude], [-200,0])" ng-href=""><img ng-src="{{path}}" class="b-problem-deatiled-info-title__icon"></a>
+            <a ng-click="map.panToOffset(problem.Coordinates, 0, 0, 600, 0)" href=""><img ng-src="images/markers/{{problem.ProblemTypes_Id}}.png" class="b-problem-deatiled-info-title__icon"></a>
             <div  class="b-problem-deatiled-info-title__text b-problem-notAdmin_{{!isAdministrator()}}">
                 <editproblemtitle  value="problem.Title"></editproblemtitle>
             </div>
