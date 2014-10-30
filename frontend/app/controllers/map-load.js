@@ -31,7 +31,7 @@ define(['./module'], function (controllers) {
             zoom: 7,
             minZoom: 6,
             maxBounds: L.latLngBounds( L.latLng(43, 19), L.latLng(53, 46) ),
-            layers:[tiles, geoJson] //disabling geoJson because of blocking ukraine-zone on the map
+            layers:[tiles, geoJson]
         });
         $timeout($scope.map.invalidateSize.bind($scope.map),200);
         $rootScope.geoJson = geoJson; //forwarding geoJson object to $rooTscope
@@ -71,6 +71,7 @@ define(['./module'], function (controllers) {
         function onMarkerClick(marker){
             if (UserService.getSaveChangeStatus()){
                 $scope.uploadRightSide = false;
+                window.location.href = "#/map";
                 window.location.href="#/problem/showProblem/"+ this._id;
                 var width = $scope.getWindowDimensions();
                 if (width < 1000) {
