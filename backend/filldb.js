@@ -1,8 +1,6 @@
 var mysql = require('mysql'),
     crypto = require('crypto'),
-    secret = require('./config/secret'),
-    XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-
+    secret = require('./config/secret');
 var resources = [{}, {}, {}, {}, {}];
 for (var i = 0; i < resources.length; i++) {
     resources[i].content = [];
@@ -41,14 +39,7 @@ var problemTypes = ['проблеми лісів', 'сміттєзвалища',
 
 var i;
 
-var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4) {
-        probs = JSON.parse(xhr.responseText);
-    };
-};
-xhr.open('GET', 'http://ecomap.org/api/problems', false);
-xhr.send(null);
+var probs = JSON.parse(fs.readFileSync('problems.json', 'utf-8'));
 
 function randomIntInc(low, high) {
     return Math.floor(Math.random() * (high - low) + low);
@@ -164,7 +155,6 @@ function fillProblemsActivities() {
             connection.query("INSERT INTO Problems SET ?", data, function (err, rows, fields) {
                 if (err) throw err;
             });
-            console.log(new Date(probs[i].created * 1000).toISOString().slice(0, 19).replace('T', ' '));
             var data = {
                 Date: new Date(probs[i].created * 1000).toISOString().slice(0, 19).replace('T', ' '),
                 ActivityTypes_Id: 1,
