@@ -6,7 +6,6 @@ define(['./module'], function(controllers){
         if($scope.uploadRightSide){
             $route.reload();
         }
-
         $scope.fileSizeLeft = 20;
         $scope.fileCountLeft = 10;
         adminToShowProblemService.setEditStatus($scope.isAdministrator());
@@ -60,6 +59,13 @@ define(['./module'], function(controllers){
                 $scope.problem.Title = problem.Title || 'назва відсутня';
                 $scope.problem.CreatedDate =activity.Date;
                 $scope.photos = data[1];
+                $scope.path = "images/markers/" + problem.ProblemTypes_Id + ".png";
+                 var width = $scope.getWindowDimensions();
+                if (width < 1000) {
+                    $rootScope.map.panToOffset($scope.problem.Coordinates, 0, 90, 0, 0);
+                }else{
+                    $rootScope.map.panToOffset($scope.problem.Coordinates, 0, 0, 600 ,0);
+                }
                 $rootScope.photos = $scope.photos;
                 $scope.checkedbox = problem.Status?1:0;
                 problemModerationStatus = problem.Moderation ;

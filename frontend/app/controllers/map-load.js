@@ -27,14 +27,14 @@ define(['./module'], function (controllers) {
             return this.fitBounds([[x1, y1], [x2, y2]], {maxZoom:14, paddingTopLeft:[paddingL, paddingT], paddingBottomRight:[paddingR, paddingB]});
         };
 
-        $scope.map     = L.map('map-content', {
+        $rootScope.map     = L.map('map-content', {
             center: latlng,
             zoom: 7,
             minZoom: 6,
             maxBounds: L.latLngBounds( L.latLng(43, 19), L.latLng(53, 46) ),
             layers:[tiles, geoJson]
         });
-        $timeout($scope.map.invalidateSize.bind($scope.map),200);
+        $timeout($rootScope.map.invalidateSize.bind($rootScope.map),200);
         $rootScope.geoJson = geoJson; //forwarding geoJson object to $rooTscope
         var markers = L.markerClusterGroup();
         $scope.data = {};
@@ -61,9 +61,9 @@ define(['./module'], function (controllers) {
                     lng: position.coords.longitude
                 };
                 if (width < 1000) {
-                    $scope.map.panToOffset(mapCenter, 0, 90, 0, 0);
+                    $rootScope.map.panToOffset(mapCenter, 0, 90, 0, 0);
                 }else{
-                    $scope.map.panToOffset(mapCenter, 0, 0, 600 ,0);
+                    $rootScope.map.panToOffset(mapCenter, 0, 0, 600 ,0);
                 }
             }
         }
@@ -72,14 +72,7 @@ define(['./module'], function (controllers) {
             if (UserService.getSaveChangeStatus()){
                 $scope.uploadRightSide = false;
                 window.location.href = "#/map";
-                window.location.href="#/problem/showProblem/"+ this._id;
-                var width = $scope.getWindowDimensions();
-                if (width < 1000) {
-                    $scope.map.panToOffset(marker.latlng, 0, 90, 0, 0);
-                }else{
-                    $scope.map.panToOffset(marker.latlng, 0, 0, 600 ,0);
-                }
-                
+                window.location.href="#/problem/showProblem/"+ this._id;                
             }
 
         }
@@ -97,9 +90,9 @@ define(['./module'], function (controllers) {
                 marker.on('click', onMarkerClick);
                 marker._id = location['Id'];
                 markers.addLayer(marker);
-                $scope.map.addLayer(markers);
+                $rootScope.map.addLayer(markers);
             });
-            $scope.map.addLayer(markers);
+            $rootScope.map.addLayer(markers);
         };
 
         function userSelectionFilterMarkers(data) {
