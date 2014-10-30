@@ -13,7 +13,6 @@ define(['./module'], function (controllers) {
                 }
                 $scope.commentContent="";
             }
-        };
         $scope.deleteComment = function(commentId) {
              ActivityService.deleteCommentFromDB(commentId).then(function(){
                  for(var i=0;i<$scope.activities.length;i++){
