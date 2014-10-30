@@ -1,7 +1,9 @@
 define(['./module'], function (controllers) {
     'use strict';
-    controllers.controller('mapLoadCtrl', ['$scope','ProblemService', '$rootScope','UserService', '$routeParams','$route','$location','todayTime', '$timeout', function ($scope, ProblemService, $rootScope, UserService,  $routeParams, $route,$location, todayTime, $timeout) {
+    controllers.controller('mapLoadCtrl', ['$scope','ProblemService', '$rootScope','UserService', '$routeParams','$route','$location','todayTime', '$timeout', 'windowWidth', function ($scope, ProblemService, $rootScope, UserService,  $routeParams, $route,$location, todayTime, $timeout, windowWidth) {
         $scope.isAdministrator = UserService.isAdministrator;
+        $scope.getWindowDimensions = windowWidth.getWindowDimensions;
+
         $rootScope.$broadcast('Update',"");
 
         var tiles   = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -24,14 +26,14 @@ define(['./module'], function (controllers) {
             return this.setView(point, this._zoom, { pan: options });
         };
 
-        var map     = L.map('map-content', {
+        $scope.map     = L.map('map-content', {
             center: latlng,
             zoom: 7,
             minZoom: 6,
             maxBounds: L.latLngBounds( L.latLng(43, 19), L.latLng(53, 46) ),
             layers:[tiles, geoJson] //disabling geoJson because of blocking ukraine-zone on the map
         });
-        $timeout(map.invalidateSize.bind(map),200);
+        $timeout($scope.map.invalidateSize.bind($scope.map),200);
         $rootScope.geoJson = geoJson; //forwarding geoJson object to $rooTscope
         var markers = L.markerClusterGroup();
         $scope.data = {};
@@ -50,25 +52,36 @@ define(['./module'], function (controllers) {
         };
         $scope.getProblemsAndPlaceMarkers();
 
-        /*navigator.geolocation.getCurrentPosition(getUserPosition);
-
-        function getUserPosition(position) {
-            var mapCenter = [
-                position.coords.latitude,
-                position.coords.longitude
-            ];
-            map.setView(mapCenter, 10);
-        }*/
+        $scope.locateUser = function() {
+            navigator.geolocation.getCurrentPosition(getUserPosition);
+            var width = $scope.getWindowDimensions();
+            function getUserPosition(position) {
+                var mapCenter = [
+                    position.coords.latitude,
+                    position.coords.longitude
+                ];
+                if (width < 1000) {
+                    $scope.map.panToOffset(mapCenter, [0,90]);
+                }else{
+                    $scope.map.setView(mapCenter, 10);
+                }
+            }
+        }
 
         function onMarkerClick(marker){
             if (UserService.getSaveChangeStatus()){
                 $scope.uploadRightSide = false;
-
                 window.location.href="#/problem/showProblem/"+ this._id;
-                map.panToOffset(marker.latlng, [-300,0]);
+                var width = $scope.getWindowDimensions();
+                if (width < 1000) {
+                    $scope.map.setView(marker.latlng);
+                }else{
+                    $scope.map.panToOffset(marker.latlng, [-200,0]);
+                }
+                
             }
 
-        };
+        }
 
         function placeMarkers(data) {
             markers.clearLayers();
@@ -83,9 +96,9 @@ define(['./module'], function (controllers) {
                 marker.on('click', onMarkerClick);
                 marker._id = location['Id'];
                 markers.addLayer(marker);
-                map.addLayer(markers);
+                $scope.map.addLayer(markers);
             });
-            map.addLayer(markers);
+            $scope.map.addLayer(markers);
         };
 
         function userSelectionFilterMarkers(data) {

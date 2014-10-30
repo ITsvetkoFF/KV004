@@ -87,7 +87,7 @@ html, body {
 }
 
 .b-container__right-side_problem  {
-    right: 0px;
+    right: 0;
 
 }
 .b-container__right-side_problem.ng-enter{
@@ -97,11 +97,11 @@ html, body {
 }
 .b-container__right-side_problem.ng-leave{
     transition: all 0.3s;
-    right: 0px;
+    right: 0;
 }
 .b-container__right-side_problem.ng-enter.ng-enter-active{
 
-    right: 0px;
+    right: 0;
 
 }
 .b-container__right-side_problem.ng-leave.ng-leave-active{
@@ -138,11 +138,11 @@ html, body {
 }
 .b-container__right-side_full.ng-leave{
     transition: all 0.3s;
-    right: 0px;
+    right: 0;
 }
 .b-container__right-side_full.ng-enter.ng-enter-active{
 
-    right: 0px;
+    right: 0;
 
 }
 .b-container__right-side_full.ng-leave.ng-leave-active{
@@ -203,6 +203,7 @@ html, body {
 
 .b-problems .nav-tabs > li > a {
     border-radius: 0;
+    color: #777;
 }
 
 .b-hintVote{
@@ -810,6 +811,12 @@ input[type=button]:disabled, button:disabled {
     .b-addProblem .markerHeader {
         padding-bottom: 0;
     }
+}
+
+.findButton {
+    height: 30px;
+    margin-bottom: 10px;
+    line-height: 1.5 !important;
 }
 
 .b-addProblem button {

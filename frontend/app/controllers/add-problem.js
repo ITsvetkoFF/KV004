@@ -1,6 +1,6 @@
 define(['./module'],function (controllers){
     'use strict';
-    controllers.controller('addProblemCtrl', function ($scope,$rootScope,$window){
+    controllers.controller('addProblemCtrl', function ($scope,$rootScope,$window,windowWidth){
         $scope.tabs = [
             {heading: "Точка", icon: "fa fa-map-marker", content: "app/templates/addMarker.html", active: true},
             {heading: "Опис", icon: "fa fa-info-circle", content: "app/templates/addInfo.html", active: false},
@@ -14,10 +14,7 @@ define(['./module'],function (controllers){
             })[0].heading;
         };
 
-        var w = angular.element($window);
-        $scope.getWindowDimensions = function () {
-            return window.innerWidth;
-        };
+        $scope.getWindowDimensions = windowWidth.getWindowDimensions;
         var width = $scope.getWindowDimensions();
 
         $scope.$watch($scope.getWindowDimensions, function (newValue, oldValue) {
