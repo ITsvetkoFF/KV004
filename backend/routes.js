@@ -181,72 +181,7 @@ exports.getProblems = function(req,res){ // get all moderated problems in brief 
         }
     });
 };
-//part addComment with using socket
-//////////////////
-exports.addComment = function(req,res) {
-    console.log("start addComment API function");
-    req.getConnection(function (err, connection) {
-        if (err) {
-            res.statusCode = 503;
-            res.send({
-                err: err.code
-            });
-            console.log('Can`t connect to db in addComment API call\n' + err +"\n");
-        } else {
-            try{
-                var content ={
-                    Content:req.body.data.Content,
-                    userName:req.body.data.userName,
-                    userSurname:req.body.data.userSurname
 
-                };
-                if(req.body.data.userId==undefined) {
-                    content.userName="(Анонім)";
-                    req.body.userId = 2;
-                }
-                var activityData = {
-                    Content:JSON.stringify(content),
-                    //Content: "Корістувачь " + req.body.userName + " залишив коментар: "+req.body.Content,
-                    Date: new Date((new Date()).getTime()+2*60*60*1000),
-                    ActivityTypes_Id: 5,
-                    Users_Id: req.body.data.userId,
-                    Problems_Id: req.params.id
-                };
-                connection.query('INSERT INTO Activities SET ?', [activityData], function (err) {
-                    if (err) {
-                        res.statusCode = 500;
-                        res.send({
-                            err: err.code
-                        });
-                        console.error('Can`t make INSERT query for activityData = '+ activityData +'\n' + err +"\n");
-                    }
-                    /////// using socket
-                    io.sockets.emit('broadcast', {
-                        payload: {content:content.Content,id:req.params.id,user:content.userName,date:new Date((new Date()).getTime()+2*60*60*1000),trigger:true
-                        },
-                        source: ""
-                    });
-                    ///////
-                    connection.query('SELECT * FROM Activities WHERE Activities.Problems_Id=?', [req.params.id], function(err3, rows3) {
-                        if (err3) {
-                            res.statusCode = 500;
-                            res.send({
-                                err3:    err3.code
-                            });
-                            console.error('Can`t make SELECT query for Activities.Problems_Id = '+ req.params.id +'\n' + err +"\n");
-                        }
-                        res.send([rows3]);
-                        console.log("end addComment API function");
-                    });
-                });
-            }
-            catch(err){
-                console.log('Can`t make query to db in addComment API' + err + '\n');
-            }
-        }
-    });
-};
-//////////////////
 exports.getProblemId = function(req,res){ //get detailed problem description (everything)
     console.log("start to get information about problem  with id:" + req.params.id);
     req.getConnection(function(err, connection) {
@@ -581,64 +516,6 @@ exports.addNewPhotos = function(req,res){
     });
 };
 
-exports.addComment = function(req,res) {
-    console.log("start addComment API function"+req.body.data);
-
-    req.getConnection(function (err, connection) {
-        if (err) {
-            res.statusCode = 503;
-            res.send({
-                err: err.code
-            });
-            console.log('Can`t connect to db in addComment API call\n' + err +"\n");
-        } else {
-            try{
-                var content ={
-                    Content:req.body.data.Content,
-                    userName:req.body.data.userName,
-                    userSurname:req.body.data.userSurname
-
-                };
-                if(req.body.data.userId==undefined) {
-                    content.userName="(Анонім)";
-                    req.body.userId = 2;
-                }
-                var activityData = {
-                    Content:JSON.stringify(content),
-                    //Content: "Корістувачь " + req.body.userName + " залишив коментар: "+req.body.Content,
-                    Date: new Date((new Date()).getTime()+2*60*60*1000),
-                    ActivityTypes_Id: 5,
-                    Users_Id: req.body.data.userId,
-                    Problems_Id: req.params.id
-                };
-                 connection.query('INSERT INTO Activities SET ?', [activityData], function (err) {
-
-                    if (err) {
-                        res.statusCode = 500;
-                        res.send({
-                            err: err.code
-                        });
-                        console.error('Can`t make INSERT query for activityData = '+ activityData +'\n' + err +"\n");
-                    }
-                    connection.query('SELECT * FROM Activities WHERE Activities.Problems_Id=?', [req.params.id], function(err3, rows3) {
-                        if (err3) {
-                            res.statusCode = 500;
-                            res.send({
-                                err3:    err3.code
-                            });
-                            console.error('Can`t make SELECT query for Activities.Problems_Id = '+ req.params.id +'\n' + err +"\n");
-                        }
-                        res.send([rows3]);
-                        console.log("end addComment API function");
-                    });
-                });
-            }
-            catch(err){
-                console.log('Can`t make query to db in addComment API' + err + '\n');
-            }
-        }
-    });
-};
 
 exports.postProblem = function(req,res){  //post new problem
     console.log("start postProblem  API function");
