@@ -32,7 +32,7 @@ define(['./app'], function (app) {
               templateUrl:'app/templates/chat.html',
               controller:'SocketCtrl'
           })
-          .when('/stats',{
+          .when('/statistic',{
               templateUrl:'app/templates/statistic.html',
               controller:'statsCtrl'
           })
