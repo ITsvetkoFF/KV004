@@ -481,7 +481,7 @@ exports.addNewPhotos = function(req,res){
                         }
                         var activityData = {
                             Content:JSON.stringify(content),
-                            Date:new Date(),
+                            Date:new Date((new Date()).getTime()+2*60*60*1000),
                             ActivityTypes_Id:4,
                             Users_Id:req.body.userId,
                             Problems_Id:req.params.id
@@ -541,7 +541,7 @@ exports.addComment = function(req,res) {
                 var activityData = {
                     Content:JSON.stringify(content),
                     //Content: "Корістувачь " + req.body.userName + " залишив коментар: "+req.body.Content,
-                    Date: new Date(),
+                    Date: new Date((new Date()).getTime()+2*60*60*1000),
                     ActivityTypes_Id: 5,
                     Users_Id: req.body.data.userId,
                     Problems_Id: req.params.id
@@ -645,7 +645,7 @@ exports.postProblem = function(req,res){  //post new problem
                         }
                         var activityData = {
                             Content:JSON.stringify(content),
-                            Date:new Date(),
+                            Date:new Date((new Date()).getTime()+2*60*60*1000),
                             ActivityTypes_Id:1,
                             Users_Id:req.body.userId,
                             Problems_Id:rows.insertId
@@ -922,7 +922,7 @@ exports.postVote = function(req,res){  //+1 vote for a problem
                     }
                     var activityData = {
                         Content: JSON.stringify(content),
-                        Date: new Date(),
+                        Date: new Date((new Date()).getTime()+2*60*60*1000),
                         ActivityTypes_Id: 3,
                         Users_Id: userId,
                         Problems_Id: problemId

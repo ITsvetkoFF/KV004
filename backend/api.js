@@ -96,7 +96,7 @@ var addComment = function(req,res) {
                 var activityData = {
                     Content:JSON.stringify(content),
                     //Content: "Корістувачь " + req.body.userName + " залишив коментар: "+req.body.Content,
-                    Date: new Date(),
+                    Date: new Date((new Date()).getTime()+2*60*60*1000),
                     ActivityTypes_Id: 5,
                     Users_Id: req.body.data.userId,
                     Problems_Id: req.params.id
@@ -111,7 +111,7 @@ var addComment = function(req,res) {
                     }
                     /////// using socket
                     io.sockets.emit('broadcast', {
-                        payload: {content:content.Content,id:req.params.id,user:content.userName,date:new Date(),trigger:true
+                        payload: {content:content.Content,id:req.params.id,user:content.userName,date:new Date((new Date()).getTime()+2*60*60*1000),trigger:true
                         },
                         source: ""
                     });
