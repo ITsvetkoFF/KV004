@@ -146,7 +146,7 @@ define(['./module','dropzone'], function(directives,Dropzone){
                                 sizeOfAllPhotos -= file.size;
                                 myDropzone.removeFile(file);
                                 scope.fileCountLeft++;
-                                alert("Максімальній розмір файлів не може перевищувати 20 МБ ");
+                                alert("Максимальний розмір файлів не може перевищувати 20 МБ ");
                             }
                         }
 
