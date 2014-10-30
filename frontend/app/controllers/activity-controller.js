@@ -15,15 +15,16 @@ define(['./module'], function (controllers) {
                 }
                 $scope.commentContent="";
             }
+        };
         $scope.deleteComment = function(commentId) {
-             ActivityService.deleteCommentFromDB(commentId).then(function(){
-                 for(var i=0;i<$scope.activities.length;i++){
-                     if($scope.activities[i].Id==commentId) {
-                         $scope.activities.splice(i,1);
-                     }
-                 }
+            ActivityService.deleteCommentFromDB(commentId).then(function(){
+                for(var i=0;i<$scope.activities.length;i++){
+                    if($scope.activities[i].Id==commentId) {
+                        $scope.activities.splice(i,1);
+                    }
+                }
 
-             });
+            });
 
         };
     }]);
