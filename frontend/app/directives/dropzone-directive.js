@@ -156,13 +156,16 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     myDropzone.on('successmultiple', function () {
                         var currentLocation = window.location.href;
                         if (scope.isLoggedIn()) {
-                            scope.swipeHide("dropzone");
+                            // scope.submitProblem();
+                            // scope.swipeHide("dropzone");
                             window.location.href = "#/map";
+                            window.location.href = currentLocation;
                             
                         }
                         else {
-                            scope.swipeHide("dropzone");
+                            //  scope.swipeHide("dropzone");
                             window.location.href = "#/map";
+                            window.location.href = currentLocation;
                             adminToShowProblemService.alertAddProblemSuccessAnonim();
                         }
                     });
