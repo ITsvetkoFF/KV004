@@ -78,7 +78,6 @@ define(['./module'],function (controllers){
         $rootScope.$broadcast('Update',"_problem");
         //function that places marker on the map
         function getCoordinates(e) {
-                                            // logs into console clicked position !!!need to remove in production
             $scope.$apply(function(){$scope.problemData.latitude = e.latlng.lat;});        // binds latln values to the input on the form
             $scope.$apply(function(){$scope.problemData.longtitude = e.latlng.lng;});      
 
