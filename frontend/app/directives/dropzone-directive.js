@@ -71,7 +71,6 @@ define(['./module','dropzone'], function(directives,Dropzone){
                                     window.location.href = "#/map";
                                 }
                                 else {
-
                                     scope.swipeHide("dropzone");
                                     window.location.href = "#/map";
                                     adminToShowProblemService.alertAddProblemSuccessAnonim();
@@ -157,19 +156,14 @@ define(['./module','dropzone'], function(directives,Dropzone){
                     myDropzone.on('successmultiple', function () {
                         var currentLocation = window.location.href;
                         if (scope.isLoggedIn()) {
-                            // scope.submitProblem();
-                            // scope.swipeHide("dropzone");
+                            scope.swipeHide("dropzone");
                             window.location.href = "#/map";
-                            window.location.href = currentLocation;
+                            
                         }
                         else {
-
-                            //  scope.swipeHide("dropzone");
+                            scope.swipeHide("dropzone");
                             window.location.href = "#/map";
-                            window.location.href = currentLocation;
-
-
-                            alert('Ви не зареєстрований користувач, тому проблема спочатку пройде модерацію і потім буде додана на карту.');
+                            adminToShowProblemService.alertAddProblemSuccessAnonim();
                         }
                     });
 
