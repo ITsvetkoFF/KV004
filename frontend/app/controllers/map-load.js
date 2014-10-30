@@ -19,11 +19,12 @@ define(['./module'], function (controllers) {
         });
         var latlng  = L.latLng(50.00, 32.00);
 
-        L.Map.prototype.panToOffset = function (latlng, offset, options) {
-            var x = this.latLngToContainerPoint(latlng).x - offset[0];
-            var y = this.latLngToContainerPoint(latlng).y - offset[1];
-            var point = this.containerPointToLatLng([x, y]);
-            return this.setView(point, this._zoom, { pan: options });
+        L.Map.prototype.panToOffset = function (latlng, paddingL, paddingT, paddingR, paddingB) {
+            var x1 = latlng.lat - 0.01,
+                y1 = latlng.lng - 0.01,
+                x2 = latlng.lat + 0.01,
+                y2 = latlng.lng + 0.01;
+            return this.fitBounds([[x1, y1], [x2, y2]], {maxZoom:14, paddingTopLeft:[paddingL, paddingT], paddingBottomRight:[paddingR, paddingB]});
         };
 
         $scope.map     = L.map('map-content', {
@@ -44,11 +45,10 @@ define(['./module'], function (controllers) {
                 .success(function (data) {
                     $scope.data = data;
                     placeMarkers($scope.data);
-            })
+                })
                 .error(function (data, status, headers, config) {
                     throw error;
                 });
-
         };
         $scope.getProblemsAndPlaceMarkers();
 
@@ -56,14 +56,14 @@ define(['./module'], function (controllers) {
             navigator.geolocation.getCurrentPosition(getUserPosition);
             var width = $scope.getWindowDimensions();
             function getUserPosition(position) {
-                var mapCenter = [
-                    position.coords.latitude,
-                    position.coords.longitude
-                ];
+                var mapCenter = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
                 if (width < 1000) {
-                    $scope.map.panToOffset(mapCenter, [0,90]);
+                    $scope.map.panToOffset(mapCenter, 0, 90, 0, 0);
                 }else{
-                    $scope.map.setView(mapCenter, 10);
+                    $scope.map.panToOffset(mapCenter, 0, 0, 600 ,0);
                 }
             }
         }
@@ -74,9 +74,9 @@ define(['./module'], function (controllers) {
                 window.location.href="#/problem/showProblem/"+ this._id;
                 var width = $scope.getWindowDimensions();
                 if (width < 1000) {
-                    $scope.map.setView(marker.latlng);
+                    $scope.map.panToOffset(marker.latlng, 0, 90, 0, 0);
                 }else{
-                    $scope.map.panToOffset(marker.latlng, [-200,0]);
+                    $scope.map.panToOffset(marker.latlng, 0, 0, 600 ,0);
                 }
                 
             }

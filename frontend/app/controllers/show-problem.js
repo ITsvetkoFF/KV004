@@ -48,8 +48,10 @@ define(['./module'], function(controllers){
             } else {
                 problem = data[0][0];
                 $scope.problem =  problem;
-                $scope.problem.Latitude = data[0][0].Latitude;
-                $scope.problem.Longtitude = data[0][0].Longtitude;
+                $scope.problem.Coordinates = {
+                    lat: data[0][0].Latitude,
+                    lng: data[0][0].Longtitude
+                };
                 activity = data[2][0];
                 userID =activity.Users_Id;
                 problemID = parseInt(problem.Id);
