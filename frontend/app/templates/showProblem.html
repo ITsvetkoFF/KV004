@@ -19,10 +19,8 @@
         <div class="b-problem-deatiled-info-general">
             <div class=" b-label-overRating" ng-class="{'label-default': value<2,'label-info':value>=2&&value<3, 'label-warning': value>=3 && value<4, 'label-danger': value>=4}" ng-show="showStatus">{{severityMessage}}</div>
             <div class="b-problem-deatiled-info-container">
-
                 <div class='b-problem-deatiled-info-severity'>
-
-                    <div  ng-class="{'b-hide-stars':!isAdministrator()}"> </div>
+                    <div  ng-class="{'b-hide-stars':!isAdministrator()}" ng-mouseover=showMessageOverRating(problem.Severity) ng-mouseleave="hideSeverityLabel()"> </div>
                     <div class="b-problem-deatiled-info__severity b-problem-notAdmin_{{!isAdministrator()}}" ng-init="problem.Severity"><rating ng-model="problem.Severity" on-hover="showMessageOverRating(value)" on-leave="showStatus = false" readonly="isReadonly" state-on="'fa-star'" state-off="'fa-star-o'" ></rating>
                     </div>
                 </div>
