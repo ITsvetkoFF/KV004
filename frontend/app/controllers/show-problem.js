@@ -235,7 +235,13 @@ define(['./module'], function(controllers){
             $scope.showStatus = false;
             $scope.value = problem.Severity;
         }
-
+        //hide popup message for user
+        $scope.hideSeverityLabel = function(){
+            $scope.severityMessage = "";
+            $scope.showStatus = false;
+        };
+        
+        
         //if user did not submit changes
         $scope.$on('$locationChangeStart', function(event,next) {
             if (!UserService.getSaveChangeStatus()) {
