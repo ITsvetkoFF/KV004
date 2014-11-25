@@ -419,10 +419,9 @@
     font-weight: normal;
 }
 .b-hide-stars{
-    width: 145px;
+    width: 125px;
     height: 30px;
     z-index: 2000;
     display: block;
     position: absolute;
-    left: 15px;
 }
