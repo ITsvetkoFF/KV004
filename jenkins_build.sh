@@ -7,4 +7,4 @@ cd ../backend
 npm install
 mysql -u root -proot < EnviromapDB.sql
 nodejs filldb.js
-forever start api.js
+sudo forever start api.js
