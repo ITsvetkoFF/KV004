@@ -10,8 +10,8 @@ var jwt          = require('jsonwebtoken'),
     mandrill = require('mandrill-api/mandrill'),
     generatePassword = require('password-generator');
 
-    mc = new mcapi.Mailchimp('fab6a7e5f260ad7ad45c7fb946b91a05-us9');
-    var mandrill_client = new mandrill.Mandrill('hYvb1HMFtPmIV0zeX_z1fg');
+    mc = new mcapi.Mailchimp('your Mailchimp api key goes here');
+    var mandrill_client = new mandrill.Mandrill('your Mandrill api key goes here');
 
     var mailchimpListID, segments = {};
 
