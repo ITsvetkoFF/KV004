@@ -520,14 +520,14 @@ exports.addNewPhotos = function(req,res){
 
 exports.postProblem = function(req,res){  //post new problem
     console.log("start postProblem  API function");
-    for (var prop in segments)
+    /*for (var prop in segments)
         console.log("We have those segments"+prop);
     
     function addEmailToSegment(problemType, userEmail){
         console.log(problemType, userEmail);
         console.log('mailchimpID: ' + mailchimpListID+ '. Problem type: ' + segments[problemType] + '. Email: ' + userEmail);
         mc.lists.staticSegmentMembersAdd({id:mailchimpListID, seg_id:segments[problemType],batch:[{email:userEmail}]});
-    };
+    };*/
     req.getConnection(function(err, connection) {
         if (err) {
             res.statusCode = 503;
