@@ -15,13 +15,13 @@ var mysql = require('mysql'),
     io = require('socket.io'),
     routes = require('./routes.js'),
     location = require('./config.js')
-    // for image processing !!!! use with GraphicsMagick and gm module
-    // var gm = require('gm');
+    //for image processing !!!! use with GraphicsMagick and gm module
+    var gm = require('gm');
     
     io = io.listen(server);
     require('./sockets/base')(io);
 
-
+app.set('view engine', 'ejs');
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
@@ -42,17 +42,21 @@ var connectionPool = {
 io.set('log level', 1);
 io.set('transports', ['flashsocket', 'websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 
-app.use(multer(
+/*app.use(multer(
     {
         dest: location+'photos/large'
-    }));
-    /*    // for image processing !!!! use with GraphicsMagick and gm module
+    }));*/
+        // for image processing !!!! use with GraphicsMagick and gm module
+        // AND ALSO U NEED TO CREATE small folder!!
+
 app.use(multer(
     {
         dest: location+"/photos/large/",
         onFileUploadComplete: function(file){
 
 
+
+/*
             gm(location+"/photos/large/"+file.name)
             .size(function (err, size) {
               if (!err && size.height>=1000){
@@ -63,16 +67,41 @@ app.use(multer(
 
               }
             if(err) throw err;
-            })
+            });
+            */
+
+            gm(location+"/photos/large/"+file.name)
+            .size(function (err, element) {
+                    var w = element.width;
+                    var h = element.height;
+                    if (h>w) {
+                        this.crop(w,w,0,Math.floor((h - w)/2))
+                            .resize(160)
+                            .write(location + "/photos/small/" + file.name, function (err) {
+                                if (!err) console.log('done');
+                            });
+                        console.log(element.height);
+                    } else {
+                        this.crop(h,h,(w - h)/2, 2)
+                            .resize(null, 160)
+                            .write(location + "/photos/small/" + file.name, function (err) {
+                                if (!err) console.log('done');
+                            });
+                    };
+
+
+            if(err) throw err;
+            });
+
 
 
     }
     }));
-*/
 
 
 
-app.use(compress());    
+
+//app.use(compress());
 app.use(bodyParser());
 app.use(cookieParser());
 app.use(bodyParser());
@@ -90,13 +119,13 @@ app.all('*', function(req, res, next) {
 });
 // production error handler
 // no stacktraces leaked to user
-app.use(function (err, req, res, next) {
+/*app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
         error: {}
     });
-});
+});*/
 //part addComment with using socket
 //////////////////
 var addComment = function(req,res) {
@@ -122,7 +151,7 @@ var addComment = function(req,res) {
                 }
                 var activityData = {
                     Content:JSON.stringify(content),
-                    //Content: "Корістувачь " + req.body.userName + " залишив коментар: "+req.body.Content,
+                    //Content: "Корістувач " + req.body.userName + " залишив коментар: "+req.body.Content,
                     Date: new Date((new Date()).getTime()+2*60*60*1000),
                     ActivityTypes_Id: 5,
                     Users_Id: req.body.data.userId,

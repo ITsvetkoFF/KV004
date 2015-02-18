@@ -10,8 +10,9 @@ var jwt          = require('jsonwebtoken'),
     mandrill = require('mandrill-api/mandrill'),
     generatePassword = require('password-generator');
 
-    mc = new mcapi.Mailchimp('fab6a7e5f260ad7ad45c7fb946b91a05-us9');
-    var mandrill_client = new mandrill.Mandrill('hYvb1HMFtPmIV0zeX_z1fg');
+    /*
+    mc = new mcapi.Mailchimp('key');
+    var mandrill_client = new mandrill.Mandrill('id');
 
     var mailchimpListID, segments = {};
 
@@ -149,7 +150,7 @@ var jwt          = require('jsonwebtoken'),
                 }
             }
         });
-    });
+    });*/
 
 exports.getProblems = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
     console.log("start to get information about all moderated problems");
