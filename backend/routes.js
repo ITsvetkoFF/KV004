@@ -561,7 +561,7 @@ exports.postProblem = function(req,res){  //post new problem
                         else { 
                             console.log('no errors');
                             console.log(rows[0].Email);
-                            addEmailToSegment(req.body.type, rows[0].Email);
+                            //addEmailToSegment(req.body.type, rows[0].Email);
                         }
                     });
                 };
