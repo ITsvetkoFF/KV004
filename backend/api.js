@@ -21,11 +21,12 @@ var mysql = require('mysql'),
     io = io.listen(server);
     require('./sockets/base')(io);
 
+
 app.set('view engine', 'ejs');
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
-    password : 'root',
+    password : '',
     database : 'Enviromap'
 };
 
@@ -196,6 +197,7 @@ var addComment = function(req,res) {
 //////////////////
 //user
 app.get('/api/problems', routes.getProblems);
+app.get('/api/push/', routes.push);
 app.get('/api/problems/:id', routes.getProblemId);
 app.get('/api/users/:idUser', routes.getUserById);
 app.get('/api/usersProblem/:idUser', routes.getUserProblemsById);
@@ -205,6 +207,7 @@ app.post('/api/vote', routes.postVote);
 app.get('/api/getTitles',routes.getTitles);
 app.get('/api/resources/:name',routes.getResource);
 //new api for adding new photos to existed problem
+app.post('/api/registerToken', routes.registerToken);
 app.post('/api/photo/:id',routes.addNewPhotos);
 app.post('/api/comment/:id',addComment);
 app.post('/api/login', routes.logIn);
