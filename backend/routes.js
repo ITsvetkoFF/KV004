@@ -632,7 +632,7 @@ exports.postProblem = function(req,res){  //post new problem
                                 i++;
                             }
                         });
-
+                        notify(req, res);
                         res.send({
                             json:   rows,
                             length: rows.length
@@ -733,7 +733,6 @@ function notify(req, res) {
                         
                     }
                     rows.forEach(logArrayElements);
-                    res.send();
 
                     console.log("end getNews API function");
                 });
@@ -1496,6 +1495,7 @@ exports.editProblem = function(req, res) {
                                 json:   rows,
                                 length: rows.length
                             });
+                            notify(req, res);
                             console.log('end editProblem API function');
                         }
                     });
