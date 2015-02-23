@@ -3,19 +3,20 @@
   "version": "0.0.2",
   "private": true,
   "dependencies": {
-    "express": "*",
-    "mysql": "~2.4.3",
-    "jsonwebtoken": "*",
     "body-parser": "*",
     "compression": "^1.2.0",
     "cookie-parser": "*",
+    "express": "*",
     "express-myconnection": "*",
-	  "xmlhttprequest":"*",
-	  "jade":"*",
-    "multer":"*",
+    "jade": "*",
+    "jsonwebtoken": "*",
     "mailchimp-api": "*",
     "mandrill-api": "*",
-    "password-generator" : "*"
+    "multer": "*",
+    "mysql": "~2.4.3",
+    "password-generator": "*",
+    "ws": "^0.7.1",
+    "xmlhttprequest": "*"
   },
   "devDependencies": {
     "bower": "*"

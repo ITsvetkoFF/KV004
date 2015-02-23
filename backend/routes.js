@@ -10,6 +10,19 @@ var jwt          = require('jsonwebtoken'),
     mandrill = require('mandrill-api/mandrill'),
     generatePassword = require('password-generator');
 
+var WebSocketServer = require('ws').Server;
+var wss = new WebSocketServer({port: 8091});
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+
+});
+wss.broadcast = function broadcast(data) {
+                          wss.clients.forEach(function each(client) {
+                            client.send(data);
+                          });
+                        };
     /*
     mc = new mcapi.Mailchimp('key');
     var mandrill_client = new mandrill.Mandrill('id');
@@ -637,6 +650,8 @@ exports.postProblem = function(req,res){  //post new problem
                             json:   rows,
                             length: rows.length
                         });
+                        
+                        wss.broadcast("Newdata");
                         console.log("end postProblem  API function");
                     }
 
@@ -700,10 +715,10 @@ function notify(req, res) {
     };
 
     var apnConnection = new apn.Connection(options);
-    var myDevice = new apn.Device('d050209aac6161ed5ee7ec9b32698a402744d38ed2ed064283ed6bfe64bd3072');
-    var note = new apn.Notification();
+    //var myDevice = new apn.Device('d050209aac6161ed5ee7ec9b32698a402744d38ed2ed064283ed6bfe64bd3072');
+    //var note = new apn.Notification();
     
-    note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+    //note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
     //note.badge = 3;
     //note.sound = "ping.aiff";
     //note.alert = "\uD83D\uDCE7 \u2709 You have a new message";
@@ -721,6 +736,8 @@ function notify(req, res) {
                     }
                     function logArrayElements(element, index, array) {
                       //console.log('a[' + index + '] = ' + element['token']);
+                        var myDevice = new apn.Device(element['token']);
+
                         var note = new apn.Notification();
     
                         note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
