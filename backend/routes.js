@@ -10,6 +10,19 @@ var jwt          = require('jsonwebtoken'),
     mandrill = require('mandrill-api/mandrill'),
     generatePassword = require('password-generator');
 
+var WebSocketServer = require('ws').Server;
+var wss = new WebSocketServer({port: 8091});
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+
+});
+wss.broadcast = function broadcast(data) {
+                          wss.clients.forEach(function each(client) {
+                            client.send(data);
+                          });
+                        };
     /*
     mc = new mcapi.Mailchimp('key');
     var mandrill_client = new mandrill.Mandrill('id');
@@ -151,6 +164,8 @@ var jwt          = require('jsonwebtoken'),
             }
         });
     });*/
+
+
 
 exports.getProblems = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
     console.log("start to get information about all moderated problems");
@@ -630,11 +645,13 @@ exports.postProblem = function(req,res){  //post new problem
                                 i++;
                             }
                         });
-
+                        notify(req, res);
                         res.send({
                             json:   rows,
                             length: rows.length
                         });
+                        
+                        wss.broadcast("Newdata");
                         console.log("end postProblem  API function");
                     }
 
@@ -647,6 +664,98 @@ exports.postProblem = function(req,res){  //post new problem
     });
 };
 
+exports.registerToken = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
+    console.log("start to registerToken");
+    req.getConnection(function(err, connection) {
+        if (err) {
+            res.statusCode = 500;
+            res.send({
+                err: err.code
+            });
+            console.log('Can`t connect to db in registerToken API call\n' + err +"\n");
+        } else {
+            // try{
+                 
+                    var data = {
+                        token: req.body.token
+                    };
+                    // consloe.log("-----" + req.body.token + "------");
+                    console.log(req.body);
+                    // consloe.log(req.body);
+                    // consloe.log(token);
+                    
+                    connection.query('INSERT INTO DeviceTokens SET ?', [data], function(err) {
+                    if (err) {
+                        res.statusCode = 500;
+                        res.send({
+                            err: err.code
+                        });
+                        console.error('Can`t make request to DeviceTokens db\n', err);
+                    } else {
+                        res.send('ok');
+                        console.log("end registeringToken \n");
+                    }
+                    });
+            // }
+            // catch(err){
+            //     console.log("Can`t make query for DeviceTokens \n");
+            // }
+        }
+    });
+};
+exports.push = function(req,res){ // get all moderated problems in brief (id, title, coordinates, type)
+   notify(req, res);
+};
+
+function notify(req, res) {
+    console.log("start pushing");
+    var apn = require('apn');
+    var options = { 
+        passphrase: "ecomaprulezz"
+    };
+
+    var apnConnection = new apn.Connection(options);
+    //var myDevice = new apn.Device('d050209aac6161ed5ee7ec9b32698a402744d38ed2ed064283ed6bfe64bd3072');
+    //var note = new apn.Notification();
+    
+    //note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+    //note.badge = 3;
+    //note.sound = "ping.aiff";
+    //note.alert = "\uD83D\uDCE7 \u2709 You have a new message";
+    // note.payload = {'content-available': 1};
+
+    // apnConnection.pushNotification(note, myDevice);
+    req.getConnection(function (err, connection) {
+    connection.query('SELECT * FROM DeviceTokens ', function (err, rows) {
+                    if (err) {
+                        res.statusCode = 500;
+                        res.send({
+                            err: err.code
+                        });
+                        console.error('Can`t make query in getNews' + '\n' + err +"\n");
+                    }
+                    function logArrayElements(element, index, array) {
+                      //console.log('a[' + index + '] = ' + element['token']);
+                        var myDevice = new apn.Device(element['token']);
+
+                        var note = new apn.Notification();
+    
+                        note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+                        note.badge = 3;
+                        note.sound = "ping.aiff";
+                        note.alert = "\uD83D\uDCE7 \u2709 You have a new message " + index;
+                        note.payload = {'content-available': 1};
+
+                        apnConnection.pushNotification(note, myDevice);
+                        
+                    }
+                    rows.forEach(logArrayElements);
+
+                    console.log("end getNews API function");
+                });
+    });
+    console.log("yey");
+}
 exports.postNews = function(req,res) {
     console.log("start postNews  API function");
     req.getConnection(function (err, connection) {
@@ -1403,6 +1512,7 @@ exports.editProblem = function(req, res) {
                                 json:   rows,
                                 length: rows.length
                             });
+                            notify(req, res);
                             console.log('end editProblem API function');
                         }
                     });
