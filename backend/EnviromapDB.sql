@@ -164,4 +164,6 @@ CREATE TABLE IF NOT EXISTS `News` (
 PRIMARY KEY (`Id`))
 ENGINE = InnoDB;
 
-
+CREATE TABLE `Enviromap`.`DeviceTokens` (
+  `token` VARCHAR(200) NOT NULL,
+  PRIMARY KEY (`token`));
