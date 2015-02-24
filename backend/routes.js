@@ -1917,7 +1917,7 @@ exports.changePassword = function (req, res) {
         }
     })
 };
-
+/*
 exports.resetPassword = function (req, res) {
     console.log('reset password called');
     req.getConnection(function (err, connection) {
@@ -1948,6 +1948,7 @@ exports.resetPassword = function (req, res) {
                             userData.newPassword = generatePassword(6);
 
                             userData.newPasswordHashed = crypto.createHmac("sha1", secret.secretToken).update(userData.newPassword).digest("hex");
+
 
                             var message = {
                                 "html": "<p>Ваш новий пароль </p>" + userData.newPassword + "<br><p>При наступному вході на сайт, наполегливо радимо змінити пароль через відповідну функцію!</p>",
@@ -2001,3 +2002,4 @@ exports.resetPassword = function (req, res) {
         }
     });
 };
+*/
