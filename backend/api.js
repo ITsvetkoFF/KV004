@@ -28,7 +28,7 @@ app.set('view engine', 'ejs');
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
-    password : '',
+    password : 'root',
     database : 'Enviromap'
 };
 
