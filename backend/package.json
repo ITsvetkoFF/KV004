@@ -18,7 +18,8 @@
     "ws": "^0.7.1",
     "xmlhttprequest": "*",
     "apn": "*",
-    "crypto": "*"
+    "crypto": "*",
+    "socket.io": "*"
   },
   "devDependencies": {
     "bower": "*"
