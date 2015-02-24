@@ -14,18 +14,21 @@ var mysql = require('mysql'),
     secret       = require('./config/secret'),
     io = require('socket.io'),
     routes = require('./routes.js'),
-    location = require('./config.js')
+    location = require('./config.js');
+
     //for image processing !!!! use with GraphicsMagick and gm module
     //var gm = require('gm');
+    //app.listen(8091);
     
     io = io.listen(server);
     require('./sockets/base')(io);
 
+//routes.wss = wss;
 app.set('view engine', 'ejs');
 var connectionPool = {
     host     : 'localhost',
     user     : 'root',
-    password : 'root',
+    password : '',
     database : 'Enviromap'
 };
 
@@ -111,14 +114,14 @@ app.use(myConnection(mysql, connectionPool, 'pool'));
 app.use('/',express.static(location));
 console.log(__dirname);
 
-app.all('*', function(req, res, next) {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Credentials', true);
-  res.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
-  res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
-  if ('OPTIONS' === req.method) return res.send(200);
-  next();
-});
+// app.all('*', function(req, res, next) {
+//   res.set('Access-Control-Allow-Origin', '*');
+//   res.set('Access-Control-Allow-Credentials', true);
+//   res.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
+//   res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
+//   if ('OPTIONS' === req.method) return res.send(200);
+//   next();
+// });
 // production error handler
 // no stacktraces leaked to user
 /*app.use(function (err, req, res, next) {
@@ -196,6 +199,7 @@ var addComment = function(req,res) {
 //////////////////
 //user
 app.get('/api/problems', routes.getProblems);
+app.get('/api/push/', routes.push);
 app.get('/api/problems/:id', routes.getProblemId);
 app.get('/api/users/:idUser', routes.getUserById);
 app.get('/api/usersProblem/:idUser', routes.getUserProblemsById);
@@ -205,6 +209,7 @@ app.post('/api/vote', routes.postVote);
 app.get('/api/getTitles',routes.getTitles);
 app.get('/api/resources/:name',routes.getResource);
 //new api for adding new photos to existed problem
+app.post('/api/registerToken', routes.registerToken);
 app.post('/api/photo/:id',routes.addNewPhotos);
 app.post('/api/comment/:id',addComment);
 app.post('/api/login', routes.logIn);

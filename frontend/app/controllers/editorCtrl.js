@@ -10,6 +10,7 @@ define(['./module'], function (controllers) {
                     $scope.Title = $scope.resource.Title;
                     $scope.IsResource = $scope.resource.IsResource;
                     $scope.Id = $scope.resource.Id;
+                
             });
         }
         else {
