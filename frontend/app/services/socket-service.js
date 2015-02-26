@@ -22,7 +22,7 @@ define(['./module'],function(services){
 
           },
           getNewsFromDb:function(uploadScope){
-              return $http.post('/api/getNews',{})
+              return $http.get('/api/getNews',{})
               .success(function(data,status,headers,config){
                   uploadScope(data);
 
