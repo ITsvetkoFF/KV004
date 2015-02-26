@@ -230,7 +230,7 @@ app.delete('/api/deleteResource/:id', routes.deleteResource);
 app.post('/api/approve/:id', routes.approveProblem);
 //admin - newsline Api
 app.post('/api/postNews',routes.postNews);
-app.post('/api/getNews',routes.getNews);
+app.get('/api/getNews',routes.getNews);
 app.post('/api/clearNews',routes.clearNews);
 app.post('/api/clearOneNews',routes.clearOneNews);
 app.get('/api/getStats1', routes.getStats1);
