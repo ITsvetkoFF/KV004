@@ -19,7 +19,8 @@
     "xmlhttprequest": "*",
     "apn": "*",
     "crypto": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "gm": "*"
   },
   "devDependencies": {
     "bower": "*"
