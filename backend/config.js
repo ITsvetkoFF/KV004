@@ -1,4 +1,4 @@
-var productionVersion = false;
+var productionVersion = true;
 var locationProduction = "../frontend/dist/";
 var locationDevelop = "../frontend/";
 var location="";

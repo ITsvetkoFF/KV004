@@ -17,7 +17,7 @@ var mysql = require('mysql'),
     location = require('./config.js');
 
     //for image processing !!!! use with GraphicsMagick and gm module
-    //var gm = require('gm');
+    var gm = require('gm');
     //app.listen(8091);
     
     io = io.listen(server);
@@ -45,15 +45,15 @@ var connectionPool = {
 io.set('log level', 1);
 io.set('transports', ['flashsocket', 'websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 
-app.use(multer(
+/*app.use(multer(
     {
         dest: location+'photos/large'
     }));
-    
+*/    
     
         // for image processing !!!! use with GraphicsMagick and gm module
         // AND ALSO U NEED TO CREATE small folder!!
-/*
+
 app.use(multer(
     {
         dest: location+"/photos/large/",
@@ -101,7 +101,7 @@ app.use(multer(
 
     }
     }));
-    */
+    
 
 
 
