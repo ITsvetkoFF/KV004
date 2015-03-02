@@ -1110,6 +1110,7 @@ exports.register = function (req, res) {
                     if(result.length !== 0) {
                         return res.send(400);
                     }
+                    /*
                     var mcReq = {
                         id: mailchimpListID,
                         email: { email: userData.email },
@@ -1131,7 +1132,7 @@ exports.register = function (req, res) {
                                 console.log('There was an error subscribing that user');
                             }
                         });
-
+                    */
                     connection.query("insert into Users set ?", userData, function(err, recordId) {
                         if (err) {
                             res.statusCode = 503;
