@@ -12,7 +12,7 @@
     "jsonwebtoken": "*",
     "mailchimp-api": "*",
     "mandrill-api": "*",
-    "multer": "*",
+    "multer": "0.1.6",
     "mysql": "~2.4.3",
     "password-generator": "*",
     "ws": "^0.7.1",

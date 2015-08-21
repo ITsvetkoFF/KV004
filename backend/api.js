@@ -42,13 +42,10 @@ var connectionPool = {
  
 
 // optional - set socket.io logging level
-io.set('log level', 1);
+//io.set('log level', 1);
 io.set('transports', ['flashsocket', 'websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling']);
 
-app.use(multer(
-    {
-        dest: location+'photos/large'
-    }));
+app.use(multer({dest: location+'photos/large'}));
     
     
         // for image processing !!!! use with GraphicsMagick and gm module
